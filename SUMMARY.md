@@ -10,3 +10,5 @@
   * [Only thinking forever](only_thinking_forever.md)
   * [Think in Cooperation and Division of labor](Thing20190725.md)
   * [Think in Android Page isolation and Relation](Think20190823.md)
+* Summary
+  * [2019 year-end summary](2019_year-end_summary.md)
