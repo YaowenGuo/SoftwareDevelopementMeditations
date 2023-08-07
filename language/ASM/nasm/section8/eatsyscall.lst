@@ -1,0 +1,36 @@
+     1                                  ;The executable program name: eatsyscall
+     2                                  ;version:1.0
+     3                                  ;Creation date:2/29/2016
+     4                                  ;Last modified date:2/29/2016
+     5                                  ;Author:Bool
+     6                                  ;Description:A simple plications under Linux,use NASM 2.10.09,
+     7                                  ;demonstrates how to use Linux INT 80H system call to display 
+     8                                  ;text.
+     9                                  ;
+    10                                  ;Use command to generate an executable program.
+    11                                  ; nasm -f elf -g -F stabs eatsysvall.asm
+    12                                  ; ld -o eatsyscall eatsyscall.o
+    13                                  ;
+    14                                  SECTION .data   ;Containing mission data portion.
+    15 00000000 456174206174204A6F-     EatMsg: db "Eat at Jos's!", 10
+    16 00000009 732773210A         
+    17                                  EatLen: equ $-EatMsg
+    18                                  
+    19                                  SECTION .bss    ;It contains an uninitiallized data section.
+    20                                  
+    21                                  SECTION .text   ;It contains the code.
+    22                                  global _start   ;Linker based on its need to find the enter point/
+    23                                  
+    24                                  _start:
+    25 00000000 90                          nop          ;Misuse instruction.
+    26 00000001 B804000000                  mov eax,    4   ;Specifies sys_write system call.
+    27 00000006 BB01000000                  mov ebx,    1   ;Specify File Descriptor 1: Standard output
+    28 0000000B B9[00000000]                mov ecx,    EatMsg  ;Pass offset of the message
+    29 00000010 BA0E000000                  mov edx,    EatLen  ;Pass the length of the message
+    30 00000015 CD80                        int 80H         ;Make syscall to output the text to stdout
+    31                                  
+    32 00000017 B801000000                  mov eax,    1   ;Specify Exit syscall
+    33 0000001C BB00000000                  mov ebx,    0   ;Return a code of zero
+    34 00000021 CD80                        int 80H         ;Make systemcall to terminate the program
+    35                                      
+    36                                  

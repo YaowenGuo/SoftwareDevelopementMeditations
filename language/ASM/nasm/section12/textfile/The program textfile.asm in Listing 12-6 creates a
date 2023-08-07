@@ -1,0 +1,14 @@
+The program textfile.asm in Listing 12-6 creates and fills a text file with text.
+You can specify the number of lines to be filled in the file, as well as text for
+the lines. If you don’t specify text for the file, the program will generate a line
+of randomly chosen characters and use that instead. Invoking the program is
+done like this:
+$./textfile 150 Time for tacos!
+This invocation would create a new file (the name of which is fixed in the
+program as ‘‘testeroo.txt’’) and write the text ‘‘Time for tacos!’’ to the file 150
+times before closing the file. If the file testeroo.txt already exists, it will be
+overwritten from the beginning. If you don’t type anything after the line count
+number, the program will fill the file with random alphanumeric characters.
+If you don’t type an integer as the first argument, textfile will display an error
+message. If you only type the program name and press Enter, textfile will
+display several lines explaining what it is and how to use it.
