@@ -4,11 +4,6 @@
 
 历史原因：在没有MMU的时代，为了最大的利用内存空间，堆和栈被设计为从两端相向生长。人们对数据访问是习惯于从地址小的位置开始，比如你在堆中申请一个数组，是习惯于把低元素放到低地址，把高位放到高地址，所以堆向上生长比较符合习惯,  而栈则对方向不敏感，一般对栈的操作只有 PUSH 和 pop，无所谓向上向下，所以就把堆放在了低端，把栈放在了高端. 但现在已经习惯这样了。这个和处理器设计有关系，目前大多数主流处理器都是这样设计，但ARM 同时支持这两种增长方式。
 
-函数调用的参数和局部数据都会放在栈中。首先看参数传递：
-
-
-[栈的使用涉及到以下几个方面](https://www.cs.princeton.edu/courses/archive/spr19/cos217/lectures/15_AssemblyFunctions.pdf)
-
 1. 调用和返回
     - 如何跳到被调用的函数执行？
     - 如何从被调用函数返回调用者？
@@ -22,27 +17,15 @@
 5. 优化
     - 调用者和被调用函数如何做到最小的内存占用？
 
-栈帧: 一个函数调用锁说使用的栈空间被称为一个栈帧。这也是调试器用于解析函数局部变量的地方。
+### 1. 调用和返回
 
-```
-Low                   |                          |
-                      +--------------------------+
-SP -----------------> |                          |
-                      +--------------------------+
-                      |          ARGS            |
-                      |          ARGS            |
-                      |          ARGS            |
-                      +==========================+
-FP -----------------> |           FP'            |
-                      +--------------------------+
-                      |           IR'            |
-High                  |                          |
-```
+ARM 使用 BL 指令作为函数调用，该指令在执行时将跳转地址加载到 CP 寄存器的同时，会将下一条指令地址加载到 X30 寄存器。调用 ret 指令从函数返回时同时将 `X30` 恢复到 SP 寄存器。
 
-BP: 栈底指针
-LR(Link Register): 函数返回地址 (arm: x30, )
-FP(Frame Pointer): 栈帧指针 (arm: r29, x86: rbp)
-SP(Stak Pointer):  栈顶指针 （arm：sp）
+
+函数调用的参数和局部数据都会放在栈中。首先看参数传递：
+
+
+[栈的使用涉及到以下几个方面](https://www.cs.princeton.edu/courses/archive/spr19/cos217/lectures/15_AssemblyFunctions.pdf)
 
 以计算两个数字绝对值的和为例：
 ```C
@@ -96,11 +79,62 @@ stp x29, x30, [sp]
 - 被调用函数通过 `SP+正偏移` 获取参数。
 
 
+Observation: Accessing memory is expensive
+• More expensive than accessing registers
+• For efficiency, want to store parameters and local variables in
+registers (and not in memory) when possible
+Observation: Registers are a finite resource
+• In principle: Each function should have its own registers
+• In reality: All functions share same small set of registers
+Problem: How do caller and callee use same set of registers
+without interference?
+• Callee may use register that the caller also is using
+• When callee returns control to caller, old register contents
+may have been lost
+• Caller function cannot continue where it left off
+
+#### ARM Solution: Register Conventions
+
+1. 优先使用寄存器保存数据，而不是内存。
+
+使用 X0~X7 传递参数，
+- 多余八个使用栈存储。
+- 结构体使用栈
+
+
+2. 返回值：
+- 整数和地址使用 X0
+- 浮点数使用浮点数寄存器
+- 结构体使用内存保存，使用 X8 保存。
+
+被调用者负责的寄存器：
+- X19..X29 (or W19..W29)
+- 被调用 **必须保存** 其内容
+- 如果需要使用
+    - 在函数开始保存其内容。
+    - 在函数结束恢复其内容。
+
+调用者需要保存的寄存器
+- X8..X18 (or W8..W18) – 加上用于保存参数的 X0..X7
+- 被调用者 **可能修改** 其内容。
+- 如果用到了这些寄存器：
+    - 将其放到 X19~X29 之中，否则
+    - 在调用函数前将其保存到栈中。
+    - 在调用结束后恢复其内容。
+
+使用 X0 返回普通数据类型，
+
+**这意味着很多函数不用再保存数据到栈中，函数能够在 X0~X18 寄存器就能处理自己的逻辑，就没有必要存储数据到寄存器。在调用函数时，也可以将数据保存到 X19~X29 中，被调用如果没有调用函数，就不必保存 X19~X29 寄存器，这就减少了很多的内存的操作。**
+
+**上面的描述太多分散，不便于理解，让我们聚焦于一个函数。一个函数一定是一个被调用者，同时也可能调用其它函数，作为被调用者，其可以任意使用 X0~X18，除非逻辑需要而不必考虑保存数据。而当其需要调用函数时，在函数调用之后仍然需要使用到的局部变量，不必保存到内存，只需要将其移到 X19~X29 寄存器中。注意要先保存用到的寄存器再使用（因为自己也是一个被调用者）。如果子程序可能用不到 X19~X29 寄存器，就会入栈的操作，从而达到了优化的目的。其实这种规则主要明确了由谁保存寄存器的问题，而不会出现同一个寄存器在调用者和被调用者中重复保存的问题。**
+
+
+
 #### 3. 局部变量
 
 
 
-**在不同语言的编译器中，调用参数压栈的顺序，参数栈的弹出，名字修饰是不同的。例如 c/c++ 的参数是从由向左开始压栈，由调用方负责弹出，命名修饰使用 `下划线 + 函数名`**
+**在不同语言的编译器中，调用参数压栈的顺序，参数栈的弹出，名字修饰是不同的。例如 c/c++ 的参数是从由右向左开始压栈，由调用方负责弹出，命名修饰使用 `下划线 + 函数名`**
 
 #### 栈攻击
 
@@ -157,6 +191,68 @@ testCall(int):                           // @testCall(int)
         bl      __stack_chk_fail
 ```
 
+## 栈帧
+
+栈帧: 一个函数调用所使用的栈空间被称为一个栈帧。栈帧的概念在各种调试器和 backtrack 中使用到，这也是调试器用于解析函数局部变量的地方。理解栈帧能更方便准确的定位问题。
+
+```
+Low                   |                          |
+                      +--------------------------+
+SP -----------------> |          ARGS            |
+                      |          ARGS            |
+                      |          ARGS            |
+                      +==========================+
+FP -----------------> |           FP'            |
+                      +--------------------------+
+                      |           IR'            |
+High                  |                          |
+```
+
+例如：
+```C
+#include <math.h>
+long test(long);
+long absadd(long a, long b)
+{
+    long absA, absB, sum;
+    absA = test(a);
+    absB = test(b);
+    sum = absA + absB;
+    return sum;
+}
+```
+编译后为：
+```assembly
+absadd(long, long):                             // 进入函数，此时 FP(x29)指向当前栈的栈底。由于该函数没有参数通过栈传递，SP 和 FP 指向同一个位置。
+        stp     x29, x30, [sp, #-32]!           // 增加栈空间，保存 FP, IR
+        stp     x20, x19, [sp, #16]             // 需要用到 X20,X19，先保存 X20,X19 变量
+        mov     x29, sp                         // 要调用函数了，FP 指向 test 的栈底。
+        mov     x19, x1                         // 保存 x1 内容到 x19
+        bl      test(long)                      // 调到 test 执行是 FP 已经指向了新的栈底，bl 会保存返回地址到 LR(x30)。
+        mov     x20, x0
+        mov     x0, x19
+        bl      test(long)
+        add     x0, x0, x20
+        ldp     x20, x19, [sp, #16]             // 恢复 x20, x19 的内容
+        ldp     x29, x30, [sp], #32             // 恢复 FP 和 LR
+        ret
+```
+从这个示例中我们可以看到：
+
+- 一个函数中 FP 不一定一直指向栈底，其在调用子函数是会指向栈顶。即子哈数的栈底。
+
+- 栈大小不是固定的，在函数内部会根据需要变化。例如这里为了保存 `x29, x30, x20, x19` 增加了 32 字节。
+
+- 当没有参数通过栈传递时，SP 和 FP 指向同一个位置。
+
+
+BP: 栈底指针
+LR(Link Register): 函数返回地址 (arm: x30, )
+FP(Frame Pointer): 栈帧指针 (arm: r29, x86: rbp)
+SP(Stak Pointer):  栈顶指针 （arm：sp）
+
+
+
 #### 栈异常处理
 
 一个函数（或方法）抛出异常，那么它首先将当前栈上的变量全部清空(unwinding)，如果变量是类对象的话，将调用其析构函数，接着，异常来到call stack的上一层，做相同操作，直到遇到catch语句。
@@ -168,5 +264,54 @@ testCall(int):                           // @testCall(int)
 ### 创建线程的数量
 
 
+## unwind
+
+如何获取寄存器和堆栈调用信息？即如何生成 backtrace？我们通常把生成 backtrace 的过程叫作 unwind，unwind 看似和我们平时开发并没有什么关系，但其实很多功能都是依赖 unwind 的。举个例子，比如你要绘制火焰图或者是在崩溃发生时得到 backtrace，都需要依赖 unwind。
+
+
+### backtrace 
+
+**backtrace 中的 pc 指是堆栈中函数返回要执行的指令的地址。**不同的堆栈解析程序输出的结果可能不同，对于动态库，Android 输出的是一个相对地址，如果执行当前指令出错了，此时的 PC 正是这个 Frame 0 中地址在内存中的绝对地址。PC 减去 Frame0 中PC 的相对地址，就是动态库的加载地址。
+
+由于 backtrace 的地址在指向函数中某个指令，而不是函数的起始地址。想要知道调用的函数是什么，需要找到地址前最近的一个函数。
+
+1. 如何根据地址快速找到函数？
+
+对于带有调试信息的对象文件，给 addr2line 添加 `-f -demangle=true` 参数。
+```
+addr2line -f -demangle=true -e <bin file> <addr ...>
+
+```
+2. 如何反汇编单个函数？
+
+### 1、获取程序的调用栈
+
+在Linux上的C/C++编程环境下，我们可以通过如下三个函数来获取程序的调用栈信息。
+```C
+#include <execinfo.h>
+ 
+/* Store up to SIZE return address of the current program state in
+   ARRAY and return the exact number of values stored.  */
+int backtrace(void **array, int size);
+ 
+/* Return names of functions from the backtrace list in ARRAY in a newly
+   malloc()ed memory block.  */
+char **backtrace_symbols(void *const *array, int size);
+ 
+/* This function is similar to backtrace_symbols() but it writes the result
+   immediately to a file.  */
+void backtrace_symbols_fd(void *const *array, int size, int fd);
+它们由GNU C Library提供，关于它们更详细的介绍可参考Linux Programmer’s Manual中关于backtrack相关函数的介绍。
+
+```
+
+## C函数调用栈约定
+
+在函数调用时，需要将函数的参数放到栈上，一个函数调用使用到的栈，被称为一个栈帧。不同语言的压栈方式不同，例如 C 语言参数从后向前压栈。
+
+
+
+参考：
 
 https://www.phpgolang.com/archives/833
+https://blog.csdn.net/jinking01/article/details/126564672

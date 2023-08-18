@@ -11,6 +11,7 @@ Notice that the idea of concurrent flows is independent of the number of process
 - 进程
 
 - I/O 多路复用：应用程序在单个进程的上下文中明确安排自己的逻辑流。逻辑流被建模为状态机，随着数据到达文件描述符，主程序随着在状态间转换。
+
 - 线程
 
 此外，在应用层级，某些语言或者库还提供了协程。

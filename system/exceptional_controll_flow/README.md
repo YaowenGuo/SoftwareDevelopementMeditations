@@ -104,11 +104,14 @@ The key point is that processes take turns using the processor. Each process exe
 
 
 ### Context Switches
-上下文切换时各种异常处理流程发生时的核心流程。在一个异常发生时，需要先保存当前进程的上下文，然后才能进行异常的处理流程。当异常处理结束后，它需要根据结果来决定执行哪个进程，同时还原被选中执行的进程的上下文。上下文切换发生在任何异常控制流程发生时，当发成中断、陷阱、错误、中止时，都需要保存当前进程的上下文；而当异常处理程序结束是，决定了要继续执行哪个程序之后，又需要恢复该进程的上下文。这种上下文的保存和恢复就是上下文切换。
 
-The operating system kernel implements multitasking using a higher-level form of exceptional control flow known as a context switch. The context switch mechanism is built on top of the lower-level exception mechanism that we discussed。
 
 The kernel maintains a context for each process. The context is the state that the kernel needs to restart a preempted process. It consists of the values of objects such as the general-purpose registers, the floating-point registers, the program counter, user's stack, status registers, kernel's stack, and various kernel data structures such as a page table that characterizes the address space, a process table that contains information about the current process, and a file table that contains information about the files that the process has opened.
+
+上下文切换时各种异常处理流程发生时的核心流程。在一个异常发生时，需要先保存当前进程的上下文，然后才能进行异常的处理流程。当异常处理结束后，它需要根据结果来决定执行哪个进程，同时还原被选中执行的进程的上下文。上下文切换发生在任何异常控制流程发生时，当发成中断、陷阱、错误、中止时，都需要保存当前进程的上下文；而当异常处理程序结束是，决定了要继续执行哪个程序之后，又需要恢复该进程的上下文。这种上下文的保存和恢复就是上下文切换。
+
+**The operating system kernel implements multitasking using a higher-level form of exceptional control flow known as a context switch. The context switch mechanism is built on top of the lower-level exception mechanism that we discussed。**
+
 
 #### Interrupt
 时钟中断。IO 

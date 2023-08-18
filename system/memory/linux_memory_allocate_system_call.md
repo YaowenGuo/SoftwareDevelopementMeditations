@@ -71,14 +71,6 @@ mmap 是 POSIX 规范中的一个函数，在 Unix 都有实现。详细使用�
 
 ### 缺点
 
-1. mmap 只能整页申请内存。当文件比较小时，会浪费物理内存页。
+1. mmap 只能整页申请内存页。当文件比较小时，会浪费物理内存页。
 
 2. 只支持定长文件（为了支持变长文件，可能可以使用 mremap，但是我几乎没见过有人这样做）。
-
-
-
-strace
-
-strace只能看syscall, malloc不是syscall而是c库，最后去call brk()/mmap()
-
-https://www.jianshu.com/p/4ddf472226cc

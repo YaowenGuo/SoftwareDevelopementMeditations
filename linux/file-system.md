@@ -4,7 +4,8 @@
 |-
     |- /etc 
     |- /usr  # usr是Unix Software Resource的缩写，即“UNIX操作系统软件资源”所放置的目录。
-    |- /opt 
+    |- /opt
+    |- /proc # Linux 上的虚拟文件系统，用于访问内核的各种信息。
 
 ```
  
@@ -28,4 +29,3 @@
 /opt 和 /usr/local 的区别其实并不太大，/opt 主要更能区分一些经常删除和更新的程序。
 
 参考 https://www.cnblogs.com/love-yh/p/8966438.html
-
