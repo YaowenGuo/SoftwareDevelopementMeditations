@@ -255,9 +255,9 @@ SP(Stak Pointer):  栈顶指针 （arm：sp）
 
 #### 栈异常处理
 
-一个函数（或方法）抛出异常，那么它首先将当前栈上的变量全部清空(unwinding)，如果变量是类对象的话，将调用其析构函数，接着，异常来到call stack的上一层，做相同操作，直到遇到catch语句。
+一个函数（或方法）抛出异常，那么它首先将当前栈上的变量全部清空(unwinding)，如果变量是类目标的话，将调用其析构函数，接着，异常来到call stack的上一层，做相同操作，直到遇到catch语句。
 
-**指针是一个普通的变量，不是类对象，所以在清空call stack时，指针指向资源的析构函数将不会调用。** 需要格外注意。
+**指针是一个普通的变量，不是类目标，所以在清空call stack时，指针指向资源的析构函数将不会调用。** 需要格外注意。
 
 
 
@@ -276,13 +276,63 @@ SP(Stak Pointer):  栈顶指针 （arm：sp）
 由于 backtrace 的地址在指向函数中某个指令，而不是函数的起始地址。想要知道调用的函数是什么，需要找到地址前最近的一个函数。
 
 1. 如何根据地址快速找到函数？
-
-对于带有调试信息的对象文件，给 addr2line 添加 `-f -demangle=true` 参数。
-```
-addr2line -f -demangle=true -e <bin file> <addr ...>
-
-```
 2. 如何反汇编单个函数？
+
+对于带有调试信息的目标文件，给 addr2line 添加 `-f -demangle=true` 参数。
+```shell
+addr2line -f -demangle=true -e <bin file> <addr ...>               # 同时输出函数名
+llvm-nm -SC <bin file> | grep '<symbol name>'                      # 获取函数名的地址和大小
+objdump -d <bin file> --start-address=<start> --stop-address=<end> # 根据地址反汇编函数
+```
+例如：
+```shell
+$ llvm-addr2line -f -demangle=true -e libtest_jni.so 0000000000003674
+Bar::g()
+/Users/lim/Project/android/AndroidTest/app/app/src/main/cpp/test_jni.cpp:78
+
+$ llvm-nm -SC libtest_jni.so | grep "Bar::g()"
+0000000000003640 000000000000004c W Bar::g()
+
+$ objdump -d libtest_jni.so --start-address=0x0000000000003640 --stop-address=0x000000000000368c
+
+libtest_jni.so:	file format elf64-littleaarch64
+
+Disassembly of section .text:
+
+0000000000003640 <_ZN3Bar1gEv>:
+    3640: ff 83 00 d1  	sub	sp, sp, #32
+    3644: fd 7b 01 a9  	stp	x29, x30, [sp, #16]
+    3648: fd 43 00 91  	add	x29, sp, #16
+    364c: e0 07 00 f9  	str	x0, [sp, #8]
+    3650: c0 00 80 52  	mov	w0, #6
+    3654: e1 ff ff d0  	adrp	x1, 0x1000 <_ZN3Bar1gEv+0xc>
+    3658: 21 fc 2f 91  	add	x1, x1, #3071
+    365c: e2 ff ff d0  	adrp	x2, 0x1000 <_ZN3Bar1gEv+0x14>
+    3660: 42 04 22 91  	add	x2, x2, #2177
+    3664: a3 0f 00 94  	bl	0x74f0 <__android_log_print@plt>
+    3668: ff 03 00 f9  	str	xzr, [sp]
+    366c: e9 03 40 f9  	ldr	x9, [sp]
+    3670: a8 00 80 52  	mov	w8, #5
+    3674: 28 01 00 b9  	str	w8, [x9]
+    3678: e8 03 40 f9  	ldr	x8, [sp]
+    367c: 00 01 40 b9  	ldr	w0, [x8]
+    3680: fd 7b 41 a9  	ldp	x29, x30, [sp, #16]
+    3684: ff 83 00 91  	add	sp, sp, #32
+    3688: c0 03 5f d6  	ret
+```
+
+对于没有调试信息的二进制文件，使用 objdump 直接使用符号名反汇编？
+
+```
+$ objdump ---disassemble-symbols=<symbole> <input object files>
+```
+带有符号表的情况下，还能通过增加 `--demangle` 参数，从而使用解析过的原始符号时。没有符号表就只能使用编译后的符号。
+
+查看符号的起始地址：
+
+```
+llvm-objdump --dynamic-syms libtest_jni.so
+```
 
 ### 1、获取程序的调用栈
 

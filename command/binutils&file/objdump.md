@@ -2,6 +2,79 @@
 
 objdump 是用于查看对象文件内容和反汇编的指令。
 
+```
+USAGE: objdump [options] <input object files>
+```
+
+objdump 中的一些参数也需要符号表，当没有符号表的时候会无法得到结果。例如 `-t`，`-C` 都需要。`-T` 需要的动态符号表跟调试符号表不同，是动态库加载到内存中用于动态链接的符号，因此即使是 strip 掉调试符号信息的动态库也是存在的。
+
+```
+OPTIONS:
+  -a --archive-headers          Display archive header information(文件格式信息)
+  -f --file-headers             Display the contents of the overall file header
+  -p --private-headers          Display format specific file headers
+  -x --all-headers              Display all available header information, relocation entries and the symbol table
+  -h --[section-]headers        Display summaries of the headers for each section.
+  -j <value> --section=<value>  Operate on the specified sections only. With --macho dump segment,section
+
+  -s --full-contents            Display the content of each section
+  --fault-map-section           Display the content of the fault map section
+
+
+  --D -disassemble-all          Disassemble all sections found in the input files
+  -d --disassemble              Disassemble all executable sections found in the input files
+  --disassemble-symbols=<value> List of symbols to disassemble. Accept demangled names when --demangle is specified, otherwise accept mangled names
+  -z --disassemble-zeroes       Do not skip blocks of zeroes when disassembling(一般反汇编输出将省略大块的零，该选项使得这些零块也被反汇编。 )
+  -M <value> --disassembler-options=options Pass target specific disassembler options
+  -S --source                   When disassembling, display source interleaved with the disassembly. Implies --disassemble
+  -l --line-numbers             When disassembling, display source line numbers. Implies --disassemble
+  --start-address=address       Set the start address for disassembling, printing relocations and printing symbols
+  --stop-address=address        Set the stop address for disassembling, printing relocations and printing symbols
+  --no-leading-addr             When disassembling, do not print leading addresses
+  --no-show-raw-insn            When disassembling instructions, do not print the instruction bytes.
+  --symbolize-operands          Symbolize instruction operands when disassembling
+
+
+  --adjust-vma=offset           Increase the displayed address by the specified offset
+  --arch-name=<value>           Target arch to disassemble for, see --version for available targets
+  --build-id=<hex>              Build ID to look up. Once found, added as an input file
+
+  --debug-file-directory=<dir>  Path to directory where to look for debug files
+  --debug-vars-indent=<value>   Distance to indent the source-level variable display, relative to the start of the disassembly
+  --debug-vars=<value>          Print the locations (in registers or memory) of source-level variables alongside disassembly. Supported formats: ascii, unicode (default)
+  --debuginfod                  Use debuginfod to find debug files
+  -C --demangle                 Demangle symbol names
+
+
+  --dwarf=<value>               Dump the specified DWARF debug sections. The only supported value is 'frames'
+  -R --dynamic-reloc            Display the dynamic relocation entries in the file
+  -t --syms                     Display the symbol table(显示文件的符号表入口。类似于nm -s提供的信息)
+  -T --dynamic-syms             Display the contents of the dynamic symbol table(动态符号表入口，仅仅对动态目标文件意义，比如某些共享库。它显示的信息类似于 nm -D|--dynamic 显示的信息。 )
+                       
+
+  --help                        Display available options (--help-hidden for more)
+  --mattr=a1,+a2,-a3,...        Target specific attributes (--mattr=help for details)
+  --mcpu=cpu-name               Target a specific cpu type (--mcpu=help for details)
+  --no-print-imm-hex            Do not use hex format for immediate values (default)
+  --prefix-strip=prefix         Strip out initial directories from absolute paths. No effect without --prefix
+  --prefix=prefix               Add prefix to absolute paths
+  --print-imm-hex               Use hex format for immediate values
+  --raw-clang-ast               Dump the raw binary contents of the clang AST section
+  -r --reloc                    Display the relocation entries in the file
+                      
+  --show-lma                    Display LMA column when dumping ELF section headers
+
+  --symbol-description          Add symbol description for disassembly. This option is for XCOFF files only.
+
+  --triple=<value>              Target triple to disassemble for, see --version for available targets
+  -u --unwind-info              Display unwind information
+
+  --wide                        Ignored for compatibility with GNU objdump
+  --x86-asm-syntax=att          Emit AT&T-style disassembly
+  --x86-asm-syntax=intel        Emit Intel-style disassembly
+
+```
+
 
 > 查看 section 的头信息
 
@@ -73,8 +146,3 @@ objdump -d -M x86-64 -M intel hello.o
 objdump -t xxx.so
 ```
 -T 和 -t 选项在于 -T 只能查看动态符号，如库导出的函数和引用其他库的函数，而 -t 可以查看所有的符号，包括数据段的符号。
-
--t 查看程序符号，实现 nm 的功能
-
-
-https://blog.csdn.net/wwchao2012/article/details/79980514

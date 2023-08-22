@@ -17,11 +17,7 @@ LLVM 提供了一套同样功能的替代程序，名字增加了 `llvm-` 前缀
 
 The `objdump` program is just one of many tools you should learn how to use; a debugger like `gdb`, memory profilers like `valgrind` or `purify`, and of course the `compiler` itself are others that you should spend time to learn more about;
 
-TODO:
-objdump
-readelf
-dwarfdump
-crashpad
+其中 `addr2line`, `nm`, `dwarfdump` 都依赖于调试信息。
 
 ## 其它：
 

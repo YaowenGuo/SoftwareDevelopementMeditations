@@ -1,5 +1,68 @@
 # readelf
 
+readelf 用于读取 elf 文件信息。llvm-readelf 是 llvm-readobj 的一个软链接。
+
+```
+USAGE: llvm-readelf [options] <input object files>
+```
+
+```
+
+OPTIONS:
+  -h --file-header                  Display file header
+  -S --section-headers              Display section headers
+  -s --syms --symbols               Display the symbol table. Also display the dynamic symbol table when using GNU output style for ELF
+  -r --relocs --relocations         Display the relocation entries in the file
+  -u --unwind                       Display unwind information
+  -e --headers                      Equivalent to setting: --file-header, --program-headers, --section-headers
+  -a --all                          Equivalent to setting: --file-header, --program-headers, --section-headers, --symbols, --relocations, --dynamic-table, --notes, --version-info, --unwind, --section-groups and --histogram
+
+  --addrsig                         Display address-significance table
+  -A --arch-specific                Display architecture-specific information
+
+  --bb-addr-map                     Display the BB address map section
+  --cg-profile                      Display call graph profile section
+  -C --demangle                     Demangle symbol names
+  --no-demangle                     Do not demangle symbol names (default)
+
+  --dependent-libraries             Display the dependent libraries section
+  --dyn-relocations                 Display the dynamic relocation entries in the file
+  --dt--dyn-syms --dyn-symbols      Display the dynamic symbol table
+  --expand-relocs                   Expand each shown relocation to multiple lines
+
+  -x --hex-dump=<name or index>     Display the specified section(s) as hexadecimal bytes
+  --pretty-print                    Pretty print JSON output
+  --sd  --section-data              Display section data for each section shown. This option has no effect for GNU style output
+  -t --section-details              Display the section details
+  --section-mapping                 Display the section to segment mapping
+  --sr --section-relocations        Display relocations for each section shown. This option has no effect for GNU style output
+  --st --section-symbols            Display symbols for each section shown. This option has no effect for GNU style output
+  --sort-symbols=<value>            Specify the keys to sort the symbols before displaying symtab
+  --stack-sizes                     Display contents of all stack sizes sections. This option has no effect for GNU style output
+  --stackmap                        Display contents of stackmap section
+  -p --string-dump=<name or index>  Display the specified section(s) as a list of strings
+  --wide                            Ignored for GNU readelf compatibility
+  -W                                Ignored for GNU readelf compatibility
+
+OPTIONS (ELF specific):
+  -l --segments --program-headers   Display program headers
+  -d --dynamic --dynamic-table      Display the dynamic section table
+  -n --notes                        Display notes
+  -V --version-info                 Display version sections
+  -g --section-groups               Display section groups
+  -I --histogram                    Display bucket list histogram for hash sections
+
+  --elf-linker-options              Display the .linker-options section
+  --elf-output-style=<value>        Specify ELF dump style: LLVM, GNU, JSON
+  --gnu-hash-table                  Display the GNU hash table for dynamic symbols
+  --hash-symbols                    Display the dynamic symbols derived from the hash section
+  --hash-table                      Display .hash section
+  --needed-libs                     Display the needed libraries
+  --raw-relr                        Do not decode relocations in SHT_RELR section, display raw contents
+
+Pass @FILE as argument to read options from FILE.
+```
+
 ```
 readelf -h  hanoi
 ```
