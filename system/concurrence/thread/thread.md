@@ -466,6 +466,19 @@ class V extends T {
 
 https://mp.weixin.qq.com/s/oLz_F7zhUN6-b-KaI8CMRw
 
+> 获取当前进程的所有线程，简单介绍两种方式。
+
+1. 在 Native 断点停止时，在 lldb 的终端输入 `thread list`
+
+2. 使用 adb 执行 ps 命令
+
+```
+$ adb shell ps | grep com.fenbi.android.servant # 包名
+u0_a487       27575    798 7579216 307616 0                   0 S com.fenbi.android.servant
+
+# adb shell ps -T -t | grep <process id>
+$ adb shell ps -T -t 27575
+```
 
 ## 内存模型
 

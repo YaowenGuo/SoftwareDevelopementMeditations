@@ -37,7 +37,7 @@ public class TestActivity extends AppCompatActivity {
         thread.start();
     }
 }
-
+
 ```
 
 输出
@@ -47,7 +47,7 @@ System.out: Thread id: 10700
 System.out: Thread id: 1
 ```
 
-可以看到 Handler 的 post 并不是在子线程中执行的，而是 Handler 对象所在的线程中执行的。 而在 Hander 的文档中说明了 `Handler()
+可以看到 Handler 的 post 并不是在子线程中执行的，而是 Handler 对象所在的线程中执行的。 而在 Hander 的文档中说明了 `Handler()
 Default constructor associates this handler with the Looper for the current thread.`。
 
 也可以指定线程执行 Hander 的 post 代码，就是在创建时指定 Looper。
@@ -66,7 +66,7 @@ public class TestActivity extends AppCompatActivity {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Looper.prepare(); // 必须，因为 Handler 创建时会获取所在线程的 Thread 的 looper。
+                Looper.prepare(); // 必须，因为 Handler 创建时会获取所在线程的 Thread 的 looper。
                 handler1 = new Handler();
                 handler1.post(new Runnable(){
                     @Override
@@ -75,7 +75,7 @@ public class TestActivity extends AppCompatActivity {
 
                     }
                 });
-                Looper.loop(); // 必须执行，用于启动消息处理。
+                Looper.loop(); // 必须执行，用于启动消息处理。
             }
         });
         thread.start();
@@ -99,7 +99,7 @@ public class TestActivity extends AppCompatActivity {
         System.out.println("Thread id main: " + Thread.currentThread().getId());
         HandlerThread thread = new HandlerThread("Work thread"); // 必须使用 HandlerThread，以获取 Looper.
         thread.start(); // 必须在 getLooper() 之前就执行。
-        handler = new Handler(thread.getLooper()); // 指定执行线程。
+        handler = new Handler(thread.getLooper()); // 指定执行线程。
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -120,7 +120,7 @@ public class TestActivity extends AppCompatActivity {
 
 - 除了立即执行的 post, Hander 还能指定延迟执行。 postAtTime， postDelayed，postAtFrontOfQueue，
 
-- 其实 post 函数也是调用 sendMessageDelayed 将 参数作为一个消息发送到消息队列。
+- 其实 post 函数也是调用 sendMessageDelayed 将 参数作为一个消息发送到消息队列。
 
 我们先来看下Handler中的post()方法，代码如下所示：
 
@@ -196,7 +196,7 @@ public final void runOnUiThread(Runnable action) {
 
 ## Handler.sendMessage
 
-想要与那个线程通信，就调用那个线程绑定的 Handler 的 sendMessage(Message msg) 方法。
+想要与那个线程通信，就调用那个线程绑定的 Handler 的 sendMessage(Message msg) 方法。
 
 
 ```
@@ -232,7 +232,6 @@ public class TestActivity extends AppCompatActivity {
                 handler1.sendMessage(message);
                 System.out.println("Handler message send : " + Thread.currentThread().getId());
 
-
             }
         });
     }
@@ -245,7 +244,7 @@ uptimeMillis参数则表示发送消息的时间，它的值等于自系统开�
 
 
 
-## Handler 线程通信原理解析
+## Handler 线程通信原理解析
 
 > android 为什么要设计只能通过handler机制更新UI？
 
@@ -258,12 +257,12 @@ uptimeMillis参数则表示发送消息的时间，它的值等于自系统开�
 出于对以上问题的考虑，Android给我们提供了一套更新UI的机制，我们只要遵循这个机制就可以了，根本不用去关心多线程并发的问题，所有的更新UI的操作，都是在主线程的消息队列中去轮训处理的。
 
 
-Handler 进程间通信，其实就是典型的生产者消费者模型。发送消息的线程为生产者，接受消息的线程为消费者。
+Handler 进程间通信，其实就是典型的生产者消费者模型。发送消息的线程为生产者，接受消息的线程为消费者。
 
 ![Producer and Consumer](images/producer_and_consumer.png)
 ![Hander](images/handler_messagequne_looper.png)
 
 
 - 每个线程仅有一个 MessageQueue
-- 每个线程仅有一个 Looper, MessageQueue 对象是在Looper的构造函数中创建的，因此一个Looper也就对应了一个MessageQueue。Loopler.looper方法，就是一个死循环，不断地从MessageQueue取消息，如果有消息就处理消息（调用 Message 对象绑定的 Handler的dispatchMessage 将消息还给 Handler 执行。执行顺序为，Handler 的 runnable，不存在就执行所在线程的 Runnable，不存在就执行 Handler 的 handleMessage() 方法。多个Handler 时，谁发的，就分发给谁，因为发送消息时保存了 Handler 的引用），没有消息就阻塞。
+- 每个线程仅有一个 Looper, MessageQueue 对象是在Looper的构造函数中创建的，因此一个Looper也就对应了一个MessageQueue。Loopler.looper方法，就是一个死循环，不断地从MessageQueue取消息，如果有消息就处理消息（调用 Message 对象绑定的 Handler的dispatchMessage 将消息还给 Handler 执行。执行顺序为，Handler 的 runnable，不存在就执行所在线程的 Runnable，不存在就执行 Handler 的 handleMessage() 方法。多个Handler 时，谁发的，就分发给谁，因为发送消息时保存了 Handler 的引用），没有消息就阻塞。
 - Handler封装了消息的发送，将消息发送给绑定的线程中的 MessageQueue(从 Looper 中获取)。

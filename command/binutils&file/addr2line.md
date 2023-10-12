@@ -1,6 +1,6 @@
 # addr2line
 
-addr2line 用于将 backtrack 中的地址信息转换为代码行。此转换需要目标文件带有调试的符号表信息。如果没有调试信息就不能使用这种方式。
+addr2line 用于将 backtrack 中的地址信息转换为代码行。此转换需要目标文件带有调试的符号表信息。如果没有调试信息就不能使用这种方式。llvm-addr2line 是 llvm-symbolizer 的一个软链接。
 
 ```
 llvm-addr2line [options] addresses...

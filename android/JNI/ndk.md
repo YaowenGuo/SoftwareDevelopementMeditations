@@ -5,7 +5,7 @@ NDK 不仅仅是一个单一功能的工具，还是一个包含了 API 、交�
 NDK 跟目录下的结构。
 
 - ndk-build: 该 Shell 脚本是 Android NDK 构建系统的起始点，一般在项目中仅仅执行这一个命令就可以编译出对应的动态链接库了。
-- ndk-gdb: 该 Shell 脚本允许用 GUN 调试器调试 Native 代码，并且可以配置到 AS 中，可以做到像调试 Java 代码一样调试 Native 代码。
+- ndk-lldb: 该 Shell 脚本允许用 GUN 调试器调试 Native 代码，并且可以配置到 AS 中，可以做到像调试 Java 代码一样调试 Native 代码。
 - ndk-stack: 该 Shell 脚本可以帮组分析 Native 代码崩溃时的堆栈信息。
 - build: 该目录包含 NDK 构建系统的所有模块。
 - platforms: 该目录包含支持不同 Android 目标版本的头文件和库文件， NDK 构建系统会根据具体的配置来引用指定平台下的头文件和库文件。

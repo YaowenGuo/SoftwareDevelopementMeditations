@@ -1,6 +1,6 @@
-# GVM
+# JVM
 
-> 了解　GVM 有什么用？
+> JVM 有什么用？
 
 1. 排查解决一些内存移除和泄露
 
@@ -98,4 +98,3 @@ GC 完成了３件事
 
 
 https://www.cnblogs.com/luohanguo/p/9469851.html
-
