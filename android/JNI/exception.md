@@ -31,5 +31,5 @@ Native 中使用 `JNIEnv::ThrowNew()` 方法向 Java 抛出异常。
 ```C++
 jclass cls = env->FindClass("java/lang/IllegalArgumentException");
 
-env->TherowNew(cls, "Some Error Message");
+env->ThrowNew(cls, "Some Error Message");
 ```

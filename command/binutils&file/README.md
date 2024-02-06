@@ -23,3 +23,5 @@ The `objdump` program is just one of many tools you should learn how to use; a d
 
 - [elf 文件格式](elf.md)
 - [dwarfdump](dwarfdump.md)
+
+memory profilers like valgrind or purify

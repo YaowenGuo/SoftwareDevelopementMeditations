@@ -26,34 +26,33 @@ Camera2 的架构模型
 
 
 
-## Camera 开发流程
+## Camera API 开发流程
 
-1. 设置权限和请求权限。
+## API 宏观流程
 
-2. 通过 applicationContext.getSystemService(Context.CAMERA_SERVICE) 获取CameraManager.
-    
-    CameraManager 可以用于获取 CameraDevice, CameraId，以及通过 CameraId 查询 camera 所能支持的各个功能。
+1. 声明权限和动态请求权限。
 
-3. 调用CameraManager.openCamera() 方法在回调中得到 CameraDevice。
-    
-    CameraDevice 用于 
+2. 通过 applicationContext.getSystemService(Context.CAMERA_SERVICE) 获取CameraManager.CameraManager 可以用于获取 CameraDevice, CameraId，以及通过 CameraId 查询 camera 所能支持的各个功能。
+    1. 通过 CameraId 查询 camera 的 metadata.
+    2. 通过 medadata 查询 camera 的各种特性（Characteristics）。通过这些特性来查找符合条件的摄像头，例如先后摄像头，分辨率等。然后返回符合条件的 Camera 的 Id
+
+3. 调用CameraManager.openCamera() 通过 Camera ID 打开摄像头。在设置的回调中得到 CameraDevice。CameraDevice 用于实际的摄像头操作。
 
 4. 通过 CameraDevice.createCaptureSession() 回调中 获得 CameraCaptureSession 链接摄像头的会话。
 
 5. 构建 CaptureRequest, 有预览/拍照/录像等多种模式可选，按照 2 中查询到的功能进行设置。
 
-5. 通过 CameraCaptureSession 发送 CaptureRequest 请求。 `setRepeatingRequest` 用于不断采样数据，这对于预览图像特别有用。 `capture` 用于发送单次执行的请求，适用于拍照。
-
-> 拍照
-
-6. 如果要拍照，创建 `ImageReader` 对象，将 `CaptureRequest` 的 target 设置为 `ImageReader` 的 `Serface` 内部对象。 给 `ImageReader` 设置 `OnImageAvailableListener` 监听，在监听器中获得拍照的数据和当前 Camera 当前的状态。
+5. 通过 CameraCaptureSession 会话发送 CaptureRequest 请求。需要创建一个 Surface 用于接收图像数据。`setRepeatingRequest` 用于不断采样数据，这对于预览图像特别有用。 `captureXXX` 用于发送单次执行的请求，适用于拍照。在 CaptureResult 中得到请求的其它相关信息。
 
 
-## Capture
+### 5.2 capture
 
-因为相机所有的操作都是为了采集图像，要么用于预览，要么用于保存成文件。所以 Camera2 将包括对相机操作和参数设置的请求都抽象成了 `Capture`， 例如对焦、调节曝光补偿、预览、连拍等，都用发送一个 Capture 到相机服务。在 Camera1 中有 `setFlashMode`、`setFocusMode`、`takePicture`，Camera2 统一抽象成了 Capture 操作。
+因为相机所有的操作都是为了采集图像，要么用于预览，要么用于保存成文件，甚至是视频。所以 Camera2 将包括对相机操作和参数设置的请求都抽象成了 `Capture`， 例如对焦、调节曝光补偿、预览、连拍等，都用发送一个 CaptureRequest 到相机服务。在 Camera1 中有 `setFlashMode`、`setFocusMode`、`takePicture`，Camera2 统一抽象成了 Capture 操作。
 
-**每个 Capture 都必须设置一个 Surface 作为目标输出。可以重复设置，例如预览的 SurfaceView 要调整参数，其中的 SurfaceView.holder.surface 可以重复使用。**
+**每个 CaptureRequest 都必须设置一个 Surface 作为目标输出。可以重复设置，例如预览的 SurfaceView 要调整参数，其中的 SurfaceView.holder.surface 可以重复使用。**
+
+如果要拍照，创建 `ImageReader` 对象，将 `CaptureRequest` 的 target 设置为 `ImageReader` 的 `Serface` 内部对象。 给 `ImageReader` 设置 `OnImageAvailableListener` 监听，在监听器中获得拍照的数据和当前 Camera 当前的状态。
+
 
 Capture 从执行方式上又被细分为【单次模式】、【多次模式】和【重复模式】三种，我们来一一解释下：
 
@@ -62,6 +61,19 @@ Capture 从执行方式上又被细分为【单次模式】、【多次模式】
 - **多次模式（Burst）**：指的是连续多次执行指定的 Capture 操作，该模式和多次执行单次模式的最大区别是连续多次 Capture 期间不允许插入其他任何 Capture 操作，例如连续拍摄 100 张照片，在拍摄这 100 张照片期间任何新的 Capture 请求都会排队等待，直到拍完 100 张照片。多组多次模式的 Capture 会进入队列按顺序执行。
 
 - **重复模式（Repeating）**：指的是不断重复执行指定的 Capture 操作，当有其他模式的 Capture 提交时会暂停该模式，转而执行其他被模式的 Capture，当其他模式的 Capture 执行完毕后又会自动恢复继续执行该模式的 Capture，例如显示预览画面就是不断 Capture 获取每一帧画面。该模式的 Capture 是全局唯一的，也就是新提交的重复模式 Capture 会覆盖旧的重复模式 Capture。
+
+- capture	送一个CaptureRequest给Camera底层，通过Handler指定回调线程	    API 21
+- captureBurst	送一组CaptureRequest给Camera底层，通过Handler指定回调线程	API 21
+- setRepeatingRequest	送一个Repeating CaptureRequest给Camera底层，通过Handler指定回调线程	API 21
+- setRepeatingBurst	送一组Repeating CaptureRequest给Camera底层，通过Handler指定回调线程	API 21
+
+上面的 API 通过 Handler 指定线程，Android 28 新增了 4 个使用 Executor 指定线程的 API。跟上面的四个方法一一对应。
+
+- captureSingleRequest	送一个CaptureRequest给Camera底层，通过Executor指定回调线程	API 28
+- captureBurstRequests	送一组CaptureRequest给Camera底层，通过Executor指定回调线程	API 28
+- setSingleRepeatingRequest	送一个Repeating CaptureRequest给Camera底层，通过Executor指定回调线程	API 28
+- setRepeatingBurstRequests	送一组Repeating CaptureRequest给Camera底层，通过Executor指定回调线程	API 28
+
 
 
 ## AE/AF Region
@@ -109,17 +121,6 @@ CameraDevice 类是连接到 Android 设备的单个摄像头的表示，允许�
 Camera2 开始默认支持 YUV 图像格式。此外还有 RAW 和 JPEG。对于YUV格式输出,视频/图像都推荐YUV_420_888
 
 
-## API 宏观流程
-
-1. 动态申请权限
-2. 获取 CameraManager
-3. 通过 CameraManager 拿到所有 CameraId
-4. 通过 CameraId 查询 camera 的 metadata.
-5. 通过 medadata 查询 camera 的各种特性（Characteristics）。通过这些特性来查找符合条件的摄像头，例如先后摄像头，分辨率等。然后返回符合条件的 Camera 的 Id
-6. 通过 Camera ID 打开摄像头。
-7. 创建一个会话，分为预览（preview）,捕获（Capture）和分析（Analysis）
-7. 输出到响应的地方。
-
 
 
 
@@ -134,5 +135,3 @@ https://www.jianshu.com/p/23e8789fbc10
 底层
 
 https://www.cnblogs.com/blogs-of-lxl/p/10651611.html
-
-

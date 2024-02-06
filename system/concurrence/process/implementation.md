@@ -141,7 +141,7 @@ Err:          0
  11:     833455              GICv3     27     Level                                     arch_timer
  14:          0              GICv3     36     Level                                     rtc-pl031
 ```
-
+    
 
 不同定时器切换频率的影响： https://core.ac.uk/download/pdf/143963314.pdf
 

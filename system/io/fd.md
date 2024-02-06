@@ -50,7 +50,7 @@ Max open files            32768                32768                files
 修改这个配置：
 ```
 sudo vi /etc/security/limits.conf
-写入以下配置,soft软限制，hard硬限制
+写入以下配置,soft软限制，hard硬限制y
 
 *                soft    nofile          65536
 *                hard    nofile          100000
@@ -81,6 +81,16 @@ NODE：索引节点（文件在磁盘上的标识）
 NAME：打开文件的确切名称
 ```
 
+## 常用文件描述符
+
+```
+lrwx------ 1 u0_a588 u0_a588 64 2023-08-31 11:20 0 -> /dev/null
+权限          groupId userId     Date       Time  fd   file 
+
+0   stdin              /dev/null
+1   stdout             /dev/null
+2   stderr             /dev/null
+```
 
 参考：
 

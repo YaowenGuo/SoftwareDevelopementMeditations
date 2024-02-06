@@ -282,7 +282,6 @@ SP(Stak Pointer):  栈顶指针 （arm：sp）
 ```shell
 addr2line -f -demangle=true -e <bin file> <addr ...>               # 同时输出函数名
 llvm-nm -SC <bin file> | grep '<symbol name>'                      # 获取函数名的地址和大小
-objdump -d <bin file> --start-address=<start> --stop-address=<end> # 根据地址反汇编函数
 ```
 例如：
 ```shell
@@ -324,8 +323,11 @@ Disassembly of section .text:
 对于没有调试信息的二进制文件，使用 objdump 直接使用符号名反汇编？
 
 ```
+$ objdump -d <bin file> --start-address=<start> --stop-address=<end> # 根据地址反汇编函数
+
 $ objdump ---disassemble-symbols=<symbole> <input object files>
 ```
+
 带有符号表的情况下，还能通过增加 `--demangle` 参数，从而使用解析过的原始符号时。没有符号表就只能使用编译后的符号。
 
 查看符号的起始地址：

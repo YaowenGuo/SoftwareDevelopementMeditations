@@ -1,12 +1,41 @@
-# 崩溃
+# 应用层调试
 
-原生程序的：调试、追踪、分析
+调试、追踪、分析，力争
 
-## 1. 开发时避免
+1. 开发时避免
+2. 开发后检测
+3. 线上报告
 
-## 2. 开发后检测
+程序在运行中发生崩溃是经常发生的事情，根据崩溃信息，有些我们能够很快定位的发生问题的原因，而另外一些则不然，其发生原因很难确定。为了定位问题我们需要有一些帮助信息和调试工具：
 
-调试、追踪、分析
+1. 在崩溃时记录信息：Crash dump or tombstone。以及程序主动打印的日志。
+
+2. 使用崩溃信息和调试工具帮助定位问题发生的地方和原因：
+    ndk-stack
+
+3. 通过检测工具提前发现错误。
+
+
+## [1. 日志](log.md)
+## [2. bug reports](android_bugreport.d)
+
+安卓的崩溃信息回同时写入日志和 bugreport。
+
+## 2. 调试工具
+
+Android Studio 图形调试前端
+
+[ndk-lldb 命令行调试](./lldb_debug/1.README.md)
+
+或者可以在崩溃后使用 adb bugreport 将日志拉取到本地查看日志文件。
+
+帮助工具：
+ndk-stack
+
+
+## 3. 检测工具
+
+### 内存
 
 - HWASan/ASan: 内存泄露。On arm64 we recommend using HWASan, while for 32-bit arm and for non-Arm platforms we recommend using ASan. They provide equivalent functionality and should be used for detecting memory safety bugs in userspace code.
     - 堆栈和堆缓冲区上溢/下溢
@@ -26,11 +55,47 @@
 - KAsan: HWASan/ASan 对应的内核调试实现
 - KFENCE: GWP-ASan 对应的内核检测工具。
 - MTE: ArmV9 才支持，HWAsan 的硬件实现。
-- CPU:  Simpleperf
+
+#### Address Sanitizer (HWASan/ASan)
+HWAddress Sanitizer (HWASan) and Address Sanitizer (ASan) are similar to Valgrind, but significantly faster and much better supported on Android.
+
+These are your best option for debugging memory errors on Android.
+
+TODO: 查看 Address Sanitizer 的崩溃报告
+
+#### Malloc debug
+See Malloc Debug and Native Memory Tracking using libc Callbacks for a thorough description of the C library's built-in options for debugging native memory issues.
+
+#### Malloc hooks
+If you want to build your own tools, Android's libc also supports intercepting all allocation/free calls that happen during program execution. See the malloc_hooks documentation for usage instructions.
+
+#### Malloc statistics
+Android supports the mallinfo(3) and malloc_info(3) extensions to <malloc.h>.
+
+The malloc_info functionality is available in Android 6.0 (Marshmallow) and higher and its XML schema is documented in Bionic's malloc.h header.
+
+
+### CPU
+
+For CPU profiling of native code, you can use [Simpleperf](https://developer.android.com/ndk/guides/simpleperf).
 
 ![undefine behavior log demonstration](./README_img/undefined_behavior_log.png)
 
-查看 Address Sanitizer 的崩溃报告
+
+
+## 3. 线上监控/上报
+
+tombstone 应用内上报：https://developer.android.com/ndk/guides/debug
+- Maloc 分析
+    - Malloc debug
+
+    - Malloc hooks
+
+    - Malloc statistics
+
+- crashpad
+
+
 
 
 
@@ -45,17 +110,7 @@ Memory: https://source.android.com/docs/core/tests/debug/native-memory
 Evaluating Performance: https://source.android.com/docs/core/tests/debug/eval_perf
 Debug your app: https://developer.android.com/studio/debug/index
 
-## 3. 线上监控/上报
 
-tombstone 应用内上报：https://developer.android.com/ndk/guides/debug
-- Maloc 分析
-    - Malloc debug
-
-    - Malloc hooks
-
-    - Malloc statistics
-
-- crashpad
 
 
 参考
