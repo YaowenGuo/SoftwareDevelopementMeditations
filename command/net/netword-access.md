@@ -10,3 +10,17 @@ HEAD 请求并不是像其他请求一样是用 -X 指定。如果只使用 `-I`
 ```
 curl -v -X GET -I -H "Testing: Test header so you see this works" http://stackoverflow.com/
 ```
+
+## 下载文件 -o/O
+
+curl 默认的将请求结果用于标准输出，想要将内容输出到文件，可以使用 `-O <url>`, 将保存为和远端同名的文件。
+
+```
+curl -O <url>
+```
+
+如果想要自己命名，可以使用 `-o <file name>` 来自定义文件名。
+
+```
+curl <url> -o <file name>
+```
