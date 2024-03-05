@@ -8,11 +8,9 @@ MACHINE="-machine virt,accel=hvf"
 CPU="-cpu host -smp cpus=8,"
 MEMORY="-m 16G"
 NAME="-name LFS"
-
-# BOOT
-STD="-L /opt/homebrew/Cellar/qemu/8.2.1/share/qemu"
 # Don’t create default devices.
 # -nodefaults
+
 # Boot
 # -L path
 # Set the directory for the BIOS, VGA BIOS and keymaps.
@@ -28,7 +26,7 @@ BOOT="${BOOT_DIR} ${FRAMEWARE} ${FRAMEWARE_VAR}"
 
 # Device
 # Display。VGA 显示器老式15针接口
-DISPLAY="-device ramfb -vga none"
+DISPLAY="-device virtio-gpu-pci -vga none"
 # USB bus
 BUS="-device nec-usb-xhci,id=usb-bus"
 STARTUP_DISK="-device usb-storage,drive=drive9FA36442-38C1-46A6-932F-390611AA5DEB,removable=true,bootindex=0,bus=usb-bus.0 -drive if=none,media=cdrom,id=drive9FA36442-38C1-46A6-932F-390611AA5DEB,file=/Users/lim/Downloads/Fedora-Workstation-Live-aarch64-39-1.5-respin.iso,readonly=on"
@@ -36,16 +34,14 @@ KEYBOARD="-device usb-kbd,bus=usb-bus.0"
 MOUSE="-device usb-mouse,bus=usb-bus.0"
 TOUCHPAD="-device usb-tablet,bus=usb-bus.0"
 DISK="-device virtio-blk-pci,drive=drive2BC0901F-DA56-49C7-A0D2-98F71114CB44,bootindex=1 -drive if=none,media=disk,id=drive2BC0901F-DA56-49C7-A0D2-98F71114CB44,file=$HOME/Project/Containers/FedoraArm64.qcow2,discard=unmap,detect-zeroes=unmap"
-NET="-device virtio-net-pci,mac=3A:F0:6E:23:0C:A4,netdev=net0 -netdev vmnet-shared,id=net0"
-# Mac homebrew 仓库的 qemu 不带 spice，使用需要自己编译。
-# SPICE="-spice unix=on,addr=55810793-DA45-4990-8DB5-76D6B5319E0A.spice,disable-ticketing=on,image-compression=off,playback-compression=off,streaming-video=off,gl=off -chardev spiceport,id=org.qemu.monitor.qmp,name=org.qemu.monitor.qmp.0 -mon chardev=org.qemu.monitor.qmp,mode=control"
+# NET="-device virtio-net-pci,mac=3A:F0:6E:23:0C:A4,netdev=net0 -netdev vmnet-shared,id=net0"
+OTHER="-device virtio-rng-pci"
 DEVICES="${DISPLAY} ${BUS} ${STARTUP_DISK} ${KEYBOARD} ${MOUSE} ${TOUCHPAD} ${DISK} ${NET}"
 
-echo ${ACCEL} ${MACHINE} ${CPU} ${MEMORY} ${NAME} ${BOOT} ${DEVICES}
-
-qemu-system-aarch64 ${ACCEL} ${MACHINE} ${CPU} ${MEMORY} ${NAME} ${BOOT} ${DEVICES} ${SPICE} $*
+qemu-system-aarch64 ${ACCEL} ${MACHINE} ${CPU} ${MEMORY} ${NAME} ${BOOT} ${DEVICES} ${OTHER} $*
 
 
+# Mac homebrew 仓库的 qemu 不带 spice，使用需要自己编译。
 # -uuid 55810793-DA45-4990-8DB5-76D6B5319E0A
 # ; 添加一块 virtio-serial 设备
 # -device virtio-serial
