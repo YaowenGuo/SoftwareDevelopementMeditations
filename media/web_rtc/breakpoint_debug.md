@@ -161,7 +161,7 @@ debug 程序的调试原理是，本地和远端都要存储同样的执行文�
 target.exec-search-paths (file-list) =
   [0]: /Users/albert/project/android/AndroidTest/app/rtc_demo_native/build/intermediates/cxx/Debug/1v3t6s3w/obj/arm64-v8a
 ```
-我们只需要也添加一个这样的搜索路径即可，使用 `settings set` 或者 `setting append` 命令，区别就是 `set` 是设置，而 `append` 是添加。
+我们只需要也添加一个这样的搜索路径即可，使用 `settings set` 或者 `settings append` 命令，区别就是 `set` 是设置，而 `append` 是添加。
 
 ```
 settings append target.exec-search-paths <你的带 debug symbole 的路径>

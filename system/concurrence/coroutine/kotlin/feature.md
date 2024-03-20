@@ -74,3 +74,52 @@ println("Hello")
 job.join() // wait until child coroutine completes
 println("Done") 
 ```
+
+```
+
+  override fun load(
+    loadType: LoadType,
+    start: Int,
+    pageSize: Int,
+    pageLoadCallback: PageLoadCallback<ThemeItem>
+  ) {
+    val loadPage = if (loadType == LoadType.INIT) 0 else lastLoadPage + 1
+    CookHomeApi.instance
+      .themeList(if (isPrePublishMode) "pre" else "", loadPage, pageSize)
+//      .flatMap {
+//        val themes = it.dataWhenSuccess
+//        if (themes.list.isNullOrEmpty()) return@flatMap Observable.just(it)
+//        val collectMete = Observable.fromIterable(themes.list)
+//          .flatMap{ theme ->
+//            Log.e("CookThemeListViewModel", "flatmap: ${theme.themeId}")
+//            CookCourseApis.getApis().isCollected(CookCourseApis.COLLECT_THEME, theme.themeId)
+//          }
+//          .map { collectRsp ->
+//            Log.e("CookThemeListViewModel", "flatmap: ${collectRsp.dataWhenSuccess}")
+//            collectRsp.dataWhenSuccess }
+//          .collect(Callable<ArrayList<Boolean>> { ArrayList() }) { list, collected -> list.add(collected) }
+//        Observable.zip(Observable.just(it), collectMete.toObservable()) { themesRsp, collectList ->
+//          Log.e("CookThemeListViewModel", "resutlt: ${collectList}")
+//          for (index in themesRsp.dataWhenSuccess.list!!.indices) {
+//            themesRsp.dataWhenSuccess.list!![index].collected = collectList[index]
+//          }
+//          themesRsp
+//        }
+//      }
+      .subscribe(
+        object : BaseRspObserver<ThemeRspData>() {
+          override fun onSuccessResult(data: ThemeRspData) {
+            lastLoadPage = data.pageInfo.currentPage
+            val theme = data.list?.filter { it.themeType <= ThemeData.THEME_TYPE_VIDEO }
+            pageLoadCallback.onPageLoad(theme?.toMutableList())
+          }
+
+          override fun onErrorResult(code: Int, e: Throwable?) {
+            if (handleAccountError(code, e)) return
+            pageLoadCallback.onPageLoadFailed(e)
+          }
+        }
+      )
+  }
+
+```
