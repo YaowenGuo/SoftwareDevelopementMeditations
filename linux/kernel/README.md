@@ -25,5 +25,11 @@ Linux 内核的五大组成部分：
 - [UEFI](uefi.md)
 - [BIOS](bios.md)
 - [MBR与GUID磁盘分区](disk_partition.md)
-- [8086 计算机内存的特殊区间](x86_physical_memory.md)
+- [X86 计算机内存的特殊区间](x86_physical_memory.md)
+
+
+TODO:
+
+1. Debug 环境建立的的文档。
+2. StartKernel 之前做的事情 文档
 
