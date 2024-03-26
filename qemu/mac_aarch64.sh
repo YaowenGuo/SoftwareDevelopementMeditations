@@ -5,7 +5,7 @@
 
 # System Specs
 MACHINE="-machine virt,accel=hvf"
-CPU="-cpu host -smp cpus=8,"
+CPU="-cpu host -smp cpus=8"
 MEMORY="-m 16G"
 NAME="-name LFS"
 # Don’t create default devices.

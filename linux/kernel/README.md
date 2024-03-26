@@ -15,13 +15,15 @@ Linux 内核的五大组成部分：
 
 ![五大部分](README_img/kerner_5_main_part.gif)
 
-
-- [调试方法](debug.md)
 - [启动流程](startup.md)
-        - [UEFI](uefi.md)
-        - [BIOS](bios.md)
+- [调试方法](debug.md)
 - [内存管理模块](memory_module.md)
 - [进程管理](process.md)
 
 
+扩展阅读：
+- [UEFI](uefi.md)
+- [BIOS](bios.md)
+- [MBR与GUID磁盘分区](disk_partition.md)
+- [8086 计算机内存的特殊区间](x86_physical_memory.md)
 
