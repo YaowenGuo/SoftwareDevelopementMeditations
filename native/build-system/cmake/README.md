@@ -19,7 +19,7 @@ CMakeLists -->(CMake) --> Makefle/Ninja --> (autotool/ninja) --> 构建源码。
     如果是每次构建都动态优化，就不能起到一次构建优化，多次 build 来节省时间。还可能拖累速度。
     如果是优化是重用的，必然要生成文件，其本质还是 元构建系统 + 构建系统。
 
-2. 历史原因：早起的软件比较简单，也没有构建优化的思想。早起的构建软件都比较简单。随着软件的复杂性提高，老的构建系统没有一下退出历史舞台，就出现了元构建系统用于生成构建系统。
+2. 历史原因：早期的软件比较简单，也没有构建优化的思想。早起的构建软件都比较简单。随着软件的复杂性提高，老的构建系统没有一下退出历史舞台，就出现了元构建系统用于生成构建系统。
 
 
 现在已经有一下软件想要简化构建流程。例如 Xmake
@@ -49,5 +49,12 @@ $ cmake --build . --target install // 安装。
 cmake-gui: Windows 上的图形化配置工具。
 ccmake: unix lick 系统上 cmake-gui 的等价物，但是是一个命令行的交互式界面。
 
+## 初始化工程
 
+CMake 没有初始化工程的命令，一个最小的工程文件包括：
+```CMake
+cmake_minimum_required(VERSION 3.29)
+project(Test VERSION 1.0)
 
+add_executable(test test.c)
+```

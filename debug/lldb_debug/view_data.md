@@ -94,13 +94,20 @@ frame
 - 查看寄存器
 rigieter
 
-- 查看内存
-memory
+### 查看内存
+
+查看内存，支持各种格式和大小的输出
 
 ```shell
 (lldb) memory read --size 4 --format x --count 4 0xbffff3c0
 (lldb) me r -s4 -fx -c4 0xbffff3c0
 ````
+
+以二进制将内存前 `0x20000` 字节输出到文件 `mem_dump`
+```
+memory read --force --outfile mem_dump  --binary 0x0 0x20000
+```
+超出 1024 字节必须加 `--force`
 
 - 打印栈帧的变量和全局变量有何不同？
 - 如何 查看数据结构定义 ？（gdb）ptype 变量

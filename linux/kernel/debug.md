@@ -1,4 +1,7 @@
 # 断点调试
+
+**不要使用 M 芯片的 Mac 调试 Linux Kernel。有各种问题：1. 硬件加速导致无法打断点。2. 不支持硬件断点。**
+
 本文用于 Mac M 的 Arm 芯片，如果使用的是 X86 平台，可以参考：https://zhuanlan.zhihu.com/p/675453558
 
 Linux kernel 最新版本断点调试方法。在 Mac M 芯片上，采用 QEMU 和 LLDB 方案，根据需要可以自己改为采用 GDB，或者用于 Linux 平台。
@@ -49,7 +52,7 @@ $ make -j $(nproc)
 ## 测试断点成功
 
 安装 qemu
-```$
+```shell
 $ brew install qemu
 $ qemu-system-aarch64 -machine virt -cpu cortex-a57  \
   -kernel arch/arm64/boot/Image \
@@ -65,7 +68,7 @@ $ qemu-system-aarch64 -machine virt -cpu cortex-a57  \
 
 这里有两点需要注意：
 - Mac ARM 平台上使用 qemu-system-aarch64 不能使用 Mac 的虚拟化加速 Hypervisor框架(hvf)，否则会打断点会失败。不知道是因 QEMU 还不支持，还是 bug。报的错误信息是
-```
+```shell
 warning: failed to set breakpoint site at 0xffff800081b70548 for breakpoint 1.1: error: 34 sending the breakpoint request
 Breakpoint 1: where = vmlinux`start_kernel at main.c:876, address = 0xffff800081b70548
 ```
@@ -76,7 +79,7 @@ Breakpoint 1: where = vmlinux`start_kernel at main.c:876, address = 0xffff800081
 $ lldb vmlinux
 (lldb) target create "vmlinux"
 Current executable set to '/Users/lim/Projects/linux/stable/vmlinux' (aarch64).
-(lldb) settings append target.source-map /home/lim/stable /Users/lim/Projects/linux/stable
+(lldb) settings append target.source-map /home/lim/stable/Users/lim/Projects/linux/stable
 (lldb) gdb-remote 1234
 Process 1 stopped
 * thread #1, stop reason = signal SIGTRAP

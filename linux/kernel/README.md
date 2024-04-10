@@ -20,16 +20,19 @@ Linux 内核的五大组成部分：
 - [内存管理模块](memory_module.md)
 - [进程管理](process.md)
 
+Tools:
+- [编译 Docker](build_docker/README.md)
+- [调试环境](debug.md)
+    - [VsCode 调试自动运行 Qemu 的 task](https://github.com/YaowenGuo/.vscode/blob/master/launch.json)
 
 扩展阅读：
 - [UEFI](uefi.md)
 - [BIOS](bios.md)
 - [MBR与GUID磁盘分区](disk_partition.md)
 - [X86 计算机内存的特殊区间](x86_physical_memory.md)
+- [config](kconfig.md)
+- [Kernel build system](kbuild.md)
 
 
 TODO:
-
-1. Debug 环境建立的的文档。
 2. StartKernel 之前做的事情 文档
-

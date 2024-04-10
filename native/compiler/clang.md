@@ -4,8 +4,8 @@
 
 > 查看编译的步骤
 
-```
-# clang -ccc-print-phases hello.cpp
+```shell
+$ clang -ccc-print-phases hello.cpp
 
 0: input, "hello.cpp", c++
 1: preprocessor, {0}, c++-cpp-output
@@ -47,7 +47,7 @@ int main() {
 
 1. 预处理: 宏的替换、头文件的导入，以及类似#if的处理。
 
-```c
+```shell
 clang -E hello.cpp
 
 # 1 "hello.cpp"
@@ -59,7 +59,8 @@ clang -E hello.cpp
 # 1 "hello.cpp" 2
 # 1 "./hello.h" 1
 # 2 "hello.cpp" 2
-
+```
+```cpp
 using namespace std;
 
 int main() {

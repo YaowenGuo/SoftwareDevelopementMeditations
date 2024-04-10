@@ -75,6 +75,6 @@ WZR/XZR
 寄存器r31是一个特殊的寄存器：
 Zero Register: 在大多数情况下，作为源寄存器使用时， r31读出来的值 是0; 作为目标寄存器使用时， 丢弃结果。 WZR(word zero rigiser)或者XZR(64位）
 
-```
+```assembly
 mov	w0, wzr
-```
+``` 
