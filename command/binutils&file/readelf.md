@@ -1,6 +1,6 @@
 # readelf
 
-readelf 用于读取 elf 文件信息。llvm-readelf 是 llvm-readobj 的一个软链接。
+readelf 用于读取 elf 文件信息。llvm-readelf 是 llvm-readobj 的一个软链接。GNU 的 readelf 只针对 ELF 格式的文件，readobj 可以适用于不同系统的目标文件。
 
 ```
 USAGE: llvm-readelf [options] <input object files>
@@ -66,6 +66,7 @@ Pass @FILE as argument to read options from FILE.
 ```
 readelf -h  hanoi
 ```
+
 对于 Mac 的可执行文件
 ```
 MachHeader {
@@ -84,8 +85,8 @@ MachHeader {
   Reserved: 0x0
 }
 ```
-即便是在 Mac 上，打印 Linux 的 ELF 文件
 
+即便是在 Mac 上，打印 Linux 的 ELF 文件
 ```
 ELF Header:
   Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00
@@ -108,3 +109,36 @@ ELF Header:
   Number of section headers:         31
   Section header string table index: 30
 ```
+可以使用 --elf-output-style= 来指定输出的格式，支持 LLVM, GNU, JSON 三种类型。
+
+```shell
+$ llvm-readelf-16 -S testelf.o
+There are 13 section headers, starting at offset 0x500:
+
+Section Headers:
+  [Nr] Name              Type            Address          Off    Size   ES Flg Lk Inf Al
+  [ 0]                   NULL            0000000000000000 000000 000000 00      0   0  0
+  [ 1] .strtab           STRTAB          0000000000000000 000414 0000e9 00      0   0  1
+  [ 2] .text             PROGBITS        0000000000000000 000040 00007c 00  AX  0   0  4
+  [ 3] .rela.text        RELA            0000000000000000 000320 0000c0 18   I 12   2  8
+  [ 4] .data             PROGBITS        0000000000000000 0000bc 000008 00  WA  0   0  4
+  [ 5] .rodata.str1.1    PROGBITS        0000000000000000 0000c4 000004 01 AMS  0   0  1
+  [ 6] .bss              NOBITS          0000000000000000 0000c8 000008 00  WA  0   0  4
+  [ 7] .comment          PROGBITS        0000000000000000 0000c8 000022 01  MS  0   0  1
+  [ 8] .note.GNU-stack   PROGBITS        0000000000000000 0000ea 000000 00      0   0  1
+  [ 9] .eh_frame         PROGBITS        0000000000000000 0000f0 000068 00   A  0   0  8
+  [10] .rela.eh_frame    RELA            0000000000000000 0003e0 000030 18   I 12   9  8
+  [11] .llvm_addrsig     LLVM_ADDRSIG    0000000000000000 000410 000004 00   E 12   0  1
+  [12] .symtab           SYMTAB          0000000000000000 000158 0001c8 18      1  14  8
+Key to Flags:
+  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),
+  L (link order), O (extra OS processing required), G (group), T (TLS),
+  C (compressed), x (unknown), o (OS specific), E (exclude),
+  R (retain), p (processor specific)
+```
+
+- ES：Entry's size（条目大小）。表示动态节条目的大小。
+- Flg：Flags（标志）。表示条目的特定属性或状态。
+- Lk：Linkage（链接）。对于需要重定位或需要符号解析的条目，这表示链接到哪个其他条目或段。
+- Inf：Info/Version（信息/版本）。对于某些条目，这可以包含额外的信息或版本号。
+- Al：Alignment（对齐）。表示条目的对齐要求。

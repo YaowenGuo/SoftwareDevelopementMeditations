@@ -133,7 +133,7 @@ SECTIONS
     }
 }
 ```
-这里，当目标文件内引用了etext符号，却没有定义它时，etext 符号对应的地址被定义为 .text section之后的第一个字节的地址。
+这里，当目标文件内引用了 etext 符号，却没有定义它时，etext 符号对应的地址被定义为 .text section之后的第一个字节的地址。
  
 ## SECTIONS 命令
 
@@ -162,10 +162,16 @@ SECTION-COMMAND 有四种:
 SECTIONS
 {
     . = 0×10000;
-    .text : { *(.text) }
+    .text : {
+        *(.text)
+    }
     . = 0×8000000;
-    .data : { *(.data) }
-    .bss : { *(.bss) }
+    .data : {
+        *(.data)
+    }
+    .bss : {
+        *(.bss)
+    }
 }
 ```
 '.' 号是链接脚本中一个特殊的符号: 定位器符号，用以表示当前位置。

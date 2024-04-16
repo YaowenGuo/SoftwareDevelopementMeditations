@@ -1,6 +1,10 @@
 # llvm-objdump
 
-objdump 是用于查看对象文件内容和反汇编的指令。
+objdump 是用于查看对象文件内容和反汇编的指令。readobj 只能用于查看对象文件的各个 section 的信息，并不能读取内容数据，objdump 虽然也能查看部分 section 信息，但更善于读取数据。
+
+objdump 能做 readelf 无法做到的事情：
+1. `--show-lma` 输出 LMA
+2. 反汇编
 
 ```
 USAGE: objdump [options] <input object files>
@@ -139,6 +143,10 @@ objdump -d -M x86-64 hello.o
 
 ```
 objdump -d -M x86-64 -M intel hello.o
+```
+
+```
+objdump-16 -s -d -j .text  testelf.o
 ```
 > 查看符号表
 

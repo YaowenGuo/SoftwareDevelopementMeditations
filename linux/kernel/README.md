@@ -16,6 +16,7 @@ Linux 内核的五大组成部分：
 ![五大部分](README_img/kerner_5_main_part.gif)
 
 - [启动流程](startup.md)
+  - [起步](first_step.md)
 - [调试方法](debug.md)
 - [内存管理模块](memory_module.md)
 - [进程管理](process.md)
@@ -35,4 +36,4 @@ Tools:
 
 
 TODO:
-2. StartKernel 之前做的事情 文档
+1. StartKernel 之前做的事情 文档

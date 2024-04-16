@@ -6,3 +6,5 @@ project(Test VERSION 1.0)
 file(GLOB base base/*.c)
 
 add_subdirectory(system)
+
+add_executable(test test.c)
