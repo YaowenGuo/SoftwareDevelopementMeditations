@@ -167,7 +167,6 @@ public class OAuthInterceptor implements Interceptor {
 
     Response originalResponse = chain.proceed(request);
     Response.Builder responseBuilder =
-        //Cache control设置缓存
         originalResponse.newBuilder().header("Cache-Control", cacheControl);
 
     return responseBuilder.build();

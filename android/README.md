@@ -82,7 +82,6 @@
 
 * [Problem](problem./problem.md)
   * [Git bisect 一种定位问题的方法](problem/find_by_bisect.md)
-  * [OOM](problem/oom.md)
 * structure
   * [Single Activity](./structure/single_activity.md)
   * [API data structure](./structure/data_structure.md)

@@ -38,7 +38,7 @@
 
 > 强缓存
 
-命中强缓存时，浏览器并不会将请求发送给服务器。在Chrome的开发者工具中看到http的返回码是200，但是在Size列会显示为(from cache)。
+命中强缓存时，浏览器并不会将请求发送给服务器。在Chrome的开发者工具中看到 http 的返回码是200，但是在Size列会显示为(from cache)。
 ![](picture/use_cache.png)
 
 ### Expires

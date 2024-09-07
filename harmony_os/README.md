@@ -124,7 +124,7 @@ struct Second {
 
 Page 有一些生命周期回调函数，类似于安卓 Acitivity 的生命周期。
 
-![Lifecycle](README_img/page_lifecycle)
+![Lifecycle](README_img/page_lifecycle.png)
 
 普通的组件只有 `aboutToAppear` 和 `aboutToDisappear` 生命周期。
 

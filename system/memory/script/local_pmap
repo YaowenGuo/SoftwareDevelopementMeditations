@@ -1,0 +1,1410 @@
+12c00000-42c00000 rw-p [anon:dalvik-main space (region space)] 768.0MB
+空闲:  736.42578125MB
+70c6d000-70f00000 rw-p [anon:dalvik-/apex/com.android.art/javalib/boot.art] 2.57421875MB
+70f00000-70f5c000 rw-p [anon:dalvik-/apex/com.android.art/javalib/boot-core-libart.art] 368.0KB
+70f5c000-71028000 rw-p [anon:dalvik-/apex/com.android.art/javalib/boot-core-icu4j.art] 816.0KB
+71028000-7105f000 rw-p [anon:dalvik-/apex/com.android.art/javalib/boot-okhttp.art] 220.0KB
+7105f000-710a8000 rw-p [anon:dalvik-/apex/com.android.art/javalib/boot-bouncycastle.art] 292.0KB
+710a8000-710b7000 rw-p [anon:dalvik-/apex/com.android.art/javalib/boot-apache-xml.art] 60.0KB
+710b7000-713e6000 r--p /apex/com.android.art/javalib/arm64/boot.oat 3.18359375MB
+713e6000-713e7000 rw-p [anon:.bss] 4.0KB
+713e7000-713e9000 r--p /apex/com.android.art/javalib/arm64/boot.vdex 8.0KB
+713e9000-713eb000 r--p /apex/com.android.art/javalib/arm64/boot.oat 8.0KB
+713eb000-71455000 r--p /apex/com.android.art/javalib/arm64/boot-core-libart.oat 424.0KB
+71455000-71456000 rw-p [anon:.bss] 4.0KB
+71456000-71457000 r--p /apex/com.android.art/javalib/arm64/boot-core-libart.vdex 4.0KB
+71457000-71459000 r--p /apex/com.android.art/javalib/arm64/boot-core-libart.oat 8.0KB
+71459000-71543000 r--p /apex/com.android.art/javalib/arm64/boot-core-icu4j.oat 936.0KB
+71543000-71544000 rw-p [anon:.bss] 4.0KB
+71544000-71545000 r--p /apex/com.android.art/javalib/arm64/boot-core-icu4j.vdex 4.0KB
+71545000-71547000 r--p /apex/com.android.art/javalib/arm64/boot-core-icu4j.oat 8.0KB
+71547000-71586000 r--p /apex/com.android.art/javalib/arm64/boot-okhttp.oat 252.0KB
+71586000-71587000 rw-p [anon:.bss] 4.0KB
+71587000-71588000 r--p /apex/com.android.art/javalib/arm64/boot-okhttp.vdex 4.0KB
+71588000-7158a000 r--p /apex/com.android.art/javalib/arm64/boot-okhttp.oat 8.0KB
+7158a000-715c0000 r--p /apex/com.android.art/javalib/arm64/boot-bouncycastle.oat 216.0KB
+715c0000-715c1000 rw-p [anon:.bss] 4.0KB
+715c1000-715c2000 r--p /apex/com.android.art/javalib/arm64/boot-bouncycastle.vdex 4.0KB
+715c2000-715c4000 r--p /apex/com.android.art/javalib/arm64/boot-bouncycastle.oat 8.0KB
+715c4000-715c9000 r--p /apex/com.android.art/javalib/arm64/boot-apache-xml.oat 20.0KB
+715c9000-715ca000 r--p /apex/com.android.art/javalib/arm64/boot-apache-xml.vdex 4.0KB
+715ca000-715cc000 r--p /apex/com.android.art/javalib/arm64/boot-apache-xml.oat 8.0KB
+715cc000-723ac000 rw-p [anon:dalvik-/system/framework/boot-framework.art] 13.875MB
+723ac000-723e7000 rw-p [anon:dalvik-/system/framework/boot-ext.art] 236.0KB
+723e7000-725c2000 rw-p [anon:dalvik-/system/framework/boot-telephony-common.art] 1.85546875MB
+725c2000-72682000 rw-p [anon:dalvik-/system/framework/boot-voip-common.art] 768.0KB
+72682000-726ac000 rw-p [anon:dalvik-/system/framework/boot-ims-common.art] 168.0KB
+726ac000-726af000 rw-p [anon:dalvik-/system/framework/boot-framework-atb-backward-compatibility.art] 12.0KB
+726af000-726f7000 rw-p [anon:dalvik-/system/framework/boot-oplus-framework.art] 288.0KB
+726f7000-7271b000 rw-p [anon:dalvik-/system/framework/boot-coloros-support-wrapper.art] 144.0KB
+7271b000-72720000 rw-p [anon:dalvik-/system/framework/boot-ifaamanager.art] 20.0KB
+72720000-72722000 rw-p [anon:dalvik-/system/framework/boot-tcmiface.art] 8.0KB
+72722000-72734000 rw-p [anon:dalvik-/system/framework/boot-telephony-ext.art] 72.0KB
+72734000-72743000 rw-p [anon:dalvik-/system/framework/boot-qcom.fmradio.art] 60.0KB
+72743000-72749000 rw-p [anon:dalvik-/system/framework/boot-QPerformance.art] 24.0KB
+72749000-7274e000 rw-p [anon:dalvik-/system/framework/boot-UxPerformance.art] 20.0KB
+7274e000-7276f000 rw-p [anon:dalvik-/system/framework/boot-WfdCommon.art] 132.0KB
+7276f000-73311000 r--p /system/framework/arm64/boot-framework.oat 11.6328125MB
+73311000-73312000 rw-p [anon:.bss] 4.0KB
+73312000-7331d000 r--p /system/framework/boot-framework.vdex 44.0KB
+7331d000-7331f000 r--p /system/framework/arm64/boot-framework.oat 8.0KB
+7331f000-7333a000 r--p /system/framework/arm64/boot-ext.oat 108.0KB
+7333a000-7333b000 r--p /system/framework/boot-ext.vdex 4.0KB
+7333b000-7333d000 r--p /system/framework/arm64/boot-ext.oat 8.0KB
+7333d000-73346000 r--p /system/framework/arm64/boot-telephony-common.oat 36.0KB
+73346000-73347000 r--p /system/framework/boot-telephony-common.vdex 4.0KB
+73347000-73349000 r--p /system/framework/arm64/boot-telephony-common.oat 8.0KB
+73349000-7334f000 r--p /system/framework/arm64/boot-voip-common.oat 24.0KB
+7334f000-73350000 r--p /system/framework/boot-voip-common.vdex 4.0KB
+73350000-73352000 r--p /system/framework/arm64/boot-voip-common.oat 8.0KB
+73352000-73354000 r--p /system/framework/arm64/boot-ims-common.oat 8.0KB
+73354000-73355000 r--p /system/framework/boot-ims-common.vdex 4.0KB
+73355000-73357000 r--p /system/framework/arm64/boot-ims-common.oat 8.0KB
+73357000-73359000 r--p /system/framework/arm64/boot-framework-atb-backward-compatibility.oat 8.0KB
+73359000-7335a000 r--p /system/framework/boot-framework-atb-backward-compatibility.vdex 4.0KB
+7335a000-7335c000 r--p /system/framework/arm64/boot-framework-atb-backward-compatibility.oat 8.0KB
+7335c000-73371000 r--p /system/framework/arm64/boot-oplus-framework.oat 84.0KB
+73371000-73372000 rw-p [anon:.bss] 4.0KB
+73372000-73373000 r--p /system/framework/boot-oplus-framework.vdex 4.0KB
+73373000-73375000 r--p /system/framework/arm64/boot-oplus-framework.oat 8.0KB
+73375000-73377000 r--p /system/framework/arm64/boot-coloros-support-wrapper.oat 8.0KB
+73377000-73378000 r--p /system/framework/boot-coloros-support-wrapper.vdex 4.0KB
+73378000-7337a000 r--p /system/framework/arm64/boot-coloros-support-wrapper.oat 8.0KB
+7337a000-7337d000 r--p /system/framework/arm64/boot-ifaamanager.oat 12.0KB
+7337d000-7337e000 r--p /system/framework/boot-ifaamanager.vdex 4.0KB
+7337e000-73380000 r--p /system/framework/arm64/boot-ifaamanager.oat 8.0KB
+73380000-73382000 r--p /system/framework/arm64/boot-tcmiface.oat 8.0KB
+73382000-73383000 r--p /system/framework/boot-tcmiface.vdex 4.0KB
+73383000-73385000 r--p /system/framework/arm64/boot-tcmiface.oat 8.0KB
+73385000-73387000 r--p /system/framework/arm64/boot-telephony-ext.oat 8.0KB
+73387000-73388000 r--p /system/framework/boot-telephony-ext.vdex 4.0KB
+73388000-7338a000 r--p /system/framework/arm64/boot-telephony-ext.oat 8.0KB
+7338a000-7338d000 r--p /system/framework/arm64/boot-qcom.fmradio.oat 12.0KB
+7338d000-7338e000 r--p /system/framework/boot-qcom.fmradio.vdex 4.0KB
+7338e000-73390000 r--p /system/framework/arm64/boot-qcom.fmradio.oat 8.0KB
+73390000-73396000 r--p /system/framework/arm64/boot-QPerformance.oat 24.0KB
+73396000-73397000 r--p /system/framework/boot-QPerformance.vdex 4.0KB
+73397000-73399000 r--p /system/framework/arm64/boot-QPerformance.oat 8.0KB
+73399000-7339d000 r--p /system/framework/arm64/boot-UxPerformance.oat 16.0KB
+7339d000-7339e000 r--p /system/framework/boot-UxPerformance.vdex 4.0KB
+7339e000-733a0000 r--p /system/framework/arm64/boot-UxPerformance.oat 8.0KB
+733a0000-733a2000 r--p /system/framework/arm64/boot-WfdCommon.oat 8.0KB
+733a2000-733a3000 r--p /system/framework/boot-WfdCommon.vdex 4.0KB
+733a3000-733a5000 r--p /system/framework/arm64/boot-WfdCommon.oat 8.0KB
+733a5000-736d2000 rw-p [anon:dalvik-zygote space] 3.17578125MB
+736d2000-773a5000 rw-p [anon:dalvik-non moving space] 60.82421875MB
+773a5000-973a5000 rw-p [anon:dalvik-free list large object space] 512.0MB
+973a5000-9b3a5000 r--s /memfd:jit-zygote-cache (deleted) 64.0MB
+9b3a5000-9f3a5000 r--s /memfd:jit-cache (deleted) 64.0MB
+空闲:  1.1945228576660156GB
+ebad6000-ebad7000 ---p [anon:dalvik-Sentinel fault page] 4.0KB
+空闲:  358.5862274169922GB
+5a91323000-5a9132c000 r--p /system/bin/app_process64 36.0KB
+5a9132c000-5a9132d000 rw-p [anon:.bss] 4.0KB
+空闲:  115.54182052612305GB
+7773e00000-7774600000 rw-p [anon:libc_malloc] 8.0MB
+空闲:  34.0MB
+7776800000-7776a00000 rw-p [anon:libc_malloc] 2.0MB
+空闲:  200.0KB
+7776a32000-7776af2000 rw-s /dev/kgsl-3d0 768.0KB
+空闲:  1016.0KB
+7776bf0000-7777000000 rw-s /dev/kgsl-3d0 4.0625MB
+7777000000-7777200000 rw-p [anon:libc_malloc] 2.0MB
+7777200000-7779200000 ---p  32.0MB
+7779200000-7779c00000 rw-p [anon:libc_malloc] 10.0MB
+空闲:  372.0KB
+7779c5d000-777bc5d000 ---p  32.0MB
+空闲:  356.0KB
+777bcb6000-777bcb7000 ---p  4.0KB
+777bcb7000-777bdb3000 rw-p [anon:stack_and_tls:29381] 1008.0KB
+777bdb3000-777bdb5000 ---p  8.0KB
+777bdb5000-777beb1000 rw-p [anon:stack_and_tls:29380] 1008.0KB
+777beb1000-777beb2000 ---p  4.0KB
+777beb2000-777c702000 rw-s /dev/kgsl-3d0 8.3125MB
+777c702000-777c800000 r--p /dev/binderfs/hwbinder 1016.0KB
+777c800000-777ca00000 rw-p [anon:libc_malloc] 2.0MB
+空闲:  620.0KB
+777ca9b000-777caaa000 r--p /vendor/lib64/hw/gralloc.lito.so 60.0KB
+空闲:  676.0KB
+777cb53000-777cc51000 r--p /dev/binderfs/hwbinder 1016.0KB
+777cc51000-777cc52000 ---p  4.0KB
+777cc52000-777cd5a000 ---p [anon:stack_and_tls:29373] 1.03125MB
+777cd5a000-777cd5c000 ---p  8.0KB
+777cd5c000-777ce58000 ---p [anon:stack_and_tls:29350] 1008.0KB
+777ce58000-777de59000 ---p  16.00390625MB
+777de59000-777df02000 r--s /data/app/~~QK5JEbdahDMbxddNKgFFGw==/com.fenbi.android-rb3VYkxjc2C50MT9PSKzEw==/base.apk 676.0KB
+777df02000-777df03000 ---p  4.0KB
+777df03000-777dfff000 ---p [anon:stack_and_tls:29348] 1008.0KB
+777dfff000-777e000000 ---p  4.0KB
+777e000000-777e200000 rw-p [anon:libc_malloc] 2.0MB
+空闲:  60.0KB
+777e20f000-777e90e000 r--p [anon:dalvik-classes.dex extracted in memory from /data/app/~~QK5JEbdahDMbxddNKgFFGw==/com.fenbi.android-rb3VYkxjc2C50MT9PSKzEw==/base.apk] 6.99609375MB
+777e90e000-777f90f000 ---p  16.00390625MB
+777f90f000-777fa17000 ---p [anon:stack_and_tls:29346] 1.03125MB
+777fa17000-7780a19000 ---p  16.0078125MB
+7780a19000-7780b15000 ---p [anon:stack_and_tls:29345] 1008.0KB
+7780b15000-7781b17000 ---p  16.0078125MB
+7781b17000-7781c13000 ---p [anon:stack_and_tls:29343] 1008.0KB
+7781c13000-7786c15000 ---p  80.0078125MB
+7786c15000-7786d11000 ---p [anon:stack_and_tls:29341] 1008.0KB
+7786d11000-7786d12000 ---p  4.0KB
+7786d12000-7786f10000 r--p /dev/binderfs/binder 1.9921875MB
+7786f10000-7787f11000 ---p  16.00390625MB
+7787f11000-7788019000 ---p [anon:stack_and_tls:29339] 1.03125MB
+7788019000-778801b000 ---p  8.0KB
+778801b000-7788123000 ---p [anon:stack_and_tls:29338] 1.03125MB
+7788123000-7788125000 ---p  8.0KB
+7788125000-778822d000 ---p [anon:stack_and_tls:29337] 1.03125MB
+778822d000-778822f000 ---p  8.0KB
+778822f000-7788337000 ---p [anon:stack_and_tls:29336] 1.03125MB
+7788337000-7788338000 ---p  4.0KB
+7788338000-7788439000 ---p [anon:dalvik-Jit thread pool worker thread 0] 1.00390625MB
+7788439000-778a439000 ---p  32.0MB
+778a439000-77ca439000 ---p [anon:libwebview reservation] 1.0GB
+77ca439000-77ca43d000 r--p /system/lib64/libwebviewchromium_loader.so 16.0KB
+空闲:  128.0KB
+77ca45d000-77ca4c0000 r--p [anon:dalvik-classes2.dex extracted in memory from /data/app/~~QK5JEbdahDMbxddNKgFFGw==/com.fenbi.android-rb3VYkxjc2C50MT9PSKzEw==/base.apk!classes2.dex] 396.0KB
+77ca4c0000-77ca4d9000 r--p /system_ext/lib64/vendor.qti.hardware.iop@2.0.so 100.0KB
+空闲:  192.0KB
+77ca509000-77ca510000 r--p /system_ext/lib64/libqti_performance.so 28.0KB
+空闲:  228.0KB
+77ca549000-77ca565000 r--p /system/lib64/libcompiler_rt.so 112.0KB
+77ca565000-77ca5ce000 rw-p [anon:.bss] 420.0KB
+空闲:  376.0KB
+77ca62c000-77ca63f000 r--p /vendor/lib64/egl/eglSubDriverAndroid.so 76.0KB
+空闲:  92.0KB
+77ca656000-77ca679000 r--p /vendor/lib64/vendor.qti.hardware.display.mapper@2.0.so 140.0KB
+空闲:  40.0KB
+77ca683000-77ca6bd000 r--p /vendor/lib64/egl/libGLESv1_CM_adreno.so 232.0KB
+77ca6bd000-77ca6be000 rw-p [anon:.bss] 4.0KB
+空闲:  116.0KB
+77ca6db000-77cb3d2000 r--p /vendor/lib64/libllvm-glnext.so 12.96484375MB
+77cb3d2000-77cb3fd000 rw-p [anon:.bss] 172.0KB
+空闲:  16.0KB
+77cb401000-77cb7d2000 r--p /vendor/lib64/egl/libGLESv2_adreno.so 3.81640625MB
+77cb7d2000-77cb7da000 rw-p [anon:.bss] 32.0KB
+空闲:  156.0KB
+77cb801000-77cb818000 r--p /apex/com.android.vndk.v30/lib64/libz.so 92.0KB
+空闲:  180.0KB
+77cb845000-77cb850000 r--p /vendor/lib64/egl/libEGL_adreno.so 44.0KB
+空闲:  368.0KB
+77cb8ac000-77cbab4000 r--p /vendor/lib64/libgsl.so 2.03125MB
+77cbab4000-77cbab5000 rw-p [anon:.bss] 4.0KB
+空闲:  208.0KB
+77cbae9000-77cbafe000 r--p /vendor/lib64/libadreno_utils.so 84.0KB
+77cbafe000-77cbb00000 rw-p [anon:.bss] 8.0KB
+空闲:  56.0KB
+77cbb0e000-77cbb26000 r--p /vendor/lib64/hw/android.hardware.graphics.mapper@4.0-impl-qti-display.so 96.0KB
+空闲:  156.0KB
+77cbb4d000-77cbb72000 r--p /vendor/lib64/vendor.qti.hardware.display.mapper@4.0.so 148.0KB
+空闲:  60.0KB
+77cbb81000-77cbb84000 r--p /vendor/lib64/libhidltransport.so 12.0KB
+空闲:  280.0KB
+77cbbca000-77cbbcd000 r--p /apex/com.android.vndk.v30/lib64/android.hardware.graphics.common@1.1.so 12.0KB
+空闲:  208.0KB
+77cbc01000-77cbc40000 r--p /apex/com.android.vndk.v30/lib64/libprocessgroup.so 252.0KB
+空闲:  36.0KB
+77cbc49000-77cbc5b000 r--p /vendor/lib64/libgrallocutils.so 72.0KB
+空闲:  204.0KB
+77cbc8e000-77cbd3a000 r--p /apex/com.android.vndk.v30/lib64/libc++.so 688.0KB
+77cbd3a000-77cbd3d000 rw-p [anon:.bss] 12.0KB
+空闲:  84.0KB
+77cbd52000-77cbd7c000 r--p /vendor/lib64/vendor.qti.hardware.display.mapperextensions@1.0.so 168.0KB
+空闲:  20.0KB
+77cbd81000-77cbda1000 r--p /vendor/lib64/vendor.qti.hardware.display.mapper@3.0.so 128.0KB
+空闲:  152.0KB
+77cbdc7000-77cbddf000 r--p /apex/com.android.vndk.v30/lib64/android.hardware.graphics.mapper@3.0.so 96.0KB
+空闲:  284.0KB
+77cbe26000-77cbe2f000 r--p /vendor/lib64/libgralloc.qti.so 36.0KB
+空闲:  204.0KB
+77cbe62000-77cbe78000 r--p /apex/com.android.vndk.v30/lib64/android.hardware.graphics.mapper@2.0.so 88.0KB
+空闲:  156.0KB
+77cbe9f000-77cbeb1000 r--p /apex/com.android.vndk.v30/lib64/libcutils.so 72.0KB
+空闲:  164.0KB
+77cbeda000-77cbede000 r--p /apex/com.android.vndk.v30/lib64/libion.so 16.0KB
+空闲:  156.0KB
+77cbf05000-77cbf1b000 r--p /apex/com.android.vndk.v30/lib64/android.hardware.graphics.mapper@2.1.so 88.0KB
+空闲:  184.0KB
+77cbf49000-77cbf4d000 r--p /apex/com.android.vndk.v30/lib64/android.hardware.common-V1-ndk_platform.so 16.0KB
+空闲:  348.0KB
+77cbfa4000-77cbfac000 r--p /vendor/lib64/libqdMetaData.so 32.0KB
+空闲:  136.0KB
+77cbfce000-77cbfe9000 r--p /vendor/lib64/libgralloccore.so 108.0KB
+77cbfe9000-77cbfea000 rw-p [anon:.bss] 4.0KB
+空闲:  256.0KB
+77cc02a000-77cc02d000 r--p /apex/com.android.vndk.v30/lib64/android.hardware.graphics.common@1.0.so 12.0KB
+空闲:  168.0KB
+77cc057000-77cc075000 r--p /apex/com.android.vndk.v30/lib64/android.hardware.graphics.mapper@4.0.so 120.0KB
+空闲:  76.0KB
+77cc088000-77cc09a000 r--p /vendor/lib64/hw/android.hardware.graphics.mapper@3.0-impl-qti-display.so 72.0KB
+空闲:  200.0KB
+77cc0cc000-77cc0df000 r--p /apex/com.android.vndk.v30/lib64/libgralloctypes.so 76.0KB
+空闲:  164.0KB
+77cc108000-77cc1ae000 r--p /apex/com.android.vndk.v30/lib64/libhidlbase.so 664.0KB
+空闲:  96.0KB
+77cc1c6000-77cc1ec000 r--p /vendor/lib64/vendor.qti.hardware.display.mapperextensions@1.1.so 152.0KB
+空闲:  80.0KB
+77cc200000-77cc400000 rw-p [anon:libc_malloc] 2.0MB
+空闲:  288.0KB
+77cc448000-77cc44b000 r--p /apex/com.android.vndk.v30/lib64/libhardware.so 12.0KB
+空闲:  360.0KB
+77cc4a5000-77cc4ac000 r--p /apex/com.android.vndk.v30/lib64/android.hardware.graphics.common-V1-ndk_platform.so 28.0KB
+空闲:  92.0KB
+77cc4c3000-77cc500000 r--p /apex/com.android.vndk.v30/lib64/libbase.so 244.0KB
+空闲:  132.0KB
+77cc521000-77cc524000 r--p /apex/com.android.vndk.v30/lib64/android.hardware.graphics.common@1.2.so 12.0KB
+空闲:  136.0KB
+77cc546000-77cc564000 r--p /apex/com.android.vndk.v30/lib64/libutils.so 120.0KB
+空闲:  312.0KB
+77cc5b2000-77cc5b4000 r--p /system/framework/oat/arm64/android.test.base.odex 8.0KB
+77cc5b4000-77cc5b5000 r--p /system/framework/oat/arm64/android.test.base.vdex 4.0KB
+77cc5b5000-77cc5b7000 r--p /system/framework/oat/arm64/android.test.base.odex 8.0KB
+空闲:  116.0KB
+77cc5d4000-77cc5d6000 r--p /system/framework/oat/arm64/android.hidl.manager-V1.0-java.odex 8.0KB
+77cc5d6000-77cc5d7000 r--p /system/framework/oat/arm64/android.hidl.manager-V1.0-java.vdex 4.0KB
+77cc5d7000-77cc5d9000 r--p /system/framework/oat/arm64/android.hidl.manager-V1.0-java.odex 8.0KB
+空闲:  284.0KB
+77cc620000-77cc622000 r--p /system/framework/oat/arm64/android.hidl.base-V1.0-java.odex 8.0KB
+77cc622000-77cc623000 r--p /system/framework/oat/arm64/android.hidl.base-V1.0-java.vdex 4.0KB
+77cc623000-77cc625000 r--p /system/framework/oat/arm64/android.hidl.base-V1.0-java.odex 8.0KB
+空闲:  164.0KB
+77cc64e000-77cc875000 r--s /system_ext/framework/oplus-framework-res.apk 2.15234375MB
+77cc875000-77ce640000 r--s /system/framework/framework-res.apk 29.79296875MB
+77ce640000-77ce652000 r--p /system/lib64/librs_jni.so 72.0KB
+空闲:  380.0KB
+77ce6b1000-77ce6bd000 r--p /system/lib64/libaudioeffect_jni.so 48.0KB
+空闲:  124.0KB
+77ce6dc000-77ce6e3000 r--p /system/lib64/libmediadrmmetrics_consumer.so 28.0KB
+空闲:  120.0KB
+77ce701000-77ce725000 r--p /system/lib64/libmediadrmmetrics_full.so 144.0KB
+空闲:  188.0KB
+77ce754000-77ce973000 r--p /system/lib64/libprotobuf-cpp-full.so 2.12109375MB
+77ce973000-77ce974000 rw-p [anon:.bss] 4.0KB
+空闲:  180.0KB
+77ce9a1000-77cea25000 r--p /system/lib64/libmedia_jni.so 528.0KB
+77cea25000-77cea26000 rw-p [anon:.bss] 4.0KB
+空闲:  212.0KB
+77cea5b000-77ceaea000 r--p /system/lib64/libsonivox.so 572.0KB
+77ceaea000-77ceaf1000 rw-p [anon:.bss] 28.0KB
+空闲:  160.0KB
+77ceb19000-77cf45f000 r--s /system/fonts/NotoColorEmoji.ttf 9.2734375MB
+77cf45f000-77d0c00000 r--s /system/fonts/NotoSerifCJK-Regular.ttc 23.62890625MB
+77d0c00000-77d0e00000 rw-p [anon:libc_malloc] 2.0MB
+空闲:  360.0KB
+77d0e5a000-77d0e5d000 r--p /system/lib64/libasyncio.so 12.0KB
+空闲:  156.0KB
+77d0e84000-77d0ec0000 r--p /system/lib64/libmtp.so 240.0KB
+空闲:  324.0KB
+77d0f11000-77d0f26000 r--p /system/lib64/libsoundpool.so 84.0KB
+空闲:  148.0KB
+77d0f4b000-77d0fc8000 r--s /apex/com.android.tzdata/etc/tz/tzdata 500.0KB
+77d0fc8000-77d232c000 r--s /system/fonts/NotoSansCJK-Regular.ttc 19.390625MB
+77d232c000-77d2d6f000 r--s /system/fonts/SysSans-Hant-Regular.ttf 10.26171875MB
+77d2d6f000-77d4281000 r--s /system/fonts/SysSans-Hans-Regular.ttf 21.0703125MB
+77d4281000-77d432f000 r--s /system/fonts/NotoSansSymbols-Regular-Subsetted.ttf 696.0KB
+77d432f000-77d43ab000 r--s /system/fonts/NotoSansEgyptianHieroglyphs-Regular.ttf 496.0KB
+77d43ab000-77d4426000 r--s /system/fonts/NotoSansCuneiform-Regular.ttf 492.0KB
+77d4426000-77d4478000 r--p /apex/com.android.conscrypt/lib64/libssl.so 328.0KB
+空闲:  48.0KB
+77d4484000-77d4535000 r--p /apex/com.android.conscrypt/lib64/libc++.so 708.0KB
+77d4535000-77d4538000 rw-p [anon:.bss] 12.0KB
+空闲:  140.0KB
+77d455b000-77d466d000 r--p /apex/com.android.conscrypt/lib64/libcrypto.so 1.0703125MB
+77d466d000-77d466e000 rw-p [anon:.bss] 4.0KB
+空闲:  84.0KB
+77d4683000-77d46cb000 r--p /apex/com.android.conscrypt/lib64/libjavacrypto.so 288.0KB
+空闲:  124.0KB
+77d46ea000-77d4738000 r--s /system/usr/hyphen-data/hyph-hu.hyb 312.0KB
+77d4738000-77d5f57000 r--s /apex/com.android.i18n/etc/icu/icudt66l.dat 24.12109375MB
+77d5f57000-77d5f5a000 r--p /system_ext/lib64/libphoenix_jni.so 12.0KB
+空闲:  104.0KB
+77d5f74000-77d5f94000 rw-s /dev/kgsl-3d0 128.0KB
+77d5f94000-77d5f97000 r--p /apex/com.android.os.statsd/lib64/libstats_jni.so 12.0KB
+空闲:  16.0KB
+77d5f9b000-77d5fdb000 rw-s /dev/kgsl-3d0 256.0KB
+77d5fdb000-77d5fe5000 r--p /system_ext/lib64/libqti-perfd-client_system.so 40.0KB
+空闲:  108.0KB
+77d6000000-77d7000000 ---p  16.0MB
+空闲:  16.0MB
+77d8000000-77da000000 ---p  32.0MB
+77da000000-77da200000 rw-p [anon:libc_malloc] 2.0MB
+空闲:  32.0KB
+77da208000-77da259000 r--s /system/fonts/RobotoCondensed-BoldItalic.ttf 324.0KB
+77da259000-77da280000 r--p /system_ext/lib64/vendor.qti.hardware.perf@2.1.so 156.0KB
+空闲:  120.0KB
+77da29e000-77da2bd000 r--p /system_ext/lib64/vendor.qti.hardware.perf@2.2.so 124.0KB
+空闲:  48.0KB
+77da2c9000-77da2cd000 r--p /system_ext/lib64/libqti-at.so 16.0KB
+空闲:  100.0KB
+77da2e6000-77da306000 rw-s /dev/kgsl-3d0 128.0KB
+77da306000-77da323000 r--p /system_ext/lib64/vendor.qti.hardware.perf@2.0.so 116.0KB
+空闲:  8.0KB
+77da325000-77da365000 rw-s /dev/kgsl-3d0 256.0KB
+空闲:  300.0KB
+77da3b0000-77da3b1000 ---p  4.0KB
+77da3b1000-77da4ad000 ---p [anon:stack_and_tls:29334] 1008.0KB
+77da4ad000-77da4af000 ---p  8.0KB
+77da4af000-77da5ab000 ---p [anon:stack_and_tls:29333] 1008.0KB
+77da5ab000-77da5ad000 ---p  8.0KB
+77da5ad000-77da6a9000 ---p [anon:stack_and_tls:29332] 1008.0KB
+77da6a9000-77da6aa000 ---p  4.0KB
+空闲:  13.96875MB
+77db4a2000-77db4a3000 ---p  4.0KB
+77db4a3000-77db59f000 ---p [anon:stack_and_tls:30362] 1008.0KB
+77db59f000-77db5a1000 ---p  8.0KB
+77db5a1000-77db6a9000 ---p [anon:stack_and_tls:30360] 1.03125MB
+77db6a9000-77db6aa000 ---p  4.0KB
+77db6aa000-77db79e000 rw-p [anon:dalvik-allocspace non moving space mark-bitmap 1] 976.0KB
+77db79e000-77db892000 rw-p [anon:dalvik-allocspace non moving space live-bitmap 1] 976.0KB
+77db892000-77df892000 rw-s /memfd:jit-cache (deleted) 64.0MB
+77df892000-77dfbe0000 r--p /apex/com.android.art/lib64/libart-compiler.so 3.3046875MB
+77dfbe0000-77dfbe7000 rw-p [anon:.bss] 28.0KB
+空闲:  116.0KB
+77dfc04000-77dfc24000 r--s /dev/__properties__/u:object_r:vendor_gralloc_prop:s0 128.0KB
+77dfc24000-77dfe23000 r--p /apex/com.android.art/lib64/libvixl.so 1.99609375MB
+77dfe23000-77dfe28000 rw-p [anon:.bss] 20.0KB
+空闲:  100.0KB
+77dfe41000-77dfe77000 r--p /apex/com.android.art/lib64/libopenjdk.so 216.0KB
+空闲:  76.0KB
+77dfe8a000-77dfeaa000 r--s /dev/__properties__/u:object_r:hwservicemanager_prop:s0 128.0KB
+77dfeaa000-77dfeb4000 r--p /apex/com.android.art/lib64/libopenjdkjvm.so 40.0KB
+空闲:  84.0KB
+77dfec9000-77e16e8000 r--s /apex/com.android.i18n/etc/icu/icudt66l.dat 24.12109375MB
+77e16e8000-77e16ec000 r--p /apex/com.android.art/lib64/libandroidio.so 16.0KB
+空闲:  92.0KB
+77e1703000-77e173f000 r--p /apex/com.android.art/lib64/libjavacore.so 240.0KB
+空闲:  84.0KB
+77e1754000-77e1761000 r--p /apex/com.android.art/lib64/libicu_jni.so 52.0KB
+空闲:  12.0KB
+77e1764000-77e17b5000 r--s /system/fonts/RobotoCondensed-MediumItalic.ttf 324.0KB
+77e17b5000-77e17ba000 r--p /system/lib64/libwebviewchromium_plat_support.so 20.0KB
+空闲:  92.0KB
+77e17d1000-77e17f1000 rw-p [anon:dalvik-LinearAlloc] 128.0KB
+77e17f1000-77e17f5000 r--p /system/lib64/libstdc++.so 16.0KB
+空闲:  48.0KB
+77e1801000-77e1821000 rw-p [anon:dalvik-LinearAlloc] 128.0KB
+77e1821000-77e1832000 r--p /system/lib64/libRS.so 68.0KB
+77e1832000-77e1833000 rw-p [anon:.bss] 4.0KB
+空闲:  16.0KB
+77e1837000-77e1857000 r--s /dev/__properties__/u:object_r:use_memfd_prop:s0 128.0KB
+77e1857000-77e185d000 r--p /system/lib64/libutilscallstack.so 24.0KB
+空闲:  100.0KB
+77e1876000-77e1896000 rw-p [anon:dalvik-LinearAlloc] 128.0KB
+77e1896000-77e18f1000 r--p /system/lib64/android.hardware.renderscript@1.0.so 364.0KB
+空闲:  24.0KB
+77e18f7000-77e1937000 rw-p [anon:dalvik-LinearAlloc] 256.0KB
+77e1937000-77e193b000 r--p /system/lib64/libOpenSLES.so 16.0KB
+空闲:  124.0KB
+77e195a000-77e197a000 rw-p [anon:dalvik-LinearAlloc] 128.0KB
+77e197a000-77e197e000 r--p /system/lib64/libOpenMAXAL.so 16.0KB
+空闲:  68.0KB
+77e198f000-77e1995000 r--p /system/lib64/libjnigraphics.so 24.0KB
+空闲:  48.0KB
+77e19a1000-77e19c1000 r--s /dev/__properties__/u:object_r:vendor_exported_system_prop:s0 128.0KB
+77e19c1000-77e19fe000 r--p /system/lib64/libcamera2ndk.so 244.0KB
+空闲:  80.0KB
+77e1a12000-77e1a1b000 r--p /system/lib64/libamidi.so 36.0KB
+空闲:  108.0KB
+77e1a36000-77e1a5a000 r--s /system/usr/hyphen-data/hyph-nn.hyb 144.0KB
+77e1a5a000-77e1aa6000 r--p /system/lib64/libaaudio_internal.so 304.0KB
+空闲:  4.0KB
+77e1aa7000-77e1ac7000 r--s /dev/__properties__/u:object_r:binder_cache_system_server_prop:s0 128.0KB
+77e1ac7000-77e1ace000 r--p /system/lib64/libaaudio.so 28.0KB
+空闲:  72.0KB
+77e1ae0000-77e1b04000 r--s /system/usr/hyphen-data/hyph-nb.hyb 144.0KB
+77e1b04000-77e1c37000 r--p /system/lib64/libxml2.so 1.19921875MB
+77e1c37000-77e1c38000 rw-p [anon:.bss] 4.0KB
+空闲:  88.0KB
+77e1c4e000-77e1c72000 r--p /system/lib64/libandroid.so 144.0KB
+空闲:  120.0KB
+77e1c90000-77e1ceb000 r--p /apex/com.android.art/lib64/libperfetto_hprof.so 364.0KB
+空闲:  60.0KB
+77e1cfa000-77e1d18000 r--s /system/usr/hyphen-data/hyph-de-ch-1901.hyb 120.0KB
+77e1d18000-77e1d28000 r--p /apex/com.android.art/lib64/libadbconnection.so 64.0KB
+空闲:  100.0KB
+77e1d41000-77e1d76000 r--p /apex/com.android.adbd/lib64/libadbconnection_client.so 212.0KB
+77e1d76000-77e1d77000 rw-p [anon:.bss] 4.0KB
+空闲:  100.0KB
+77e1d90000-77e1dae000 r--s /system/usr/hyphen-data/hyph-de-1996.hyb 120.0KB
+77e1dae000-77e1e00000 r--s /system/fonts/RobotoCondensed-LightItalic.ttf 328.0KB
+77e1e00000-77e2000000 rw-p [anon:libc_malloc] 2.0MB
+空闲:  32.0KB
+77e2008000-77e20b8000 r--p /apex/com.android.wifi/javalib/framework-wifi.jar 704.0KB
+77e20b8000-77e2120000 r--p /apex/com.android.media/javalib/updatable-media.jar 416.0KB
+77e2120000-77e22b0000 rw-p [anon:dalvik-indirect ref table] 1.5625MB
+77e22b0000-77e23b0000 rw-p [anon:dalvik-non-moving-space inter region ref bitmap] 1.0MB
+77e23b0000-77e33b0000 rw-p [anon:dalvik-region-space inter region ref bitmap] 16.0MB
+77e33b0000-77e35b0000 rw-p [anon:dalvik-rb copying gc mark stack] 2.0MB
+77e35b0000-77e3db0000 rw-p [anon:dalvik-concurrent copying gc mark stack] 8.0MB
+77e3db0000-77e3fb0000 rw-p [anon:dalvik-rb copying gc mark stack] 2.0MB
+77e3fb0000-77e47b0000 rw-p [anon:dalvik-concurrent copying gc mark stack] 8.0MB
+77e47b0000-77e4fb1000 rw-p [anon:dalvik-live stack] 8.00390625MB
+77e4fb1000-77e57b2000 rw-p [anon:dalvik-allocation stack] 8.00390625MB
+77e57b2000-77e5bb3000 rw-p [anon:dalvik-card table] 4.00390625MB
+77e5bb3000-77e5cb3000 rw-p [anon:dalvik-large object free list space allocation info map] 1.0MB
+77e5cb3000-77e6cb3000 rw-p [anon:dalvik-region space live bitmap] 16.0MB
+77e6cb3000-77e6db3000 rw-p [anon:dalvik-allocspace zygote / non moving space mark-bitmap 0] 1.0MB
+77e6db3000-77e6eb3000 rw-p [anon:dalvik-allocspace zygote / non moving space live-bitmap 0] 1.0MB
+77e6eb3000-77e6f32000 r--p /system/framework/oplus-framework.jar 508.0KB
+77e6f32000-77e6ffb000 r--p /system/framework/voip-common.jar 804.0KB
+77e6ffb000-77e7340000 r--p /system/framework/telephony-common.jar 3.26953125MB
+77e7340000-77e9365000 r--p /system/framework/framework.jar 32.14453125MB
+77e9365000-77e948d000 r--p /apex/com.android.art/javalib/apache-xml.jar 1.15625MB
+77e948d000-77e95e4000 r--p /apex/com.android.art/javalib/bouncycastle.jar 1.33984375MB
+77e95e4000-77e9860000 r--p /apex/com.android.art/javalib/core-icu4j.jar 2.484375MB
+77e9860000-77e9902000 r--p /apex/com.android.art/javalib/core-libart.jar 648.0KB
+77e9902000-77e9dc1000 r--p /apex/com.android.art/javalib/core-oj.jar 4.74609375MB
+77e9dc1000-77e9dc7000 r--p /system/lib64/libtombstoned_client.so 24.0KB
+空闲:  60.0KB
+77e9dd6000-77e9df6000 r--s /dev/__properties__/u:object_r:vendor_public_vendor_default_prop:s0 128.0KB
+77e9df6000-77e9e16000 r--s /dev/__properties__/u:object_r:vndk_prop:s0 128.0KB
+77e9e16000-77e9e1c000 r--p /system/lib64/libartpalette-system.so 24.0KB
+空闲:  104.0KB
+77e9e36000-77e9e56000 r--s /dev/__properties__/u:object_r:vendor_persist_dpm_prop:s0 128.0KB
+77e9e56000-77e9e5a000 r--p /apex/com.android.art/lib64/libartpalette.so 16.0KB
+77e9e5a000-77e9eab000 r--s /system/fonts/RobotoCondensed-Italic.ttf 324.0KB
+77e9eab000-77e9eb0000 r--p /system/lib64/libsigchain.so 20.0KB
+空闲:  76.0KB
+77e9ec3000-77e9ef8000 r--p /apex/com.android.art/lib64/libprofile.so 212.0KB
+空闲:  40.0KB
+77e9f02000-77e9f75000 r--p /apex/com.android.art/lib64/libartbase.so 460.0KB
+77e9f75000-77e9f7b000 rw-p [anon:.bss] 24.0KB
+空闲:  8.0KB
+77e9f7d000-77e9fbe000 r--s /system/fonts/FZZWXBTOT_Uni.ttf 260.0KB
+77e9fbe000-77ea000000 r--p /apex/com.android.art/lib64/libdexfile.so 264.0KB
+空闲:  52.0KB
+77ea00d000-77ea6b8000 r--p /apex/com.android.art/lib64/libart.so 6.66796875MB
+77ea6b8000-77ea6bb000 rw-p [anon:.bss] 12.0KB
+空闲:  20.0KB
+77ea6c0000-77ea716000 r-xp /system_ext/lib64/libavutil.so 344.0KB
+77ea716000-77ea726000 ---p  64.0KB
+77ea726000-77ea731000 r--p /system_ext/lib64/libavutil.so 44.0KB
+77ea731000-77ea7bf000 rw-p [anon:.bss] 568.0KB
+77ea7bf000-77ea7df000 rw-p [anon:dalvik-LinearAlloc] 128.0KB
+77ea7df000-77ea84d000 r-xp /system_ext/lib64/libswscale.so 440.0KB
+77ea84d000-77ea85c000 ---p  60.0KB
+77ea85c000-77ea85f000 r--p /system_ext/lib64/libswscale.so 12.0KB
+77ea85f000-77ea867000 rw-p [anon:.bss] 32.0KB
+空闲:  64.0KB
+77ea877000-77ea883000 rw-s /dev/kgsl-3d0 48.0KB
+77ea883000-77ea929000 r-xp /system_ext/lib64/libdav1d.so.4 664.0KB
+77ea929000-77ea939000 ---p  64.0KB
+77ea939000-77ea93b000 r--p /system_ext/lib64/libdav1d.so.4 8.0KB
+77ea93b000-77ea97f000 rw-p [anon:.bss] 272.0KB
+空闲:  4.0KB
+77ea980000-77ea99b000 rw-s /dev/kgsl-3d0 108.0KB
+77ea99b000-77ea9bb000 rw-p [anon:dalvik-LinearAlloc] 128.0KB
+77ea9bb000-77eaa40000 r--p /system/lib64/libstagefright_httplive.so 532.0KB
+77eaa40000-77eafa0000 r--p /system_ext/lib64/libozoaudiodecoder.so 5.375MB
+77eafa0000-77eafbf000 rw-p [anon:.bss] 124.0KB
+77eafbf000-77eafc9000 rw-s /dev/kgsl-3d0 40.0KB
+77eafc9000-77eafe9000 r--s /dev/__properties__/u:object_r:exported3_radio_prop:s0 128.0KB
+77eafe9000-77eb136000 r--p /system/lib64/libmediaplayerservice.so 1.30078125MB
+77eb136000-77eb137000 rw-s /dev/kgsl-3d0 4.0KB
+77eb137000-77eb138000 ---p  4.0KB
+77eb138000-77eb140000 rw-p [anon:thread signal stack] 32.0KB
+77eb140000-77eba9c000 r-xp /system_ext/lib64/libavcodec.so 9.359375MB
+77eba9c000-77ebaab000 ---p  60.0KB
+77ebaab000-77ebaf8000 r--p /system_ext/lib64/libavcodec.so 308.0KB
+77ebaf8000-77ec1e4000 rw-p [anon:.bss] 6.921875MB
+77ec1e4000-77ec1e6000 rw-s /dev/kgsl-3d0 8.0KB
+77ec1e6000-77ec1e7000 ---p  4.0KB
+77ec1e7000-77ec1ef000 rw-p [anon:thread signal stack] 32.0KB
+空闲:  32.0KB
+77ec1f7000-77ec1f8000 ---p  4.0KB
+77ec1f8000-77ec200000 rw-p [anon:thread signal stack] 32.0KB
+77ec200000-77ec600000 rw-p [anon:libc_malloc] 4.0MB
+77ec600000-77ec648000 r--s /system/fonts/SourceSansPro-Bold.ttf 288.0KB
+77ec648000-77ec750000 r-xp /system_ext/lib64/libavformat.so 1.03125MB
+77ec750000-77ec760000 ---p  64.0KB
+77ec760000-77ec77b000 r--p /system_ext/lib64/libavformat.so 108.0KB
+77ec77b000-77ec781000 rw-s /dev/kgsl-3d0 24.0KB
+77ec781000-786c781000 ---p [anon:cfi shadow] 2.0GB
+786c781000-786c785000 r--p /system/lib64/android.hardware.media@1.0.so 16.0KB
+786c785000-786c786000 ---p  4.0KB
+786c786000-786c78e000 rw-p [anon:thread signal stack] 32.0KB
+786c78e000-786c7df000 r--s /system/fonts/SysSans-En-Regular.ttf 324.0KB
+786c7df000-786c868000 r--p /system/lib64/libvintf.so 548.0KB
+786c868000-786c86a000 rw-p [anon:.bss] 8.0KB
+786c86a000-786c86d000 rw-s /dev/kgsl-3d0 12.0KB
+786c86d000-786c86e000 ---p  4.0KB
+786c86e000-786c876000 rw-p [anon:thread signal stack] 32.0KB
+786c876000-786c880000 r--p [anon:dalvik-classes3.dex extracted in memory from /data/app/~~QK5JEbdahDMbxddNKgFFGw==/com.fenbi.android-rb3VYkxjc2C50MT9PSKzEw==/base.apk!classes3.dex] 40.0KB
+786c880000-786c93e000 r--p /system/lib64/libdng_sdk.so 760.0KB
+786c93e000-786c945000 rw-s /dev/kgsl-3d0 28.0KB
+786c945000-786c951000 r--s /data/app/~~QK5JEbdahDMbxddNKgFFGw==/com.fenbi.android-rb3VYkxjc2C50MT9PSKzEw==/base.apk 48.0KB
+786c951000-786c952000 ---p  4.0KB
+786c952000-786c95a000 rw-p [anon:thread signal stack] 32.0KB
+786c95a000-786c976000 r--p /system/lib64/libbufferhubqueue.so 112.0KB
+786c976000-786c97e000 rw-s /dev/kgsl-3d0 32.0KB
+786c97e000-786c97f000 ---p  4.0KB
+786c97f000-786c987000 rw-p [anon:thread signal stack] 32.0KB
+786c987000-786c9a7000 r--s /dev/__properties__/u:object_r:log_prop:s0 128.0KB
+786c9a7000-786c9aa000 r--p /system/lib64/libhardware.so 12.0KB
+786c9aa000-786c9ad000 rw-s /dev/kgsl-3d0 12.0KB
+786c9ad000-786c9ae000 ---p  4.0KB
+786c9ae000-786c9b6000 rw-p [anon:thread signal stack] 32.0KB
+786c9b6000-786c9b7000 ---p  4.0KB
+786c9b7000-786c9bf000 rw-p [anon:thread signal stack] 32.0KB
+786c9bf000-786c9df000 r--s /dev/__properties__/u:object_r:vendor_oppo_prop:s0 128.0KB
+786c9df000-786ca2f000 r--p /system/lib64/libstagefright_omx.so 320.0KB
+786ca2f000-786ca30000 rw-s /dev/kgsl-3d0 4.0KB
+786ca30000-786ca4e000 r--s /system/usr/hyphen-data/hyph-de-1901.hyb 120.0KB
+786ca4e000-786ca6e000 r--s /dev/__properties__/u:object_r:config_prop:s0 128.0KB
+786ca6e000-786ca7c000 r--p /system/lib64/libappfuse.so 56.0KB
+786ca7c000-786ca82000 rw-s /dev/kgsl-3d0 24.0KB
+786ca82000-786ca87000 r--p /system_ext/lib64/liboplus_imageprocessing.so 20.0KB
+786ca87000-786ca88000 r--s /vendor/etc/passwd 4.0KB
+786ca88000-786ca8d000 rw-s /dev/kgsl-3d0 20.0KB
+786ca8d000-786ca8e000 ---p  4.0KB
+786ca8e000-786ca96000 rw-p [anon:thread signal stack] 32.0KB
+786ca96000-786cae8000 r--s /system/fonts/Roboto-BoldItalic.ttf 328.0KB
+786cae8000-786cb7b000 r--p /system/lib64/libsfplugin_ccodec.so 588.0KB
+786cb7b000-786cb80000 rw-s /dev/kgsl-3d0 20.0KB
+786cb80000-786cb81000 ---p  4.0KB
+786cb81000-786cb89000 rw-p [anon:thread signal stack] 32.0KB
+786cb89000-786cb8d000 r--p /system/lib64/android.hardware.graphics.common@1.1.so 16.0KB
+786cb8d000-786cb90000 rw-s /dev/kgsl-3d0 12.0KB
+786cb90000-786cbe1000 r--s /system/fonts/Roboto-BlackItalic.ttf 324.0KB
+786cbe1000-786cbe7000 r--p /system/lib64/libmedia_omx_client.so 24.0KB
+786cbe7000-786cbe8000 ---p  4.0KB
+786cbe8000-786cbf0000 rw-p [anon:thread signal stack] 32.0KB
+786cbf0000-786cbf1000 ---p  4.0KB
+786cbf1000-786cbf9000 rw-p [anon:thread signal stack] 32.0KB
+786cbf9000-786cbfa000 ---p  4.0KB
+786cbfa000-786cc02000 rw-p [anon:thread signal stack] 32.0KB
+786cc02000-786cc22000 r--s /dev/__properties__/u:object_r:media_variant_prop:s0 128.0KB
+786cc22000-786cc35000 r--p /system/lib64/android.hidl.memory.token@1.0.so 76.0KB
+786cc35000-786cc3b000 rw-s /dev/kgsl-3d0 24.0KB
+786cc3b000-786cc5b000 r--s /dev/__properties__/u:object_r:exported_camera_prop:s0 128.0KB
+786cc5b000-786cc61000 r--p /system_ext/lib64/libOplusGameVoiceOptimize.so 24.0KB
+786cc61000-786cc69000 r--s /dev/kgsl-3d0 32.0KB
+786cc69000-786cc6a000 ---p  4.0KB
+786cc6a000-786cc72000 rw-p [anon:thread signal stack] 32.0KB
+786cc72000-786cc73000 ---p  4.0KB
+786cc73000-786cc7b000 rw-p [anon:thread signal stack] 32.0KB
+786cc7b000-786cc94000 r--s /system/fonts/NotoSansBhaiksuki-Regular.otf 100.0KB
+786cc94000-786ccb8000 r--p /system/lib64/android.hardware.graphics.mapper@4.0.so 144.0KB
+786ccb8000-786ccbb000 rw-s /dev/kgsl-3d0 12.0KB
+空闲:  68.0KB
+786cccc000-786cd00000 r--p /system/lib64/libstagefright_foundation.so 208.0KB
+786cd00000-786cd01000 rw-s /dev/kgsl-3d0 4.0KB
+786cd01000-786cd02000 rw-p [anon:bionic_alloc_small_objects] 4.0KB
+786cd02000-786cd04000 rw-s /dev/kgsl-3d0 8.0KB
+786cd04000-786cd22000 r--p /system/lib64/libutils.so 120.0KB
+786cd22000-786cd23000 rw-s /dev/ashmem/GFXStats-29320 (deleted) 4.0KB
+786cd23000-786cd25000 r--s /dev/ashmem/618c92a8-3b41-4107-b7c0-2b8de372c6dd (deleted) 8.0KB
+786cd25000-786cd27000 rw-s /dev/kgsl-3d0 8.0KB
+786cd27000-786cd29000 rw-p [anon:dalvik-indirect ref table] 8.0KB
+786cd29000-786cd2a000 ---p  4.0KB
+786cd2a000-786cd32000 rw-p [anon:thread signal stack] 32.0KB
+786cd32000-786cd53000 r--s /system/fonts/NotoSansAnatolianHieroglyphs-Regular.otf 132.0KB
+786cd53000-786d4db000 r--p /system/lib64/libhwui.so 7.53125MB
+786d4db000-786d4e1000 rw-p [anon:.bss] 24.0KB
+786d4e1000-786d4e3000 r--s /dev/ashmem/618c92a8-3b41-4107-b7c0-2b8de372c6dd (deleted) 8.0KB
+786d4e3000-786d4e5000 rw-p [anon:dalvik-indirect ref table] 8.0KB
+空闲:  68.0KB
+786d4f6000-786d512000 r--s /system/fonts/NotoSansMongolian-Regular.ttf 112.0KB
+786d512000-786d518000 r--p /apex/com.android.art/lib64/libnativebridge.so 24.0KB
+786d518000-786d51a000 rw-p [anon:dalvik-indirect ref table] 8.0KB
+786d51a000-786d562000 r--s /system/fonts/SourceSansPro-SemiBold.ttf 288.0KB
+786d562000-786d579000 r--p /system/lib64/libz.so 92.0KB
+786d579000-786d57b000 r--s /my_product/overlay/android_framework_res_overlay.display.product.19752.apk 8.0KB
+空闲:  68.0KB
+786d58c000-786d5a0000 r--p /system/lib64/libnetdutils.so 80.0KB
+786d5a0000-786d5a1000 r--s /data/resource-cache/my_product@overlay@android_framework_res_overlay.display.product.19752.apk@idmap 4.0KB
+786d5a1000-786d5c0000 r--s /system/fonts/NotoSansYi-Regular.ttf 124.0KB
+786d5c0000-786d5c4000 r--p /system/lib64/libETC1.so 16.0KB
+786d5c4000-786d5c6000 r--s /vendor/overlay/FrameworksResTarget.apk 8.0KB
+786d5c6000-786d5c7000 r--s /data/resource-cache/vendor@overlay@FrameworksResTarget.apk@idmap 4.0KB
+786d5c7000-786d5c9000 r--s /odm/overlay/framework_res_overlay.19752.apk 8.0KB
+786d5c9000-786d5ca000 r--s /data/resource-cache/odm@overlay@framework_res_overlay.19752.apk@idmap 4.0KB
+786d5ca000-786d5e3000 r--s /system/fonts/NotoSansLepcha-Regular.ttf 100.0KB
+786d5e3000-786d604000 r--s /system/fonts/NotoSansBamum-Regular.ttf 132.0KB
+786d604000-786d62e000 r--p /system/lib64/libminikin.so 168.0KB
+786d62e000-786d630000 r--s /product/overlay/FrameworksResCommonQva.apk 8.0KB
+786d630000-786d635000 r--s /product/overlay/FrameworksResCommon.apk 20.0KB
+786d635000-786d644000 r--s /system/usr/hyphen-data/hyph-en-us.hyb 60.0KB
+786d644000-786d647000 r--p /system/lib64/libmedia_jni_utils.so 12.0KB
+786d647000-786d650000 r--s /system/usr/hyphen-data/hyph-ga.hyb 36.0KB
+786d650000-786d66c000 r--s /system/fonts/NotoSansMyanmarUI-Bold.otf 112.0KB
+786d66c000-786d689000 r--s /system/fonts/NotoSansMyanmarUI-Medium.otf 116.0KB
+786d689000-786d6a2000 r--p /system/lib64/libselinux.so 100.0KB
+786d6a2000-786d6a4000 rw-p [anon:.bss] 8.0KB
+786d6a4000-786d6c6000 r--s /system/fonts/NotoSerifMyanmar-Bold.otf 136.0KB
+786d6c6000-786d6fa000 r--p /apex/com.android.art/lib64/libandroidicu.so 208.0KB
+786d6fa000-786d6fb000 ---p  4.0KB
+786d6fb000-786d6ff000 rw-p [anon:stack_and_tls:29335] 16.0KB
+786d6ff000-786d700000 ---p  4.0KB
+786d700000-786d722000 r--s /system/fonts/NotoSerifMyanmar-Regular.otf 136.0KB
+786d722000-786d72a000 r--p /apex/com.android.art/lib64/libnativehelper.so 32.0KB
+786d72a000-786d72b000 r--s /data/resource-cache/product@overlay@FrameworksResCommonQva.apk@idmap 4.0KB
+786d72b000-786d72c000 r--s /product/overlay/FrameworksResCommon.apk 4.0KB
+786d72c000-786d72d000 r--s /data/resource-cache/product@overlay@FrameworksResCommon.apk@idmap 4.0KB
+786d72d000-786d72e000 r--s /product/overlay/ModuleMetadataGoogleOverlay.apk 4.0KB
+786d72e000-786d779000 r--s /system/fonts/RobotoCondensed-Bold.ttf 300.0KB
+786d779000-786d77e000 r--p /system/lib64/libcgrouprc.so 20.0KB
+786d77e000-786d77f000 r--s /product/overlay/ModuleMetadataGoogleOverlay.apk 4.0KB
+786d77f000-786d79b000 r--s /system/fonts/NotoSansMyanmarUI-Regular.otf 112.0KB
+786d79b000-786d82c000 r--p /system/lib64/libft2.so 580.0KB
+786d82c000-786d846000 r--s /system/fonts/NotoSansAdlam-VF.ttf 104.0KB
+786d846000-786d861000 r--s /system/fonts/NotoSansMyanmar-Bold.otf 108.0KB
+786d861000-786d87f000 r--p /system/lib64/android.frameworks.bufferhub@1.0.so 120.0KB
+786d87f000-786d880000 r--s /data/resource-cache/product@overlay@ModuleMetadataGoogleOverlay.apk@idmap 4.0KB
+786d880000-786d889000 r--p /system/lib64/libGLESv1_CM.so 36.0KB
+786d889000-786d88b000 r--s /my_heytap/overlay/GmsConfigOverlayCommon/GmsConfigOverlayCommon.apk 8.0KB
+786d88b000-786d8f7000 r--p /apex/com.android.conscrypt/javalib/conscrypt.jar 432.0KB
+786d8f7000-786d8ff000 r--p /system/lib64/libstagefright_codecbase.so 32.0KB
+786d8ff000-786d900000 r--s /product/overlay/GooglePermissionControllerFrameworkOverlay.apk 4.0KB
+786d900000-786d903000 r--p [anon:dalvik-classes6.dex extracted in memory from /data/app/~~QK5JEbdahDMbxddNKgFFGw==/com.fenbi.android-rb3VYkxjc2C50MT9PSKzEw==/base.apk!classes6.dex] 12.0KB
+786d903000-786d998000 r--p /system/lib64/libcodec2_vndk.so 596.0KB
+786d998000-786d999000 r--s /product/overlay/GooglePermissionControllerFrameworkOverlay.apk 4.0KB
+786d999000-786d99c000 r--p [anon:dalvik-classes4.dex extracted in memory from /data/app/~~QK5JEbdahDMbxddNKgFFGw==/com.fenbi.android-rb3VYkxjc2C50MT9PSKzEw==/base.apk!classes4.dex] 12.0KB
+786d99c000-786d9a2000 r--s /system/usr/hyphen-data/hyph-et.hyb 24.0KB
+786d9a2000-786d9ae000 r--s /system/usr/hyphen-data/hyph-en-gb.hyb 48.0KB
+786d9ae000-786d9cb000 r--s /system/fonts/NotoSansMyanmar-Medium.otf 116.0KB
+786d9cb000-786d9ed000 r--p /system/lib64/libaudioutils.so 136.0KB
+786d9ed000-786da05000 r--s /system_ext/framework/oplus-framework-res.apk 96.0KB
+786da05000-786da7d000 r--p /system/lib64/libcamera_client.so 480.0KB
+786da7d000-786da7e000 r--s /data/resource-cache/product@overlay@GooglePermissionControllerFrameworkOverlay.apk@idmap 4.0KB
+786da7e000-786da82000 rw-p [anon:dalvik-indirect ref table] 16.0KB
+786da82000-786dafb000 r--p /system/lib64/android.hardware.media.omx@1.0.so 484.0KB
+786dafb000-786dafc000 r--s /product/overlay/GoogleExtServicesConfigOverlay.apk 4.0KB
+786dafc000-786dafe000 rw-p [anon:dalvik-indirect ref table] 8.0KB
+786dafe000-786db07000 r--s /system/usr/hyphen-data/hyph-cy.hyb 36.0KB
+786db07000-786db2b000 r--s /system/fonts/NotoSansKhmer-VF.ttf 144.0KB
+786db2b000-786db30000 r--p /system/lib64/libdexfile_support.so 20.0KB
+786db30000-786db31000 r--s /product/overlay/GoogleExtServicesConfigOverlay.apk 4.0KB
+786db31000-786db33000 rw-p [anon:dalvik-indirect ref table] 8.0KB
+786db33000-786db40000 r--s /system/usr/hyphen-data/hyph-cu.hyb 52.0KB
+786db40000-786db65000 r--p /system/lib64/libcodec2_client.so 148.0KB
+786db65000-786db66000 r--s /data/resource-cache/product@overlay@GoogleExtServicesConfigOverlay.apk@idmap 4.0KB
+786db66000-786dbae000 r--s /system/fonts/SourceSansPro-Regular.ttf 288.0KB
+786dbae000-786dbbe000 r--p /system/lib64/libdataloader.so 64.0KB
+786dbbe000-786dbbf000 r--s /my_heytap/overlay/GmsConfigOverlayCommon/GmsConfigOverlayCommon.apk 4.0KB
+786dbbf000-786dbc8000 r--p /system/framework/android.test.base.jar 36.0KB
+786dbc8000-786dbd0000 r--p /system/framework/android.hidl.manager-V1.0-java.jar 32.0KB
+786dbd0000-786dbf6000 r--p /system/lib64/libpdx_default_transport.so 152.0KB
+786dbf6000-786dbf7000 rw-p [anon:bionic_alloc_small_objects] 4.0KB
+786dbf7000-786dbfb000 rw-p [anon:dalvik-indirect ref table] 16.0KB
+786dbfb000-786dc16000 r--s /system/fonts/NotoSansMyanmar-Regular.otf 108.0KB
+786dc16000-786dc56000 r--p /apex/com.android.os.statsd/lib64/libstatspull.so 256.0KB
+786dc56000-786dc57000 rw-p [anon:.bss] 4.0KB
+786dc57000-786dc58000 rw-p [anon:bionic_alloc_small_objects] 4.0KB
+786dc58000-786dc60000 r--s /system/fonts/NotoSansGunjalaGondi-Regular.otf 32.0KB
+786dc60000-786dcb1000 r--s /system/fonts/Roboto-MediumItalic.ttf 324.0KB
+786dcb1000-786dcf7000 r--p /system/lib64/libui.so 280.0KB
+786dcf7000-786dcf8000 rw-p [anon:.bss] 4.0KB
+786dcf8000-786dcfc000 rw-p [anon:dalvik-indirect ref table] 16.0KB
+786dcfc000-786dd0d000 r--s /system/fonts/NotoSansNewa-Regular.otf 68.0KB
+786dd0d000-786dd25000 r--p /system/lib64/libsensor.so 96.0KB
+786dd25000-786dd26000 r--s /data/resource-cache/my_heytap@overlay@GmsConfigOverlayCommon@GmsConfigOverlayCommon.apk@idmap 4.0KB
+786dd26000-786dd28000 rw-p [anon:dalvik-indirect ref table] 8.0KB
+786dd28000-786dd73000 r--s /system/fonts/RobotoCondensed-Medium.ttf 300.0KB
+786dd73000-786dd77000 r--p /system/lib64/libion.so 16.0KB
+786dd77000-786dd79000 rw-p [anon:dalvik-indirect ref table] 8.0KB
+786dd79000-786dd8f000 r--s /system/fonts/NotoSansJavanese-Regular.otf 88.0KB
+786dd8f000-786dda7000 r--p /system/lib64/android.hardware.graphics.allocator@2.0.so 96.0KB
+786dda7000-786dda8000 r--s /dev/cgroup_info/cgroup.rc 4.0KB
+786dda8000-786dda9000 r--s /system/usr/hyphen-data/hyph-und-ethi.hyb 4.0KB
+786dda9000-786ddaa000 r--s /system/usr/hyphen-data/hyph-tk.hyb 4.0KB
+786ddaa000-786ddae000 r--s /system/usr/hyphen-data/hyph-es.hyb 16.0KB
+786ddae000-786ddc3000 r--s /system/fonts/NotoSansSinhalaUI-Bold.otf 84.0KB
+786ddc3000-786dddb000 r--p /system/lib64/libmedia_helper.so 96.0KB
+786dddb000-786dddc000 r--s /system/usr/hyphen-data/hyph-te.hyb 4.0KB
+786dddc000-786dddd000 r--s /system/usr/hyphen-data/hyph-ta.hyb 4.0KB
+786dddd000-786dded000 r--s /system/fonts/NotoSansMarchen-Regular.otf 64.0KB
+786dded000-786de04000 r--s /system/fonts/NotoSansSinhalaUI-Medium.otf 92.0KB
+786de04000-786de07000 r--p /system/lib64/android.hidl.safe_union@1.0.so 12.0KB
+786de07000-786de0e000 r--s /system/fonts/NotoSansKhojki-Regular.otf 28.0KB
+786de0e000-786de72000 rw-p [anon:linker_alloc] 400.0KB
+786de72000-786de79000 r--p /system/lib64/libnativewindow.so 28.0KB
+786de79000-786de7b000 r--s /system/usr/hyphen-data/hyph-sl.hyb 8.0KB
+786de7b000-786de8b000 r--s /system/fonts/NotoSansVai-Regular.ttf 64.0KB
+786de8b000-786df27000 r--p /system/lib64/libmedia.so 624.0KB
+786df27000-786df28000 r--s /system/usr/hyphen-data/hyph-pt.hyb 4.0KB
+786df28000-786df2f000 r--s /system/fonts/NotoSansSharada-Regular.otf 28.0KB
+786df2f000-786df3b000 r--s /system/fonts/NotoSansTaiTham-Regular.ttf 48.0KB
+786df3b000-786df50000 r--s /system/fonts/NotoSansSinhalaUI-Regular.otf 84.0KB
+786df50000-786df68000 r--p /system/lib64/android.hardware.graphics.allocator@3.0.so 96.0KB
+786df68000-786df6a000 r--s /system/usr/hyphen-data/hyph-mn-cyrl.hyb 8.0KB
+786df6a000-786df6e000 r--p /system/framework/android.hidl.base-V1.0-java.jar 16.0KB
+786df6e000-786df83000 r--s /system/fonts/NotoSerifSinhala-Bold.otf 84.0KB
+786df83000-786e143000 r--p /system/lib64/libstagefright.so 1.75MB
+786e143000-786e144000 rw-p [anon:.bss] 4.0KB
+786e144000-786e14a000 r--s /system/fonts/NotoSansWarangCiti-Regular.otf 24.0KB
+786e14a000-786e15f000 r--s /system/fonts/NotoSansSinhala-Bold.otf 84.0KB
+786e15f000-786e176000 r--s /system/fonts/NotoSansSinhala-Medium.otf 92.0KB
+786e176000-786e18b000 r--s /system/fonts/NotoSansSinhala-Regular.otf 84.0KB
+786e18b000-786e1a8000 r--p /system/lib64/libimg_utils.so 116.0KB
+786e1a8000-786e1a9000 rw-p [anon:.bss] 4.0KB
+786e1a9000-786e1aa000 r--s /system/usr/hyphen-data/hyph-pa.hyb 4.0KB
+786e1aa000-786e1b3000 r--s /system/fonts/NotoSansLinearA-Regular.otf 36.0KB
+786e1b3000-786e1c7000 r--s /system/fonts/NotoSansOriyaUI-Bold.ttf 80.0KB
+786e1c7000-786e1f8000 r--p /system/lib64/libEGL.so 196.0KB
+786e1f8000-786e200000 rw-p [anon:.bss] 32.0KB
+786e200000-786e205000 r--s /product/overlay/FrameworksResCommon.apk 20.0KB
+786e205000-786e223000 r--p /system/lib64/android.hardware.configstore@1.1.so 120.0KB
+786e223000-786e224000 r--s /system/usr/hyphen-data/hyph-or.hyb 4.0KB
+786e224000-786e22b000 r--s /system/fonts/NotoSansPhagsPa-Regular.ttf 28.0KB
+786e22b000-786e23f000 r--s /system/fonts/NotoSansOriyaUI-Regular.ttf 80.0KB
+786e23f000-786e254000 r--s /system/fonts/NotoSansOriya-Bold.ttf 84.0KB
+786e254000-786e269000 r--s /system/fonts/NotoSansOriya-Regular.ttf 84.0KB
+786e269000-786e26e000 r--p /system/lib64/libaudiomanager.so 20.0KB
+786e26e000-786e26f000 r--s /system/usr/hyphen-data/hyph-mr.hyb 4.0KB
+786e26f000-786e270000 r--s /system/usr/hyphen-data/hyph-ml.hyb 4.0KB
+786e270000-786e274000 r--s /system/fonts/NotoSansWancho-Regular.otf 16.0KB
+786e274000-786e281000 r--s /system/fonts/NotoSansSyriacWestern-Regular.ttf 52.0KB
+786e281000-786e29d000 r--s /system/fonts/NotoSansTeluguUI-Bold.ttf 112.0KB
+786e29d000-786e2b0000 r--p /system/lib64/libcutils.so 76.0KB
+786e2b0000-786e2b1000 r--s /system/usr/hyphen-data/hyph-la.hyb 4.0KB
+786e2b1000-786e2b2000 r--s /system/usr/hyphen-data/hyph-kn.hyb 4.0KB
+786e2b2000-786e2b3000 r--s /system/usr/hyphen-data/hyph-hy.hyb 4.0KB
+786e2b3000-786e2c2000 r--s /system/fonts/NotoSansLinearB-Regular.ttf 60.0KB
+786e2c2000-786e2d1000 r--p /system/lib64/libbufferhub.so 60.0KB
+786e2d1000-786e2d2000 r--s /system/usr/hyphen-data/hyph-hr.hyb 4.0KB
+786e2d2000-786e2d4000 r--s /system/usr/hyphen-data/hyph-fr.hyb 8.0KB
+786e2d4000-786e2f0000 r--s /system/fonts/NotoSansTeluguUI-Regular.ttf 112.0KB
+786e2f0000-786e315000 r--s /system/fonts/NotoSerifTelugu-Bold.ttf 148.0KB
+786e315000-786e31a000 r--p /system/lib64/libusbhost.so 20.0KB
+786e31a000-786e323000 r--s /system/fonts/NotoSansSymbols-Regular-Subsetted2.ttf 36.0KB
+786e323000-786e348000 r--s /system/fonts/NotoSerifTelugu-Regular.ttf 148.0KB
+786e348000-786e34c000 r--p /system/lib64/libstagefright_http_support.so 16.0KB
+786e34c000-786e34d000 r--s /system/usr/hyphen-data/hyph-hi.hyb 4.0KB
+786e34d000-786e397000 r--s /system/fonts/RobotoCondensed-Regular.ttf 296.0KB
+786e397000-786e3b4000 r--p /system/lib64/android.hardware.graphics.mapper@3.0.so 116.0KB
+786e3b4000-786e3ba000 r--s /system/fonts/NotoSansMasaramGondi-Regular.otf 24.0KB
+786e3ba000-786e3d5000 r--s /system/fonts/NotoSansTelugu-Bold.ttf 108.0KB
+786e3d5000-786e3d8000 r--p /system/lib64/libhidlallocatorutils.so 12.0KB
+786e3d8000-786e3da000 r--s /system/usr/hyphen-data/hyph-da.hyb 8.0KB
+786e3da000-786e3f1000 r--s /system/fonts/NotoSerifKannada-Bold.ttf 92.0KB
+786e3f1000-786e40d000 r--s /system/fonts/NotoSansTelugu-Regular.ttf 112.0KB
+786e40d000-786e43c000 r--p /system/lib64/libmedia_omx.so 188.0KB
+786e43c000-786e449000 r--s /system/fonts/NotoSansSyriacEastern-Regular.ttf 52.0KB
+786e449000-786e47b000 r--p /system/lib64/libmediandk.so 200.0KB
+786e47b000-786e48f000 r--s /system/fonts/NotoSansKannadaUI-Bold.ttf 80.0KB
+786e48f000-786e4b2000 r--p /system/lib64/android.hardware.configstore@1.0.so 140.0KB
+786e4b2000-786e4c1000 r--s /system/fonts/NotoSansKaithi-Regular.ttf 60.0KB
+786e4c1000-786e4f6000 r--p /system/lib64/android.hardware.media.c2@1.1.so 212.0KB
+786e4f6000-786e4f7000 r--s /system/usr/hyphen-data/hyph-gu.hyb 4.0KB
+786e4f7000-786e4f9000 r--s /system/usr/hyphen-data/hyph-be.hyb 8.0KB
+786e4f9000-786e510000 r--s /system/fonts/NotoSerifKannada-Regular.ttf 92.0KB
+786e510000-786e52d000 r--s /system/fonts/NotoSerifBengali-Bold.ttf 116.0KB
+786e52d000-786e534000 r--p /system/lib64/libhidlmemory.so 28.0KB
+786e534000-786e535000 r--s /system/usr/hyphen-data/hyph-eu.hyb 4.0KB
+786e535000-786e549000 r--s /system/fonts/NotoSansKannadaUI-Regular.ttf 80.0KB
+786e549000-786e55b000 r--p /system/lib64/libstatslog.so 72.0KB
+786e55b000-786e55c000 r--s /system/usr/hyphen-data/hyph-bn.hyb 4.0KB
+786e55c000-786e55d000 rw-p [anon:bionic_alloc_small_objects] 4.0KB
+786e55d000-786e55e000 r--s /system/usr/hyphen-data/hyph-bg.hyb 4.0KB
+786e55e000-786e5a9000 r--s /system/fonts/Roboto-Bold.ttf 300.0KB
+786e5a9000-786e5b3000 r--p /system_ext/lib64/libOppoAudioVoiceScence.so 40.0KB
+786e5b3000-786e5b5000 rw-p [anon:bionic_alloc_small_objects] 8.0KB
+786e5b5000-786e5b9000 r--s /system/fonts/NotoSansHanifiRohingya-Regular.otf 16.0KB
+786e5b9000-786e5d6000 r--s /system/fonts/NotoSerifBengali-Regular.ttf 116.0KB
+786e5d6000-786e5da000 r--p /system/lib64/libnativeloader_lazy.so 16.0KB
+786e5da000-786e5e0000 r--s /system/fonts/NotoSansMiao-Regular.otf 24.0KB
+786e5e0000-786e5f4000 r--s /system/fonts/NotoSansKannada-Bold.ttf 80.0KB
+786e5f4000-786e610000 r--s /system/fonts/NotoSansGujaratiUI-Bold.ttf 112.0KB
+786e610000-786e679000 r--p /system/lib64/android.hardware.drm@1.2.so 420.0KB
+786e679000-786e67a000 rw-p [anon:bionic_alloc_small_objects] 4.0KB
+786e67a000-786e67c000 r--p /system/framework/tcmclient.jar 8.0KB
+786e67c000-786e68b000 r--s /system/fonts/NotoSansCherokee-Regular.ttf 60.0KB
+786e68b000-786e6bb000 r--p /system/lib64/libmemunreachable.so 192.0KB
+786e6bb000-786e6c7000 r--s /system/fonts/NotoSansSyriacEstrangela-Regular.ttf 48.0KB
+786e6c7000-786e72f000 r--p /system/lib64/android.hardware.drm@1.0.so 416.0KB
+786e72f000-786e730000 r--p /system/framework/tcmiface.jar 4.0KB
+786e730000-786e733000 r--s /system/fonts/NotoSansPauCinHau-Regular.otf 12.0KB
+786e733000-786e748000 r--s /system/fonts/NotoSansKannada-Regular.ttf 84.0KB
+786e748000-786e77a000 r--p /system/lib64/libnblog.so 200.0KB
+786e77a000-786e781000 r--s /system/fonts/NotoSansTifinagh-Regular.otf 28.0KB
+786e781000-786e79f000 r--p /system/lib64/android.hidl.memory@1.0.so 120.0KB
+786e79f000-786e7a3000 r--s /system/fonts/NotoSansPahawhHmong-Regular.otf 16.0KB
+786e7a3000-786e7c0000 r--s /system/fonts/NotoSansGujaratiUI-Regular.ttf 116.0KB
+786e7c0000-786e7dd000 r--s /system/fonts/NotoSansGujarati-Bold.ttf 116.0KB
+786e7dd000-786e7f7000 r--p /system/lib64/libtinyxml2.so 104.0KB
+786e7f7000-786e7fa000 r--s /system/fonts/NotoSansPalmyrene-Regular.otf 12.0KB
+786e7fa000-786e802000 r--s /system/fonts/NotoSansChakma-Regular.otf 32.0KB
+786e802000-786e805000 r--p /apex/com.android.runtime/lib64/bionic/libdl_android.so 12.0KB
+786e805000-786e806000 rw-p [anon:bionic_alloc_small_objects] 4.0KB
+786e806000-786e809000 r--s /system/fonts/NotoSansOldPermic-Regular.otf 12.0KB
+786e809000-786e827000 r--s /system/fonts/NotoSansGujarati-Regular.ttf 120.0KB
+786e827000-786e842000 r--s /system/fonts/NotoSansDevanagariUI-Bold.otf 108.0KB
+786e842000-786e870000 r--p /system/lib64/libmediadrm.so 184.0KB
+786e870000-786e875000 r--s /system/fonts/NotoSansMeroitic-Regular.otf 20.0KB
+786e875000-786e881000 r--s /system/fonts/NotoSansCanadianAboriginal-Regular.ttf 48.0KB
+786e881000-786e8bf000 r--p /system/lib64/libwilhelm.so 248.0KB
+786e8bf000-786e8c4000 r--s /system/fonts/NotoSansManichaean-Regular.otf 20.0KB
+786e8c4000-786e8e0000 r--s /system/fonts/NotoSansDevanagariUI-Medium.otf 112.0KB
+786e8e0000-786e8e5000 r--p /system/lib64/libnativebridge_lazy.so 20.0KB
+786e8e5000-786e8e7000 r--s /my_heytap/overlay/GmsConfigOverlayCommon/GmsConfigOverlayCommon.apk 8.0KB
+786e8e7000-786e928000 r--s /system/fonts/NotoSerif-BoldItalic.ttf 260.0KB
+786e928000-786e93e000 r--p /system/lib64/libstagefright_xmlparser.so 88.0KB
+786e93e000-786e940000 r--s /system/fonts/NotoSansSoraSompeng-Regular.otf 8.0KB
+786e940000-786e942000 r--s /system/fonts/NotoSansOldNorthArabian-Regular.otf 8.0KB
+786e942000-786e96c000 r--p /system/lib64/libstagefright_bufferpool@2.0.1.so 168.0KB
+786e96c000-786e96e000 r--s /system/fonts/NotoSansNabataean-Regular.otf 8.0KB
+786e96e000-786e970000 r--s /system/fonts/NotoSansMultani-Regular.otf 8.0KB
+786e970000-786e98d000 r--s /system/fonts/NotoSansDevanagari-Bold.otf 116.0KB
+786e98d000-786e9ac000 r--s /system/fonts/NotoSansDevanagari-Medium.otf 124.0KB
+786e9ac000-786e9b8000 r--p /system/lib64/libtimeinstate.so 48.0KB
+786e9b8000-786e9b9000 r--s /my_product/overlay/oplus_framework_res_overlay.display.product.19752.apk 4.0KB
+786e9b9000-786e9bb000 r--s /system/fonts/NotoSansMro-Regular.otf 8.0KB
+786e9bb000-786e9d8000 r--s /system/fonts/NotoSansDevanagari-Regular.otf 116.0KB
+786e9d8000-786e9f3000 r--p /system_ext/lib64/libiatlasservice.so 108.0KB
+786e9f3000-786e9f5000 r--s /system/fonts/NotoSansHatran-Regular.otf 8.0KB
+786e9f5000-786e9f7000 r--s /system/fonts/NotoSansBassaVah-Regular.otf 8.0KB
+786e9f7000-786e9ff000 r--s /system/fonts/NotoSansBalinese-Regular.ttf 32.0KB
+786e9ff000-786ea1f000 rw-p [anon:dalvik-CompilerMetadata] 128.0KB
+786ea1f000-786ea28000 r--p /system/lib64/libbpf.so 36.0KB
+786ea28000-786ea2b000 r--s /system/fonts/NotoSansTaiLe-Regular.ttf 12.0KB
+786ea2b000-786ea7c000 r--s /system/fonts/Roboto-Italic.ttf 324.0KB
+786ea7c000-786ea80000 r--p /system/lib64/libmemtrack.so 16.0KB
+786ea80000-786ea82000 r--s /system/fonts/NotoSansUgaritic-Regular.ttf 8.0KB
+786ea82000-786ea96000 r--s /system/fonts/NotoSansBengaliUI-Bold.otf 80.0KB
+786ea96000-786eab7000 r--p /system/lib64/libincfs.so 132.0KB
+786eab7000-786eabc000 r--s /system/fonts/NotoSansSaurashtra-Regular.ttf 20.0KB
+786eabc000-786eac5000 r--s /system/fonts/MyanmarZg.ttf 36.0KB
+786eac5000-786eb00000 r--p /system/lib64/android.hardware.media.bufferpool@2.0.so 236.0KB
+786eb00000-786eb04000 r--s /system/fonts/NotoSansTaiViet-Regular.ttf 16.0KB
+786eb04000-786eb1f000 r--p /system/lib64/android.hardware.graphics.mapper@2.1.so 108.0KB
+786eb1f000-786eb6a000 r--s /system/fonts/Roboto-Black.ttf 300.0KB
+786eb6a000-786eb6e000 r--p /system/lib64/libandroid_runtime_lazy.so 16.0KB
+786eb6e000-786eb6f000 r--s /my_product/overlay/oplus_framework_res_overlay.display.product.19752.apk 4.0KB
+786eb6f000-786eb85000 r--s /system/fonts/NotoSansBengaliUI-Medium.otf 88.0KB
+786eb85000-786ebe6000 r--p /system/lib64/libclang_rt.ubsan_standalone-aarch64-android.so 388.0KB
+786ebe6000-786ed37000 rw-p [anon:.bss] 1.31640625MB
+786ed37000-786ed38000 r--s /data/resource-cache/my_product@overlay@oplus_framework_res_overlay.display.product.19752.apk@idmap 4.0KB
+786ed38000-786ed40000 r--s /system/fonts/NotoSansLaoUI-Bold.ttf 32.0KB
+786ed40000-786ee29000 r--p /apex/com.android.runtime/lib64/bionic/libc.so 932.0KB
+786ee29000-786ee33000 rw-p [anon:.bss] 40.0KB
+786ee33000-786ee47000 r--s /system/fonts/NotoSansBengaliUI-Regular.otf 80.0KB
+786ee47000-786ee51000 r--p /system_ext/lib64/libphoenix_native.so 40.0KB
+786ee51000-786ee52000 r--s /my_product/overlay/android_framework_res_overlay.display.product.19752.apk 4.0KB
+786ee52000-786eea4000 r--s /system/fonts/Roboto-LightItalic.ttf 328.0KB
+786eea4000-786eea8000 r--p /system/lib64/libvndksupport.so 16.0KB
+786eea8000-786eee5000 r--s /system/fonts/NotoSerif-Italic.ttf 244.0KB
+786eee5000-786eee9000 r--p /system/lib64/libsync.so 16.0KB
+786eee9000-786ef26000 r--s /system/fonts/NotoSerif-Bold.ttf 244.0KB
+786ef26000-786ef34000 r--p /system/lib64/libhidl-gen-utils.so 56.0KB
+786ef34000-786ef47000 r--s /system/fonts/NotoSerifSinhala-Regular.otf 76.0KB
+786ef47000-786ef5d000 r--p /system/lib64/android.hardware.graphics.allocator@4.0.so 88.0KB
+786ef5d000-786ef5f000 r--s /system/fonts/NotoSansTagbanwa-Regular.ttf 8.0KB
+786ef5f000-786ef61000 r--s /system/fonts/NotoSansTagalog-Regular.ttf 8.0KB
+786ef61000-786ef81000 r--s /system/fonts/NotoSerifEthiopic-Bold.otf 128.0KB
+786ef81000-786f027000 r--p /system/lib64/libhidlbase.so 664.0KB
+786f027000-786f02f000 r--s /system/fonts/NotoSansLaoUI-Regular.ttf 32.0KB
+786f02f000-786f037000 r--s /system/fonts/NotoSerifLao-Bold.ttf 32.0KB
+786f037000-786f053000 r--s /system/fonts/NotoSerifEthiopic-Regular.otf 112.0KB
+786f053000-786f057000 r--p /system/lib64/libcodec2_hidl_client@1.1.so 16.0KB
+786f057000-786f05b000 r--s /system/fonts/NotoSansSylotiNagri-Regular.ttf 16.0KB
+786f05b000-786f0a6000 r--s /system/fonts/Roboto-Medium.ttf 300.0KB
+786f0a6000-786f0af000 r--p /system/lib64/libnetd_client.so 36.0KB
+786f0af000-786f0b0000 r--s /my_product/overlay/android_framework_res_overlay.display.product.19752.apk 4.0KB
+786f0b0000-786f0c5000 r--s /system/fonts/NotoSansBengali-Bold.otf 84.0KB
+786f0c5000-786f165000 r--p /system/lib64/android.hardware.media.c2@1.0.so 640.0KB
+786f165000-786f166000 r--s /data/resource-cache/my_product@overlay@android_framework_res_overlay.display.product.19752.apk@idmap 4.0KB
+786f166000-786f169000 r--s /system/fonts/NotoSansSundanese-Regular.ttf 12.0KB
+786f169000-786f16c000 r--s /system/fonts/NotoSansSamaritan-Regular.ttf 12.0KB
+786f16c000-786f190000 r--s /system/fonts/NotoSansEthiopic-Bold.ttf 144.0KB
+786f190000-786f1a0000 r--p /system_ext/lib64/libtinyxmlbp.so 64.0KB
+786f1a0000-786f1eb000 r--s /system/fonts/Roboto-Regular.ttf 300.0KB
+786f1eb000-786f1fb000 r--p /system/lib64/libmedia_codeclist.so 64.0KB
+786f1fb000-786f1fc000 r--s /vendor/overlay/FrameworksResTarget.apk 4.0KB
+786f1fc000-786f202000 r--s /system/fonts/NotoSansKharoshthi-Regular.ttf 24.0KB
+786f202000-786f225000 r--s /system/fonts/NotoSansEthiopic-Regular.ttf 140.0KB
+786f225000-786f232000 r--p /system/lib64/libmeminfo.so 52.0KB
+786f232000-786f248000 r--s /system/fonts/NotoSansBengali-Medium.otf 88.0KB
+786f248000-786f261000 r--p /system/lib64/android.hardware.cas.native@1.0.so 100.0KB
+786f261000-786f262000 r--s /vendor/overlay/FrameworksResTarget.apk 4.0KB
+786f262000-786f276000 r--s /system/fonts/NotoSansBengali-Regular.otf 80.0KB
+786f276000-786f294000 r--s /system/fonts/NotoNaskhArabicUI-Bold.ttf 120.0KB
+786f294000-786f2ba000 r--p /system/lib64/liblzma.so 152.0KB
+786f2ba000-786f2c0000 rw-p [anon:.bss] 24.0KB
+786f2c0000-786f2c4000 r--p /system/lib64/android.hardware.configstore-utils.so 16.0KB
+786f2c4000-786f2c5000 r--s /data/resource-cache/vendor@overlay@FrameworksResTarget.apk@idmap 4.0KB
+786f2c5000-786f2c8000 r--s /system/fonts/NotoSansRunic-Regular.ttf 12.0KB
+786f2c8000-786f2d1000 r--s /system/fonts/NotoSansKhmerUI-Bold.ttf 36.0KB
+786f2d1000-786f322000 r--s /system/fonts/Roboto-ThinItalic.ttf 324.0KB
+786f322000-786f328000 r--p /system_ext/lib64/libVoiceScenceDiscern.so 24.0KB
+786f328000-786f32d000 r--s /system/fonts/NotoSansNKo-Regular.ttf 20.0KB
+786f32d000-786f34b000 r--s /system/fonts/NotoNaskhArabicUI-Regular.ttf 120.0KB
+786f34b000-786f35d000 r--p /system/lib64/liblog.so 72.0KB
+786f35d000-786f3a8000 r--s /system/fonts/Roboto-Light.ttf 300.0KB
+786f3a8000-786f3ad000 r--p /system/lib64/android.hardware.common-V1-ndk_platform.so 20.0KB
+786f3ad000-786f3b3000 r--s /system/fonts/NotoSansCoptic-Regular.ttf 24.0KB
+786f3b3000-786f3d3000 rw-p [anon:dalvik-CompilerMetadata] 128.0KB
+786f3d3000-786f3d9000 r--p /system/lib64/libstagefright_omx_utils.so 24.0KB
+786f3d9000-786f3db000 r--s /system/fonts/NotoSansShavian-Regular.ttf 8.0KB
+786f3db000-786f3e7000 r--s /system/fonts/NotoSerifKhmer-Bold.otf 48.0KB
+786f3e7000-786f433000 r--s /system/fonts/Roboto-Thin.ttf 304.0KB
+786f433000-786f437000 r--p /system/lib64/libmediandk_utils.so 16.0KB
+786f437000-786f438000 r--s /odm/overlay/framework_res_overlay.19752.apk 4.0KB
+786f438000-786f455000 r--s /system/fonts/NotoNaskhArabic-Bold.ttf 116.0KB
+786f455000-786f49f000 r--p /system/lib64/libsfplugin_ccodec_utils.so 296.0KB
+786f49f000-786f4a7000 r--s /system/fonts/NotoSerifLao-Regular.ttf 32.0KB
+786f4a7000-786f4c4000 r--s /system/fonts/NotoNaskhArabic-Regular.ttf 116.0KB
+786f4c4000-786f4fa000 r--p /system/lib64/libmediautils.so 216.0KB
+786f4fa000-786f514000 r--s /system/fonts/NotoSansDevanagariUI-Regular.otf 104.0KB
+786f514000-786f52e000 r--p /system/lib64/android.hardware.graphics.mapper@2.0.so 104.0KB
+786f52e000-786f52f000 r--s /odm/overlay/framework_res_overlay.19752.apk 4.0KB
+786f52f000-786f539000 r--s /system/fonts/NotoSansKhmerUI-Regular.ttf 40.0KB
+786f539000-786f547000 r--s /system/fonts/NotoSansMalayalamUI-Medium.otf 56.0KB
+786f547000-786f567000 rw-p [anon:dalvik-CompilerMetadata] 128.0KB
+786f567000-786f56c000 r--p /system/lib64/libspeexresampler.so 20.0KB
+786f56c000-786f570000 r--s /system/fonts/NotoSansOldPersian-Regular.ttf 16.0KB
+786f570000-786f58a000 r--s /system/fonts/SourceSansPro-BoldItalic.ttf 104.0KB
+786f58a000-786f5a4000 r--s /system/fonts/SourceSansPro-SemiBoldItalic.ttf 104.0KB
+786f5a4000-786f5b6000 r--p /system/lib64/libbinder_ndk.so 72.0KB
+786f5b6000-786f5c2000 r--s /system/fonts/NotoSansMalayalamUI-Bold.otf 48.0KB
+786f5c2000-786f5cf000 r--s /system/fonts/NotoSerifMalayalam-Bold.ttf 52.0KB
+786f5cf000-786f5e4000 r--p /system/lib64/android.hidl.token@1.0.so 84.0KB
+786f5e4000-786f62e000 r--s /system/fonts/RobotoCondensed-Light.ttf 296.0KB
+786f62e000-786fae7000 r--p /system/lib64/libpdfium.so 4.72265625MB
+786fae7000-786faef000 rw-p [anon:.bss] 32.0KB
+786faef000-786fafb000 r--s /system/fonts/NotoSansMalayalamUI-Regular.otf 48.0KB
+786fafb000-786fb08000 r--s /system/fonts/NotoSerifMalayalam-Regular.ttf 52.0KB
+786fb08000-786fb1c000 r--p /system/lib64/libdatasource.so 80.0KB
+786fb1c000-786fb59000 r--s /system/fonts/NotoSerif-Regular.ttf 244.0KB
+786fb59000-786fb5f000 r--p /system/lib64/libaudiopolicy.so 24.0KB
+786fb5f000-786fb65000 r--s /system/fonts/NotoSansBrahmi-Regular.ttf 24.0KB
+786fb65000-786fb73000 r--s /system/fonts/NotoSansMalayalam-Medium.otf 56.0KB
+786fb73000-786fb93000 rw-p [anon:dalvik-CompilerMetadata] 128.0KB
+786fb93000-786fbac000 r--p /system/lib64/libpiex.so 100.0KB
+786fbac000-786fbad000 r--s /data/resource-cache/odm@overlay@framework_res_overlay.19752.apk@idmap 4.0KB
+786fbad000-786fbb1000 r--s /system/fonts/NotoSansNewTaiLue-Regular.ttf 16.0KB
+786fbb1000-786fbce000 r--s /system/fonts/DancingScript-Bold.ttf 116.0KB
+786fbce000-786fc3d000 r--p /system/lib64/libunwindstack.so 444.0KB
+786fc3d000-786fc49000 r--s /system/fonts/NotoSansMalayalam-Bold.otf 48.0KB
+786fc49000-786fc66000 r--s /system/fonts/DancingScript-Regular.ttf 116.0KB
+786fc66000-786fc80000 r--p /system/lib64/libGLESv2.so 104.0KB
+786fc80000-786fc81000 r--s /product/overlay/FrameworksResCommonQva.apk 4.0KB
+786fc81000-786fc83000 r--s /system/fonts/NotoSansRejang-Regular.ttf 8.0KB
+786fc83000-786fcbf000 r--p /system/lib64/android.hardware.graphics.bufferqueue@1.0.so 240.0KB
+786fcbf000-786fcc1000 r--s /system/fonts/NotoSansPhoenician-Regular.ttf 8.0KB
+786fcc1000-786fcf6000 r--p /apex/com.android.art/lib64/libnativeloader.so 212.0KB
+786fcf6000-786fcf7000 rw-p [anon:.bss] 4.0KB
+786fcf7000-786fcff000 r--s /system/fonts/NotoSansLao-Bold.ttf 32.0KB
+786fcff000-786fd0b000 r--s /system/fonts/NotoSansMalayalam-Regular.otf 48.0KB
+786fd0b000-786fd2b000 rw-p [anon:dalvik-CompilerMetadata] 128.0KB
+786fd2b000-786fd40000 r--p /system/lib64/android.hardware.memtrack@1.0.so 84.0KB
+786fd40000-786fd41000 r--s /product/overlay/FrameworksResCommonQva.apk 4.0KB
+786fd41000-786fd4b000 r--s /system/fonts/NotoSerifKhmer-Regular.otf 40.0KB
+786fd4b000-786fd58000 r--p /system/lib64/libheif.so 52.0KB
+786fd58000-786fd59000 r--s /data/resource-cache/product@overlay@FrameworksResCommonQva.apk@idmap 4.0KB
+786fd59000-786fd5b000 r--s /system/fonts/NotoSansOsmanya-Regular.ttf 8.0KB
+786fd5b000-786fd76000 r--s /system/fonts/DroidSansMono.ttf 108.0KB
+786fd76000-786fd96000 rw-p [anon:dalvik-CompilerMetadata] 128.0KB
+786fd96000-786fdb8000 r--p /system/lib64/libexpat.so 136.0KB
+786fdb8000-786fdc0000 r--s /system/fonts/NotoSansLao-Regular.ttf 32.0KB
+786fdc0000-786fdc8000 r--s /system/fonts/NotoSansTamilUI-Bold.otf 32.0KB
+786fdc8000-786fdef000 r--p /system/lib64/libbacktrace.so 156.0KB
+786fdef000-786fdf0000 r--s /product/overlay/FrameworksResCommon.apk 4.0KB
+786fdf0000-786fdf4000 r--s /system/fonts/NotoSansMeeteiMayek-Regular.ttf 16.0KB
+786fdf4000-786fdfd000 r--s /system/fonts/NotoSansTamilUI-Medium.otf 36.0KB
+786fdfd000-786fe05000 r--s /system/fonts/NotoSansTamilUI-Regular.otf 32.0KB
+786fe05000-786fe25000 rw-p [anon:dalvik-LinearAlloc] 128.0KB
+786fe25000-786fe6c000 r--p /system/lib64/libRScpp.so 284.0KB
+786fe6c000-786fe86000 r--s /system/fonts/SourceSansPro-Italic.ttf 104.0KB
+786fe86000-786febb000 r--p /system/lib64/android.hardware.graphics.bufferqueue@2.0.so 212.0KB
+786febb000-786fec1000 r--s /system/fonts/NotoSansCham-Bold.ttf 24.0KB
+786fec1000-786fec9000 r--s /system/fonts/NotoSerifTamil-Bold.otf 32.0KB
+786fec9000-786fed1000 r--s /system/fonts/NotoSerifTamil-Regular.otf 32.0KB
+786fed1000-786fee8000 r--p /system/lib64/libaudiofoundation.so 92.0KB
+786fee8000-786fee9000 r--s /data/resource-cache/product@overlay@FrameworksResCommon.apk@idmap 4.0KB
+786fee9000-786feed000 r--s /system/fonts/NotoSansMandaic-Regular.ttf 16.0KB
+786feed000-786ff01000 r--s /system/fonts/NotoSerifDevanagari-Bold.ttf 80.0KB
+786ff01000-786ff38000 r--p /apex/com.android.runtime/lib64/bionic/libm.so 220.0KB
+786ff38000-786ff3c000 r--s /system/fonts/NotoSansGlagolitic-Regular.ttf 16.0KB
+786ff3c000-786ff5c000 rw-p [anon:dalvik-LinearAlloc] 128.0KB
+786ff5c000-786ff62000 r--p /apex/com.android.os.statsd/lib64/libstatssocket.so 24.0KB
+786ff62000-786ff65000 r--s /system/fonts/NotoSansOsage-Regular.ttf 12.0KB
+786ff65000-786ff85000 r--s /dev/__properties__/u:object_r:exported3_default_prop:s0 128.0KB
+786ff85000-787007a000 r--p /system/lib64/libgui.so 980.0KB
+787007a000-787007b000 rw-p [anon:.bss] 4.0KB
+787007b000-787007f000 r--s /system/fonts/NotoSansBatak-Regular.ttf 16.0KB
+787007f000-7870088000 r--s /system/fonts/NotoSansTamil-Medium.otf 36.0KB
+7870088000-78700a8000 rw-p [anon:dalvik-LinearAlloc] 128.0KB
+78700a8000-78700bb000 r--p /system/lib64/libnativedisplay.so 76.0KB
+78700bb000-78700db000 rw-p [anon:dalvik-LinearAlloc] 128.0KB
+78700db000-78700f9000 r--s /system/framework/ext.jar 120.0KB
+78700f9000-787013f000 r--p /system/lib64/android.hardware.drm@1.1.so 280.0KB
+787013f000-7870147000 r--s /system/fonts/NotoSansTamil-Bold.otf 32.0KB
+7870147000-787014f000 r--s /system/fonts/NotoSansTamil-Regular.otf 32.0KB
+787014f000-78701fb000 r--p /system/lib64/libc++.so 688.0KB
+78701fb000-78701fe000 rw-p [anon:.bss] 12.0KB
+78701fe000-7870202000 r--s /system/fonts/NotoSansAhom-Regular.otf 16.0KB
+7870202000-7870216000 r--s /system/fonts/NotoSerifDevanagari-Regular.ttf 80.0KB
+7870216000-7870234000 r--p /system/lib64/libmediadrmmetrics_lite.so 120.0KB
+7870234000-7870235000 r--s /product/overlay/ModuleMetadataGoogleOverlay.apk 4.0KB
+7870235000-7870237000 r--s /system/fonts/NotoSansOldTurkic-Regular.ttf 8.0KB
+7870237000-787023f000 r--s /system/fonts/NotoSansGurmukhiUI-Bold.ttf 32.0KB
+787023f000-7870247000 r--s /system/fonts/NotoSansGurmukhiUI-Regular.ttf 32.0KB
+7870247000-78703ed000 r--p /system/lib64/libandroid_runtime.so 1.6484375MB
+78703ed000-78703ef000 rw-p [anon:.bss] 8.0KB
+78703ef000-7870403000 r--s /system/fonts/NotoSerifGeorgian-VF.ttf 80.0KB
+7870403000-7870413000 r--p /system_ext/lib64/liboplustinyxml.so 64.0KB
+7870413000-7870414000 r--s /product/overlay/ModuleMetadataGoogleOverlay.apk 4.0KB
+7870414000-787041c000 r--s /system/fonts/NotoSerifGurmukhi-Bold.otf 32.0KB
+787041c000-7870457000 r--s /apex/com.android.tzdata/etc/icu/icu_tzdata.dat 236.0KB
+7870457000-787047e000 r--p /system/lib64/libnetdbpf.so 156.0KB
+787047e000-7870480000 r--s /system/fonts/NotoSansOldSouthArabian-Regular.ttf 8.0KB
+7870480000-7870487000 r--s /system/fonts/NotoSerifGurmukhi-Regular.otf 28.0KB
+7870487000-787048f000 r--s /system/fonts/NotoSansGurmukhi-Bold.ttf 32.0KB
+787048f000-787049c000 r--p /system/lib64/libcamera_metadata.so 52.0KB
+787049c000-787049d000 r--s /data/resource-cache/product@overlay@ModuleMetadataGoogleOverlay.apk@idmap 4.0KB
+787049d000-787049f000 r--s /system/fonts/NotoSansOldItalic-Regular.ttf 8.0KB
+787049f000-78704af000 r--s /system/fonts/NotoSerifGujarati-Bold.ttf 64.0KB
+78704af000-78704ea000 r--s /apex/com.android.tzdata/etc/icu/icu_tzdata.dat 236.0KB
+78704ea000-78704f1000 r--p /system/lib64/libhardware_legacy.so 28.0KB
+78704f1000-78704f3000 r--s /system/fonts/NotoSansOlChiki-Regular.ttf 8.0KB
+78704f3000-7870503000 r--s /system/fonts/NotoSerifGujarati-Regular.ttf 64.0KB
+7870503000-7870579000 r--p /system/lib64/libprotobuf-cpp-lite.so 472.0KB
+7870579000-787057f000 r--s /system/fonts/NotoSansCham-Regular.ttf 24.0KB
+787057f000-7870587000 r--s /system/fonts/NotoSansGurmukhi-Regular.ttf 32.0KB
+7870587000-7870639000 r--p /system/lib64/libharfbuzz_ng.so 712.0KB
+7870639000-787063b000 r--s /system/fonts/NotoSansOgham-Regular.ttf 8.0KB
+787063b000-787064c000 r--s /system/fonts/NotoSansGeorgian-VF.ttf 68.0KB
+787064c000-787066c000 rw-p [anon:dalvik-LinearAlloc] 128.0KB
+787066c000-787066f000 r--p /system/lib64/libpackagelistparser.so 12.0KB
+787066f000-7870670000 rw-p [anon:bionic_alloc_small_objects] 4.0KB
+7870670000-7870674000 r--s /system/fonts/NotoSansThaana-Bold.ttf 16.0KB
+7870674000-787068b000 r--s /system/framework/telephony-common.jar 92.0KB
+787068b000-787069b000 r--p /system/lib64/libziparchive.so 64.0KB
+787069b000-787069f000 r--s /system/fonts/NotoSansThaana-Regular.ttf 16.0KB
+787069f000-78706a3000 r--s /system/fonts/NotoSerifArmenian-Regular.otf 16.0KB
+78706a3000-78706c3000 r--s /dev/__properties__/u:object_r:radio_prop:s0 128.0KB
+78706c3000-7870700000 r--p /system/lib64/libbase.so 244.0KB
+7870700000-7870701000 r--s /product/overlay/GooglePermissionControllerFrameworkOverlay.apk 4.0KB
+7870701000-7870703000 r--s /system/fonts/NotoSansLydian-Regular.ttf 8.0KB
+7870703000-7870708000 r--s /system/fonts/NotoSansThaiUI-Bold.ttf 20.0KB
+7870708000-787070e000 r--s /system/fonts/NotoSansThaiUI-Regular.ttf 24.0KB
+787070e000-7870713000 r--s /system/fonts/NotoSerifThai-Bold.ttf 20.0KB
+7870713000-7870726000 r--p /system/lib64/android.hidl.allocator@1.0.so 76.0KB
+7870726000-7870727000 r--s /product/overlay/GooglePermissionControllerFrameworkOverlay.apk 4.0KB
+7870727000-7870729000 r--s /system/fonts/NotoSansLycian-Regular.ttf 8.0KB
+7870729000-787072e000 r--s /system/fonts/NotoSerifThai-Regular.ttf 20.0KB
+787072e000-787074e000 r--s /dev/__properties__/u:object_r:exported3_system_prop:s0 128.0KB
+787074e000-787076a000 r--p /system/lib64/libSurfaceFlingerProp.so 112.0KB
+787076a000-787076e000 r--s /system/fonts/NotoSansArmenian-Bold.otf 16.0KB
+787076e000-7870773000 r--s /system/fonts/NotoSansThai-Bold.ttf 20.0KB
+7870773000-7870793000 r--s /dev/__properties__/u:object_r:system_prop:s0 128.0KB
+7870793000-7870799000 r--p /system_ext/lib64/libAtlasListParser.so 24.0KB
+7870799000-787079c000 r--s /system/fonts/NotoSansLimbu-Regular.ttf 12.0KB
+787079c000-78707a2000 r--s /system/fonts/NotoSansThai-Regular.ttf 24.0KB
+78707a2000-78707a7000 r--s /system/fonts/NotoSerifHebrew-Bold.ttf 20.0KB
+78707a7000-78707ac000 r--s /system/fonts/NotoSerifHebrew-Regular.ttf 20.0KB
+78707ac000-78707cc000 rw-p [anon:dalvik-LinearAlloc] 128.0KB
+78707cc000-78707d8000 r--p /system/lib64/libvibrator.so 48.0KB
+78707d8000-78707dc000 r--s /system/fonts/NotoSansArmenian-Medium.otf 16.0KB
+78707dc000-78707e1000 r--s /system/fonts/NotoSansHebrew-Bold.ttf 20.0KB
+78707e1000-7870801000 rw-p [anon:dalvik-LinearAlloc] 128.0KB
+7870801000-7870809000 r--p /system/lib64/android.hardware.graphics.common-V1-ndk_platform.so 32.0KB
+7870809000-787080b000 r--s /system/fonts/NotoSansLisu-Regular.ttf 8.0KB
+787080b000-787081a000 r--s /system/fonts/ComingSoon.ttf 60.0KB
+787081a000-787085a000 rw-p [anon:dalvik-LinearAlloc] 256.0KB
+787085a000-78708aa000 r--p /system/lib64/libpcre2.so 320.0KB
+78708aa000-78708ab000 r--s /data/resource-cache/product@overlay@GooglePermissionControllerFrameworkOverlay.apk@idmap 4.0KB
+78708ab000-78708ad000 r--s /system/fonts/NotoSansKayahLi-Regular.ttf 8.0KB
+78708ad000-78708b7000 r--s /system/fonts/CarroisGothicSC-Regular.ttf 40.0KB
+78708b7000-78708d7000 rw-p [anon:dalvik-LinearAlloc] 128.0KB
+78708d7000-78708db000 r--p /system/lib64/libprocinfo.so 16.0KB
+78708db000-78708dc000 r--s /product/overlay/GoogleExtServicesConfigOverlay.apk 4.0KB
+78708dc000-78708de000 r--s /system/fonts/NotoSansInscriptionalParthian-Regular.ttf 8.0KB
+78708de000-78708ef000 r--s /system/fonts/CutiveMono.ttf 68.0KB
+空闲:  36.0KB
+78708f8000-7870938000 rw-p [anon:dalvik-LinearAlloc] 256.0KB
+7870938000-787097d000 r--p /system/lib64/android.hardware.cas@1.0.so 276.0KB
+787097d000-787097e000 r--s /product/overlay/GoogleExtServicesConfigOverlay.apk 4.0KB
+787097e000-787097f000 rw-p [anon:bionic_alloc_small_objects] 4.0KB
+空闲:  32.0KB
+7870987000-78709a3000 r--p /system/lib64/libcodec2_hidl_client@1.0.so 112.0KB
+78709a3000-78709a7000 r--s /system/fonts/NotoSansArmenian-Regular.otf 16.0KB
+78709a7000-78709e7000 rw-p [anon:dalvik-LinearAlloc] 256.0KB
+78709e7000-78709f2000 r--p /system_ext/lib64/liboplusloadframe.so 44.0KB
+78709f2000-78709f5000 r--s /system/fonts/NotoSansElbasan-Regular.otf 12.0KB
+78709f5000-78709fa000 r--s /system/fonts/NotoSansHebrew-Regular.ttf 20.0KB
+空闲:  36.0KB
+7870a03000-7870a23000 rw-p [anon:dalvik-LinearAlloc] 128.0KB
+7870a23000-7870a27000 r--p /system_ext/lib64/libatlasutilshelper.so 16.0KB
+7870a27000-7870a29000 r--s /system/fonts/NotoSansInscriptionalPahlavi-Regular.ttf 8.0KB
+空闲:  36.0KB
+7870a32000-7870a40000 r--p /apex/com.android.tethering/javalib/framework-tethering.jar 56.0KB
+7870a40000-7870a53000 r--p /apex/com.android.os.statsd/javalib/framework-statsd.jar 76.0KB
+7870a53000-7870afd000 r--p /system/lib64/libbinder.so 680.0KB
+7870afd000-7870afe000 rw-p [anon:.bss] 4.0KB
+空闲:  36.0KB
+7870b07000-7870b12000 r--p /apex/com.android.mediaprovider/javalib/framework-mediaprovider.jar 44.0KB
+7870b12000-7870b16000 r--p /system/lib64/android.hardware.graphics.common@1.2.so 16.0KB
+7870b16000-7870b19000 r--s /system/fonts/NotoSansDeseret-Regular.ttf 12.0KB
+空闲:  24.0KB
+7870b1f000-7870b4f000 rw-p [anon:dalvik-thread local mark stack] 192.0KB
+7870b4f000-7870b78000 r--p /system/lib64/libvulkan.so 164.0KB
+7870b78000-7870b7a000 r--s /system/fonts/NotoSansImperialAramaic-Regular.ttf 8.0KB
+7870b7a000-7870b96000 rw-p [anon:dalvik-thread local mark stack] 112.0KB
+7870b96000-7870cbd000 r--p /system/lib64/libsqlite.so 1.15234375MB
+7870cbd000-7870cbe000 r--s /data/resource-cache/product@overlay@GoogleExtServicesConfigOverlay.apk@idmap 4.0KB
+7870cbe000-7870cc6000 rw-p [anon:dalvik-thread local mark stack] 32.0KB
+7870cc6000-7870e79000 r--p /apex/com.android.art/lib64/libicuuc.so 1.69921875MB
+7870e79000-7870e7b000 rw-p [anon:.bss] 8.0KB
+7870e7b000-7870e83000 rw-p [anon:dalvik-thread local mark stack] 32.0KB
+7870e83000-7870ec0000 r--p /system/lib64/libinput.so 244.0KB
+7870ec0000-7870ec1000 r--s /my_heytap/overlay/GmsConfigOverlayCommon/GmsConfigOverlayCommon.apk 4.0KB
+7870ec1000-7870ee9000 rw-p [anon:dalvik-thread local mark stack] 160.0KB
+7870ee9000-7870ef6000 r--p /system/lib64/libbpf_android.so 52.0KB
+7870ef6000-7870f2a000 rw-p [anon:dalvik-thread local mark stack] 208.0KB
+7870f2a000-7870f3f000 r--p /system/lib64/libmediametrics.so 84.0KB
+7870f3f000-7870f41000 r--s /system/fonts/NotoSansHanunoo-Regular.ttf 8.0KB
+7870f41000-7870f61000 rw-p [anon:dalvik-thread local mark stack] 128.0KB
+7870f61000-7870f6b000 r--p /system/lib64/capture_state_listener-aidl-V1-cpp.so 40.0KB
+7870f6b000-7870f8b000 rw-p [anon:dalvik-thread local mark stack] 128.0KB
+7870f8b000-78711f6000 r--p /apex/com.android.art/lib64/libicui18n.so 2.41796875MB
+78711f6000-78711f7000 rw-p [anon:.bss] 4.0KB
+78711f7000-78711f9000 r--s /system/fonts/NotoSansGothic-Regular.ttf 8.0KB
+78711f9000-7871239000 rw-p [anon:dalvik-thread local mark stack] 256.0KB
+7871239000-787123c000 r--p /system_ext/lib64/liboplus_heifconverter.so 12.0KB
+787123c000-787123f000 r--s /system/fonts/NotoSansAvestan-Regular.ttf 12.0KB
+787123f000-7871247000 rw-p [anon:dalvik-thread local mark stack] 32.0KB
+7871247000-787125a000 r--p /system/lib64/libgralloctypes.so 76.0KB
+787125a000-787125c000 r--s /system/fonts/NotoSansCypriot-Regular.ttf 8.0KB
+787125c000-7871294000 rw-p [anon:dalvik-thread local mark stack] 224.0KB
+7871294000-78712a5000 r--p /system_ext/lib64/liboplusutils.so 68.0KB
+78712a5000-78712c5000 rw-p [anon:dalvik-thread local mark stack] 128.0KB
+78712c5000-78712df000 r--p /system/lib64/libGLESv3.so 104.0KB
+78712df000-78712e0000 r--s /data/resource-cache/my_heytap@overlay@GmsConfigOverlayCommon@GmsConfigOverlayCommon.apk@idmap 4.0KB
+78712e0000-787132c000 rw-p [anon:dalvik-thread local mark stack] 304.0KB
+787132c000-787132f000 r--p /system/lib64/libcodec2.so 12.0KB
+787132f000-7871331000 r--s /system/fonts/NotoSansCarian-Regular.ttf 8.0KB
+7871331000-7871371000 rw-p [anon:dalvik-thread local mark stack] 256.0KB
+7871371000-7871379000 r--p /system_ext/lib64/liboplusplugin.so 32.0KB
+7871379000-787137b000 r--s /system/fonts/NotoSansBuhid-Regular.ttf 8.0KB
+787137b000-7871383000 rw-p [anon:dalvik-thread local mark stack] 32.0KB
+7871383000-78713b8000 r--p /system/lib64/libpng.so 212.0KB
+78713b8000-78713ba000 r--s /system/fonts/NotoSansBuginese-Regular.ttf 8.0KB
+78713ba000-78713f6000 rw-p [anon:dalvik-thread local mark stack] 240.0KB
+78713f6000-78713fa000 r--p /system/lib64/libfmq.so 16.0KB
+78713fa000-78713fd000 r--s /system/fonts/NotoSerifArmenian-Bold.otf 12.0KB
+78713fd000-7871419000 rw-p [anon:dalvik-thread local mark stack] 112.0KB
+7871419000-787142f000 r--p /system/lib64/libstagefright_bufferqueue_helper.so 88.0KB
+787142f000-7871431000 r--s /system/fonts/OplusOSUI-XThin.ttf 8.0KB
+7871431000-7871455000 rw-p [anon:dalvik-thread local mark stack] 144.0KB
+7871455000-7871568000 r--p /system/lib64/libcrypto.so 1.07421875MB
+7871568000-7871569000 rw-p [anon:.bss] 4.0KB
+7871569000-787156a000 r--s /apex/com.android.tethering/javalib/framework-tethering.jar 4.0KB
+787156a000-787156b000 r--s /apex/com.android.wifi/javalib/framework-wifi.jar 4.0KB
+787156b000-78715a7000 rw-p [anon:dalvik-thread local mark stack] 240.0KB
+78715a7000-78715f5000 r--p /system/lib64/libjpeg.so 312.0KB
+78715f5000-78715f6000 r--s /apex/com.android.sdkext/javalib/framework-sdkextensions.jar 4.0KB
+78715f6000-78715f7000 r--s /apex/com.android.permission/javalib/framework-permission.jar 4.0KB
+78715f7000-78715f8000 r--s /apex/com.android.os.statsd/javalib/framework-statsd.jar 4.0KB
+78715f8000-7871638000 rw-p [anon:dalvik-thread local mark stack] 256.0KB
+7871638000-787163b000 r--p /apex/com.android.runtime/lib64/bionic/libdl.so 12.0KB
+787163b000-787163c000 ---p  4.0KB
+787163c000-787163d000 r--p [anon:.bss] 4.0KB
+787163d000-787163e000 r--s /apex/com.android.mediaprovider/javalib/framework-mediaprovider.jar 4.0KB
+787163e000-787165e000 rw-p [anon:dalvik-thread local mark stack] 128.0KB
+787165e000-7871663000 r--p /system/lib64/server_configurable_flags.so 20.0KB
+7871663000-7871664000 r--s /apex/com.android.media/javalib/updatable-media.jar 4.0KB
+7871664000-7871666000 r--s /system/framework/coloros-support-wrapper.jar 8.0KB
+7871666000-78716aa000 rw-p [anon:dalvik-thread local mark stack] 272.0KB
+78716aa000-787177d000 r--p /system/lib64/libaudioclient.so 844.0KB
+787177d000-7871781000 rw-p [anon:dalvik-thread local mark stack] 16.0KB
+7871781000-78717f0000 r--p /system/lib64/libandroidfw.so 444.0KB
+78717f0000-78717f2000 r--s /system/framework/framework.jar 8.0KB
+78717f2000-7871802000 rw-p [anon:dalvik-thread local mark stack] 64.0KB
+7871802000-7871dd1000 r--p /system_ext/lib64/liboplus_10bitHeif.so 5.80859375MB
+7871dd1000-7871dd4000 rw-p [anon:.bss] 12.0KB
+7871dd4000-7871dd5000 r--s /apex/com.android.conscrypt/javalib/conscrypt.jar 4.0KB
+7871dd5000-7871e05000 rw-p [anon:dalvik-thread local mark stack] 192.0KB
+7871e05000-7871e21000 r--p /system/lib64/android.system.suspend@1.0.so 112.0KB
+7871e21000-7871e22000 r--s /system/framework/WfdCommon.jar 4.0KB
+7871e22000-7871e5a000 rw-p [anon:dalvik-thread local mark stack] 224.0KB
+7871e5a000-7871e5f000 r--p /system/lib64/android.hidl.token@1.0-utils.so 20.0KB
+7871e5f000-7871e87000 rw-p [anon:dalvik-thread local mark stack] 160.0KB
+7871e87000-7871eb2000 r--p /system/lib64/libstagefright_framecapture_utils.so 172.0KB
+7871eb2000-7871eb3000 r--s /system/framework/UxPerformance.jar 4.0KB
+7871eb3000-7871eb5000 r--s /apex/com.android.art/javalib/core-icu4j.jar 8.0KB
+7871eb5000-7871ec9000 rw-p [anon:dalvik-thread local mark stack] 80.0KB
+7871ec9000-7871ef0000 r--p /system/lib64/android.hardware.drm@1.3.so 156.0KB
+7871ef0000-7871ef1000 r--s /system/framework/QPerformance.jar 4.0KB
+7871ef1000-7871f01000 rw-p [anon:dalvik-thread local mark stack] 64.0KB
+7871f01000-7871f40000 r--p /system/lib64/libprocessgroup.so 252.0KB
+7871f40000-7871f42000 r--s /apex/com.android.art/javalib/core-oj.jar 8.0KB
+7871f42000-7871f6a000 rw-p [anon:dalvik-thread local mark stack] 160.0KB
+7871f6a000-7871f6e000 r--p /system/lib64/android.hardware.graphics.common@1.0.so 16.0KB
+7871f6e000-7871f6f000 r--s /system/framework/qcom.fmradio.jar 4.0KB
+7871f6f000-7871f93000 rw-p [anon:dalvik-thread local mark stack] 144.0KB
+7871f93000-7871fa1000 r--p /system/lib64/libgraphicsenv.so 56.0KB
+7871fa1000-7871fa3000 rw-p [anon:dalvik-indirect ref table] 8.0KB
+7871fa3000-7871fdf000 rw-p [anon:dalvik-thread local mark stack] 240.0KB
+7871fdf000-7871fe9000 r--p /system/lib64/libdebuggerd_client.so 40.0KB
+7871fe9000-7871fea000 r--s /system/framework/telephony-ext.jar 4.0KB
+7871fea000-7871ffa000 rw-p [anon:dalvik-thread local mark stack] 64.0KB
+7871ffa000-787203a000 rw-p  256.0KB
+787203a000-787203c000 rw-p [anon:dalvik-indirect ref table] 8.0KB
+787203c000-7872080000 rw-p [anon:dalvik-thread local mark stack] 272.0KB
+7872080000-7872087000 r--p /apex/com.android.art/lib64/libdexfile_external.so 28.0KB
+7872087000-7872088000 r--s /system/framework/tcmiface.jar 4.0KB
+7872088000-78720c0000 rw-p [anon:dalvik-thread local mark stack] 224.0KB
+78720c0000-78720c7000 r--p /system_ext/lib64/libffmpeg_utils.so 28.0KB
+78720c7000-787212f000 rw-p [anon:dalvik-thread local mark stack] 416.0KB
+787212f000-7872130000 rw-p [anon:bionic_alloc_small_objects] 4.0KB
+7872130000-78721a8000 rw-p [anon:dalvik-thread local mark stack] 480.0KB
+78721a8000-78721b2000 r--p /system_ext/lib64/libbsproxy.so 40.0KB
+78721b2000-78721ce000 rw-p [anon:dalvik-thread local mark stack] 112.0KB
+78721ce000-78721cf000 rw-p [anon:bionic_alloc_small_objects] 4.0KB
+78721cf000-78721d0000 r--s /system/framework/ifaamanager.jar 4.0KB
+78721d0000-7872200000 rw-p [anon:dalvik-thread local mark stack] 192.0KB
+7872200000-7872280000 r--p /system_ext/lib64/libavenhancements.so 512.0KB
+7872280000-7872281000 r--s /system/framework/oplus-framework.jar 4.0KB
+7872281000-7872295000 rw-p [anon:dalvik-thread local mark stack] 80.0KB
+7872295000-7872296000 rw-p [anon:bionic_alloc_small_objects] 4.0KB
+空闲:  8.0KB
+7872298000-78722c4000 rw-p [anon:dalvik-thread local mark stack] 176.0KB
+78722c4000-78722e7000 r--p /system/lib64/libdrmframework.so 140.0KB
+78722e7000-78722e8000 r--s /system/framework/framework-atb-backward-compatibility.jar 4.0KB
+空闲:  8.0KB
+78722ea000-7872332000 rw-p [anon:dalvik-thread local mark stack] 288.0KB
+7872332000-7872335000 r--p /system/lib64/libhidltransport.so 12.0KB
+7872335000-7872369000 rw-p [anon:dalvik-thread local mark stack] 208.0KB
+7872369000-787236c000 r--p /system/lib64/libhwbinder.so 12.0KB
+787236c000-7872370000 rw-p [anon:dalvik-thread local mark stack] 16.0KB
+7872370000-78723b0000 rw-p [anon:dalvik-mark stack] 256.0KB
+78723b0000-78723b1000 rw-p [anon:bionic_alloc_small_objects] 4.0KB
+78723b1000-78723b2000 r--s /system/framework/ims-common.jar 4.0KB
+78723b2000-78723b3000 rw-p [anon:bionic_alloc_small_objects] 4.0KB
+78723b3000-78723b4000 rw-p [anon:dalvik-mod union bitmap] 4.0KB
+78723b4000-78723d0000 rw-p [anon:dalvik-thread local mark stack] 112.0KB
+78723d0000-7872412000 r--p /system/framework/ims-common.jar 264.0KB
+7872412000-7872417000 r--p /system_ext/lib64/liboplusavenhancements.so 20.0KB
+7872417000-7872418000 r--s /system/framework/voip-common.jar 4.0KB
+7872418000-7872444000 rw-p [anon:dalvik-thread local mark stack] 176.0KB
+7872444000-787246d000 r--p /system_ext/lib64/liboplusstagefright.so 164.0KB
+787246d000-787246e000 r--s /apex/com.android.art/javalib/apache-xml.jar 4.0KB
+787246e000-7872482000 rw-p [anon:dalvik-thread local mark stack] 80.0KB
+7872482000-78724a2000 rw-p [anon:dalvik-large marked objects] 128.0KB
+78724a2000-78724bf000 r--p /system_ext/lib64/liboplusmediaplayerservice.so 116.0KB
+78724bf000-78724c3000 rw-p [anon:dalvik-thread local mark stack] 16.0KB
+78724c3000-78724e3000 rw-p [anon:dalvik-large live objects] 128.0KB
+78724e3000-78724ee000 r--p /system_ext/lib64/libozoaudioutils.so 44.0KB
+78724ee000-78724ef000 rw-p [anon:.bss] 4.0KB
+78724ef000-78724f0000 r--s /apex/com.android.art/javalib/bouncycastle.jar 4.0KB
+78724f0000-7872504000 rw-p [anon:dalvik-thread local mark stack] 80.0KB
+7872504000-7872517000 r--p /system/lib64/libpowermanager.so 76.0KB
+7872517000-7872518000 r--s /apex/com.android.art/javalib/okhttp.jar 4.0KB
+7872518000-787251a000 rw-p [anon:dalvik-indirect ref table] 8.0KB
+787251a000-787252e000 rw-p [anon:dalvik-thread local mark stack] 80.0KB
+787252e000-7872573000 r--p /system/framework/ext.jar 276.0KB
+7872573000-7872574000 rw-p [anon:bionic_alloc_small_objects] 4.0KB
+7872574000-78725d8000 r--p /apex/com.android.art/javalib/okhttp.jar 400.0KB
+78725d8000-78725dc000 r--p /system_ext/lib64/liboplusstagefright_foundation.so 16.0KB
+78725dc000-78725de000 rw-p [anon:dalvik-concurrent copying sweep array free buffer] 8.0KB
+78725de000-78725f2000 rw-p [anon:dalvik-thread local mark stack] 80.0KB
+78725f2000-787260c000 r--p /system/framework/WfdCommon.jar 104.0KB
+787260c000-787267c000 r--p /system_ext/lib64/liboithmb.so 448.0KB
+787267c000-787267d000 rw-p [anon:.bss] 4.0KB
+787267d000-787268f000 r--p /system/framework/qcom.fmradio.jar 72.0KB
+787268f000-78726a1000 r-xp /system_ext/lib64/libswresample.so 72.0KB
+78726a1000-78726b1000 ---p  64.0KB
+78726b1000-78726b4000 r--p /system_ext/lib64/libswresample.so 12.0KB
+78726b4000-78726c4000 rw-p [anon:dalvik-thread local mark stack] 64.0KB
+78726c4000-78726ed000 r--p /system/framework/coloros-support-wrapper.jar 164.0KB
+78726ed000-78726f6000 r--p /system/lib64/libnbaio.so 36.0KB
+78726f6000-78726f7000 r--p /apex/com.android.sdkext/javalib/framework-sdkextensions.jar 4.0KB
+78726f7000-78726fb000 rw-p [anon:dalvik-thread local mark stack] 16.0KB
+78726fb000-78726fe000 r--p /system/framework/UxPerformance.jar 12.0KB
+78726fe000-787270d000 r--p /system/framework/telephony-ext.jar 60.0KB
+787270d000-787272d000 r--s /dev/__properties__/u:object_r:exported_fingerprint_prop:s0 128.0KB
+787272d000-787274d000 r--s /dev/__properties__/u:object_r:persist_debug_prop:s0 128.0KB
+787274d000-787276d000 r--s /dev/__properties__/u:object_r:exported_vold_prop:s0 128.0KB
+787276d000-787276e000 rw-p [anon:bionic_alloc_small_objects] 4.0KB
+787276e000-7872770000 rw-p [anon:dalvik-concurrent copying sweep array free buffer] 8.0KB
+7872770000-7872771000 r--s /system/usr/hyphen-data/hyph-as.hyb 4.0KB
+7872771000-7872789000 r--p /system/framework/arm64/boot-framework.art 96.0KB
+7872789000-78727a9000 r--s /dev/__properties__/u:object_r:exported_config_prop:s0 128.0KB
+78727a9000-78727c9000 r--s /dev/__properties__/u:object_r:dalvik_prop:s0 128.0KB
+78727c9000-78727e9000 r--s /dev/__properties__/u:object_r:default_prop:s0 128.0KB
+78727e9000-78727ea000 r--p [anon:dalvik-classes5.dex extracted in memory from /data/app/~~QK5JEbdahDMbxddNKgFFGw==/com.fenbi.android-rb3VYkxjc2C50MT9PSKzEw==/base.apk!classes5.dex] 4.0KB
+空闲:  36.0KB
+78727f3000-78727f5000 rw-p [anon:dalvik-indirect ref table] 8.0KB
+78727f5000-78727f6000 ---p  4.0KB
+78727f6000-78727fe000 rw-p [anon:thread signal stack] 32.0KB
+78727fe000-78727ff000 ---p  4.0KB
+78727ff000-7872807000 rw-p [anon:thread signal stack] 32.0KB
+7872807000-7872809000 rw-p [anon:dalvik-indirect ref table] 8.0KB
+7872809000-7872829000 r--s /dev/__properties__/u:object_r:exported_dalvik_prop:s0 128.0KB
+7872829000-7872849000 r--s /dev/__properties__/u:object_r:exported_default_prop:s0 128.0KB
+7872849000-7872859000 r--p [anon:atexit handlers] 64.0KB
+7872859000-787285a000 r--p /apex/com.android.permission/javalib/framework-permission.jar 4.0KB
+787285a000-787285f000 r--p /system/framework/QPerformance.jar 20.0KB
+787285f000-7872860000 r--p /system/framework/tcmiface.jar 4.0KB
+7872860000-7872864000 r--p /system/framework/ifaamanager.jar 16.0KB
+7872864000-7872865000 r--p /system/framework/framework-atb-backward-compatibility.jar 4.0KB
+7872865000-7872866000 r--s /apex/com.android.art/javalib/core-libart.jar 4.0KB
+7872866000-7872867000 r--p /system/framework/arm64/boot-WfdCommon.art 4.0KB
+7872867000-7872868000 r--p /system/framework/arm64/boot-UxPerformance.art 4.0KB
+7872868000-7872869000 r--p /system/framework/arm64/boot-QPerformance.art 4.0KB
+7872869000-787286a000 r--p /system/framework/arm64/boot-qcom.fmradio.art 4.0KB
+787286a000-787286b000 r--p /system/framework/arm64/boot-telephony-ext.art 4.0KB
+787286b000-787286c000 r--p /system/framework/arm64/boot-tcmiface.art 4.0KB
+787286c000-787286d000 r--p /system/framework/arm64/boot-ifaamanager.art 4.0KB
+787286d000-787286e000 r--p /system/framework/arm64/boot-coloros-support-wrapper.art 4.0KB
+787286e000-787286f000 r--p /system/framework/arm64/boot-oplus-framework.art 4.0KB
+787286f000-7872870000 r--p /system/framework/arm64/boot-framework-atb-backward-compatibility.art 4.0KB
+7872870000-7872875000 r--p /apex/com.android.art/javalib/arm64/boot.art 20.0KB
+7872875000-7872895000 r--s /dev/__properties__/u:object_r:logd_prop:s0 128.0KB
+7872895000-78728b5000 r--s /dev/__properties__/u:object_r:log_tag_prop:s0 128.0KB
+78728b5000-78728d5000 r--s /dev/__properties__/u:object_r:exported_system_prop:s0 128.0KB
+78728d5000-78728f5000 r--s /dev/__properties__/u:object_r:bq_config_prop:s0 128.0KB
+78728f5000-78728f6000 r--p /system/framework/arm64/boot-ims-common.art 4.0KB
+78728f6000-78728f9000 r--p /system/framework/arm64/boot-telephony-common.art 12.0KB
+78728f9000-7872919000 r--s /dev/__properties__/u:object_r:debug_prop:s0 128.0KB
+7872919000-7872939000 r--s /dev/__properties__/properties_serial 128.0KB
+7872939000-787294e000 r--s /dev/__properties__/property_info 84.0KB
+787294e000-7872950000 r--p /system/framework/arm64/boot-voip-common.art 8.0KB
+7872950000-7872952000 r--p /apex/com.android.art/javalib/arm64/boot-core-icu4j.art 8.0KB
+7872952000-7872972000 r--s /dev/__properties__/u:object_r:vendor_socket_hook_prop:s0 128.0KB
+7872972000-7872992000 r--s /dev/__properties__/u:object_r:heapprofd_prop:s0 128.0KB
+7872992000-78729b2000 r--s /dev/__properties__/u:object_r:exported2_default_prop:s0 128.0KB
+78729b2000-7872a7a000 r--p [anon:linker_alloc] 800.0KB
+7872a7a000-7872a9a000 r--s /dev/__properties__/u:object_r:vndk_prop:s0 128.0KB
+7872a9a000-7872a9c000 rw-p [anon:bionic_alloc_small_objects] 8.0KB
+7872a9c000-7872a9d000 r--p /system/framework/arm64/boot-ext.art 4.0KB
+7872a9d000-7872a9f000 rw-p [anon:bionic_alloc_small_objects] 8.0KB
+7872a9f000-7872aa0000 r--p /apex/com.android.art/javalib/arm64/boot-apache-xml.art 4.0KB
+7872aa0000-7872aa2000 rw-p [anon:bionic_alloc_small_objects] 8.0KB
+7872aa2000-7872aa3000 r--p /apex/com.android.art/javalib/arm64/boot-bouncycastle.art 4.0KB
+7872aa3000-7872aa5000 rw-p [anon:bionic_alloc_small_objects] 8.0KB
+7872aa5000-7872aa6000 rw-p [anon:bionic_alloc_lob] 4.0KB
+7872aa6000-7872aa8000 rw-p [anon:Allocate] 8.0KB
+7872aa8000-7872aab000 rw-p [anon:System property context nodes] 12.0KB
+7872aab000-7872aac000 ---p  4.0KB
+7872aac000-7872ab0000 rw-p [anon:stack_and_tls:main] 16.0KB
+7872ab0000-7872ab1000 ---p  4.0KB
+7872ab1000-7872ab5000 rw-p [anon:bionic_alloc_small_objects] 16.0KB
+7872ab5000-7872ab6000 r--p /apex/com.android.art/javalib/arm64/boot-okhttp.art 4.0KB
+7872ab6000-7872abe000 rw-p [anon:bionic_alloc_small_objects] 32.0KB
+7872abe000-7872b22000 r--p [anon:linker_alloc] 400.0KB
+7872b22000-7872b23000 rw-p [anon:bionic_alloc_small_objects] 4.0KB
+7872b23000-7872b43000 r--s /dev/__properties__/u:object_r:debug_prop:s0 128.0KB
+7872b43000-7872b63000 r--s /dev/__properties__/u:object_r:exported2_default_prop:s0 128.0KB
+7872b63000-7872b6d000 ---p  40.0KB
+7872b6d000-7872b8d000 r--s /dev/__properties__/properties_serial 128.0KB
+7872b8d000-7872b90000 rw-p [anon:System property context nodes] 12.0KB
+7872b90000-7872ba5000 r--s /dev/__properties__/property_info 84.0KB
+7872ba5000-7872c09000 r--p [anon:linker_alloc] 400.0KB
+7872c09000-7872c0b000 rw-p [anon:bionic_alloc_small_objects] 8.0KB
+7872c0b000-7872c0c000 r--p [anon:atexit handlers] 4.0KB
+7872c0c000-7873c0d000 ---p  16.00390625MB
+7873c0d000-7873c15000 rw-p [anon:thread signal stack] 32.0KB
+7873c15000-7873c16000 rw-p [anon:arc4random data] 4.0KB
+7873c16000-7873c17000 rw-p [anon:ReadFileToBuffer] 4.0KB
+7873c17000-7873c18000 r--p /apex/com.android.art/javalib/arm64/boot-core-libart.art 4.0KB
+7873c18000-7873c19000 rw-p [anon:arc4random data] 4.0KB
+7873c19000-7873c1a000 r--p [vvar] 4.0KB
+7873c1a000-7873c1b000 r-xp [vdso] 4.0KB
+7873c1b000-7873d0a000 r--p /apex/com.android.runtime/bin/linker64 956.0KB
+7873d0a000-7873d15000 rw-p [anon:.bss] 44.0KB
+空闲:  29.689697265625GB
+7fdff55000-7fdff56000 ---p  4.0KB
+7fdff56000-7fe0755000 rw-p [stack] 7.99609375MB

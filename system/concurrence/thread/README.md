@@ -345,7 +345,7 @@ BOOM! cnt=1404746
             <th colspan="6">(a) Correct ordering</th>
         </tr>
         <tr>
-            <th>Step</th><th>Thread</th><th>Instr.</th><th>%$rdx<sub>1</sub></th><th>%rdx<sub>2</sub></th><th>cnt</th>
+            <th>Step</th><th>Thread</th><th>Instr.</th><th>%rdx<sub>1</sub></th><th>%rdx<sub>2</sub></th><th>cnt</th>
         </tr>
     </thead>
     <tbody>

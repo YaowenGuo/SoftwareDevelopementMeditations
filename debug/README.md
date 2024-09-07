@@ -1,39 +1,14 @@
 # 应用层调试
 
-调试、追踪、分析，力争
+调试、追踪、分析
 
-1. 开发时避免
-2. 开发后检测
-3. 线上报告
+1. 开发后检测
+2. 线上监控
+3. 定位问题、解决
 
-程序在运行中发生崩溃是经常发生的事情，根据崩溃信息，有些我们能够很快定位的发生问题的原因，而另外一些则不然，其发生原因很难确定。为了定位问题我们需要有一些帮助信息和调试工具：
+## 2. 检测工具
 
-1. 在崩溃时记录信息：Crash dump or tombstone。以及程序主动打印的日志。
-
-2. 使用崩溃信息和调试工具帮助定位问题发生的地方和原因：
-    ndk-stack
-
-3. 通过检测工具提前发现错误。
-
-
-## [1. 日志](log.md)
-## [2. bug reports](android_bugreport.d)
-
-安卓的崩溃信息回同时写入日志和 bugreport。
-
-## 2. 调试工具
-
-Android Studio 图形调试前端
-
-[ndk-lldb 命令行调试](./lldb_debug/1.README.md)
-
-或者可以在崩溃后使用 adb bugreport 将日志拉取到本地查看日志文件。
-
-帮助工具：
-ndk-stack
-
-
-## 3. 检测工具
+通过检测工具提前发现错误。
 
 ### 内存
 
@@ -83,7 +58,7 @@ For CPU profiling of native code, you can use [Simpleperf](https://developer.and
 
 
 
-## 3. 线上监控/上报
+## 线上监控/上报
 
 tombstone 应用内上报：https://developer.android.com/ndk/guides/debug
 - Maloc 分析
@@ -96,6 +71,23 @@ tombstone 应用内上报：https://developer.android.com/ndk/guides/debug
 - crashpad
 
 
+## 定位问题
+
+1. [日志](log.md) 在崩溃时记录信息：Crash dump or tombstone。以及程序主动打印的日志。
+
+2. [崩溃报告](android_bugreport.md)
+
+
+### 2. 调试工具
+
+Android Studio 图形调试前端
+
+[ndk-lldb 命令行调试](./lldb_debug/1.README.md)
+
+或者可以在崩溃后使用 adb bugreport 将日志拉取到本地查看日志文件。
+
+帮助工具：
+ndk-stack
 
 
 

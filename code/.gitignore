@@ -1,4 +1,5 @@
 /build
+.vscode
 .cache
-.a
-.o
+*.a
+*.o

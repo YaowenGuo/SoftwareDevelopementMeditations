@@ -1,6 +1,6 @@
 # Cross compiling
 
-跨品台编译即在一种类型的主机上给另一种平台（系统）编译运行软件。
+[概念](media/)
 
 一些概念：
 
@@ -10,7 +10,7 @@ targe：目标是实际运行代码的平台
 target 在不同语境中有不同的含义，在用于描述编译的对象时，target 是指构建目标，而跨平台编译的 target 是指目标平台。在中文中含义区分很明显，而在英文中根据语境区分。
 
 
-GN 启动后，host_os 和 host_cpu 变量被自动设置为 host 平台的对应值（它们可以被 args 中的参数覆盖，这在特殊的情况下非常有用）。当用于想要交叉编译时，需要设置 `target_os`，`target_cpu` 至少其中之一（前者操作控制系统不同，后者控制 cup 不同）。如果没有被设置，它们将被设置为 host 的对应值。这些值的设置是在 `BUILDCONFIG.gn` 文件中完成的，可以根据需要调整(例如，android 仅在 arm/x86 芯片上运行，当用户指定了 target_os, 没有指定 target_cpu 时，可以将 target_cup 设置为常用的 `arm`, 而不是跟 host 保持一致。)。但原则是 `host_` 指编译平台，`target_` 指向运行平台。
+GN 启动后，host_os 和 host_cpu 变量被自动设置为 host 平台的对应值（它们可以被 args 中的参数覆盖，这在特殊的情况下非常有用）。当用于想要交叉编译时，需要设置 `target_os`，`target_cpu` 至少其中之一（前者操作控制系统不同，后者控制 cpu 不同）。如果没有被设置，它们将被设置为 host 的对应值。这些值的设置是在 `BUILDCONFIG.gn` 文件中完成的，可以根据需要调整(例如，android 仅在 arm/x86 芯片上运行，当用户指定了 target_os, 没有指定 target_cpu 时，可以将 target_cpu 设置为常用的 `arm`, 而不是跟 host 保持一致。)。但原则是 `host_` 指编译平台，`target_` 指向运行平台。
 
 
 So, for example, running on an x64 Linux machine:
@@ -35,9 +35,10 @@ And, to do a 64-bit MIPS Chrome OS cross-compile:
 gn gen out/Default --args='target_os="chromeos" target_cpu="mips64el"'
 ```
 
-## toolchain
+在配置 `BUILDCONFIG.gn` 时，还有一个 current_ 的概念，表示编译目标要运行的环境，因为要编译的内容不只有在目标系统上运行，也会编译一些用于编译的工具，这些工具是运行在当前 host 系统上的。
 
-toolchain 是编译目标文件的工具集合，例如对运行在 Linux 上的 C/C++ ，其包括编译器、汇编器、链接器、反汇编、系统库等。因为系统、运行环境、编译器、库等不同，不同的目标平台往往需要不同的工具链。
+
+## toolchain
 
 ### 定义一个新的 toolchain
 
@@ -261,7 +262,7 @@ function configEnv()
 
 toolchain 是 `BUILDCONFIG.gn` 中设置。
 
-chromium 设置了两种 toolchain：default toolchain，host_toolchain 用于在交叉编译时区分目标和本地的工具链。在非交叉编译时，二者相同。
+chromium 设置了两种 toolchain：default_toolchain，host_toolchain 用于在交叉编译时区分目标和本地的工具链。在非交叉编译时，二者相同。
 
 
 ```

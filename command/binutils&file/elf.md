@@ -205,22 +205,6 @@ Key to Flags:
   L (link order), O (extra OS processing required), G (group), T (TLS),
   C (compressed), x (unknown), o (OS specific), E (exclude),
   R (retain), p (processor specific)
-
-Section Headers:
-  [Nr] Name              Type            Address          Off    Size   ES Flg Lk Inf Al
-  [ 0]                   NULL            0000000000000000 000000 000000 00      0   0  0
-  [ 1] .text             PROGBITS        0000000000000000 000040 000074 00  AX  0   0  4
-  [ 2] .rela.text        RELA            0000000000000000 0003a0 0000c0 18   I 10   1  8
-  [ 3] .data             PROGBITS        0000000000000000 0000b4 000008 00  WA  0   0  4
-  [ 4] .bss              NOBITS          0000000000000000 0000bc 000008 00  WA  0   0  4
-  [ 5] .rodata           PROGBITS        0000000000000000 0000c0 000004 00   A  0   0  8
-  [ 6] .comment          PROGBITS        0000000000000000 0000c4 000026 01  MS  0   0  1
-  [ 7] .note.GNU-stack   PROGBITS        0000000000000000 0000ea 000000 00      0   0  1
-  [ 8] .eh_frame         PROGBITS        0000000000000000 0000f0 000058 00   A  0   0  8
-  [ 9] .rela.eh_frame    RELA            0000000000000000 000460 000030 18   I 10   8  8
-  [10] .symtab           SYMTAB          0000000000000000 000148 0001f8 18     11  16  8
-  [11] .strtab           STRTAB          0000000000000000 000340 000060 00      0   0  1
-  [12] .shstrtab         STRTAB          0000000000000000 000490 000061 00      0   0  1
 ```
 
 - ES：Entry's size（条目大小）。表示动态节条目的大小。
@@ -323,7 +307,7 @@ Contents of section .data:
 可以使 objdump 添加 `-d` 参数来查看代码段，并对代码段进行反汇编。
 
 ```shell
-$ llvm-objdump-16 -d -j .text testelf.o
+$ llvm-objdump -d -j .text testelf.o
 
 testelf.o:	file format elf64-littleaarch64
 
@@ -390,7 +374,7 @@ Hex dump of section '.strtab':
 0x00000020 5f756e69 6e69745f 76617200 676c6f62 _uninit_var.glob
 0x00000030 616c5f69 6e69745f 76617200 6d61696e al_init_var.main
 ```
-可以看到偏移量为 6 开始的字符串就是 `.text`。另一个有意思的点是 `.rela.text` 的 `sh_name` 为 1, `.rela.text` 段和 `.text` 段的段名的复用了 `.text` 字符串。
+可以看到偏移量为 6 开始的字符串就是 `.text`。另一个有意思的点是 `.rela.text` 的 `sh_name` 为 1, `.rela.text` 段和 `.text` 段的段名的复用了 `.text`字符串。
 
 ## 链接
 

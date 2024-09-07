@@ -99,7 +99,7 @@ tar: ./lib/x86_64-linux-gnu/libpthread.so.0: Cannot utime: No such file or direc
 如果你在是在 Mac 的 docker 中下载，并且下载目录是挂载在 mac 的目录中，那这个方法可能适合你。这个错误应该是文件系统导致的，有两种方法解决：
 
 方法 1: 只需要下载到 docker 内部的文件目录里就行了。
-方法 2: 在 mac 主机中执行响应的指令，例如 `python3 src/build/linux/sysroot_scripts/install-sysroot.py --arch=amd64`
+方法 2: 在 mac 主机中执行相应的指令，例如 `python3 src/build/linux/sysroot_scripts/install-sysroot.py --arch=amd64`
 
 linux 使用的是 ext 文件系统，跟 mac 不一致。很奇怪的是，我单独执行 tar 命令解压或者单独执行以下的 Python 脚本都不会出问题。很可能是 `src/build/linux/sysroot_scripts/install-sysroot.py` 脚本环境有问题。
 

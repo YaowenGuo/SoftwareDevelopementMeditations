@@ -113,6 +113,26 @@ Process 46915 Stopped
 
 ## 断点
 
+Sets a breakpoint or set of breakpoints in the executable.
+
+Syntax: breakpoint set <cmd-options>
+
+Command Options Usage:
+  breakpoint set [-DHd] -l <linenum> [-G <boolean>] [-C <command>] [-c <expr>] [-i <count>] [-o <boolean>] [-q <queue-name>] [-t <thread-id>] [-x <thread-index>] [-T <thread-name>] [-R <address>] [-N <breakpoint-name>] [-u <column>] [-f <filename>] [-m <boolean>] [-s <shlib-name>] [-K <boolean>]
+
+  breakpoint set [-DHd] -a <address-expression> [-G <boolean>] [-C <command>] [-c <expr>] [-i <count>] [-o <boolean>] [-q <queue-name>] [-t <thread-id>] [-x <thread-index>] [-T <thread-name>] [-N <breakpoint-name>] [-s <shlib-name>]
+
+  breakpoint set [-DHd] -n <function-name> [-G <boolean>] [-C <command>] [-c <expr>] [-i <count>] [-o <boolean>] [-q <queue-name>] [-t <thread-id>] [-x <thread-index>] [-T <thread-name>] [-R <address>] [-N <breakpoint-name>] [-f <filename>] [-L <source-language>] [-s <shlib-name>] [-K <boolean>]
+
+  breakpoint set [-DHd] -F <fullname> [-G <boolean>] [-C <command>] [-c <expr>] [-i <count>] [-o <boolean>] [-q <queue-name>] [-t <thread-id>] [-x <thread-index>] [-T <thread-name>] [-R <address>] [-N <breakpoint-name>] [-f <filename>] [-L <source-language>] [-s <shlib-name>] [-K <boolean>]
+
+  breakpoint set [-DHd] -S <selector> [-G <boolean>] [-C <command>] [-c <expr>] [-i <count>] [-o <boolean>] [-q <queue-name>] [-t <thread-id>] [-x <thread-index>] [-T <thread-name>] [-R <address>] [-N <breakpoint-name>] [-f <filename>] [-L <source-language>] [-s <shlib-name>] [-K <boolean>]
+
+  breakpoint set [-DHd] -M <method> [-G <boolean>] [-C <command>] [-c <expr>] [-i <count>] [-o <boolean>] [-q <queue-name>] [-t <thread-id>] [-x <thread-index>] [-T <thread-name>] [-R <address>] [-N <breakpoint-name>] [-f <filename>] [-L <source-language>] [-s <shlib-name>] [-K <boolean>]
+  
+  breakpoint set [-DHd] -r <regular-expression> [-G <boolean>] [-C <command>] [-c <expr>] [-i <count>] [-o <boolean>] [-q <queue-name>] [-t <thread-id>] [-x <thread-index>] [-T <thread-name>] [-R <address>] [-N <breakpoint-name>] [-f <filename>] [-L <source-language>] [-s <shlib-name>] [-K <boolean>]
+
+
 ### 添加断点
 
 使用行号添加断点:
@@ -338,4 +358,4 @@ lldb 使用 script 支持内置的 python 解析代替 gdb 的宏。
 
 ## 参考
 
- https://lldb.llvm.org/use/tutorial.html
+https://lldb.llvm.org/use/tutorial.html

@@ -36,7 +36,7 @@ URL的结构
 
 # 请求数据
 
-请求数据不在GET方法中使用，而是在POST方法中使用。POST方法适用于需要客户填写表单的场合，与请求数据相关的最常用的请求头是Content-Type和Content-Length。
+请求数据不在 GET 方法中使用，而是在POST方法中使用。POST方法适用于需要客户填写表单的场合，与请求数据相关的最常用的请求头是Content-Type和Content-Length。
 
 # HTTP的响应报文
 响应报文的一般格式：

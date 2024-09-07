@@ -1,5 +1,7 @@
 # ARM64 汇编
 
+ARMv8 是 ARM 处理器第一代支持 64 位指令集的架构。a 是 A 系列处理器，面向性能密集型应用处理器内核。
+
 ## Hello Wrold
 
 [Mac 系统](https://medium.com/@gamedev0909/how-to-set-up-and-program-arm-64-assembly-on-apple-silicon-part-1-ac3c7d110195)
@@ -48,3 +50,5 @@ $ ld -o hello hello.o
 $ ./hello
 Hello World!
 ```
+
+如果使用 gcc 或者 clang 直接编译，需要将 `_start` 符号换成 `main`。 或者使用编译器参数 -m main 来指定入口函数。

@@ -17,6 +17,7 @@
 类型：
 ① We start with exceptions, which lie at the intersection of the hardware and the operating system. ② We also discuss system calls, which are exceptions that provide applications with entry points into the operating system. ③ We then move up a level of abstraction and describe processes and signals, which lie at the intersection of applications and the operating system. ④ Finally, we discuss nonlocal jumps, which are an application-level form of ECF.
 
+
 ## Exceptions
 
 ![Exception](./README_img/exception_control_flow.png)
@@ -61,6 +62,8 @@ Interrupts occur asynchronously as a result of signals from I/O devices that are
 
 
 I/O devices such as network adapters, disk controllers, and timer chips trigger interrupts by signaling a pin on the processor chip and placing onto the system bus the exception number that identifies the device that caused the interrupt.
+
+此外，CPU 在与外设交互时，最重要的机制就是中断，内存、磁盘 IO、网络 IO 有很多功能都是依赖中断完成的
 
 ![Interrupt handling](./README_img/interrupts.png)
 

@@ -183,7 +183,7 @@ clang hello.o -shared -o hello.so
 ld hello.o -o hello
 ```
 
-但是要连接成为可运行程序，还需要链接系统库，如标准输入输出。这可能会出错，因为 ln 不知道这些信息。为此可以使用 clang 并显示详细链接的参数。
+但是要链接成为可运行程序，还需要链接系统库，如标准输入输出。这可能会出错，因为 ln 不知道这些信息。为此可以使用 clang 并显示详细链接的参数。
 
 ```shell
 clang hello.o -o hello -v
@@ -222,25 +222,8 @@ clang 命令参数
 ```
 
 
-## 交叉编译
+## 导入搜索路径
 
-每种主机/目标(host/target)都有自己的一组二进制文件、头文件、库等组合。要想生成目标主机的可执行程序，就要指定目标主机的类型。`-target <triple>` 选项用于指定编译的主机类型。
-
-
-triple 的一般格式为<arch><sub>-<sys>-<abi>，其中：
-
-arch = x86_64、i386、arm、aarch、thumb、mips等。
-sub = v5, v6m, v7a, v7m等。
-vendor = pc, apple, nvidia, ibm,等。
-sys = none, linux, win32, darwin, cuda等。
-abi = eabi, gnu, android, macho, elf等。
-
-
-// -arch 表示要编译的架构 这里为arm64.
-// -isysroot 指定头文件的根路径
-```
-$ clang -arch arm64 -o hello hello.c –
-```
 - --sysroot=XX
 
 使用XX作为这一次编译的头文件与库文件的查找目录，查找XX下面的 usr/include、usr/lib目录。
@@ -267,6 +250,7 @@ $ clang -arch arm64 -o hello hello.c –
 
 https://www.cnblogs.com/webor2006/p/9946061.html
 
+`-H` 参数可以输出导入文件详细目录和导入关系
 
 ## 问题排查
 

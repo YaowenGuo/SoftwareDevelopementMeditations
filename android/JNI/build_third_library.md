@@ -37,8 +37,7 @@ $ $NDK/toolchains/llvm/prebuilt/$HOST_TAG/bin/aarch64-linux-android21-clang++ fo
 
 **注意：对于 32 位 ARM，编译器会使用前缀 armv7a-linux-androideabi，但 binutils 工具会使用前缀 arm-linux-androideabi。对于其他架构，所有工具的前缀都相同。**
 
-许多构建脚本都仅接受 GCC 格式的交叉编译，每个编译器仅针对一个 `OS/架构` 组合，因此可能不能正确的处理 `-target`，因此更好的做法是使用目标前缀的 Clang 编译器。
-
+很多项目的构建脚本都使用 GCC 风格的交叉编译器，GCC 针对一个OS/架构组合使用单独的编译器，使用 clang 作为编译器时可能无法正确的处理 `-target` 参数（clang 一个程序支持不同平台，使用 target 来指定目标）。此时，可以将 -target 作为编译器定义的一部分（例如 CC="clang -target aarch64-linux-android21）。如果在极少数情况下的构建系统不能使用这种形式，请使用带有三元组前缀的Clang二进制文件。
 
 - --arch 参数是必填项，但 API 级别将默认设为指定架构支持的最低级别（目前，级别 16 适用于 32 位架构，级别 21 适用于 64 位架构）。
 

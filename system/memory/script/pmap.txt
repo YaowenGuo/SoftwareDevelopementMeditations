@@ -1,0 +1,1665 @@
+高通的 GPU 设备文件 /dev/kgsl-3d0 占用过多内存空间导致，可以看到分配的段达到上万甚至三万多，这应该是系统 bug，设备文件是底层访问。或者等了解了 GPU 编程后才可能进一步确定。
+
+
+12c00000-32c00000 ---p /dev/ashmem/dalvik-main space (deleted) 512.0MB
+32c00000-52c00000 rw-p /dev/ashmem/dalvik-main space 1 (deleted) 512.0MB
+空闲:  452.41796875MB
+6f06b000-6fda6000 rw-p /data/dalvik-cache/arm64/system@framework@boot.art 13.23046875MB
+6fda6000-73e6d000 r--p /system/framework/arm64/boot.oat 64.77734375MB
+73e6d000-73f5f000 rw-p /dev/ashmem/dalvik-zygote space (deleted) 968.0KB
+73f5f000-77e6d000 rw-p /dev/ashmem/dalvik-non moving space (deleted) 63.0546875MB
+77e6d000-97e6d000 rw-p /dev/ashmem/dalvik-free list large object space (deleted) 512.0MB
+空闲:  29.348644256591797GB
+7ee370000-7ee490000 rw-s /dev/kgsl-3d0 1.125MB
+空闲:  960.0KB
+7ee580000-7ee590000 rw-s /dev/kgsl-3d0 64.0KB
+空闲:  3.24609375MB
+7ee8cf000-7ee8d0000 rw-s /dev/kgsl-3d0 4.0KB
+空闲:  36.1875MB
+7f0d00000-7f0e00000 rw-s /dev/kgsl-3d0 1.0MB
+空闲:  1.25MB
+7f0f40000-7f0f61000 rw-s /dev/kgsl-3d0 132.0KB
+空闲:  808.0KB
+7f102b000-7f1031000 rw-s /dev/kgsl-3d0 24.0KB
+空闲:  4.0KB
+7f1032000-7f1a7f000 rw-s /dev/kgsl-3d0 10.30078125MB
+空闲:  28.0KB
+7f1a86000-7f1a8a000 rw-s /dev/kgsl-3d0 16.0KB
+空闲:  40.0KB
+7f1a94000-7f2a11000 rw-s /dev/kgsl-3d0 15.48828125MB
+空闲:  48.0KB
+7f2a1d000-7f52be000 rw-s /dev/kgsl-3d0 40.62890625MB
+空闲:  32.0KB
+7f52c6000-7f52ca000 rw-s /dev/kgsl-3d0 16.0KB
+空闲:  48.0KB
+7f52d6000-7f52dc000 rw-s /dev/kgsl-3d0 24.0KB
+空闲:  12.0KB
+7f52df000-7f549a000 rw-s /dev/kgsl-3d0 1.73046875MB
+空闲:  16.0KB
+7f549e000-7f623e000 rw-s /dev/kgsl-3d0 13.625MB
+空闲:  32.0KB
+7f6246000-7f92b0000 rw-s /dev/kgsl-3d0 48.4140625MB
+空闲:  24.0KB
+7f92b6000-7f95d0000 rw-s /dev/kgsl-3d0 3.1015625MB
+空闲:  24.0KB
+7f95d6000-7faef7000 rw-s /dev/kgsl-3d0 25.12890625MB
+空闲:  32.0KB
+7faeff000-7faf8c000 rw-s /dev/kgsl-3d0 564.0KB
+空闲:  8.0KB
+7faf8e000-7faf90000 rw-s /dev/kgsl-3d0 8.0KB
+空闲:  64.0KB
+7fafa0000-7fb030000 rw-s /dev/kgsl-3d0 576.0KB
+空闲:  32.0KB
+7fb038000-7fb0a0000 rw-s /dev/kgsl-3d0 416.0KB
+空闲:  12.0KB
+7fb0a3000-7fb0a8000 rw-s /dev/kgsl-3d0 20.0KB
+空闲:  64.0KB
+7fb0b8000-7fb110000 rw-s /dev/kgsl-3d0 352.0KB
+空闲:  44.0KB
+7fb11b000-7fb1cb000 rw-s /dev/kgsl-3d0 704.0KB
+空闲:  60.0KB
+7fb1da000-7fb421000 rw-s /dev/kgsl-3d0 2.27734375MB
+空闲:  56.0KB
+7fb42f000-7fb437000 rw-s /dev/kgsl-3d0 32.0KB
+空闲:  4.0KB
+7fb438000-7fb440000 rw-s /dev/kgsl-3d0 32.0KB
+空闲:  128.0KB
+7fb460000-7fb480000 rw-s /dev/kgsl-3d0 128.0KB
+空闲:  4.0KB
+7fb481000-7fb48c000 rw-s /dev/kgsl-3d0 44.0KB
+空闲:  284.0KB
+7fb4d3000-7fb4e7000 rw-s /dev/kgsl-3d0 80.0KB
+空闲:  312.0KB
+7fb535000-7fb540000 rw-s /dev/kgsl-3d0 44.0KB
+空闲:  300.0KB
+7fb58b000-7fb792000 rw-s /dev/kgsl-3d0 2.02734375MB
+空闲:  56.0KB
+7fb7a0000-7fb7cb000 rw-s /dev/kgsl-3d0 172.0KB
+空闲:  4.0KB
+7fb7cc000-7fb817000 rw-s /dev/kgsl-3d0 300.0KB
+空闲:  36.0KB
+7fb820000-7fb867000 rw-s /dev/kgsl-3d0 284.0KB
+空闲:  64.0KB
+7fb877000-7fb8df000 rw-s /dev/kgsl-3d0 416.0KB
+空闲:  4.0KB
+7fb8e0000-7fb991000 rw-s /dev/kgsl-3d0 708.0KB
+空闲:  12.0KB
+7fb994000-7fbb20000 rw-s /dev/kgsl-3d0 1.546875MB
+空闲:  56.0KB
+7fbb2e000-7fbeaa000 rw-s /dev/kgsl-3d0 3.484375MB
+空闲:  64.0KB
+7fbeba000-7fbf56000 rw-s /dev/kgsl-3d0 624.0KB
+空闲:  4.0KB
+7fbf57000-7fbfa0000 rw-s /dev/kgsl-3d0 292.0KB
+空闲:  512.0KB
+7fc020000-7fc025000 rw-s /dev/kgsl-3d0 20.0KB
+空闲:  8.0KB
+7fc027000-7fc047000 rw-s /dev/kgsl-3d0 128.0KB
+空闲:  4.0KB
+7fc048000-7fc058000 rw-s /dev/kgsl-3d0 64.0KB
+空闲:  288.0KB
+7fc0a0000-7fc0dd000 rw-s /dev/kgsl-3d0 244.0KB
+空闲:  364.0KB
+7fc138000-7fc140000 rw-s /dev/kgsl-3d0 32.0KB
+空闲:  128.0KB
+7fc160000-7fc1b6000 rw-s /dev/kgsl-3d0 344.0KB
+空闲:  52.0KB
+7fc1c3000-7fc1cd000 rw-s /dev/kgsl-3d0 40.0KB
+空闲:  64.0KB
+7fc1dd000-7fc1e7000 rw-s /dev/kgsl-3d0 40.0KB
+空闲:  296.0KB
+7fc231000-7fc27f000 rw-s /dev/kgsl-3d0 312.0KB
+空闲:  4.0KB
+7fc280000-7fc520000 rw-s /dev/kgsl-3d0 2.625MB
+空闲:  1.0MB
+7fc620000-7fc630000 rw-s /dev/kgsl-3d0 64.0KB
+空闲:  1.3125MB
+7fc780000-7fc789000 rw-s /dev/kgsl-3d0 36.0KB
+空闲:  92.0KB
+7fc7a0000-7fc7ff000 rw-s /dev/kgsl-3d0 380.0KB
+空闲:  1.18359375MB
+7fc92e000-7fc960000 rw-s /dev/kgsl-3d0 200.0KB
+空闲:  1.0MB
+7fca60000-7fcae0000 rw-s /dev/kgsl-3d0 512.0KB
+空闲:  48.0KB
+7fcaec000-7fcb2d000 rw-s /dev/kgsl-3d0 260.0KB
+空闲:  12.0KB
+7fcb30000-7fcb6d000 rw-s /dev/kgsl-3d0 244.0KB
+空闲:  12.0KB
+7fcb70000-7fcbad000 rw-s /dev/kgsl-3d0 244.0KB
+空闲:  12.0KB
+7fcbb0000-7fcbed000 rw-s /dev/kgsl-3d0 244.0KB
+空闲:  12.0KB
+7fcbf0000-7fcc20000 rw-s /dev/kgsl-3d0 192.0KB
+空闲:  64.0KB
+7fcc30000-7fcc34000 rw-s /dev/kgsl-3d0 16.0KB
+空闲:  24.0KB
+7fcc3a000-7fccb0000 rw-s /dev/kgsl-3d0 472.0KB
+空闲:  44.0KB
+7fccbb000-7fccc7000 rw-s /dev/kgsl-3d0 48.0KB
+空闲:  356.0KB
+7fcd20000-7fcd40000 rw-s /dev/kgsl-3d0 128.0KB
+空闲:  184.0KB
+7fcd6e000-7fcd80000 rw-s /dev/kgsl-3d0 72.0KB
+空闲:  164.0KB
+7fcda9000-7fcdcf000 rw-s /dev/kgsl-3d0 152.0KB
+空闲:  312.0KB
+7fce1d000-7fce2b000 rw-s /dev/kgsl-3d0 56.0KB
+空闲:  228.0KB
+7fce64000-7fce80000 rw-s /dev/kgsl-3d0 112.0KB
+空闲:  116.0KB
+7fce9d000-7fceb0000 rw-s /dev/kgsl-3d0 76.0KB
+空闲:  808.0KB
+7fcf7a000-7fd0b0000 rw-s /dev/kgsl-3d0 1.2109375MB
+空闲:  46.109375MB
+7ffecc000-7fff3b000 rw-s /dev/kgsl-3d0 444.0KB
+空闲:  4.0KB
+7fff3c000-7fff84000 rw-s /dev/kgsl-3d0 288.0KB
+空闲:  64.0KB
+7fff94000-7fff98000 rw-s /dev/kgsl-3d0 16.0KB
+空闲:  304.0KB
+7fffe4000-800000000 rw-s /dev/kgsl-3d0 112.0KB
+空闲:  310.04985427856445GB
+558330d000-5583311000 r-xp /system/bin/app_process64 16.0KB
+空闲:  64.0KB
+5583321000-5583323000 r--p /system/bin/app_process64 8.0KB
+空闲:  404.19921875MB
+559c756000-55b6785000 rw-p [heap] 416.18359375MB
+空闲:  166.35812759399414GB
+7f4d63e000-7f4f736000 rw-p [anon:libc_malloc] 32.96875MB
+空闲:  25.7890625MB
+7f51100000-7f51102000 ---p  8.0KB
+7f51102000-7f51205000 rw-p [stack:26328] 1.01171875MB
+空闲:  2.0390625MB
+7f5140f000-7f51411000 ---p  8.0KB
+7f51411000-7f51514000 rw-p [stack:11480] 1.01171875MB
+空闲:  24.0KB
+7f5151a000-7f51619000 ---p  1020.0KB
+7f51619000-7f518f5000 rw-p [anon:libc_malloc] 2.859375MB
+7f518f5000-7f521ec000 rw-s anon_inode:dmabuf 8.96484375MB
+空闲:  592.0KB
+7f52280000-7f52282000 ---p  8.0KB
+7f52282000-7f52385000 rw-p [stack:28111] 1.01171875MB
+7f52385000-7f52c7c000 rw-s anon_inode:dmabuf 8.96484375MB
+7f52c7c000-7f52c7e000 r-xp /system/lib64/libOpenSLES.so 8.0KB
+7f52c7e000-7f52c8e000 ---p  64.0KB
+7f52c8e000-7f52c90000 r--p /system/lib64/libOpenSLES.so 8.0KB
+7f52c90000-7f52d8d000 r-xp /data/app/com.fenbi.android.servant-1/lib/arm64/libc++_shared.so 1012.0KB
+7f52d8d000-7f52d94000 rw-p  28.0KB
+7f52d94000-7f533f8000 r-xp /data/app/com.fenbi.android.servant-1/lib/arm64/libopencv_world.so 6.390625MB
+7f533f8000-7f5349d000 rw-p  660.0KB
+7f5349d000-7f538d1000 r-xp /data/app/com.fenbi.android.servant-1/lib/arm64/libtensorflowlite.so 4.203125MB
+7f538d1000-7f538d2000 ---p  4.0KB
+7f538d2000-7f538e1000 r--p /data/app/com.fenbi.android.servant-1/lib/arm64/libtensorflowlite.so 60.0KB
+7f538e1000-7f538e8000 rw-p  28.0KB
+7f538e8000-7f53a76000 r-xp /data/app/com.fenbi.android.servant-1/lib/arm64/libffmpeg.so 1.5546875MB
+7f53a76000-7f53bd8000 rw-p  1.3828125MB
+7f53bd8000-7f544a9000 r-xp /data/app/com.fenbi.android.servant-1/lib/arm64/libengine.so 8.81640625MB
+7f544a9000-7f544b6000 rw-p  52.0KB
+7f544b6000-7f544e0000 r-xp /data/app/com.fenbi.android.servant-1/lib/arm64/libtruman_engine.so 168.0KB
+7f544e0000-7f54500000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+空闲:  132.0KB
+7f54521000-7f54554000 rw-p [anon:libc_malloc] 204.0KB
+7f54554000-7f54556000 ---p  8.0KB
+7f54556000-7f54659000 rw-p [stack:19441] 1.01171875MB
+7f54659000-7f54679000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+7f54679000-7f546c4000 rw-p [anon:libc_malloc] 300.0KB
+空闲:  20.0KB
+7f546c9000-7f546ca000 ---p  4.0KB
+7f546ca000-7f546ce000 rw-p [anon:thread signal stack] 16.0KB
+7f546ce000-7f546cf000 ---p  4.0KB
+7f546cf000-7f547cd000 rw-p [stack:14374] 1016.0KB
+7f547cd000-7f547ce000 ---p  4.0KB
+7f547ce000-7f547d2000 rw-p [anon:thread signal stack] 16.0KB
+7f547d2000-7f547d3000 ---p  4.0KB
+7f547d3000-7f548d1000 rw-p [stack:14373] 1016.0KB
+7f548d1000-7f548d2000 ---p  4.0KB
+7f548d2000-7f549d0000 rw-p [stack:14372] 1016.0KB
+7f549d0000-7f549d1000 ---p  4.0KB
+7f549d1000-7f54acf000 rw-p [stack:14371] 1016.0KB
+7f54acf000-7f54ad0000 ---p  4.0KB
+7f54ad0000-7f54bce000 rw-p [stack:14370] 1016.0KB
+7f54bce000-7f54bcf000 ---p  4.0KB
+7f54bcf000-7f54ccd000 rw-p [stack:14369] 1016.0KB
+7f54ccd000-7f54cce000 ---p  4.0KB
+7f54cce000-7f54dcc000 rw-p [stack:14368] 1016.0KB
+7f54dcc000-7f54dcd000 ---p  4.0KB
+7f54dcd000-7f54ecb000 rw-p [stack:14367] 1016.0KB
+7f54ecb000-7f54fcd000 r-xp /system/lib64/libblas.so 1.0078125MB
+7f54fcd000-7f54fdc000 ---p  60.0KB
+7f54fdc000-7f54fdf000 r--p /system/lib64/libblas.so 12.0KB
+7f54fdf000-7f54fe0000 rw-p  4.0KB
+7f54fe0000-7f55021000 r-xp /system/lib64/libRSCpuRef.so 260.0KB
+7f55021000-7f55030000 ---p  60.0KB
+7f55030000-7f55034000 r--p /system/lib64/libRSCpuRef.so 16.0KB
+7f55034000-7f55036000 ---p  8.0KB
+7f55036000-7f55133000 rw-p [stack:14364] 1012.0KB
+7f55133000-7f55a2a000 rw-s anon_inode:dmabuf 8.96484375MB
+7f55a2a000-7f55a2c000 ---p  8.0KB
+7f55a2c000-7f55b29000 rw-p [stack:14275] 1012.0KB
+7f55b29000-7f55b2b000 ---p  8.0KB
+7f55b2b000-7f55c2e000 rw-p [stack:14262] 1.01171875MB
+7f55c2e000-7f55c30000 ---p  8.0KB
+7f55c30000-7f55d33000 rw-p [stack:14232] 1.01171875MB
+空闲:  48.0KB
+7f55d3f000-7f55d41000 ---p  8.0KB
+7f55d41000-7f55e44000 rw-p [stack:27920] 1.01171875MB
+7f55e44000-7f55e46000 ---p  8.0KB
+7f55e46000-7f55f43000 rw-p [stack:22341] 1012.0KB
+7f55f43000-7f55f45000 ---p  8.0KB
+7f55f45000-7f56042000 rw-p [stack:21985] 1012.0KB
+7f56042000-7f56044000 ---p  8.0KB
+7f56044000-7f56147000 rw-p [stack:14225] 1.01171875MB
+空闲:  436.0KB
+7f561b4000-7f5624c000 rw-p [anon:libc_malloc] 608.0KB
+7f5624c000-7f5624e000 ---p  8.0KB
+7f5624e000-7f56351000 rw-p [stack:14222] 1.01171875MB
+7f56351000-7f56353000 ---p  8.0KB
+7f56353000-7f56456000 rw-p [stack:27917] 1.01171875MB
+7f56456000-7f56458000 ---p  8.0KB
+7f56458000-7f5655b000 rw-p [stack:14220] 1.01171875MB
+空闲:  24.0KB
+7f56561000-7f56563000 ---p  8.0KB
+7f56563000-7f56660000 rw-p [stack:18047] 1012.0KB
+7f56660000-7f56662000 ---p  8.0KB
+7f56662000-7f56765000 rw-p [stack:11469] 1.01171875MB
+7f56765000-7f56767000 ---p  8.0KB
+7f56767000-7f5686a000 rw-p [stack:14201] 1.01171875MB
+空闲:  84.0KB
+7f5687f000-7f568ff000 rw-p [anon:libc_malloc] 512.0KB
+空闲:  288.0KB
+7f56947000-7f56949000 ---p  8.0KB
+7f56949000-7f56a46000 rw-p [stack:17395] 1012.0KB
+空闲:  716.0KB
+7f56af9000-7f56b45000 rw-p [anon:libc_malloc] 304.0KB
+7f56b45000-7f56b47000 ---p  8.0KB
+7f56b47000-7f56c4a000 rw-p [stack:27916] 1.01171875MB
+7f56c4a000-7f5704a000 rw-s /dev/ashmem/AudioFlinger::Client (deleted) 4.0MB
+7f5704a000-7f5704b000 ---p  4.0KB
+7f5704b000-7f5714b000 rw-p [stack:14529] 1.0MB
+7f5714b000-7f5714d000 ---p  8.0KB
+7f5714d000-7f5724c000 rw-p [stack:14526] 1020.0KB
+7f5724c000-7f5724e000 ---p  8.0KB
+7f5724e000-7f5734d000 rw-p [stack:14525] 1020.0KB
+7f5734d000-7f5734f000 ---p  8.0KB
+7f5734f000-7f5744e000 rw-p [stack:14524] 1020.0KB
+7f5744e000-7f5744f000 ---p  4.0KB
+7f5744f000-7f5754f000 rw-p [stack:14523] 1.0MB
+7f5754f000-7f57550000 ---p  4.0KB
+7f57550000-7f57650000 rw-p [stack:14522] 1.0MB
+7f57650000-7f57651000 ---p  4.0KB
+7f57651000-7f57751000 rw-p [stack:14521] 1.0MB
+7f57751000-7f57753000 ---p  8.0KB
+7f57753000-7f57856000 rw-p [stack:14520] 1.01171875MB
+7f57856000-7f57857000 ---p  4.0KB
+7f57857000-7f57957000 rw-p [stack:14519] 1.0MB
+7f57957000-7f57958000 ---p  4.0KB
+7f57958000-7f57a58000 rw-p [stack:14517] 1.0MB
+7f57a58000-7f57a5a000 ---p  8.0KB
+7f57a5a000-7f57b5d000 rw-p [stack:14157] 1.01171875MB
+空闲:  12.0KB
+7f57b60000-7f57b61000 ---p  4.0KB
+7f57b61000-7f57b65000 rw-p [anon:thread signal stack] 16.0KB
+7f57b65000-7f57b66000 ---p  4.0KB
+7f57b66000-7f57b6a000 rw-p [anon:thread signal stack] 16.0KB
+7f57b6a000-7f57b6b000 ---p  4.0KB
+7f57b6b000-7f57b6f000 rw-p [anon:thread signal stack] 16.0KB
+7f57b6f000-7f57b70000 ---p  4.0KB
+7f57b70000-7f57b74000 rw-p [anon:thread signal stack] 16.0KB
+7f57b74000-7f57b75000 ---p  4.0KB
+7f57b75000-7f57b79000 rw-p [anon:thread signal stack] 16.0KB
+7f57b79000-7f57b7a000 ---p  4.0KB
+7f57b7a000-7f57b7e000 rw-p [anon:thread signal stack] 16.0KB
+7f57b7e000-7f57baf000 r-xp /system/lib64/libRSDriver.so 196.0KB
+7f57baf000-7f57bbf000 ---p  64.0KB
+7f57bbf000-7f57bc1000 r--p /system/lib64/libRSDriver.so 8.0KB
+空闲:  124.0KB
+7f57be0000-7f57c13000 rw-p [anon:libc_malloc] 204.0KB
+7f57c13000-7f57c33000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+空闲:  20.0KB
+7f57c38000-7f57c58000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+空闲:  104.0KB
+7f57c72000-7f57c93000 rw-p [anon:libc_malloc] 132.0KB
+7f57c93000-7f57c95000 ---p  8.0KB
+7f57c95000-7f57d98000 rw-p [stack:14346] 1.01171875MB
+7f57d98000-7f57da8000 r--s /data/data/com.fenbi.android.servant/cache/image_manager_disk_cache/d9fe380335a78f4c3abf9b62e21b4d7a5a0c32c8641305ef321fcd0f6b41114c.0 64.0KB
+空闲:  120.0KB
+7f57dc6000-7f57dc8000 ---p  8.0KB
+7f57dc8000-7f57ecb000 rw-p [stack:27915] 1.01171875MB
+7f57ecb000-7f57ecd000 ---p  8.0KB
+7f57ecd000-7f57fd0000 rw-p [stack:14343] 1.01171875MB
+空闲:  108.0KB
+7f57feb000-7f58006000 rw-p [anon:libc_malloc] 108.0KB
+7f58006000-7f58008000 ---p  8.0KB
+7f58008000-7f58105000 rw-p [stack:31807] 1012.0KB
+7f58105000-7f58107000 ---p  8.0KB
+7f58107000-7f5820a000 rw-p [stack:14336] 1.01171875MB
+7f5820a000-7f5822a000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+7f5822a000-7f5822c000 ---p  8.0KB
+7f5822c000-7f5832f000 rw-p [stack:14305] 1.01171875MB
+7f5832f000-7f58331000 ---p  8.0KB
+7f58331000-7f58434000 rw-p [stack:14279] 1.01171875MB
+7f58434000-7f58454000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+7f58454000-7f58456000 ---p  8.0KB
+7f58456000-7f58553000 rw-p [stack:14154] 1012.0KB
+7f58553000-7f58554000 ---p  4.0KB
+7f58554000-7f58652000 rw-p [stack:14151] 1016.0KB
+7f58652000-7f58653000 ---p  4.0KB
+7f58653000-7f58751000 rw-p [stack:14150] 1016.0KB
+7f58751000-7f58752000 ---p  4.0KB
+7f58752000-7f58850000 rw-p [stack:14149] 1016.0KB
+7f58850000-7f58851000 ---p  4.0KB
+7f58851000-7f5894f000 rw-p [stack:14148] 1016.0KB
+7f5894f000-7f58950000 ---p  4.0KB
+7f58950000-7f58a4e000 rw-p [stack:14147] 1016.0KB
+7f58a4e000-7f58a4f000 ---p  4.0KB
+7f58a4f000-7f58b4d000 rw-p [stack:14146] 1016.0KB
+7f58b4d000-7f58b4e000 ---p  4.0KB
+7f58b4e000-7f58c4c000 rw-p [stack:14145] 1016.0KB
+7f58c4c000-7f58c4d000 ---p  4.0KB
+7f58c4d000-7f58d4b000 rw-p [stack:14144] 1016.0KB
+7f58d4b000-7f58d4d000 ---p  8.0KB
+7f58d4d000-7f58e50000 rw-p [stack:14140] 1.01171875MB
+7f58e50000-7f58f51000 ---p  1.00390625MB
+7f58f51000-7f59054000 rw-p [stack:26505] 1.01171875MB
+7f59054000-7f59056000 ---p  8.0KB
+7f59056000-7f59159000 rw-p [stack:14136] 1.01171875MB
+7f59159000-7f5915a000 ---p  4.0KB
+7f5915a000-7f59258000 rw-p [stack:14135] 1016.0KB
+7f59258000-7f5925a000 ---p  8.0KB
+7f5925a000-7f59357000 rw-p [stack:14134] 1012.0KB
+7f59357000-7f59359000 ---p  8.0KB
+7f59359000-7f59456000 rw-p [stack:14133] 1012.0KB
+7f59456000-7f59458000 ---p  8.0KB
+7f59458000-7f5955b000 rw-p [stack:14131] 1.01171875MB
+7f5955b000-7f5955d000 ---p  8.0KB
+7f5955d000-7f5965a000 rw-p [stack:14130] 1012.0KB
+7f5965a000-7f5965c000 ---p  8.0KB
+7f5965c000-7f59759000 rw-p [stack:14128] 1012.0KB
+7f59759000-7f5975b000 ---p  8.0KB
+7f5975b000-7f5985e000 rw-p [stack:12857] 1.01171875MB
+7f5985e000-7f59860000 ---p  8.0KB
+7f59860000-7f5995d000 rw-p [stack:12853] 1012.0KB
+7f5995d000-7f5995f000 ---p  8.0KB
+7f5995f000-7f59a5c000 rw-p [stack:12829] 1012.0KB
+7f59a5c000-7f59a5e000 ---p  8.0KB
+7f59a5e000-7f59b61000 rw-p [stack:12827] 1.01171875MB
+7f59b61000-7f59b63000 ---p  8.0KB
+7f59b63000-7f59c66000 rw-p [stack:14124] 1.01171875MB
+7f59c66000-7f59c68000 ---p  8.0KB
+7f59c68000-7f59d6b000 rw-p [stack:12821] 1.01171875MB
+7f59d6b000-7f59d6d000 ---p  8.0KB
+7f59d6d000-7f59e70000 rw-p [stack:12849] 1.01171875MB
+7f59e70000-7f59e72000 ---p  8.0KB
+7f59e72000-7f59f75000 rw-p [stack:12810] 1.01171875MB
+7f59f75000-7f5a2dc000 r-xp /data/app/com.fenbi.android.servant-1/lib/arm64/libImSDK.so 3.40234375MB
+7f5a2dc000-7f5a2e3000 rw-p  28.0KB
+空闲:  4.0KB
+7f5a2e4000-7f5a2e5000 ---p  4.0KB
+7f5a2e5000-7f5a2e9000 rw-p [anon:thread signal stack] 16.0KB
+7f5a2e9000-7f5a2ea000 ---p  4.0KB
+7f5a2ea000-7f5a3e8000 rw-p [stack:12815] 1016.0KB
+7f5a3e8000-7f5a3ea000 ---p  8.0KB
+7f5a3ea000-7f5a4ed000 rw-p [stack:12807] 1.01171875MB
+7f5a4ed000-7f5a4ef000 ---p  8.0KB
+7f5a4ef000-7f5a5f2000 rw-p [stack:12806] 1.01171875MB
+7f5a5f2000-7f5a5f4000 ---p  8.0KB
+7f5a5f4000-7f5a6f7000 rw-p [stack:12801] 1.01171875MB
+空闲:  8.0KB
+7f5a6f9000-7f5a719000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+7f5a719000-7f5a784000 r-xp /data/app/com.fenbi.android.servant-1/lib/arm64/libglide-webp.so 428.0KB
+7f5a784000-7f5a794000 ---p  64.0KB
+7f5a794000-7f5a797000 r--p /data/app/com.fenbi.android.servant-1/lib/arm64/libglide-webp.so 12.0KB
+7f5a797000-7f5a7b7000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+7f5a7b7000-7f5a7b9000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5a7b9000-7f5a7ba000 ---p  4.0KB
+7f5a7ba000-7f5a7be000 rw-p [anon:thread signal stack] 16.0KB
+空闲:  68.0KB
+7f5a7cf000-7f5a7e3000 rw-p [anon:libc_malloc] 80.0KB
+7f5a7e3000-7f5a7e5000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+空闲:  8.0KB
+7f5a7e7000-7f5a7e8000 ---p  4.0KB
+7f5a7e8000-7f5a7ec000 rw-p [anon:thread signal stack] 16.0KB
+7f5a7ec000-7f5a7ee000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+空闲:  20.0KB
+7f5a7f3000-7f5a7f4000 ---p  4.0KB
+7f5a7f4000-7f5a7f8000 rw-p [anon:thread signal stack] 16.0KB
+7f5a7f8000-7f5a7fa000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+空闲:  12.0KB
+7f5a7fd000-7f5a7ff000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5a7ff000-7f5a87e000 r-xp /data/app/com.fenbi.android.servant-1/lib/arm64/libumeng-spy.so 508.0KB
+7f5a87e000-7f5a88e000 ---p  64.0KB
+7f5a88e000-7f5a891000 r--p /data/app/com.fenbi.android.servant-1/lib/arm64/libumeng-spy.so 12.0KB
+7f5a891000-7f5a8a5000 rw-p  80.0KB
+7f5a8a5000-7f5a8ad000 rw-s /data/data/com.fenbi.android.servant/databases/ti.db-shm 32.0KB
+7f5a8ad000-7f5a8ae000 ---p  4.0KB
+7f5a8ae000-7f5a8b2000 rw-p [anon:thread signal stack] 16.0KB
+7f5a8b2000-7f5a8b3000 ---p  4.0KB
+7f5a8b3000-7f5a8b7000 rw-p [anon:thread signal stack] 16.0KB
+7f5a8b7000-7f5a8d7000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+空闲:  4.0KB
+7f5a8d8000-7f5a8da000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5a8da000-7f5a97a000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 640.0KB
+7f5a97a000-7f5a97c000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5a97c000-7f5a97d000 ---p  4.0KB
+7f5a97d000-7f5a981000 rw-p [anon:thread signal stack] 16.0KB
+空闲:  20.0KB
+7f5a986000-7f5a987000 ---p  4.0KB
+7f5a987000-7f5a98b000 rw-p [anon:thread signal stack] 16.0KB
+7f5a98b000-7f5a98d000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5a98d000-7f5a98e000 ---p  4.0KB
+7f5a98e000-7f5a992000 rw-p [anon:thread signal stack] 16.0KB
+空闲:  28.0KB
+7f5a999000-7f5a99a000 ---p  4.0KB
+7f5a99a000-7f5a99e000 rw-p [anon:thread signal stack] 16.0KB
+7f5a99e000-7f5a9a0000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5a9a0000-7f5a9a1000 ---p  4.0KB
+7f5a9a1000-7f5a9a5000 rw-p [anon:thread signal stack] 16.0KB
+7f5a9a5000-7f5a9a6000 ---p  4.0KB
+7f5a9a6000-7f5a9aa000 rw-p [anon:thread signal stack] 16.0KB
+7f5a9aa000-7f5a9ac000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5a9ac000-7f5a9ad000 ---p  4.0KB
+7f5a9ad000-7f5a9b1000 rw-p [anon:thread signal stack] 16.0KB
+7f5a9b1000-7f5a9b2000 ---p  4.0KB
+7f5a9b2000-7f5a9b6000 rw-p [anon:thread signal stack] 16.0KB
+7f5a9b6000-7f5a9b8000 ---p  8.0KB
+7f5a9b8000-7f5aabb000 rw-p [stack:12799] 1.01171875MB
+7f5aabb000-7f5aabd000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5aabd000-7f5aabf000 ---p  8.0KB
+7f5aabf000-7f5abc2000 rw-p [stack:12798] 1.01171875MB
+7f5abc2000-7f5abc4000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5abc4000-7f5abc5000 ---p  4.0KB
+7f5abc5000-7f5abc9000 rw-p [anon:thread signal stack] 16.0KB
+7f5abc9000-7f5abcb000 ---p  8.0KB
+7f5abcb000-7f5acce000 rw-p [stack:12790] 1.01171875MB
+7f5acce000-7f5acd0000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5acd0000-7f5acd1000 ---p  4.0KB
+7f5acd1000-7f5acd5000 rw-p [anon:thread signal stack] 16.0KB
+7f5acd5000-7f5acd7000 ---p  8.0KB
+7f5acd7000-7f5adda000 rw-p [stack:12789] 1.01171875MB
+空闲:  4.0KB
+7f5addb000-7f5addd000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+空闲:  8.0KB
+7f5addf000-7f5ade0000 ---p  4.0KB
+7f5ade0000-7f5ade4000 rw-p [anon:thread signal stack] 16.0KB
+7f5ade4000-7f5ade5000 ---p  4.0KB
+7f5ade5000-7f5ade9000 rw-p [anon:thread signal stack] 16.0KB
+7f5ade9000-7f5adeb000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+空闲:  24.0KB
+7f5adf1000-7f5adf2000 ---p  4.0KB
+7f5adf2000-7f5adf6000 rw-p [anon:thread signal stack] 16.0KB
+7f5adf6000-7f5adf8000 r-xp /system/lib64/libqti_performance.so 8.0KB
+7f5adf8000-7f5ae07000 ---p  60.0KB
+7f5ae07000-7f5ae09000 r--p /system/lib64/libqti_performance.so 8.0KB
+7f5ae09000-7f5aeb5000 rw-p [anon:libc_malloc] 688.0KB
+7f5aeb5000-7f5aef5000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 256.0KB
+7f5aef5000-7f5aef7000 ---p  8.0KB
+7f5aef7000-7f5affa000 rw-p [stack:12785] 1.01171875MB
+7f5affa000-7f5affc000 ---p  8.0KB
+7f5affc000-7f5b0ff000 rw-p [stack:12784] 1.01171875MB
+7f5b0ff000-7f5b101000 ---p  8.0KB
+7f5b101000-7f5b204000 rw-p [stack:12783] 1.01171875MB
+7f5b204000-7f5b206000 ---p  8.0KB
+7f5b206000-7f5b309000 rw-p [stack:12781] 1.01171875MB
+7f5b309000-7f5b329000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+7f5b329000-7f5b32b000 ---p  8.0KB
+7f5b32b000-7f5b42e000 rw-p [stack:12777] 1.01171875MB
+7f5b42e000-7f5b430000 ---p  8.0KB
+7f5b430000-7f5b533000 rw-p [stack:12776] 1.01171875MB
+7f5b533000-7f5b535000 ---p  8.0KB
+7f5b535000-7f5b638000 rw-p [stack:12775] 1.01171875MB
+7f5b638000-7f5b63a000 ---p  8.0KB
+7f5b63a000-7f5b73d000 rw-p [stack:14122] 1.01171875MB
+7f5b73d000-7f5b73f000 ---p  8.0KB
+7f5b73f000-7f5b842000 rw-p [stack:12773] 1.01171875MB
+7f5b842000-7f5b844000 ---p  8.0KB
+7f5b844000-7f5b947000 rw-p [stack:12772] 1.01171875MB
+7f5b947000-7f5b949000 ---p  8.0KB
+7f5b949000-7f5ba4c000 rw-p [stack:12770] 1.01171875MB
+7f5ba4c000-7f5ba4e000 ---p  8.0KB
+7f5ba4e000-7f5bb51000 rw-p [stack:12769] 1.01171875MB
+7f5bb51000-7f5bb53000 ---p  8.0KB
+7f5bb53000-7f5bc56000 rw-p [stack:12768] 1.01171875MB
+7f5bc56000-7f5bc8c000 r-xp /data/app/com.fenbi.android.servant-1/lib/arm64/libBugly_Native.so 216.0KB
+7f5bc8c000-7f5bcca000 rw-p  248.0KB
+7f5bcca000-7f5bdcd000 rw-p [stack:12766] 1.01171875MB
+7f5bdcd000-7f5bdcf000 ---p  8.0KB
+7f5bdcf000-7f5bed2000 rw-p [stack:12765] 1.01171875MB
+7f5bed2000-7f5bed4000 ---p  8.0KB
+7f5bed4000-7f5bfd7000 rw-p [stack:12761] 1.01171875MB
+7f5bfd7000-7f5bfd9000 ---p  8.0KB
+7f5bfd9000-7f5c0dc000 rw-p [stack:14121] 1.01171875MB
+7f5c0dc000-7f5c0de000 ---p  8.0KB
+7f5c0de000-7f5c1e1000 rw-p [stack:12748] 1.01171875MB
+7f5c1e1000-7f5c1e3000 ---p  8.0KB
+7f5c1e3000-7f5c2e6000 rw-p [stack:12747] 1.01171875MB
+7f5c2e6000-7f5c2e8000 ---p  8.0KB
+7f5c2e8000-7f5c3eb000 rw-p [stack:12746] 1.01171875MB
+7f5c3eb000-7f5c3ec000 ---p  4.0KB
+7f5c3ec000-7f5c4ea000 rw-p [stack:12745] 1016.0KB
+7f5c4ea000-7f5c4ec000 ---p  8.0KB
+7f5c4ec000-7f5c5e9000 rw-p [stack:12742] 1012.0KB
+7f5c5e9000-7f5c5eb000 ---p  8.0KB
+7f5c5eb000-7f5c6ee000 rw-p [stack:12739] 1.01171875MB
+空闲:  4.0KB
+7f5c6ef000-7f5c6f0000 ---p  4.0KB
+7f5c6f0000-7f5c6f4000 rw-p [anon:thread signal stack] 16.0KB
+7f5c6f4000-7f5c6f6000 ---p  8.0KB
+7f5c6f6000-7f5c7f9000 rw-p [stack:14120] 1.01171875MB
+7f5c7f9000-7f5c7fa000 ---p  4.0KB
+7f5c7fa000-7f5c8f8000 rw-p [stack:14117] 1016.0KB
+7f5c8f8000-7f5c8fa000 ---p  8.0KB
+7f5c8fa000-7f5c9fd000 rw-p [stack:14027] 1.01171875MB
+空闲:  64.0KB
+7f5ca0d000-7f5ca28000 rw-p [anon:libc_malloc] 108.0KB
+空闲:  108.0KB
+7f5ca43000-7f5ca45000 ---p  8.0KB
+7f5ca45000-7f5cb48000 rw-p [stack:26318] 1.01171875MB
+7f5cb48000-7f5cbe5000 rw-p [anon:libc_malloc] 628.0KB
+空闲:  200.0KB
+7f5cc17000-7f5cc37000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+空闲:  56.0KB
+7f5cc45000-7f5cc46000 ---p  4.0KB
+7f5cc46000-7f5cc4a000 rw-p [anon:thread signal stack] 16.0KB
+7f5cc4a000-7f5cc4b000 ---p  4.0KB
+7f5cc4b000-7f5cc4f000 rw-p [anon:thread signal stack] 16.0KB
+7f5cc4f000-7f5cc50000 ---p  4.0KB
+7f5cc50000-7f5cc54000 rw-p [anon:thread signal stack] 16.0KB
+7f5cc54000-7f5cc55000 ---p  4.0KB
+7f5cc55000-7f5cc59000 rw-p [anon:thread signal stack] 16.0KB
+7f5cc59000-7f5cc5a000 ---p  4.0KB
+7f5cc5a000-7f5cc5e000 rw-p [anon:thread signal stack] 16.0KB
+7f5cc5e000-7f5cc5f000 ---p  4.0KB
+7f5cc5f000-7f5cc63000 rw-p [anon:thread signal stack] 16.0KB
+7f5cc63000-7f5cc64000 ---p  4.0KB
+7f5cc64000-7f5cc68000 rw-p [anon:thread signal stack] 16.0KB
+7f5cc68000-7f5cc69000 ---p  4.0KB
+7f5cc69000-7f5cc6d000 rw-p [anon:thread signal stack] 16.0KB
+7f5cc6d000-7f5cc6f000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5cc6f000-7f5cc70000 ---p  4.0KB
+7f5cc70000-7f5cc74000 rw-p [anon:thread signal stack] 16.0KB
+7f5cc74000-7f5cc7b000 r-xp /system/lib64/libaudioeffect_jni.so 28.0KB
+7f5cc7b000-7f5cc8a000 ---p  60.0KB
+7f5cc8a000-7f5cc8c000 r--p /system/lib64/libaudioeffect_jni.so 8.0KB
+7f5cc8c000-7f5cd0c000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 512.0KB
+7f5cd0c000-7f5cd0e000 ---p  8.0KB
+7f5cd0e000-7f5ce11000 rw-p [stack:12727] 1.01171875MB
+7f5ce11000-7f5ce13000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5ce13000-7f5ce14000 r--p  4.0KB
+7f5ce14000-7f5ce16000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+空闲:  8.0KB
+7f5ce18000-7f5ce19000 ---p  4.0KB
+7f5ce19000-7f5ce1d000 rw-p [anon:thread signal stack] 16.0KB
+7f5ce1d000-7f5ce1e000 r--p [anon:linker_alloc] 4.0KB
+7f5ce1e000-7f5ce1f000 ---p  4.0KB
+7f5ce1f000-7f5ce23000 rw-p [anon:thread signal stack] 16.0KB
+7f5ce23000-7f5ce25000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5ce25000-7f5ce26000 ---p  4.0KB
+7f5ce26000-7f5ce2a000 rw-p [anon:thread signal stack] 16.0KB
+7f5ce2a000-7f5ce2c000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5ce2c000-7f5ce2d000 ---p  4.0KB
+7f5ce2d000-7f5ce31000 rw-p [anon:thread signal stack] 16.0KB
+7f5ce31000-7f5ce33000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5ce33000-7f5ce34000 ---p  4.0KB
+7f5ce34000-7f5ce38000 rw-p [anon:thread signal stack] 16.0KB
+7f5ce38000-7f5ce3a000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5ce3a000-7f5ce3b000 ---p  4.0KB
+7f5ce3b000-7f5ce3f000 rw-p [anon:thread signal stack] 16.0KB
+7f5ce3f000-7f5ce41000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5ce41000-7f5ce42000 ---p  4.0KB
+7f5ce42000-7f5ce46000 rw-p [anon:thread signal stack] 16.0KB
+7f5ce46000-7f5ce66000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+7f5ce66000-7f5ce68000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5ce68000-7f5ce69000 ---p  4.0KB
+7f5ce69000-7f5ce6d000 rw-p [anon:thread signal stack] 16.0KB
+7f5ce6d000-7f5ce71000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 16.0KB
+空闲:  20.0KB
+7f5ce76000-7f5ce77000 ---p  4.0KB
+7f5ce77000-7f5ce7b000 rw-p [anon:thread signal stack] 16.0KB
+7f5ce7b000-7f5ce7c000 ---p  4.0KB
+7f5ce7c000-7f5ce80000 rw-p [anon:thread signal stack] 16.0KB
+7f5ce80000-7f5ce84000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 16.0KB
+7f5ce84000-7f5ce85000 ---p  4.0KB
+7f5ce85000-7f5ce89000 rw-p [anon:thread signal stack] 16.0KB
+7f5ce89000-7f5ce8b000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5ce8b000-7f5ce8c000 ---p  4.0KB
+7f5ce8c000-7f5ce90000 rw-p [anon:thread signal stack] 16.0KB
+7f5ce90000-7f5ce92000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5ce92000-7f5ce93000 ---p  4.0KB
+7f5ce93000-7f5ce97000 rw-p [anon:thread signal stack] 16.0KB
+7f5ce97000-7f5ce99000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5ce99000-7f5ce9a000 ---p  4.0KB
+7f5ce9a000-7f5ce9e000 rw-p [anon:thread signal stack] 16.0KB
+7f5ce9e000-7f5cede000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 256.0KB
+空闲:  8.0KB
+7f5cee0000-7f5cee1000 ---p  4.0KB
+7f5cee1000-7f5cee5000 rw-p [anon:thread signal stack] 16.0KB
+7f5cee5000-7f5cf06000 rw-p [anon:libc_malloc] 132.0KB
+7f5cf06000-7f5cf07000 ---p  4.0KB
+7f5cf07000-7f5cf0b000 rw-p [anon:thread signal stack] 16.0KB
+7f5cf0b000-7f5cf0d000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5cf0d000-7f5cf0e000 ---p  4.0KB
+7f5cf0e000-7f5cf12000 rw-p [anon:thread signal stack] 16.0KB
+7f5cf12000-7f5cf13000 ---p  4.0KB
+7f5cf13000-7f5cf17000 rw-p [anon:thread signal stack] 16.0KB
+7f5cf17000-7f5cf1f000 rw-s /data/data/com.fenbi.android.servant/databases/smartpen.db-shm 32.0KB
+7f5cf1f000-7f5cf20000 ---p  4.0KB
+7f5cf20000-7f5cf24000 rw-p [anon:thread signal stack] 16.0KB
+7f5cf24000-7f5cf26000 ---p  8.0KB
+7f5cf26000-7f5d029000 rw-p [stack:12721] 1.01171875MB
+7f5d029000-7f5d02d000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 16.0KB
+空闲:  44.0KB
+7f5d038000-7f5d03a000 ---p  8.0KB
+7f5d03a000-7f5d137000 rw-p [stack:19642] 1012.0KB
+7f5d137000-7f5d139000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5d139000-7f5d13a000 ---p  4.0KB
+7f5d13a000-7f5d13e000 rw-p [anon:thread signal stack] 16.0KB
+7f5d13e000-7f5d13f000 ---p  4.0KB
+7f5d13f000-7f5d143000 rw-p [anon:thread signal stack] 16.0KB
+7f5d143000-7f5d184000 rw-p [anon:libc_malloc] 260.0KB
+7f5d184000-7f5d1ac000 r-xp /data/app/com.fenbi.android.servant-1/lib/arm64/libsls_producer.so 160.0KB
+7f5d1ac000-7f5d1bc000 ---p  64.0KB
+7f5d1bc000-7f5d1be000 r--p /data/app/com.fenbi.android.servant-1/lib/arm64/libsls_producer.so 8.0KB
+7f5d1be000-7f5d1c0000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5d1c0000-7f5d1c1000 ---p  4.0KB
+7f5d1c1000-7f5d1c5000 rw-p [anon:thread signal stack] 16.0KB
+7f5d1c5000-7f5d1c7000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5d1c7000-7f5d1c8000 ---p  4.0KB
+7f5d1c8000-7f5d1cc000 rw-p [anon:thread signal stack] 16.0KB
+7f5d1cc000-7f5d1cd000 ---p  4.0KB
+7f5d1cd000-7f5d1d1000 rw-p [anon:thread signal stack] 16.0KB
+7f5d1d1000-7f5d1d3000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+空闲:  28.0KB
+7f5d1da000-7f5d1db000 r--p [anon:linker_alloc] 4.0KB
+7f5d1db000-7f5d1dd000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5d1dd000-7f5d1de000 ---p  4.0KB
+7f5d1de000-7f5d1e2000 rw-p [anon:thread signal stack] 16.0KB
+7f5d1e2000-7f5d1e4000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5d1e4000-7f5d1eb000 r--p /system/framework/oat/arm64/QPerformance.odex 28.0KB
+7f5d1eb000-7f5d20b000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+空闲:  32.0KB
+7f5d213000-7f5d215000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5d215000-7f5d216000 ---p  4.0KB
+7f5d216000-7f5d21a000 rw-p [anon:thread signal stack] 16.0KB
+7f5d21a000-7f5d21c000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5d21c000-7f5d21d000 ---p  4.0KB
+7f5d21d000-7f5d221000 rw-p [anon:thread signal stack] 16.0KB
+7f5d221000-7f5d223000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5d223000-7f5d243000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+空闲:  28.0KB
+7f5d24a000-7f5d24b000 ---p  4.0KB
+7f5d24b000-7f5d24f000 rw-p [anon:thread signal stack] 16.0KB
+7f5d24f000-7f5d250000 ---p  4.0KB
+7f5d250000-7f5d254000 rw-p [anon:thread signal stack] 16.0KB
+7f5d254000-7f5d255000 ---p  4.0KB
+7f5d255000-7f5d259000 rw-p [anon:thread signal stack] 16.0KB
+7f5d259000-7f5d25a000 ---p  4.0KB
+7f5d25a000-7f5d25e000 rw-p [anon:thread signal stack] 16.0KB
+7f5d25e000-7f5d25f000 ---p  4.0KB
+7f5d25f000-7f5d263000 rw-p [anon:thread signal stack] 16.0KB
+7f5d263000-7f5d264000 ---p  4.0KB
+7f5d264000-7f5d268000 rw-p [anon:thread signal stack] 16.0KB
+7f5d268000-7f5d269000 ---p  4.0KB
+7f5d269000-7f5d26d000 rw-p [anon:thread signal stack] 16.0KB
+7f5d26d000-7f5d299000 rw-p [anon:libc_malloc] 176.0KB
+7f5d299000-7f5d2f9000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 384.0KB
+7f5d2f9000-7f5d2fa000 ---p  4.0KB
+7f5d2fa000-7f5d2fe000 rw-p [anon:thread signal stack] 16.0KB
+7f5d2fe000-7f5d302000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 16.0KB
+7f5d302000-7f5d303000 ---p  4.0KB
+7f5d303000-7f5d307000 rw-p [anon:thread signal stack] 16.0KB
+7f5d307000-7f5d308000 ---p  4.0KB
+7f5d308000-7f5d30c000 rw-p [anon:thread signal stack] 16.0KB
+7f5d30c000-7f5d30e000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5d30e000-7f5d34f000 rw-p [anon:libc_malloc] 260.0KB
+7f5d34f000-7f5d357000 rw-s /data/data/com.fenbi.android.servant/databases/yuantiku_db-shm 32.0KB
+7f5d357000-7f5d397000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 256.0KB
+7f5d397000-7f5d398000 ---p  4.0KB
+7f5d398000-7f5d39c000 rw-p [anon:thread signal stack] 16.0KB
+7f5d39c000-7f5d39e000 ---p  8.0KB
+7f5d39e000-7f5d4a1000 rw-p [stack:12716] 1.01171875MB
+7f5d4a1000-7f5d4a3000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5d4a3000-7f5d4ab000 rw-s /data/data/com.fenbi.android.servant/databases/mnms.db-shm 32.0KB
+7f5d4ab000-7f5d4ac000 ---p  4.0KB
+7f5d4ac000-7f5d4b0000 rw-p [anon:thread signal stack] 16.0KB
+7f5d4b0000-7f5d4b2000 ---p  8.0KB
+7f5d4b2000-7f5d5b5000 rw-p [stack:12713] 1.01171875MB
+7f5d5b5000-7f5d5b9000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 16.0KB
+7f5d5b9000-7f5d5ba000 ---p  4.0KB
+7f5d5ba000-7f5d5be000 rw-p [anon:thread signal stack] 16.0KB
+7f5d5be000-7f5d5c0000 ---p  8.0KB
+7f5d5c0000-7f5d6c3000 rw-p [stack:14503] 1.01171875MB
+7f5d6c3000-7f5d6c4000 ---p  4.0KB
+7f5d6c4000-7f5d6c8000 rw-p [anon:thread signal stack] 16.0KB
+7f5d6c8000-7f5d6ca000 ---p  8.0KB
+7f5d6ca000-7f5d7cd000 rw-p [stack:12707] 1.01171875MB
+7f5d7cd000-7f5d7cf000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5d7cf000-7f5d7d7000 rw-s /data/data/com.fenbi.android.servant/databases/moment.db-shm 32.0KB
+空闲:  44.0KB
+7f5d7e2000-7f5d7e4000 ---p  8.0KB
+7f5d7e4000-7f5d8e1000 rw-p [stack:26502] 1012.0KB
+7f5d8e1000-7f5d8e3000 ---p  8.0KB
+7f5d8e3000-7f5d9e6000 rw-p [stack:12702] 1.01171875MB
+空闲:  24.0KB
+7f5d9ec000-7f5d9ee000 ---p  8.0KB
+7f5d9ee000-7f5daeb000 rw-p [stack:17329] 1012.0KB
+空闲:  24.0KB
+7f5daf1000-7f5daf3000 ---p  8.0KB
+7f5daf3000-7f5dbf0000 rw-p [stack:18389] 1012.0KB
+7f5dbf0000-7f5dbf2000 ---p  8.0KB
+7f5dbf2000-7f5dcf5000 rw-p [stack:12861] 1.01171875MB
+空闲:  56.0KB
+7f5dd03000-7f5dd1b000 rw-p [anon:libc_malloc] 96.0KB
+空闲:  8.0KB
+7f5dd1d000-7f5dd1e000 ---p  4.0KB
+7f5dd1e000-7f5dd22000 rw-p [anon:thread signal stack] 16.0KB
+7f5dd22000-7f5dd24000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+空闲:  128.0KB
+7f5dd44000-7f5dd46000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5dd46000-7f5dd47000 ---p  4.0KB
+7f5dd47000-7f5dd4b000 rw-p [anon:thread signal stack] 16.0KB
+空闲:  20.0KB
+7f5dd50000-7f5dd52000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5dd52000-7f5dd53000 ---p  4.0KB
+7f5dd53000-7f5dd57000 rw-p [anon:thread signal stack] 16.0KB
+空闲:  168.0KB
+7f5dd81000-7f5dd82000 ---p  4.0KB
+7f5dd82000-7f5dd86000 rw-p [anon:thread signal stack] 16.0KB
+空闲:  40.0KB
+7f5dd90000-7f5dd91000 ---p  4.0KB
+7f5dd91000-7f5dd95000 rw-p [anon:thread signal stack] 16.0KB
+空闲:  68.0KB
+7f5dda6000-7f5ddc7000 rw-p [anon:libc_malloc] 132.0KB
+7f5ddc7000-7f5ddcb000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 16.0KB
+空闲:  8.0KB
+7f5ddcd000-7f5ddce000 ---p   .0KB
+7f5ddce000-7f5ddd2000 rw-p [anon:thread signal stack] 16.0KB
+7f5ddd2000-7f5ddd4000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f5ddd4000-7f5ddd5000 ---p  4.0KB
+7f5ddd5000-7f5ddd9000 rw-p [anon:thread signal stack] 16.0KB
+7f5ddd9000-7f5ddfa000 rw-p [anon:libc_malloc] 132.0KB
+7f5ddfa000-7f5ddfc000 ---p  8.0KB
+7f5ddfc000-7f5deff000 rw-p [stack:12697] 1.01171875MB
+7f5deff000-7f5df1f000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+7f5df1f000-7f5df21000 ---p  8.0KB
+7f5df21000-7f5e024000 rw-p [stack:12696] 1.01171875MB
+7f5e024000-7f5e026000 ---p  8.0KB
+7f5e026000-7f5e129000 rw-p [stack:12767] 1.01171875MB
+7f5e129000-7f5e12b000 ---p  8.0KB
+7f5e12b000-7f5e22e000 rw-p [stack:12694] 1.01171875MB
+7f5e22e000-7f5e230000 ---p  8.0KB
+7f5e230000-7f5e333000 rw-p [stack:12693] 1.01171875MB
+7f5e333000-7f5e335000 ---p  8.0KB
+7f5e335000-7f5e438000 rw-p [stack:12692] 1.01171875MB
+7f5e438000-7f5e458000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+7f5e458000-7f626ff000 rwxp  66.65234375MB
+7f626ff000-7f62700000 rw-p /system/lib64/libm.so 4.0KB
+7f62700000-7f62d10000 rw-p  6.0625MB
+7f62d10000-7f62d11000 rw-p /system/lib64/libm.so 4.0KB
+7f62d11000-7f6310d000 rw-p  3.984375MB
+7f6310d000-7f6310e000 rw-p /system/lib64/libm.so 4.0KB
+7f6310e000-7f6354c000 rw-p  4.2421875MB
+7f6354c000-7f6354d000 rw-p /system/lib64/libm.so 4.0KB
+7f6354d000-7f637bb000 rw-p  2.4296875MB
+7f637bb000-7f637bc000 rw-p /system/lib64/libm.so 4.0KB
+7f637bc000-7f63c3c000 rw-p  4.5MB
+7f63c3c000-7f63c3d000 rw-p /system/lib64/libm.so 4.0KB
+7f63c3d000-7f640e4000 rw-p  4.65234375MB
+7f640e4000-7f640e5000 rw-p /system/lib64/libm.so 4.0KB
+7f640e5000-7f64560000 rw-p  4.48046875MB
+7f64560000-7f64561000 rw-p /system/lib64/libm.so 4.0KB
+7f64561000-7f64a5b000 rw-p  4.9765625MB
+7f64a5b000-7f64a5c000 rw-p /system/lib64/libm.so 4.0KB
+7f64a5c000-7f65366000 rw-p  9.0390625MB
+7f65366000-7f65367000 rw-p /system/lib64/libm.so 4.0KB
+7f65367000-7f65bb9000 rw-p  8.3203125MB
+7f65bb9000-7f65bba000 rw-p /system/lib64/libm.so 4.0KB
+7f65bba000-7f663fa000 rw-p  8.25MB
+空闲:  4.0KB
+7f663fb000-7f663fd000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f663fd000-7f663fe000 ---p  4.0KB
+7f663fe000-7f66402000 rw-p [anon:thread signal stack] 16.0KB
+7f66402000-7f66404000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+空闲:  8.0KB
+7f66406000-7f66408000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f66408000-7f66409000 ---p  4.0KB
+7f66409000-7f6640d000 rw-p [anon:thread signal stack] 16.0KB
+7f6640d000-7f6640e000 ---p  4.0KB
+7f6640e000-7f66412000 rw-p [anon:thread signal stack] 16.0KB
+7f66412000-7f66413000 ---p  4.0KB
+7f66413000-7f66417000 rw-p [anon:thread signal stack] 16.0KB
+7f66417000-7f66497000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 512.0KB
+7f66497000-7f664ae000 rw-p [anon:libc_malloc] 92.0KB
+7f664ae000-7f664ee000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 256.0KB
+7f664ee000-7f6651c000 rw-p [anon:libc_malloc] 184.0KB
+空闲:  364.0KB
+7f66577000-7f66584000 rw-p  52.0KB
+7f66584000-7f66596000 rw-p [anon:libc_malloc] 72.0KB
+空闲:  28.0KB
+7f6659d000-7f6659e000 ---p  4.0KB
+7f6659e000-7f665a2000 rw-p [anon:thread signal stack] 16.0KB
+7f665a2000-7f665a4000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+空闲:  28.0KB
+7f665ab000-7f665d1000 rw-p [anon:libc_malloc] 152.0KB
+7f665d1000-7f665d2000 ---p  4.0KB
+7f665d2000-7f665d6000 rw-p [anon:thread signal stack] 16.0KB
+7f665d6000-7f665d8000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+空闲:  24.0KB
+7f665de000-7f665df000 ---p  4.0KB
+7f665df000-7f665e3000 rw-p [anon:thread signal stack] 16.0KB
+7f665e3000-7f665f7000 rw-p [anon:libc_malloc] 80.0KB
+空闲:  4.0KB
+7f665f8000-7f665f9000 rw-p  4.0KB
+7f665f9000-7f665fb000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f665fb000-7f665fc000 ---p  4.0KB
+7f665fc000-7f66600000 rw-p [anon:thread signal stack] 16.0KB
+7f66600000-7f66602000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f66602000-7f66603000 ---p  4.0KB
+7f66603000-7f66607000 rw-p [anon:thread signal stack] 16.0KB
+7f66607000-7f66609000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f66609000-7f6660a000 ---p  4.0KB
+7f6660a000-7f6660e000 rw-p [anon:thread signal stack] 16.0KB
+7f6660e000-7f66610000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f66610000-7f66621000 rw-p [anon:libc_malloc] 68.0KB
+7f66621000-7f66622000 rw-p /system/lib64/libm.so 4.0KB
+7f66622000-7f6696c000 rw-p  3.2890625MB
+空闲:  4.0KB
+7f6696d000-7f66971000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 16.0KB
+7f66971000-7f66972000 ---p  4.0KB
+7f66972000-7f66976000 rw-p [anon:thread signal stack] 16.0KB
+7f66976000-7f669b7000 rw-p [anon:libc_malloc] 260.0KB
+7f669b7000-7f669d7000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+7f669d7000-7f66a21000 rw-p [anon:libc_malloc] 296.0KB
+7f66a21000-7f66a23000 ---p  8.0KB
+7f66a23000-7f66b26000 rw-p [stack:12684] 1.01171875MB
+7f66b26000-7f66c25000 ---p  1020.0KB
+7f66c25000-7f66c29000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 16.0KB
+7f66c29000-7f66c2b000 r--s /dev/kgsl-3d0 8.0KB
+7f66c2b000-7f66c2d000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f66c2d000-7f66c2e000 ---p  4.0KB
+7f66c2e000-7f66c32000 rw-p [anon:thread signal stack] 16.0KB
+7f66c32000-7f66c33000 ---p  4.0KB
+7f66c33000-7f66c37000 rw-p [stack:14138] 16.0KB
+7f66c37000-7f66c3b000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 16.0KB
+7f66c3b000-7f66c3c000 ---p  4.0KB
+7f66c3c000-7f66c40000 rw-p [anon:thread signal stack] 16.0KB
+7f66c40000-7f66c41000 ---p  4.0KB
+7f66c41000-7f66c45000 rw-p [anon:thread signal stack] 16.0KB
+7f66c45000-7f66c46000 ---p  4.0KB
+7f66c46000-7f66c4a000 rw-p [anon:thread signal stack] 16.0KB
+7f66c4a000-7f66c8b000 rw-p [anon:libc_malloc] 260.0KB
+7f66c8b000-7f66c8c000 ---p  4.0KB
+7f66c8c000-7f66c90000 rw-p [anon:thread signal stack] 16.0KB
+7f66c90000-7f66c94000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 16.0KB
+7f66c94000-7f66c95000 ---p  4.0KB
+7f66c95000-7f66c99000 rw-p [anon:thread signal stack] 16.0KB
+7f66c99000-7f66c9a000 ---p  4.0KB
+7f66c9a000-7f66c9e000 rw-p [anon:thread signal stack] 16.0KB
+7f66c9e000-7f66ca2000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 16.0KB
+7f66ca2000-7f66ca3000 ---p  4.0KB
+7f66ca3000-7f66ca7000 rw-p [anon:thread signal stack] 16.0KB
+7f66ca7000-7f66ca9000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f66ca9000-7f66caa000 ---p  4.0KB
+7f66caa000-7f66cae000 rw-p [anon:thread signal stack] 16.0KB
+7f66cae000-7f66cce000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+7f66cce000-7f66ccf000 ---p  4.0KB
+7f66ccf000-7f66cd3000 rw-p [anon:thread signal stack] 16.0KB
+7f66cd3000-7f66cd5000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f66cd5000-7f66cd6000 ---p  4.0KB
+7f66cd6000-7f66cda000 rw-p [anon:thread signal stack] 16.0KB
+7f66cda000-7f66cdc000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f66cdc000-7f66cdd000 ---p  4.0KB
+7f66cdd000-7f66ce1000 rw-p [anon:thread signal stack] 16.0KB
+7f66ce1000-7f66ce2000 ---p  4.0KB
+7f66ce2000-7f66ce6000 rw-p [anon:thread signal stack] 16.0KB
+7f66ce6000-7f66ce8000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f66ce8000-7f66ce9000 ---p  4.0KB
+7f66ce9000-7f66ced000 rw-p [anon:thread signal stack] 16.0KB
+7f66ced000-7f66cef000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f66cef000-7f66cf0000 ---p  4.0KB
+7f66cf0000-7f66cf4000 rw-p [anon:thread signal stack] 16.0KB
+7f66cf4000-7f66cf6000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f66cf6000-7f66cf7000 ---p  4.0KB
+7f66cf7000-7f66cfb000 rw-p [anon:thread signal stack] 16.0KB
+7f66cfb000-7f66cfc000 ---p  4.0KB
+7f66cfc000-7f66d00000 rw-p [anon:thread signal stack] 16.0KB
+7f66d00000-7f66d01000 ---p  4.0KB
+7f66d01000-7f66d05000 rw-p [anon:thread signal stack] 16.0KB
+7f66d05000-7f66d06000 rw-p  4.0KB
+7f66d06000-7f66d0a000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 16.0KB
+7f66d0a000-7f66d0b000 ---p  4.0KB
+7f66d0b000-7f66d0f000 rw-p [anon:thread signal stack] 16.0KB
+7f66d0f000-7f66d11000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f66d11000-7f66d13000 rw-s anon_inode:dmabuf 8.0KB
+7f66d13000-7f66d14000 ---p  4.0KB
+7f66d14000-7f66d18000 rw-p [anon:thread signal stack] 16.0KB
+7f66d18000-7f66d1a000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f66d1a000-7f66d1b000 ---p  4.0KB
+7f66d1b000-7f66d1f000 rw-p [anon:thread signal stack] 16.0KB
+7f66d1f000-7f66d20000 ---p  4.0KB
+7f66d20000-7f66d24000 rw-p [anon:thread signal stack] 16.0KB
+7f66d24000-7f66d25000 ---p  4.0KB
+7f66d25000-7f66e23000 rw-p [stack:12677] 1016.0KB
+7f66e23000-7f6ae9a000 r--p /data/app/com.fenbi.android.servant-1/oat/arm64/base.odex 64.46484375MB
+7f6ae9a000-7f6b69a000 rw-p /dev/ashmem/dalvik-allocspace main rosalloc space mark-bitmap 3 (deleted) 8.0MB
+7f6b69a000-7f6be9a000 rw-p /dev/ashmem/dalvik-allocspace main rosalloc space live-bitmap 3 (deleted) 8.0MB
+7f6be9a000-7f7229a000 ---p  100.0MB
+7f7229a000-7f7229c000 r-xp /system/lib64/libwebviewchromium_loader.so 8.0KB
+7f7229c000-7f722ab000 ---p  60.0KB
+7f722ab000-7f722ad000 r--p /system/lib64/libwebviewchromium_loader.so 8.0KB
+7f722ad000-7f722d1000 r--s /system/usr/hyphen-data/hyph-nn.hyb 144.0KB
+7f722d1000-7f722f5000 r--s /system/usr/hyphen-data/hyph-nb.hyb 144.0KB
+7f722f5000-7f72343000 r--s /system/usr/hyphen-data/hyph-hu.hyb 312.0KB
+7f72343000-7f72344000 r-xp /system/lib64/libjnigraphics.so 4.0KB
+7f72344000-7f72353000 ---p  60.0KB
+7f72353000-7f72355000 r--p /system/lib64/libjnigraphics.so 8.0KB
+7f72355000-7f72370000 r-xp /system/lib64/libcompiler_rt.so 108.0KB
+7f72370000-7f7237f000 ---p  60.0KB
+7f7237f000-7f72381000 r--p /system/lib64/libcompiler_rt.so 8.0KB
+7f72381000-7f723ea000 rw-p  420.0KB
+7f723ea000-7f723fd000 r-xp /system/lib64/libandroid.so 76.0KB
+7f723fd000-7f7240c000 ---p  60.0KB
+7f7240c000-7f72410000 r--p /system/lib64/libandroid.so 16.0KB
+7f72410000-7f7241c000 r-xp /system/lib64/libqservice.so 48.0KB
+7f7241c000-7f7242c000 ---p  64.0KB
+7f7242c000-7f72432000 r--p /system/lib64/libqservice.so 24.0KB
+7f72432000-7f72437000 r-xp /system/lib64/libqdutils.so 20.0KB
+7f72437000-7f72446000 ---p  60.0KB
+7f72446000-7f72448000 r--p /system/lib64/libqdutils.so 8.0KB
+7f72448000-7f72449000 r-xp /system/lib64/libqdMetaData.so 4.0KB
+7f72449000-7f72458000 ---p  60.0KB
+7f72458000-7f7245a000 r--p /system/lib64/libqdMetaData.so 8.0KB
+7f7245a000-7f72461000 r-xp /system/lib64/libmemalloc.so 28.0KB
+7f72461000-7f72470000 ---p  60.0KB
+7f72470000-7f72472000 r--p /system/lib64/libmemalloc.so 8.0KB
+7f72472000-7f72478000 r-xp /system/lib64/hw/gralloc.msm8953.so 24.0KB
+7f72478000-7f72487000 ---p  60.0KB
+7f72487000-7f72489000 r--p /system/lib64/hw/gralloc.msm8953.so 8.0KB
+7f72489000-7f72496000 r-xp /system/vendor/lib64/egl/eglSubDriverAndroid.so 52.0KB
+7f72496000-7f724a5000 ---p  60.0KB
+7f724a5000-7f724a7000 r--p /system/vendor/lib64/egl/eglSubDriverAndroid.so 8.0KB
+7f724a7000-7f724d9000 r-xp /system/vendor/lib64/egl/libGLESv1_CM_adreno.so 200.0KB
+7f724d9000-7f724e8000 ---p  60.0KB
+7f724e8000-7f724ea000 r--p /system/vendor/lib64/egl/libGLESv1_CM_adreno.so 8.0KB
+7f724ea000-7f7309f000 r-xp /system/vendor/lib64/libllvm-glnext.so 11.70703125MB
+7f7309f000-7f730af000 ---p  64.0KB
+7f730af000-7f730ec000 r--p /system/vendor/lib64/libllvm-glnext.so 244.0KB
+7f730ec000-7f73106000 rw-p  104.0KB
+7f73106000-7f734e6000 r-xp /system/vendor/lib64/egl/libGLESv2_adreno.so 3.875MB
+7f734e6000-7f734f5000 ---p  60.0KB
+7f734f5000-7f7377f000 r--p /system/vendor/lib64/egl/libGLESv2_adreno.so 2.5390625MB
+7f7377f000-7f73780000 rw-p  4.0KB
+7f73780000-7f737c9000 r-xp /system/vendor/lib64/libgsl.so 292.0KB
+7f737c9000-7f737d9000 ---p  64.0KB
+7f737d9000-7f737db000 r--p /system/vendor/lib64/libgsl.so 8.0KB
+7f737db000-7f737dc000 rw-p  4.0KB
+7f737dc000-7f737e2000 r-xp /system/vendor/lib64/libadreno_utils.so 24.0KB
+7f737e2000-7f737f1000 ---p  60.0KB
+7f737f1000-7f737f3000 r--p /system/vendor/lib64/libadreno_utils.so 8.0KB
+7f737f3000-7f737f5000 rw-p  8.0KB
+7f737f5000-7f7380c000 r-xp /system/vendor/lib64/egl/libEGL_adreno.so 92.0KB
+7f7380c000-7f7381b000 ---p  60.0KB
+7f7381b000-7f7381d000 r--p /system/vendor/lib64/egl/libEGL_adreno.so 8.0KB
+7f7381d000-7f7381e000 rw-p  4.0KB
+7f7381e000-7f739eb000 r--s /system/framework/framework-res.apk 1.80078125MB
+7f739eb000-7f73a2c000 rw-p [anon:libc_malloc] 260.0KB
+7f73a2c000-7f73ac9000 r--s /system/framework/framework-res.apk 628.0KB
+7f73ac9000-7f73aca000 ---p  4.0KB
+7f73aca000-7f73ace000 rw-p [anon:thread signal stack] 16.0KB
+7f73ace000-7f73acf000 ---p  4.0KB
+7f73acf000-7f73ad3000 rw-p [anon:thread signal stack] 16.0KB
+7f73ad3000-7f73ad4000 ---p  4.0KB
+7f73ad4000-7f73ad8000 rw-p [anon:thread signal stack] 16.0KB
+7f73ad8000-7f73ad9000 r--s /system/usr/hyphen-data/hyph-und-ethi.hyb 4.0KB
+7f73ad9000-7f73ada000 r--s /system/usr/hyphen-data/hyph-hy.hyb 4.0KB
+7f73ada000-7f73afd000 r-xp /system/lib64/libkeymaster1.so 140.0KB
+7f73afd000-7f73b0c000 ---p  60.0KB
+7f73b0c000-7f73b10000 r--p /system/lib64/libkeymaster1.so 16.0KB
+7f73b10000-7f73b1b000 r-xp /system/lib64/libkeymaster_messages.so 44.0KB
+7f73b1b000-7f73b2b000 ---p  64.0KB
+7f73b2b000-7f73b2d000 r--p /system/lib64/libkeymaster_messages.so 8.0KB
+7f73b2d000-7f73b49000 r-xp /system/lib64/libsoftkeymasterdevice.so 112.0KB
+7f73b49000-7f73b59000 ---p  64.0KB
+7f73b59000-7f73b5c000 r--p /system/lib64/libsoftkeymasterdevice.so 12.0KB
+7f73b5c000-7f73b69000 r-xp /system/lib64/libkeystore_binder.so 52.0KB
+7f73b69000-7f73b79000 ---p  64.0KB
+7f73b79000-7f73b7c000 r--p /system/lib64/libkeystore_binder.so 12.0KB
+7f73b7c000-7f73b7f000 r-xp /system/lib64/libkeystore-engine.so 12.0KB
+7f73b7f000-7f73b8e000 ---p  60.0KB
+7f73b8e000-7f73b90000 r--p /system/lib64/libkeystore-engine.so 8.0KB
+7f73b90000-7f73bb4000 r-xp /system/lib64/libjavacrypto.so 144.0KB
+7f73bb4000-7f73bc3000 ---p  60.0KB
+7f73bc3000-7f73bc7000 r--p /system/lib64/libjavacrypto.so 16.0KB
+7f73bc7000-7f73bf1000 rw-p [anon:libc_malloc] 168.0KB
+7f73bf1000-7f73bf9000 r--s /system/usr/hyphen-data/hyph-en-us.hyb 32.0KB
+7f73bf9000-7f73bfa000 r--p [anon:linker_alloc] 4.0KB
+7f73bfa000-7f73bfb000 r--s /system/usr/hyphen-data/hyph-eu.hyb 4.0KB
+7f73bfb000-7f73bfd000 r--p [anon:linker_alloc] 8.0KB
+7f73bfd000-7f73bff000 r--p  8.0KB
+7f73bff000-7f73c00000 r--p [anon:linker_alloc] 4.0KB
+7f73c00000-7f73c07000 r--p /data/dalvik-cache/arm64/system@framework@tcmclient.jar@classes.dex 28.0KB
+7f73c07000-7f73c08000 r--p  4.0KB
+7f73c08000-7f73c0b000 r-xp /system/lib64/libextmedia_jni.so 12.0KB
+7f73c0b000-7f73c1a000 ---p  60.0KB
+7f73c1a000-7f73c1d000 r--p /system/lib64/libextmedia_jni.so 12.0KB
+7f73c1d000-7f73c1e000 rw-p [anon:linker_alloc_128] 4.0KB
+7f73c1e000-7f73c2e000 r-xp /system/lib64/libstagefright_amrnb_common.so 64.0KB
+7f73c2e000-7f73c3d000 ---p  60.0KB
+7f73c3d000-7f73c3f000 r--p /system/lib64/libstagefright_amrnb_common.so 8.0KB
+7f73c3f000-7f73c64000 r-xp /system/lib64/libexif.so 148.0KB
+7f73c64000-7f73c74000 ---p  64.0KB
+7f73c74000-7f73c89000 r--p /system/lib64/libexif.so 84.0KB
+7f73c89000-7f73ca7000 r-xp /system/lib64/libmtp.so 120.0KB
+7f73ca7000-7f73cb6000 ---p  60.0KB
+7f73cb6000-7f73cba000 r--p /system/lib64/libmtp.so 16.0KB
+7f73cba000-7f73d24000 r-xp /system/lib64/libmedia_jni.so 424.0KB
+7f73d24000-7f73d33000 ---p  60.0KB
+7f73d33000-7f73d3a000 r--p /system/lib64/libmedia_jni.so 28.0KB
+7f73d3a000-7f73d3b000 rw-p  4.0KB
+7f73d3b000-7f73db4000 r--s /system/usr/share/zoneinfo/tzdata 484.0KB
+7f73db4000-7f753b5000 r--s /system/usr/icu/icudt55l.dat 22.00390625MB
+7f753b5000-7f753c6000 rw-p [anon:libc_malloc] 68.0KB
+7f753c6000-7f753d0000 r--p /system/fonts/CarroisGothicSC-Regular.ttf 40.0KB
+7f753d0000-7f753e1000 rw-p [anon:libc_malloc] 68.0KB
+7f753e1000-7f753fe000 r--p /system/fonts/DancingScript-Bold.ttf 116.0KB
+7f753fe000-7f7541b000 r--p /system/fonts/DancingScript-Regular.ttf 116.0KB
+7f7541b000-7f7542c000 rw-p [anon:libc_malloc] 68.0KB
+7f7542c000-7f7543b000 r--p /system/fonts/ComingSoon.ttf 60.0KB
+7f7543b000-7f7544c000 rw-p [anon:libc_malloc] 68.0KB
+7f7544c000-7f7545d000 r--p /system/fonts/CutiveMono.ttf 68.0KB
+7f7545d000-7f7546e000 rw-p [anon:libc_malloc] 68.0KB
+7f7546e000-7f75489000 r--p /system/fonts/DroidSansMono.ttf 108.0KB
+7f75489000-7f7549a000 rw-p [anon:libc_malloc] 68.0KB
+7f7549a000-7f754db000 r--p /system/fonts/NotoSerif-BoldItalic.ttf 260.0KB
+7f754db000-7f75518000 r--p /system/fonts/NotoSerif-Italic.ttf 244.0KB
+7f75518000-7f75555000 r--p /system/fonts/NotoSerif-Bold.ttf 244.0KB
+7f75555000-7f75592000 r--p /system/fonts/NotoSerif-Regular.ttf 244.0KB
+7f75592000-7f755df000 r--p /system/fonts/RobotoCondensed-BoldItalic.ttf 308.0KB
+7f755df000-7f75627000 r--p /system/fonts/RobotoCondensed-Bold.ttf 288.0KB
+7f75627000-7f75674000 r--p /system/fonts/RobotoCondensed-Italic.ttf 308.0KB
+7f75674000-7f756bd000 r--p /system/fonts/RobotoCondensed-Regular.ttf 292.0KB
+7f756bd000-7f7570b000 r--p /system/fonts/RobotoCondensed-LightItalic.ttf 312.0KB
+7f7570b000-7f75753000 r--p /system/fonts/RobotoCondensed-Light.ttf 288.0KB
+7f75753000-7f7576f000 r--p /system/fonts/NotoSansMongolian-Regular.ttf 112.0KB
+7f7576f000-7f75772000 r--p /system/fonts/NotoSansTaiLe-Regular.ttf 12.0KB
+7f75772000-7f759e1000 r--p /system/fonts/NotoColorEmoji.ttf 2.43359375MB
+7f759e1000-7f75ba1000 r--p /system/fonts/NotoSansKR-Regular.otf 1.75MB
+7f75ba1000-7f75eaf000 r--p /system/fonts/NotoSansJP-Regular.otf 3.0546875MB
+7f75eaf000-7f761a3000 r--p /system/fonts/NotoSansTC-Regular.otf 2.953125MB
+7f761a3000-7f7696b000 r--p /system/fonts/NotoSansSC-Regular.otf 7.78125MB
+7f7696b000-7f769ad000 r--p /system/fonts/NotoSansSymbols-Regular-Subsetted.ttf 264.0KB
+7f769ad000-7f769cb000 r--p /system/fonts/NotoSansYi-Regular.ttf 120.0KB
+7f769cb000-7f769db000 r--p /system/fonts/NotoSansVai-Regular.ttf 64.0KB
+7f769db000-7f769df000 r--p /system/fonts/NotoSansTifinagh-Regular.ttf 16.0KB
+7f769df000-7f76a41000 r--p /system/fonts/NotoSansTibetan-Regular.ttf 392.0KB
+7f76a41000-7f76a45000 r--p /system/fonts/NotoSansTaiViet-Regular.ttf 16.0KB
+7f76a45000-7f76a51000 r--p /system/fonts/NotoSansTaiTham-Regular.ttf 48.0KB
+7f76a51000-7f76a53000 r--p /system/fonts/NotoSansTagbanwa-Regular.ttf 8.0KB
+7f76a53000-7f76a5f000 r--p /system/fonts/NotoSansSyriacEstrangela-Regular.ttf 48.0KB
+7f76a5f000-7f76a63000 r--p /system/fonts/NotoSansSylotiNagri-Regular.ttf 16.0KB
+7f76a63000-7f76a66000 r--p /system/fonts/NotoSansSundanese-Regular.ttf 12.0KB
+7f76a66000-7f76a6b000 r--p /system/fonts/NotoSansSaurashtra-Regular.ttf 20.0KB
+7f76a6b000-7f76a6d000 r--p /system/fonts/NotoSansRejang-Regular.ttf 8.0KB
+7f76a6d000-7f76a6f000 r--p /system/fonts/NotoSansOlChiki-Regular.ttf 8.0KB
+7f76a6f000-7f76a74000 r--p /system/fonts/NotoSansNKo-Regular.ttf 20.0KB
+7f76a74000-7f76a78000 r--p /system/fonts/NotoSansNewTaiLue-Regular.ttf 16.0KB
+7f76a78000-7f76a7c000 r--p /system/fonts/NotoSansMeeteiMayek-Regular.ttf 16.0KB
+7f76a7c000-7f76a80000 r--p /system/fonts/NotoSansMandaic-Regular.ttf 16.0KB
+7f76a80000-7f76a82000 r--p /system/fonts/NotoSansLisu-Regular.ttf 8.0KB
+7f76a82000-7f76a85000 r--p /system/fonts/NotoSansLimbu-Regular.ttf 12.0KB
+7f76a85000-7f76a9e000 r--p /system/fonts/NotoSansLepcha-Regular.ttf 100.0KB
+7f76a9e000-7f76aa0000 r--p /system/fonts/NotoSansKayahLi-Regular.ttf 8.0KB
+7f76aa0000-7f76aa9000 r--p /system/fonts/NotoSansJavanese-Regular.ttf 36.0KB
+7f76aa9000-7f76aab000 r--p /system/fonts/NotoSansHanunoo-Regular.ttf 8.0KB
+7f76aab000-7f76aaf000 r--p /system/fonts/NotoSansGlagolitic-Regular.ttf 16.0KB
+7f76aaf000-7f76ab5000 r--p /system/fonts/NotoSansCoptic-Regular.ttf 24.0KB
+7f76ab5000-7f76abe000 r--p /system/fonts/NotoSansCherokee-Regular.ttf 36.0KB
+7f76abe000-7f76aca000 r--p /system/fonts/NotoSansCanadianAboriginal-Regular.ttf 48.0KB
+7f76aca000-7f76acc000 r--p /system/fonts/NotoSansBuhid-Regular.ttf 8.0KB
+7f76acc000-7f76ace000 r--p /system/fonts/NotoSansBuginese-Regular.ttf 8.0KB
+7f76ace000-7f76ad2000 r--p /system/fonts/NotoSansBatak-Regular.ttf 16.0KB
+7f76ad2000-7f76af3000 r--p /system/fonts/NotoSansBamum-Regular.ttf 132.0KB
+7f76af3000-7f76afb000 r--p /system/fonts/NotoSansBalinese-Regular.ttf 32.0KB
+7f76afb000-7f76b01000 r--p /system/fonts/NotoSansCham-Bold.ttf 24.0KB
+7f76b01000-7f76b07000 r--p /system/fonts/NotoSansCham-Regular.ttf 24.0KB
+7f76b07000-7f76b0b000 r--p /system/fonts/NotoSansThaana-Bold.ttf 16.0KB
+7f76b0b000-7f76b0f000 r--p /system/fonts/NotoSansThaana-Regular.ttf 16.0KB
+7f76b0f000-7f76b29000 r--p /system/fonts/NotoSansMyanmarUI-Bold.ttf 104.0KB
+7f76b29000-7f76b42000 r--p /system/fonts/NotoSansMyanmarUI-Regular.ttf 100.0KB
+7f76b42000-7f76b5d000 r--p /system/fonts/NotoSansMyanmar-Bold.ttf 108.0KB
+7f76b5d000-7f76b78000 r--p /system/fonts/NotoSansMyanmar-Regular.ttf 108.0KB
+7f76b78000-7f76b80000 r--p /system/fonts/NotoSansLaoUI-Bold.ttf 32.0KB
+7f76b80000-7f76b88000 r--p /system/fonts/NotoSansLaoUI-Regular.ttf 32.0KB
+7f76b88000-7f76b90000 r--p /system/fonts/NotoSansLao-Bold.ttf 32.0KB
+7f76b90000-7f76b98000 r--p /system/fonts/NotoSansLao-Regular.ttf 32.0KB
+7f76b98000-7f76ba1000 r--p /system/fonts/NotoSansKhmerUI-Bold.ttf 36.0KB
+7f76ba1000-7f76bab000 r--p /system/fonts/NotoSansKhmerUI-Regular.ttf 40.0KB
+7f76bab000-7f76bb4000 r--p /system/fonts/NotoSansKhmer-Bold.ttf 36.0KB
+7f76bb4000-7f76bbd000 r--p /system/fonts/NotoSansKhmer-Regular.ttf 36.0KB
+7f76bbd000-7f76be3000 r--p /system/fonts/NotoSansSinhala-Bold.ttf 152.0KB
+7f76be3000-7f76c0a000 r--p /system/fonts/NotoSansSinhala-Regular.ttf 156.0KB
+7f76c0a000-7f76c1e000 r--p /system/fonts/NotoSansOriyaUI-Bold.ttf 80.0KB
+7f76c1e000-7f76c32000 r--p /system/fonts/NotoSansOriyaUI-Regular.ttf 80.0KB
+7f76c32000-7f76c47000 r--p /system/fonts/NotoSansOriya-Bold.ttf 84.0KB
+7f76c47000-7f76c5c000 r--p /system/fonts/NotoSansOriya-Regular.ttf 84.0KB
+7f76c5c000-7f76c70000 r--p /system/fonts/NotoSansKannadaUI-Bold.ttf 80.0KB
+7f76c70000-7f76c84000 r--p /system/fonts/NotoSansKannadaUI-Regular.ttf 80.0KB
+7f76c84000-7f76c98000 r--p /system/fonts/NotoSansKannada-Bold.ttf 80.0KB
+7f76c98000-7f76cac000 r--p /system/fonts/NotoSansKannada-Regular.ttf 80.0KB
+7f76cac000-7f76cc8000 r--p /system/fonts/NotoSansTeluguUI-Bold.ttf 112.0KB
+7f76cc8000-7f76ce4000 r--p /system/fonts/NotoSansTeluguUI-Regular.ttf 112.0KB
+7f76ce4000-7f76cff000 r--p /system/fonts/NotoSansTelugu-Bold.ttf 108.0KB
+7f76cff000-7f76d1a000 r--p /system/fonts/NotoSansTelugu-Regular.ttf 108.0KB
+7f76d1a000-7f76d34000 r--p /system/fonts/NotoSansBengaliUI-Bold.ttf 104.0KB
+7f76d34000-7f76d4f000 r--p /system/fonts/NotoSansBengaliUI-Regular.ttf 108.0KB
+7f76d4f000-7f76d67000 r--p /system/fonts/NotoSansBengali-Bold.ttf 96.0KB
+7f76d67000-7f76d80000 r--p /system/fonts/NotoSansBengali-Regular.ttf 100.0KB
+7f76d80000-7f76d8e000 r--p /system/fonts/NotoSansMalayalamUI-Bold.ttf 56.0KB
+7f76d8e000-7f76d9c000 r--p /system/fonts/NotoSansMalayalamUI-Regular.ttf 56.0KB
+7f76d9c000-7f76daa000 r--p /system/fonts/NotoSansMalayalam-Bold.ttf 56.0KB
+7f76daa000-7f76db8000 r--p /system/fonts/NotoSansMalayalam-Regular.ttf 56.0KB
+7f76db8000-7f76dc1000 r--p /system/fonts/NotoSansTamilUI-Bold.ttf 36.0KB
+7f76dc1000-7f76dca000 r--p /system/fonts/NotoSansTamilUI-Regular.ttf 36.0KB
+7f76dca000-7f76dd3000 r--p /system/fonts/NotoSansTamil-Bold.ttf 36.0KB
+7f76dd3000-7f76ddc000 r--p /system/fonts/NotoSansTamil-Regular.ttf 36.0KB
+7f76ddc000-7f76de4000 r--p /system/fonts/NotoSansGurmukhiUI-Bold.ttf 32.0KB
+7f76de4000-7f76dec000 r--p /system/fonts/NotoSansGurmukhiUI-Regular.ttf 32.0KB
+7f76dec000-7f76df4000 r--p /system/fonts/NotoSansGurmukhi-Bold.ttf 32.0KB
+7f76df4000-7f76dfc000 r--p /system/fonts/NotoSansGurmukhi-Regular.ttf 32.0KB
+7f76dfc000-7f76e18000 r--p /system/fonts/NotoSansGujaratiUI-Bold.ttf 112.0KB
+7f76e18000-7f76e35000 r--p /system/fonts/NotoSansGujaratiUI-Regular.ttf 116.0KB
+7f76e35000-7f76e52000 r--p /system/fonts/NotoSansGujarati-Bold.ttf 116.0KB
+7f76e52000-7f76e70000 r--p /system/fonts/NotoSansGujarati-Regular.ttf 120.0KB
+7f76e70000-7f76e8e000 r--p /system/fonts/NotoSansDevanagariUI-Bold.ttf 120.0KB
+7f76e8e000-7f76ead000 r--p /system/fonts/NotoSansDevanagariUI-Regular.ttf 124.0KB
+7f76ead000-7f76ece000 r--p /system/fonts/NotoSansDevanagari-Bold.ttf 132.0KB
+7f76ece000-7f76ef0000 r--p /system/fonts/NotoSansDevanagari-Regular.ttf 136.0KB
+7f76ef0000-7f76ef5000 r--p /system/fonts/NotoSansGeorgian-Bold.ttf 20.0KB
+7f76ef5000-7f76efa000 r--p /system/fonts/NotoSansGeorgian-Regular.ttf 20.0KB
+7f76efa000-7f76efe000 r--p /system/fonts/NotoSansArmenian-Bold.ttf 16.0KB
+7f76efe000-7f76f02000 r--p /system/fonts/NotoSansArmenian-Regular.ttf 16.0KB
+7f76f02000-7f76f07000 r--p /system/fonts/NotoSansThaiUI-Bold.ttf 20.0KB
+7f76f07000-7f76f0d000 r--p /system/fonts/NotoSansThaiUI-Regular.ttf 24.0KB
+7f76f0d000-7f76f12000 r--p /system/fonts/NotoSansThai-Bold.ttf 20.0KB
+7f76f12000-7f76f18000 r--p /system/fonts/NotoSansThai-Regular.ttf 24.0KB
+7f76f18000-7f76f1d000 r--p /system/fonts/NotoSansHebrew-Bold.ttf 20.0KB
+7f76f1d000-7f76f22000 r--p /system/fonts/NotoSansHebrew-Regular.ttf 20.0KB
+7f76f22000-7f76f44000 r--p /system/fonts/NotoSansEthiopic-Bold.ttf 136.0KB
+7f76f44000-7f76f66000 r--p /system/fonts/NotoSansEthiopic-Regular.ttf 136.0KB
+7f76f66000-7f76f83000 r--p /system/fonts/NotoNaskhArabicUI-Bold.ttf 116.0KB
+7f76f83000-7f76fa0000 r--p /system/fonts/NotoNaskhArabicUI-Regular.ttf 116.0KB
+7f76fa0000-7f76fbd000 r--p /system/fonts/NotoNaskhArabic-Bold.ttf 116.0KB
+7f76fbd000-7f76fda000 r--p /system/fonts/NotoNaskhArabic-Regular.ttf 116.0KB
+7f76fda000-7f77029000 r--p /system/fonts/Roboto-BoldItalic.ttf 316.0KB
+7f77029000-7f77072000 r--p /system/fonts/Roboto-Bold.ttf 292.0KB
+7f77072000-7f770c0000 r--p /system/fonts/Roboto-BlackItalic.ttf 312.0KB
+7f770c0000-7f77109000 r--p /system/fonts/Roboto-Black.ttf 292.0KB
+7f77109000-7f77157000 r--p /system/fonts/Roboto-MediumItalic.ttf 312.0KB
+7f77157000-7f771a0000 r--p /system/fonts/Roboto-Medium.ttf 292.0KB
+7f771a0000-7f771ee000 r--p /system/fonts/Roboto-Italic.ttf 312.0KB
+7f771ee000-7f77238000 r--p /system/fonts/Roboto-Regular.ttf 296.0KB
+7f77238000-7f77287000 r--p /system/fonts/Roboto-LightItalic.ttf 316.0KB
+7f77287000-7f772d0000 r--p /system/fonts/Roboto-Light.ttf 292.0KB
+7f772d0000-7f7731f000 r--p /system/fonts/Roboto-ThinItalic.ttf 316.0KB
+7f7731f000-7f77369000 r--p /system/fonts/Roboto-Thin.ttf 296.0KB
+7f77369000-7f7736b000 r-xp /system/vendor/lib64/libqti-perfd-client.so 8.0KB
+7f7736b000-7f7737a000 ---p  60.0KB
+7f7737a000-7f7737c000 r--p /system/vendor/lib64/libqti-perfd-client.so 8.0KB
+7f7737c000-7f774d1000 r-xp /system/lib64/libxml2.so 1.33203125MB
+7f774d1000-7f774e1000 ---p  64.0KB
+7f774e1000-7f774ec000 r--p /system/lib64/libxml2.so 44.0KB
+7f774ec000-7f774ed000 rw-p  4.0KB
+7f774ed000-7f774f2000 r-xp /system/vendor/lib64/libqti-gt.so 20.0KB
+7f774f2000-7f77501000 ---p  60.0KB
+7f77501000-7f77503000 r--p /system/vendor/lib64/libqti-gt.so 8.0KB
+7f77503000-7f77504000 r-xp /system/vendor/lib64/libqti-at.so 4.0KB
+7f77504000-7f77514000 ---p  64.0KB
+7f77514000-7f77516000 r--p /system/vendor/lib64/libqti-at.so 8.0KB
+7f77516000-7f77536000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+7f77536000-7f77537000 r-xp /system/lib64/hw/memtrack.msm8953.so 4.0KB
+7f77537000-7f77547000 ---p  64.0KB
+7f77547000-7f77549000 r--p /system/lib64/hw/memtrack.msm8953.so 8.0KB
+7f77549000-7f77560000 rw-p [anon:libc_malloc] 92.0KB
+7f77560000-7f77566000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 24.0KB
+7f77566000-7f7757d000 rw-p [anon:libc_malloc] 92.0KB
+7f7757d000-7f7757e000 ---p  4.0KB
+7f7757e000-7f7767c000 rw-p [stack:12676] 1016.0KB
+7f7767c000-7f7767d000 ---p  4.0KB
+7f7767d000-7f7777b000 rw-p [stack:12675] 1016.0KB
+7f7777b000-7f77885000 rw-p [anon:libc_malloc] 1.0390625MB
+7f77885000-7f7793c000 r-xp /data/app/com.fenbi.android.servant-1/lib/arm64/libnesec.so 732.0KB
+7f7793c000-7f7793f000 rw-p  12.0KB
+7f7793f000-7f7794e000 r-xp /data/app/com.fenbi.android.servant-1/lib/arm64/libnesec.so 60.0KB
+7f7794e000-7f7795d000 ---p  60.0KB
+7f7795d000-7f77970000 r--p /data/app/com.fenbi.android.servant-1/lib/arm64/libnesec.so 76.0KB
+7f77970000-7f77990000 rw-p /dev/ashmem/dalvik-rosalloc page map (deleted) 128.0KB
+7f77990000-7f78f91000 r--s /system/usr/icu/icudt55l.dat 22.00390625MB
+7f78f91000-7f78fb1000 rw-p /dev/ashmem/dalvik-LinearAlloc (deleted) 128.0KB
+7f78fb1000-7f79002000 r-xp /system/lib64/libjavacore.so 324.0KB
+7f79002000-7f79012000 ---p  64.0KB
+7f79012000-7f79018000 r--p /system/lib64/libjavacore.so 24.0KB
+7f79018000-7f79019000 rw-p  4.0KB
+7f79019000-7f791ab000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 1.5703125MB
+7f791ab000-7f791b1000 rw-p /dev/ashmem/dalvik-mark sweep sweep array free buffer (deleted) 24.0KB
+7f791b1000-7f799b2000 rw-p /dev/ashmem/dalvik-live stack (deleted) 8.00390625MB
+7f799b2000-7f7a1b3000 rw-p /dev/ashmem/dalvik-allocation stack (deleted) 8.00390625MB
+7f7a1b3000-7f7a1f3000 rw-p /dev/ashmem/dalvik-mark stack (deleted) 256.0KB
+7f7a1f3000-7f7ae98000 rw-p /dev/ashmem/dalvik-card table (deleted) 12.64453125MB
+7f7ae98000-7f7af98000 rw-p /dev/ashmem/dalvik-large object free list space allocation info map (deleted) 1.0MB
+7f7af98000-7f7afb8000 rw-p /dev/ashmem/dalvik-large marked objects (deleted) 128.0KB
+7f7afb8000-7f7afd8000 rw-p /dev/ashmem/dalvik-large live objects (deleted) 128.0KB
+7f7afd8000-7f7b7d8000 rw-p /dev/ashmem/dalvik-allocspace main rosalloc space 1 mark-bitmap 2 (deleted) 8.0MB
+7f7b7d8000-7f7bfd8000 rw-p /dev/ashmem/dalvik-allocspace main rosalloc space 1 live-bitmap 2 (deleted) 8.0MB
+7f7bfd8000-7f7bff8000 rw-p /dev/ashmem/dalvik-rosalloc page map (deleted) 128.0KB
+7f7bff8000-7f7bff9000 r--p [anon:linker_alloc] 4.0KB
+7f7bff9000-7f7bffa000 ---p  4.0KB
+7f7bffa000-7f7bffe000 rw-p [anon:thread signal stack] 16.0KB
+7f7bffe000-7f7c000000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f7c000000-7f7c001000 ---p  4.0KB
+7f7c001000-7f7c005000 rw-p [anon:thread signal stack] 16.0KB
+7f7c005000-7f7c006000 ---p  4.0KB
+7f7c006000-7f7c00a000 rw-p [anon:thread signal stack] 16.0KB
+7f7c00a000-7f7c010000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 24.0KB
+7f7c010000-7f7c011000 ---p  4.0KB
+7f7c011000-7f7c015000 rw-p [anon:thread signal stack] 16.0KB
+7f7c015000-7f7c018000 r--p /data/data/com.fenbi.android.servant/.cache/stub.odex 12.0KB
+7f7c018000-7f7c019000 rw-s anon_inode:dmabuf 4.0KB
+7f7c019000-7f7c01a000 ---p  4.0KB
+7f7c01a000-7f7c01e000 rw-p [anon:thread signal stack] 16.0KB
+7f7c01e000-7f7c020000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f7c020000-7f7c021000 rw-s /dev/ashmem/GFXStats-10072 (deleted) 4.0KB
+7f7c021000-7f7c025000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 16.0KB
+7f7c025000-7f7c4da000 r--s /data/app/com.fenbi.android.servant-1/base.apk 4.70703125MB
+7f7c4da000-7f7c51b000 rw-p [anon:libc_malloc] 260.0KB
+7f7c51b000-7f7c5cc000 r--s /data/app/com.fenbi.android.servant-1/base.apk 708.0KB
+7f7c5cc000-7f7c5ce000 rwxp  8.0KB
+7f7c5ce000-7f7c5d2000 rw-p [anon:thread signal stack] 16.0KB
+7f7c5d2000-7f7c5d3000 ---p  4.0KB
+7f7c5d3000-7f7c5d7000 rw-p [anon:thread signal stack] 16.0KB
+7f7c5d7000-7f7c5d8000 rw-p [anon:linker_alloc_vector] 4.0KB
+7f7c5d8000-7f7c5d9000 ---p  4.0KB
+7f7c5d9000-7f7c5dd000 rw-p [anon:thread signal stack] 16.0KB
+7f7c5dd000-7f7c5df000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f7c5df000-7f7c5e0000 ---p  4.0KB
+7f7c5e0000-7f7c5e4000 rw-p [anon:thread signal stack] 16.0KB
+7f7c5e4000-7f7c5e6000 ---p  8.0KB
+7f7c5e6000-7f7c6e3000 rw-p [stack:12674] 1012.0KB
+7f7c6e3000-7f7c6e5000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f7c6e5000-7f7c6e6000 ---p  4.0KB
+7f7c6e6000-7f7c6ea000 rw-p [anon:thread signal stack] 16.0KB
+7f7c6ea000-7f7c6ec000 ---p  8.0KB
+7f7c6ec000-7f7c7e9000 rw-p [stack:12673] 1012.0KB
+7f7c7e9000-7f7c8e7000 r--p /dev/binder 1016.0KB
+7f7c8e7000-7f7c8e8000 ---p  4.0KB
+7f7c8e8000-7f7c8ec000 rw-p [anon:thread signal stack] 16.0KB
+7f7c8ec000-7f7c8ee000 ---p  8.0KB
+7f7c8ee000-7f7c9f1000 rw-p [stack:12672] 1.01171875MB
+7f7c9f1000-7f7c9f3000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f7c9f3000-7f7c9f4000 ---p  4.0KB
+7f7c9f4000-7f7c9f8000 rw-p [anon:thread signal stack] 16.0KB
+7f7c9f8000-7f7c9f9000 ---p  4.0KB
+7f7c9f9000-7f7c9fd000 rw-p [anon:thread signal stack] 16.0KB
+7f7c9fd000-7f7c9ff000 ---p  8.0KB
+7f7c9ff000-7f7cb02000 rw-p [stack:12671] 1.01171875MB
+7f7cb02000-7f7cb03000 ---p  4.0KB
+7f7cb03000-7f7cb07000 rw-p [anon:thread signal stack] 16.0KB
+7f7cb07000-7f7cb09000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f7cb09000-7f7cb0b000 ---p  8.0KB
+7f7cb0b000-7f7cc0e000 rw-p [stack:12670] 1.01171875MB
+7f7cc0e000-7f7cc10000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 8.0KB
+7f7cc10000-7f7cc12000 ---p  8.0KB
+7f7cc12000-7f7cd15000 rw-p [stack:12669] 1.01171875MB
+7f7cd15000-7f7cd19000 rw-p /dev/ashmem/dalvik-indirect ref table (deleted) 16.0KB
+7f7cd19000-7f7cd1a000 ---p  4.0KB
+7f7cd1a000-7f7cd1e000 rw-p [anon:thread signal stack] 16.0KB
+7f7cd1e000-7f7cd20000 ---p  8.0KB
+7f7cd20000-7f7ce1d000 rw-p [stack:12668] 1012.0KB
+7f7ce1d000-7f7ce1e000 rw-p /dev/ashmem/dalvik-mod union bitmap (deleted) 4.0KB
+7f7ce1e000-7f7cf1b000 rw-p /dev/ashmem/dalvik-allocspace non moving space mark-bitmap 4 (deleted) 1012.0KB
+7f7cf1b000-7f7d018000 rw-p /dev/ashmem/dalvik-allocspace non moving space live-bitmap 4 (deleted) 1012.0KB
+7f7d018000-7f7d118000 rw-p /dev/ashmem/dalvik-allocspace zygote / non moving space mark-bitmap 0 (deleted) 1.0MB
+7f7d118000-7f7d218000 rw-p /dev/ashmem/dalvik-allocspace zygote / non moving space live-bitmap 0 (deleted) 1.0MB
+7f7d218000-7f7d219000 r--p /system/framework/arm64/boot.oat 4.0KB
+7f7d219000-7f7d21a000 r--p [anon:linker_alloc] 4.0KB
+7f7d21a000-7f7d241000 r--p /data/dalvik-cache/arm64/system@framework@boot.art 156.0KB
+7f7d241000-7f7d242000 r--p [anon:linker_alloc] 4.0KB
+7f7d242000-7f7d243000 r-xp /system/lib64/libsigchain.so 4.0KB
+7f7d243000-7f7d252000 ---p  60.0KB
+7f7d252000-7f7d254000 r--p /system/lib64/libsigchain.so 8.0KB
+7f7d254000-7f7d83d000 r-xp /system/lib64/libart.so 5.91015625MB
+7f7d83d000-7f7d84c000 ---p  60.0KB
+7f7d84c000-7f7d861000 r--p /system/lib64/libart.so 84.0KB
+7f7d861000-7f7d864000 rw-p  12.0KB
+7f7d864000-7f7d865000 r--p [anon:linker_alloc] 4.0KB
+7f7d865000-7f7d867000 r--p  8.0KB
+7f7d867000-7f7d892000 r-xp /system/lib64/libdashplayer.so 172.0KB
+7f7d892000-7f7d8a1000 ---p  60.0KB
+7f7d8a1000-7f7d8a5000 r--p /system/lib64/libdashplayer.so 16.0KB
+7f7d8a5000-7f7d8a6000 r-xp /system/vendor/lib64/libExtendedExtractor.so 4.0KB
+7f7d8a6000-7f7d8b6000 ---p  64.0KB
+7f7d8b6000-7f7d8b8000 r--p /system/vendor/lib64/libExtendedExtractor.so 8.0KB
+7f7d8b8000-7f7d8ba000 r--p  8.0KB
+7f7d8ba000-7f7d8ee000 r-xp /system/lib64/libstagefright_wfd.so 208.0KB
+7f7d8ee000-7f7d8fe000 ---p  64.0KB
+7f7d8fe000-7f7d902000 r--p /system/lib64/libstagefright_wfd.so 16.0KB
+7f7d902000-7f7d9b8000 r-xp /system/lib64/libmediaplayerservice.so 728.0KB
+7f7d9b8000-7f7d9c8000 ---p  64.0KB
+7f7d9c8000-7f7d9d7000 r--p /system/lib64/libmediaplayerservice.so 60.0KB
+7f7d9d7000-7f7da02000 r-xp /system/lib64/libstagefright_httplive.so 172.0KB
+7f7da02000-7f7da11000 ---p  60.0KB
+7f7da11000-7f7da14000 r--p /system/lib64/libstagefright_httplive.so 12.0KB
+7f7da14000-7f7da64000 r-xp /system/vendor/lib64/libavenhancements.so 320.0KB
+7f7da64000-7f7da73000 ---p  60.0KB
+7f7da73000-7f7da79000 r--p /system/vendor/lib64/libavenhancements.so 24.0KB
+7f7da79000-7f7da7a000 r--p [anon:linker_alloc] 4.0KB
+7f7da7a000-7f7da7e000 r-xp /system/vendor/lib64/libvendorconn.so 16.0KB
+7f7da7e000-7f7da8e000 ---p  64.0KB
+7f7da8e000-7f7da90000 r--p /system/vendor/lib64/libvendorconn.so 8.0KB
+7f7da90000-7f7da96000 r-xp /system/vendor/lib64/libcneconn.so 24.0KB
+7f7da96000-7f7daa5000 ---p  60.0KB
+7f7daa5000-7f7daa7000 r--p /system/vendor/lib64/libcneconn.so 8.0KB
+7f7daa7000-7f7dac7000 r--s /dev/__properties__ 128.0KB
+7f7dac7000-7f7dac8000 rw-p [anon:linker_alloc_vector] 4.0KB
+7f7dac8000-7f7dac9000 r--p [anon:linker_alloc] 4.0KB
+7f7dac9000-7f7daca000 rw-p [anon:linker_alloc_vector] 4.0KB
+7f7daca000-7f7dacb000 r--p  4.0KB
+7f7dacb000-7f7e9e2000 r-xp /system/lib64/libLLVM.so 15.08984375MB
+7f7e9e2000-7f7e9f2000 ---p  64.0KB
+7f7e9f2000-7f7ea91000 r--p /system/lib64/libLLVM.so 636.0KB
+7f7ea91000-7f7ea9f000 rw-p  56.0KB
+7f7ea9f000-7f7eae9000 r-xp /system/lib64/libbcinfo.so 296.0KB
+7f7eae9000-7f7eaf9000 ---p  64.0KB
+7f7eaf9000-7f7eafb000 r--p /system/lib64/libbcinfo.so 8.0KB
+7f7eafb000-7f7eb5c000 r-xp /system/lib64/libbcc.so 388.0KB
+7f7eb5c000-7f7eb6b000 ---p  60.0KB
+7f7eb6b000-7f7eb6e000 r--p /system/lib64/libbcc.so 12.0KB
+7f7eb6e000-7f7eb7a000 r-xp /system/lib64/libcommon_time_client.so 48.0KB
+7f7eb7a000-7f7eb89000 ---p  60.0KB
+7f7eb89000-7f7eb8f000 r--p /system/lib64/libcommon_time_client.so 24.0KB
+7f7eb8f000-7f7ebb2000 r-xp /system/lib64/libprotobuf-cpp-lite.so 140.0KB
+7f7ebb2000-7f7ebc2000 ---p  64.0KB
+7f7ebc2000-7f7ebc4000 r--p /system/lib64/libprotobuf-cpp-lite.so 8.0KB
+7f7ebc4000-7f7ebc6000 r--p [anon:linker_alloc] 8.0KB
+7f7ebc6000-7f7ebd0000 r-xp /system/lib64/libstagefright_avc_common.so 40.0KB
+7f7ebd0000-7f7ebdf000 ---p  60.0KB
+7f7ebdf000-7f7ebe1000 r--p /system/lib64/libstagefright_avc_common.so 8.0KB
+7f7ebe1000-7f7ebe2000 r-xp /system/lib64/libstagefright_enc_common.so 4.0KB
+7f7ebe2000-7f7ebf1000 ---p  60.0KB
+7f7ebf1000-7f7ebf3000 r--p /system/lib64/libstagefright_enc_common.so 8.0KB
+7f7ebf3000-7f7ebf6000 r-xp /system/lib64/libpowermanager.so 12.0KB
+7f7ebf6000-7f7ec06000 ---p  64.0KB
+7f7ec06000-7f7ec08000 r--p /system/lib64/libpowermanager.so 8.0KB
+7f7ec08000-7f7ec25000 r-xp /system/lib64/libvorbisidec.so 116.0KB
+7f7ec25000-7f7ec34000 ---p  60.0KB
+7f7ec34000-7f7ec36000 r--p /system/lib64/libvorbisidec.so 8.0KB
+7f7ec36000-7f7ec39000 r-xp /system/lib64/libstagefright_yuv.so 12.0KB
+7f7ec39000-7f7ec48000 ---p  60.0KB
+7f7ec48000-7f7ec4a000 r--p /system/lib64/libstagefright_yuv.so 8.0KB
+7f7ec4a000-7f7ec80000 r-xp /system/lib64/libstagefright_omx.so 216.0KB
+7f7ec80000-7f7ec8f000 ---p  60.0KB
+7f7ec8f000-7f7ec95000 r--p /system/lib64/libstagefright_omx.so 24.0KB
+7f7ec95000-7f7ece0000 r-xp /system/lib64/libopus.so 300.0KB
+7f7ece0000-7f7ecf0000 ---p  64.0KB
+7f7ecf0000-7f7ecf2000 r--p /system/lib64/libopus.so 8.0KB
+7f7ecf2000-7f7ecf9000 r-xp /system/lib64/libmediautils.so 28.0KB
+7f7ecf9000-7f7ed08000 ---p  60.0KB
+7f7ed08000-7f7ed0b000 r--p /system/lib64/libmediautils.so 12.0KB
+7f7ed0b000-7f7ed0c000 r--p [anon:linker_alloc] 4.0KB
+7f7ed0c000-7f7ed2a000 r-xp /system/lib64/libdrmframework.so 120.0KB
+7f7ed2a000-7f7ed39000 ---p  60.0KB
+7f7ed39000-7f7ed3f000 r--p /system/lib64/libdrmframework.so 24.0KB
+7f7ed3f000-7f7ed68000 r-xp /system/lib64/libRScpp.so 164.0KB
+7f7ed68000-7f7ed78000 ---p  64.0KB
+7f7ed78000-7f7ed7a000 r--p /system/lib64/libRScpp.so 8.0KB
+7f7ed7a000-7f7edcd000 r-xp /system/lib64/libRS.so 332.0KB
+7f7edcd000-7f7eddc000 ---p  60.0KB
+7f7eddc000-7f7ede0000 r--p /system/lib64/libRS.so 16.0KB
+7f7ede0000-7f7ede3000 r-xp /system/lib64/libspeexresampler.so 12.0KB
+7f7ede3000-7f7edf2000 ---p  60.0KB
+7f7edf2000-7f7edf4000 r--p /system/lib64/libspeexresampler.so 8.0KB
+7f7edf4000-7f7edff000 r-xp /system/lib64/libnbaio.so 44.0KB
+7f7edff000-7f7ee0f000 ---p  64.0KB
+7f7ee0f000-7f7ee11000 r--p /system/lib64/libnbaio.so 8.0KB
+7f7ee11000-7f7ee13000 rw-p [anon:linker_alloc_64] 8.0KB
+7f7ee13000-7f7ee2d000 r-xp /system/lib64/libpcre.so 104.0KB
+7f7ee2d000-7f7ee3c000 ---p  60.0KB
+7f7ee3c000-7f7ee3e000 r--p /system/lib64/libpcre.so 8.0KB
+7f7ee3e000-7f7ee42000 r-xp /system/lib64/libwpa_client.so 16.0KB
+7f7ee42000-7f7ee51000 ---p  60.0KB
+7f7ee51000-7f7ee53000 r--p /system/lib64/libwpa_client.so 8.0KB
+7f7ee53000-7f7ee54000 r--p [anon:linker_alloc] 4.0KB
+7f7ee54000-7f7ef24000 r-xp /system/lib64/libGLES_trace.so 832.0KB
+7f7ef24000-7f7ef25000 r--p [anon:linker_alloc] 4.0KB
+7f7ef25000-7f7ef5e000 r-xp /system/vendor/lib64/libqc-opt.so 228.0KB
+7f7ef5e000-7f7ef6e000 ---p  64.0KB
+7f7ef6e000-7f7ef71000 r--p /system/vendor/lib64/libqc-opt.so 12.0KB
+7f7ef71000-7f7efdf000 r-xp /system/lib64/libft2.so 440.0KB
+7f7efdf000-7f7efee000 ---p  60.0KB
+7f7efee000-7f7eff2000 r--p /system/lib64/libft2.so 16.0KB
+7f7eff2000-7f7f024000 r-xp /system/lib64/libpng.so 200.0KB
+7f7f024000-7f7f033000 ---p  60.0KB
+7f7f033000-7f7f035000 r--p /system/lib64/libpng.so 8.0KB
+7f7f035000-7f7f036000 r-xp /system/lib64/libsync.so 4.0KB
+7f7f036000-7f7f045000 ---p  60.0KB
+7f7f045000-7f7f047000 r--p /system/lib64/libsync.so 8.0KB
+7f7f047000-7f7f04a000 r-xp /system/lib64/libstdc++.so 12.0KB
+7f7f04a000-7f7f059000 ---p  60.0KB
+7f7f059000-7f7f05b000 r--p /system/lib64/libstdc++.so 8.0KB
+7f7f05b000-7f7f05c000 r--p [anon:linker_alloc] 4.0KB
+7f7f05c000-7f7f077000 r-xp /system/lib64/libunwind.so 108.0KB
+7f7f077000-7f7f086000 ---p  60.0KB
+7f7f086000-7f7f088000 r--p /system/lib64/libunwind.so 8.0KB
+7f7f088000-7f7f0f1000 rw-p  420.0KB
+7f7f0f1000-7f7f0fa000 r-xp /system/lib64/libbase.so 36.0KB
+7f7f0fa000-7f7f109000 ---p  60.0KB
+7f7f109000-7f7f10b000 r--p /system/lib64/libbase.so 8.0KB
+7f7f10b000-7f7f10f000 r-xp /system/lib64/libeffects.so 16.0KB
+7f7f10f000-7f7f11e000 ---p  60.0KB
+7f7f11e000-7f7f120000 r--p /system/lib64/libeffects.so 8.0KB
+7f7f120000-7f7f122000 rw-p [anon:linker_alloc] 8.0KB
+7f7f122000-7f7f124000 r-xp /system/lib64/libstagefright_http_support.so 8.0KB
+7f7f124000-7f7f133000 ---p  60.0KB
+7f7f133000-7f7f135000 r--p /system/lib64/libstagefright_http_support.so 8.0KB
+7f7f135000-7f7f153000 r-xp /system/lib64/libstagefright_foundation.so 120.0KB
+7f7f153000-7f7f163000 ---p  64.0KB
+7f7f163000-7f7f166000 r--p /system/lib64/libstagefright_foundation.so 12.0KB
+7f7f166000-7f7f319000 r-xp /system/lib64/libstagefright.so 1.69921875MB
+7f7f319000-7f7f329000 ---p  64.0KB
+7f7f329000-7f7f33f000 r--p /system/lib64/libstagefright.so 88.0KB
+7f7f33f000-7f7f341000 r-xp /system/lib64/libregionalization.so 8.0KB
+7f7f341000-7f7f350000 ---p  60.0KB
+7f7f350000-7f7f352000 r--p /system/lib64/libregionalization.so 8.0KB
+7f7f352000-7f7f3e6000 r-xp /system/lib64/libhwui.so 592.0KB
+7f7f3e6000-7f7f3f6000 ---p  64.0KB
+7f7f3f6000-7f7f3fd000 r--p /system/lib64/libhwui.so 28.0KB
+7f7f3fd000-7f7f3ff000 r-xp /system/lib64/libradio_metadata.so 8.0KB
+7f7f3ff000-7f7f40e000 ---p  60.0KB
+7f7f40e000-7f7f410000 r--p /system/lib64/libradio_metadata.so 8.0KB
+7f7f410000-7f7f413000 r-xp /system/lib64/libnativebridge.so 12.0KB
+7f7f413000-7f7f422000 ---p  60.0KB
+7f7f422000-7f7f424000 r--p /system/lib64/libnativebridge.so 8.0KB
+7f7f424000-7f7f426000 r-xp /system/lib64/libprocessgroup.so 8.0KB
+7f7f426000-7f7f435000 ---p  60.0KB
+7f7f435000-7f7f437000 r--p /system/lib64/libprocessgroup.so 8.0KB
+7f7f437000-7f7f438000 r--p [anon:linker_alloc] 4.0KB
+7f7f438000-7f7f44d000 r-xp /system/lib64/libminikin.so 84.0KB
+7f7f44d000-7f7f45d000 ---p  64.0KB
+7f7f45d000-7f7f45f000 r--p /system/lib64/libminikin.so 8.0KB
+7f7f45f000-7f7f469000 r-xp /system/lib64/libsoundtrigger.so 40.0KB
+7f7f469000-7f7f478000 ---p  60.0KB
+7f7f478000-7f7f47e000 r--p /system/lib64/libsoundtrigger.so 24.0KB
+7f7f47e000-7f7f488000 r-xp /system/lib64/libradio.so 40.0KB
+7f7f488000-7f7f497000 ---p  60.0KB
+7f7f497000-7f7f49c000 r--p /system/lib64/libradio.so 20.0KB
+7f7f49c000-7f7f49e000 r-xp /system/lib64/libnetd_client.so 8.0KB
+7f7f49e000-7f7f4ad000 ---p  60.0KB
+7f7f4ad000-7f7f4af000 r--p /system/lib64/libnetd_client.so 8.0KB
+7f7f4af000-7f7f4c1000 r-xp /system/lib64/libimg_utils.so 72.0KB
+7f7f4c1000-7f7f4d0000 ---p  60.0KB
+7f7f4d0000-7f7f4d4000 r--p /system/lib64/libimg_utils.so 16.0KB
+7f7f4d4000-7f7f8f8000 r-xp /system/lib64/libpdfium.so 4.140625MB
+7f7f8f8000-7f7f907000 ---p  60.0KB
+7f7f907000-7f7f91d000 r--p /system/lib64/libpdfium.so 88.0KB
+7f7f91d000-7f7f91e000 rw-p  4.0KB
+7f7f91e000-7f7f929000 r-xp /system/lib64/libaudioutils.so 44.0KB
+7f7f929000-7f7f938000 ---p  60.0KB
+7f7f938000-7f7f93a000 r--p /system/lib64/libaudioutils.so 8.0KB
+7f7f93a000-7f7f956000 r-xp /system/lib64/libz.so 112.0KB
+7f7f956000-7f7f965000 ---p  60.0KB
+7f7f965000-7f7f967000 r--p /system/lib64/libz.so 8.0KB
+7f7f967000-7f7f968000 r--p [anon:linker_alloc] 4.0KB
+7f7f968000-7f7f9b7000 r-xp /system/lib64/libharfbuzz_ng.so 316.0KB
+7f7f9b7000-7f7f9c7000 ---p  64.0KB
+7f7f9c7000-7f7f9c9000 r--p /system/lib64/libharfbuzz_ng.so 8.0KB
+7f7f9c9000-7f7f9ca000 rw-p [anon:linker_alloc] 4.0KB
+7f7f9ca000-7f7f9ce000 r-xp /system/lib64/libusbhost.so 16.0KB
+7f7f9ce000-7f7f9dd000 ---p  60.0KB
+7f7f9dd000-7f7f9df000 r--p /system/lib64/libusbhost.so 8.0KB
+7f7f9df000-7f7fa15000 r-xp /system/lib64/libjpeg.so 216.0KB
+7f7fa15000-7f7fa25000 ---p  64.0KB
+7f7fa25000-7f7fa27000 r--p /system/lib64/libjpeg.so 8.0KB
+7f7fa27000-7f7faee000 r-xp /system/lib64/libmedia.so 796.0KB
+7f7faee000-7f7fafd000 ---p  60.0KB
+7f7fafd000-7f7fb33000 r--p /system/lib64/libmedia.so 216.0KB
+7f7fb33000-7f7fd4f000 r-xp /system/lib64/libicui18n.so 2.109375MB
+7f7fd4f000-7f7fd5f000 ---p  64.0KB
+7f7fd5f000-7f7fd74000 r--p /system/lib64/libicui18n.so 84.0KB
+7f7fd74000-7f7fef7000 r-xp /system/lib64/libicuuc.so 1.51171875MB
+7f7fef7000-7f7ff07000 ---p  64.0KB
+7f7ff07000-7f7ff1a000 r--p /system/lib64/libicuuc.so 76.0KB
+7f7ff1a000-7f7ff1e000 rw-p  16.0KB
+7f7ff1e000-7f7ff57000 r-xp /system/lib64/libssl.so 228.0KB
+7f7ff57000-7f7ff67000 ---p  64.0KB
+7f7ff67000-7f7ff6a000 r--p /system/lib64/libssl.so 12.0KB
+7f7ff6a000-7f8006c000 r-xp /system/lib64/libcrypto.so 1.0078125MB
+7f8006c000-7f8007b000 ---p  60.0KB
+7f8007b000-7f80090000 r--p /system/lib64/libcrypto.so 84.0KB
+7f80090000-7f80091000 r--p [anon:linker_alloc] 4.0KB
+7f80091000-7f800e9000 r-xp /system/lib64/libsonivox.so 352.0KB
+7f800e9000-7f800f9000 ---p  64.0KB
+7f800f9000-7f800fb000 r--p /system/lib64/libsonivox.so 8.0KB
+7f800fb000-7f800fc000 rw-p  4.0KB
+7f800fc000-7f80111000 r-xp /system/lib64/libselinux.so 84.0KB
+7f80111000-7f80121000 ---p  64.0KB
+7f80121000-7f80123000 r--p /system/lib64/libselinux.so 8.0KB
+7f80123000-7f80124000 rw-p  4.0KB
+7f80124000-7f8012c000 r-xp /system/lib64/libhardware_legacy.so 32.0KB
+7f8012c000-7f8013b000 ---p  60.0KB
+7f8013b000-7f8013d000 r--p /system/lib64/libhardware_legacy.so 8.0KB
+7f8013d000-7f8013e000 rw-p  4.0KB
+7f8013e000-7f80140000 r-xp /system/lib64/libhardware.so 8.0KB
+7f80140000-7f8014f000 ---p  60.0KB
+7f8014f000-7f80152000 r--p /system/lib64/libhardware.so 12.0KB
+7f80152000-7f80155000 r-xp /system/lib64/libETC1.so 12.0KB
+7f80155000-7f80165000 ---p  64.0KB
+7f80165000-7f80167000 r--p /system/lib64/libETC1.so 8.0KB
+7f80167000-7f80177000 r-xp /system/lib64/libGLESv2.so 64.0KB
+7f80177000-7f80186000 ---p  60.0KB
+7f80186000-7f80188000 r--p /system/lib64/libGLESv2.so 8.0KB
+7f80188000-7f80191000 r-xp /system/lib64/libGLESv1_CM.so 36.0KB
+7f80191000-7f801a0000 ---p  60.0KB
+7f801a0000-7f801a2000 r--p /system/lib64/libGLESv1_CM.so 8.0KB
+7f801a2000-7f80265000 r-xp /system/lib64/libEGL.so 780.0KB
+7f80265000-7f80274000 ---p  60.0KB
+7f80274000-7f80284000 r--p /system/lib64/libEGL.so 64.0KB
+7f80284000-7f8028a000 rw-p  24.0KB
+7f8028a000-7f8028b000 r--p [anon:linker_alloc] 4.0KB
+7f8028b000-7f80345000 r-xp /system/lib64/libsqlite.so 744.0KB
+7f80345000-7f80355000 ---p  64.0KB
+7f80355000-7f80359000 r--p /system/lib64/libsqlite.so 16.0KB
+7f80359000-7f8035a000 rw-p  4.0KB
+7f8035a000-7f807ff000 r-xp /system/lib64/libskia.so 4.64453125MB
+7f807ff000-7f8080e000 ---p  60.0KB
+7f8080e000-7f80841000 r--p /system/lib64/libskia.so 204.0KB
+7f80841000-7f8084a000 rw-p  36.0KB
+7f8084a000-7f80852000 r-xp /system/lib64/libcamera_metadata.so 32.0KB
+7f80852000-7f80861000 ---p  60.0KB
+7f80861000-7f80863000 r--p /system/lib64/libcamera_metadata.so 8.0KB
+7f80863000-7f80864000 rw-p  4.0KB
+7f80864000-7f80897000 r-xp /system/lib64/libcamera_client.so 204.0KB
+7f80897000-7f808a6000 ---p  60.0KB
+7f808a6000-7f808b2000 r--p /system/lib64/libcamera_client.so 48.0KB
+7f808b2000-7f80907000 r-xp /system/lib64/libinputflinger.so 340.0KB
+7f80907000-7f80917000 ---p  64.0KB
+7f80917000-7f8091c000 r--p /system/lib64/libinputflinger.so 20.0KB
+7f8091c000-7f8091d000 rw-p [anon:linker_alloc] 4.0KB
+7f8091d000-7f80941000 r-xp /system/lib64/libinput.so 144.0KB
+7f80941000-7f80951000 ---p  64.0KB
+7f80951000-7f80958000 r--p /system/lib64/libinput.so 28.0KB
+7f80958000-7f809bf000 r-xp /system/lib64/libgui.so 412.0KB
+7f809bf000-7f809ce000 ---p  60.0KB
+7f809ce000-7f809e5000 r--p /system/lib64/libgui.so 92.0KB
+7f809e5000-7f809f7000 r-xp /system/lib64/libui.so 72.0KB
+7f809f7000-7f809f8000 r--p [anon:linker_alloc] 4.0KB
+7f809f8000-7f809ff000 r-xp /system/lib64/libnetutils.so 28.0KB
+7f809ff000-7f80a0f000 ---p  64.0KB
+7f80a0f000-7f80a11000 r--p /system/lib64/libnetutils.so 8.0KB
+7f80a11000-7f80a19000 r-xp /system/lib64/libnativehelper.so 32.0KB
+7f80a19000-7f80a28000 ---p  60.0KB
+7f80a28000-7f80a2a000 r--p /system/lib64/libnativehelper.so 8.0KB
+7f80a2a000-7f80a4b000 r-xp /system/lib64/libexpat.so 132.0KB
+7f80a4b000-7f80a5b000 ---p  64.0KB
+7f80a5b000-7f80a5f000 r--p /system/lib64/libexpat.so 16.0KB
+7f80a5f000-7f80a9a000 r-xp /system/lib64/libandroidfw.so 236.0KB
+7f80a9a000-7f80aa9000 ---p  60.0KB
+7f80aa9000-7f80aad000 r--p /system/lib64/libandroidfw.so 16.0KB
+7f80aad000-7f80aae000 r-xp /system/lib64/libmemtrack.so 4.0KB
+7f80aae000-7f80abe000 ---p  64.0KB
+7f80abe000-7f80ac0000 r--p /system/lib64/libmemtrack.so 8.0KB
+7f80ac0000-7f80acb000 r-xp /system/lib64/libbacktrace.so 44.0KB
+7f80acb000-7f80ada000 ---p  60.0KB
+7f80ada000-7f80add000 r--p /system/lib64/libbacktrace.so 12.0KB
+7f80add000-7f80b15000 r-xp /system/lib64/libm.so 224.0KB
+7f80b15000-7f80b25000 ---p  64.0KB
+7f80b25000-7f80b27000 r--p /system/lib64/libm.so 8.0KB
+7f80b27000-7f80bbc000 r-xp /system/lib64/libc.so 596.0KB
+7f80bbc000-7f80bcc000 ---p  64.0KB
+7f80bcc000-7f80bd3000 r--p /system/lib64/libc.so 28.0KB
+7f80bd3000-7f80be1000 rw-p  56.0KB
+7f80be1000-7f80be2000 r--p [anon:linker_alloc] 4.0KB
+7f80be2000-7f80cb9000 r-xp /system/lib64/libc++.so 860.0KB
+7f80cb9000-7f80cc8000 ---p  60.0KB
+7f80cc8000-7f80cd0000 r--p /system/lib64/libc++.so 32.0KB
+7f80cd0000-7f80cd3000 rw-p  12.0KB
+7f80cd3000-7f80d0f000 r-xp /system/lib64/libwilhelm.so 240.0KB
+7f80d0f000-7f80d1e000 ---p  60.0KB
+7f80d1e000-7f80d24000 r--p /system/lib64/libwilhelm.so 24.0KB
+7f80d24000-7f80e84000 r-xp /system/lib64/libandroid_runtime.so 1.375MB
+7f80e84000-7f80e94000 ---p  64.0KB
+7f80e94000-7f80eae000 r--p /system/lib64/libandroid_runtime.so 104.0KB
+7f80eae000-7f80eb0000 rw-p  8.0KB
+7f80eb0000-7f80ee7000 r-xp /system/lib64/libbinder.so 220.0KB
+7f80ee7000-7f80ef7000 ---p  64.0KB
+7f80ef7000-7f80f03000 r--p /system/lib64/libbinder.so 48.0KB
+7f80f03000-7f80f0c000 r-xp /system/lib64/liblog.so 36.0KB
+7f80f0c000-7f80f1c000 ---p  64.0KB
+7f80f1c000-7f80f1e000 r--p /system/lib64/liblog.so 8.0KB
+7f80f1e000-7f80f41000 r-xp /system/lib64/libutils.so 140.0KB
+7f80f41000-7f80f51000 ---p  64.0KB
+7f80f51000-7f80f55000 r--p /system/lib64/libutils.so 16.0KB
+7f80f55000-7f80f6a000 r-xp /system/lib64/libcutils.so 84.0KB
+7f80f6a000-7f80f7a000 ---p  64.0KB
+7f80f7a000-7f80f7c000 r--p /system/lib64/libcutils.so 8.0KB
+7f80f7c000-7f80f7d000 r--p [anon:linker_alloc] 4.0KB
+7f80f7d000-7f80f7e000 rw-p [anon:linker_alloc_vector] 4.0KB
+7f80f7e000-7f80f80000 r-xp /system/vendor/lib64/libNimsWrap.so 8.0KB
+7f80f80000-7f80f8f000 ---p  60.0KB
+7f80f8f000-7f80f91000 r--p /system/vendor/lib64/libNimsWrap.so 8.0KB
+7f80f91000-7f80fb1000 r--s /dev/__properties__ 128.0KB
+7f80fb1000-7f80fe2000 r-xp /system/bin/linker64 196.0KB
+7f80fe2000-7f80fe3000 rw-p [anon:linker_alloc_16] 4.0KB
+7f80fe3000-7f80fe5000 r--p [anon:linker_alloc] 8.0KB
+7f80fe5000-7f80fe6000 rw-p [anon:linker_alloc_vector] 4.0KB
+7f80fe6000-7f80fe7000 rw-p [anon:linker_alloc_32] 4.0KB
+7f80fe7000-7f80fe8000 r--p [anon:linker_alloc] 4.0KB
+7f80fe8000-7f80fe9000 rw-p [anon:linker_alloc_64] 4.0KB
+7f80fe9000-7f80fea000 r--p [anon:linker_alloc] 4.0KB
+7f80fea000-7f80fec000 r--p  8.0KB
+7f80fec000-7f80ff0000 rw-p [anon:thread signal stack] 16.0KB
+7f80ff0000-7f80ff1000 r--p [vvar] 4.0KB
+7f80ff1000-7f80ff2000 r-xp [vdso] 4.0KB
+7f80ff2000-7f80ff5000 r--p /system/bin/linker64 12.0KB
+7f80ff5000-7f80ff9000 rw-p  16.0KB
+空闲:  1.5857505798339844GB
+7fe67c8000-7fe67c9000 rw-p  4.0KB
+7fe67c9000-7fe6fc8000 rw-p [stack] 7.99609375MB

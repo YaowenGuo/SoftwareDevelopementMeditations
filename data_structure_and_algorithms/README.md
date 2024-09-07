@@ -51,7 +51,7 @@ Data Structure  = (D, S)
 图 > 树 > 二叉树 > 线性表
 
 
-[体系图](./images/structure.png)
+![体系图](images/structure.png)
 ## 数据结构分类
 
 逻辑结构：

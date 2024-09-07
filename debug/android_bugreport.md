@@ -33,7 +33,49 @@ $ adb pull /bugreports/bugreport-foo-bar.xxx.YYYY-MM-DD-HH-MM-SS.zip
 
 ### bug 报告的内容
 
+## 查看 tombstones
 
+### 崩溃日志
+
+Bugs are a reality in any type of development—and bug reports are critical to identifying and solving problems. All versions of Android support capturing bug reports with Android Debug Bridge (adb); Android versions 4.2 and higher support a [Developer Option](http://developer.android.com/tools/device.html#developer-device-options) for taking bug reports and sharing via email, Drive, etc.
+
+
+
+Unix 系统一般都提供了[core dump](core_dump.md) 功能来定位 Native 的崩溃问题。Core Dump 依赖于系统设置，无法用于生产环境提供调试信息。因此很多应用 SDK 都提供了不同形式的 unwind stack 的功能，用于记录线上问题。同时 Core Dump 也仅能用于纯 Native 的程序，对 Java 这种混合程序作用有限。为了解决以上问题，Android 提供 tombstone 功能，用于输出崩溃信息。
+
+Provide apps direct access to tombstone traces
+
+Previously, the only way to get access to this information was through the Android Debug Bridge (adb). Starting in Android 12 (API level 31), you can access your app's native crash tombstone as a protocol buffer through the ApplicationExitInfo.getTraceInputStream() method. The protocol buffer is serialized using this schema. 
+
+Here’s an example of how to implement this in your app:
+
+```Java
+ActivityManager activityManager: ActivityManager = getSystemService(Context.ACTIVITY_SERVICE);
+MutableList<ApplicationExitInfo> exitReasons = activityManager.getHistoricalProcessExitReasons(/* packageName = */ null, /* pid = */ 0, /* maxNum = */ 5);
+for (ApplicationExitInfo aei: exitReasons) {
+    if (aei.getReason() == REASON_CRASH_NATIVE) {
+        // Get the tombstone input stream.
+        InputStream trace = aei.getTraceInputStream();
+        // The tombstone parser built with protoc uses the tombstone schema, then parses the trace.
+        Tombstone tombstone = Tombstone.parseFrom(trace);
+    }
+}
+```
+
+或者在未崩溃时主动获取一个 stombstone: Getting a stack trace/tombstone from a running process
+
+You can use the debuggerd tool to get a stack dump from a running process. From the command line, invoke debuggerd using a process ID (PID) to dump a full tombstone to stdout. To get just the stack for every thread in the process, include the -b or --backtrace flag.
+
+
+新版的手机除非 root，否则无法查看 `/data` 目录下的内容。也就无法获取 `ANR` 和 `tombstones` 崩溃信息。因此 adb 提供了一个额外的指令来下载这些文件到本地。
+
+```
+adb bugreport
+```
+该指令会生成一个 zip 文件到本地。解压就能获取各种崩溃信息的文件。在 `FS/data` 下分别有 anr 和 tombstones 文件夹，里面便是对应文件。
+
+解析 tombstone： https://stackoverflow.com/questions/28105054/default-tombstones-location-in-android
+其它生成方式： https://developer.android.com/studio/debug/bug-report?hl=zh-cn
 
 
 
@@ -56,12 +98,6 @@ FS
 ├── linkerconfig
 └── proc                        # * proc 文件系统，很过系统和应用相关信息保存在这里。
 ```
-
-## bug 报告内容
-
-
-### logcat
-
 
 
 [堆栈示例](https://source.android.com/docs/core/tests/debug)
@@ -88,3 +124,32 @@ dumpsys, dumpstate
 ## 如何从用户获取这些信息？
 
 Google play 和 firebase 之外的选择？如何自己实现？
+
+
+## 郭耀文
+https://bugly.tds.qq.com/v2/exception/crash/issues/detail?productId=900004178&pid=1&token=58e51ac6f49c4b896e619bae063d6880&feature=C024E3958388AF0AA23047BDDDD53932&cId=d28b0d61-71fb-4527-bf4a-2e2c2fb0d613
+
+
+
+https://bugly.tds.qq.com/v2/exception/crash/issues/detail?productId=900004178&pid=1&token=63294c2049d41d4d4d1cd269ab7c9d0c&feature=2A69A58243B501DFA7CA125B13553893&cId=81ee09e0-6e02-47d1-b2e8-e9cefd74c7a3
+
+http://gerrit.corp.fenbi.com/#/c/android-module-video/+/161275
+http://gerrit.corp.fenbi.com/#/c/android-app-gwy/+/161276
+修复线程不安全引起的崩溃
+https://bugly.tds.qq.com/v2/exception/crash/issues/list?productId=900004178&pid=1&token=e8686b9d991486c8d65e10319c71600c
+
+
+https://bugly.tds.qq.com/v2/exception/crash/issues/detail?productId=900004178&pid=1&token=63294c2049d41d4d4d1cd269ab7c9d0c&feature=75E714A50FCAD2DED1D4EA42D849225C&cId=08520649-e1cf-4915-be8f-6890b00e4c83
+
+
+http://gerrit.corp.fenbi.com/#/c/android-module-ocr/+/161316
+http://gerrit.corp.fenbi.com/#/c/android-app-gwy/+/161317
+修复安卓低版本阴影设置超过 25 时引起的崩溃
+https://stackoverflow.com/questions/23048567/android-signal-11-rs-cpp-error-blur-radius-out-of-0-25-pixel-bound
+
+https://bugly.tds.qq.com/v2/exception/crash/issues/detail?productId=900004178&pid=1&token=63294c2049d41d4d4d1cd269ab7c9d0c&feature=EEFE14E8ECDFF9A37A4FA9A4D905B883&cId=1177623b-dd1f-4ef6-8536-68dac70df321
+
+
+
+https://bugly.tds.qq.com/v2/exception/crash/issues/detail?productId=900004178&pid=1&token=63294c2049d41d4d4d1cd269ab7c9d0c&feature=F6A92BBC309DBAC1ED52409FAA0A1AAA&cId=ca73cf10-ba6a-4e13-b7e7-559be67aac07
+升级 IM SDK

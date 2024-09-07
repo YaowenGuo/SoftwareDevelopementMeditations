@@ -50,9 +50,7 @@ External library support: 扩展库
 
 ### 交叉编译
 
-交叉编译是在一个平台上生成另一个平台上的可执行代码。很显然，要在 linux 编译在 android 系统使用的 so 库就属于交叉编译。虽然安卓也是 linux 内核，但是平台是 ARM，要编译成 ARM 指令的可执行二进制文件。
-
-交叉编译主要配置使用的编译器，连接器，编译链接的目标平台（CPU架构）依赖库等。
+主要配置使用的编译器，连接器，编译链接的目标平台（CPU架构）依赖库等。
 
 - 编译器：
     - NDK17 开始，`make_standalone_toolchain.py` 用于替换之前的 `make-standalone-toolchain.sh` 用于在 windows 不用配置 bash 环境也能编译，但是实际情况是许多使用 `Autoconf` 配置编译的三方库仍旧无法在 Windows 上编译。 

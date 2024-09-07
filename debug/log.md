@@ -124,36 +124,6 @@ adb shell setprop persist.log.tag.FOO_TAG VERBOSE
 
 logcat 支持在输出内容是进行过滤，可以减少从 logd 显示的日志量。详细的使用方法在下文 logcat 命令行中说明。
 
-### 崩溃日志
-
-Bugs are a reality in any type of development—and bug reports are critical to identifying and solving problems. All versions of Android support capturing bug reports with Android Debug Bridge (adb); Android versions 4.2 and higher support a [Developer Option](http://developer.android.com/tools/device.html#developer-device-options) for taking bug reports and sharing via email, Drive, etc.
-
-
-
-Unix 系统一般都提供了[core dump](core_dump.md) 功能来定位 Native 的崩溃问题。Core Dump 依赖于系统设置，无法用于生产环境提供调试信息。因此很多应用 SDK 都提供了不同形式的 unwind stack 的功能，用于记录线上问题。同时 Core Dump 也仅能用于纯 Native 的程序，对 Java 这种混合程序作用有限。为了解决以上问题，Android 提供 tombstone 功能，用于输出崩溃信息。
-
-Provide apps direct access to tombstone traces
-
-Previously, the only way to get access to this information was through the Android Debug Bridge (adb). Starting in Android 12 (API level 31), you can access your app's native crash tombstone as a protocol buffer through the ApplicationExitInfo.getTraceInputStream() method. The protocol buffer is serialized using this schema. 
-
-Here’s an example of how to implement this in your app:
-
-```Java
-ActivityManager activityManager: ActivityManager = getSystemService(Context.ACTIVITY_SERVICE);
-MutableList<ApplicationExitInfo> exitReasons = activityManager.getHistoricalProcessExitReasons(/* packageName = */ null, /* pid = */ 0, /* maxNum = */ 5);
-for (ApplicationExitInfo aei: exitReasons) {
-    if (aei.getReason() == REASON_CRASH_NATIVE) {
-        // Get the tombstone input stream.
-        InputStream trace = aei.getTraceInputStream();
-        // The tombstone parser built with protoc uses the tombstone schema, then parses the trace.
-        Tombstone tombstone = Tombstone.parseFrom(trace);
-    }
-}
-```
-
-或者在未崩溃时主动获取一个 stombstone: Getting a stack trace/tombstone from a running process
-
-You can use the debuggerd tool to get a stack dump from a running process. From the command line, invoke debuggerd using a process ID (PID) to dump a full tombstone to stdout. To get just the stack for every thread in the process, include the -b or --backtrace flag.
 
 
 在调试环境中，可以使用 Android studio 的 Logcat 面板或者 adb logcat 命令行查看。
