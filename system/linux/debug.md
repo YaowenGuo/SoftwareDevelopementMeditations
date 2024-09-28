@@ -117,7 +117,37 @@ Process 1 stopped
 ```shell
 $ ./create-image.sh
 ```
-会生成一个`bullseye.img`，使用 QEMU 的 `-hda` 参数指定该文件。
+会生成一个`bullseye.img`，有几个问题需要说明：
+1. bullseye 是 debine 的上个版本的版本号，可用通过脚本的参数指定其它 debine 衍生版本的版本号，生成的名字也不同。使用 `-h` 查看参数。
+2. 这个文件在 Docker 中生成有点问题，可能是使用主机映射文件的问题，最好不要在映射目录中生成。
+3. 生成比较耗时，最好指定国内的软件源能快速生成。
+4. 生成的文件没有 initrd 镜像，需要自己整一个，我用的 Ubuntu 主机的 `/boot/initrd.img`。
+
+使用 QEMU 的 `-hda` 参数指定 `bullseye.img`, 另外添加启动参数 `-append "root=/dev/vda earlyprintk=serial nokaslr"`。**vda** 指定了 -hda 指定的挂载点，不同版本系统可能不一样，在 ubuntu24.04 中被挂载到 `/dev/vda`（这里 a 可能是 a、b、c...）,我看网上别人写的博客都是 `/dev/sda`。如果挂载失败，可以先把 `bullseye.img` 挂载到其它系统上，看看是被当所硬盘还是虚拟盘了，再指定对应的路径。
+
+另外执行后面的启动会报错： 
+```
+You are in emergency mode. After logging in, type "journalctl -xb" to view
+system logs, "systemctl reboot" to reboot, or "exit"
+to continue bootup.
+Press Enter for maintenance
+```
+通过查看日志：
+```
+journalctl -xb | grep failed
+```
+我的是因为内核编译没有支持 binfmt_misc，systemd 挂载时挂载点不存在导致。我直接把 systemd 的 binfmt_misc 关了。
+
+```shell
+# 注释掉或删除 /etc/fstab 中的条目：
+# 编辑 /etc/fstab 文件，找到有关 binfmt_misc 的条目并注释掉或删除。
+sudo nano /etc/fstab
+
+# 禁用 proc-sys-fs-binfmt_misc.automount 服务：
+# 禁用与 binfmt_misc 相关的 systemd 服务。
+systemctl disable proc-sys-fs-binfmt_misc.automount
+```
+然后重启一下 QEMU。
 
 ### 配置 VsCode 
 使用命令行没有使用图形化的工具方便，这里配置 VsCode 环境。首先给 VsCode 安装 clangd 和 codelldb。不使用微软官方的 C/C++ 插件 cpptools 是这个插件普遍反馈问题比较多。因为 C 语言有很多宏定义，VsCode 并不知道编译选项选择了什么。为了避免打开后很多地方报红色，找不到符号，可以给 clangd 生成 `compile_commands.json` 指导文件，而 Linux 内核就提供了完成此功能的工具。
@@ -130,8 +160,9 @@ scripts/clang-tools/gen_compile_commands.py
 ```shell
 qemu-system-aarch64 -machine virt -cpu cortex-a57  \
   -kernel ../arch/arm64/boot/Image \
-  -append "root=/dev/sda earlyprintk=serial nokaslr"\
+  -initrd image/initrd.img \
   -hda ./bullseye.img \
+  -append "root=/dev/vda earlyprintk=serial nokaslr"\
   -net user,hostfwd=tcp::10021-:22 -net nic \
   -nographic \
   -m 2G \

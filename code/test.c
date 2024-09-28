@@ -138,24 +138,30 @@ enum fixed_addresses {
 // #define FOO(A, B) int foo(A x, B y)
 // #define BAR(A, B) FOO(PP_REMOVE_PARENS(A), PP_REMOVE_PARENS(B))
 
-// FOO(bool, IntPair)                  // -> int foo(bool x, IntPair y)
-// BAR((bool), (std::pair<int, int>))  // -> int foo(bool x, std::pair<int, int> y)
+#include <iostream>
+ 
 
-int main(int argc, char *argv[])
-{
-    int count1 = CALL_ENGINE_CALLBACK(1);                                                                              // count1 = 0
-    int count2 = CALL_ENGINE_CALLBACK(1, 3);                                                                       // count2 = 3
-    int count3 = COUNT_ARGS(1, 2, 3, 4, 5, 6, 7);                                                           // count3 = 7
-    int count4 = COUNT_ARGS("Hello", 'a', 3.14);                                                            // count4 = 3
-    int count5 = COUNT_ARGS(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);         // count5 = 20
-    int count6 = COUNT_ARGS(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 46, 76); // count6 = 20
-
-    printf("count1 = %d\n", count1);
-    printf("count2 = %d\n", count2);
-    printf("count3 = %d\n", count3);
-    printf("count4 = %d\n", count4);
-    printf("count5 = %d\n", count5);
-    printf("count6 = %d\n", count6);
-
+template<typename... Args>
+void myFunction(int a, Args... args) {
+    // 函数体
+}
+class MyClass {
+public:
+    void Print() {
+        std::cout << "Hello, World!" << std::endl;
+		myFunction(2);
+    }
+};
+ 
+// 函数接受类的成员函数作为参数
+void AcceptMemberFunction(void (MyClass::*memberFunction)(), MyClass* obj) {
+    (obj->*memberFunction)();
+}
+ 
+int main() {
+    MyClass obj;
+    // 将成员函数的地址作为参数传递
+    AcceptMemberFunction(&MyClass::Print, &obj);
+ 
     return 0;
 }

@@ -29,6 +29,6 @@
 杂记
 
 - [线程队列](./thread.md)
-- [WebRTC 中的静态搭理](./proxy.md)
+- [WebRTC 中的静态代理](./proxy.md)
 - [NAT](./NAT.md)
 - [RTP 协议](./RTP_RTCP.md)

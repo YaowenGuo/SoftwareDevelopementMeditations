@@ -4,15 +4,16 @@
 cd <Dockerfile 所在目录>
 docker build -t albertguo88/linux_build:latest .
 
-docker run -itd --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --security-opt apparmor=unconfined -v $HOME/projects/:/Users/lim/projects -w /Users/lim/projects/linux/ --name linux_build albertguo88/linux_build /bin/bash
+docker run --privileged=true  -itd --cap-add=SYS_PTRACE --cap-add=SYS_ADMIN --security-opt seccomp=unconfined --security-opt apparmor=unconfined -v $HOME/projects/:/Users/lim/projects -w /Users/lim/projects/linux/ --name linux_build albertguo88/linux_build /bin/bash
 
 docker exec -it linux_build /bin/bash
-```
+``` 
 
 [docker中运行lldb出现错误：process launch failed: 'A' packet returned an error: 8](https://javamana.com/2021/12/202112200008292891.html)
 
 想要使用 lldb 调试，需要给 run 增加 `--cap-add=SYS_PTRACE --security-opt seccomp=unconfined --security-opt apparmor=unconfined` 参数。
 
+**使用 debootstrap 创建根文件系统镜像需要挂载磁盘，需要使用 docker 使用 --privileged=true 权限，否则文件出现，mount 时出现文件不存在的问题。**
 
 ## 编译
 

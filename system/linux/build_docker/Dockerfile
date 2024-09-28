@@ -1,4 +1,4 @@
-FROM ubuntu:rolling
+FROM debian:latest
 
 LABEL Description="This image is used to build linux kernel." Vendor="GuoYaowen" Version="0.2"
 
@@ -23,4 +23,6 @@ clang \
 lldb \
 libelf-dev \
 dwarves \
+sudo \
+debootstrap \
 && mkdir -p /Users/lim/projects \
