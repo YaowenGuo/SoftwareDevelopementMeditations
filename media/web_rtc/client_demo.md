@@ -616,5 +616,16 @@ python3 build/android/gradle/generate_gradle.py --output-directory $PWD/out/arm6
 [从 M80 开始，WebRTC 已经不再提供官方的 SDK 了](https://groups.google.com/g/discuss-webrtc/c/xhUx4iwbVAA/m/X6tPE7daAgAJ)，但是使用旧版本的 sdk 上传 google play 会警告过时。我们可以自己编译 aar 包。
 
 ```
-python3 tools_webrtc/android/build_aar.py --build-dir=out/arm64 --output=google-webrtc-1.1.aar
+python3 tools_webrtc/android/build_aar.py --build-dir=out/arm64 --use-unstripped-libs  --output=google-webrtc-1.1.aar
 ```
+
+python3 tools_webrtc/android/build_aar.py --build-dir=out/arm64  --output=google-webrtc-1.0.32006.aar
+
+git fetch --depth=1 origin 67510fac36d27b2e22c7cd955fc167136b737b93
+
+git fetch --depth=1 origin 27c0a8d090c666a50e40fceb4ee5b40b1a2d3f87
+
+https://chromium.googlesource.com/android_ndk.git@27c0a8d090c666a50e40fceb4ee5b40b1a2d3f87
+
+
+git clone --depth=1 --single-branch -b 27c0a8d090c666a50e40fceb4ee5b40b1a2d3f87 https://chromium.googlesource.com/android_ndk.git android_ndk

@@ -1,4 +1,4 @@
-# [物理页的统计信息](https://man7.org/linux/man-pages/man5/proc_meminfo.5.html)
+# [物理内存和交换分区的统计信息](https://man7.org/linux/man-pages/man5/proc_meminfo.5.html)
 
 https://www.cnblogs.com/liulianzhen99/articles/18005637
 

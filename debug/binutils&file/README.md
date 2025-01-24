@@ -25,3 +25,11 @@ The `objdump` program is just one of many tools you should learn how to use; a d
 - [dwarfdump](dwarfdump.md)
 
 memory profilers like valgrind or purify
+
+
+C++ 符号转成原始名称
+
+```
+c++filt -n <samble>
+nm your_object_file | c++filt
+```

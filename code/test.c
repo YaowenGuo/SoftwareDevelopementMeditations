@@ -138,30 +138,6 @@ enum fixed_addresses {
 // #define FOO(A, B) int foo(A x, B y)
 // #define BAR(A, B) FOO(PP_REMOVE_PARENS(A), PP_REMOVE_PARENS(B))
 
-#include <iostream>
- 
-
-template<typename... Args>
-void myFunction(int a, Args... args) {
-    // 函数体
-}
-class MyClass {
-public:
-    void Print() {
-        std::cout << "Hello, World!" << std::endl;
-		myFunction(2);
-    }
-};
- 
-// 函数接受类的成员函数作为参数
-void AcceptMemberFunction(void (MyClass::*memberFunction)(), MyClass* obj) {
-    (obj->*memberFunction)();
-}
- 
 int main() {
-    MyClass obj;
-    // 将成员函数的地址作为参数传递
-    AcceptMemberFunction(&MyClass::Print, &obj);
- 
     return 0;
 }

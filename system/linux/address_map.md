@@ -87,26 +87,42 @@ ffff 8000 0000 0000   |         modules          |  2GB
 ffff 8000 8000 0000   |                          | 内核文件映射区，会有一个随机偏移
 					  |            		         |
                       |         vmalloc          |
-					  |        124TB-2GB         |
+					  |        124TB-2GB         |                 128T
 					  |            		         |
                       +--------------------------+     
-ffff fc00 0000 0000   |         vmemmap          |  2TB          128TB
-                      +--------------------------+<------------+
-ffff fe00 0000 0000   ~   				         ~             |
-                      +--------------------------+<-----+      |  
-                      |      [guard region]      | 8MB  |      |
-                      +--------------------------+      |      |
-ffff ffff f000 0000   |       PCI I/O space      | 16MB |      |
-                      +--------------------------+     1GB    2T   
-ffff ffff fe00 0000   ~   				         ~      |      |
-                      +--------------------------+      |      |
-ffff ffff fe80 0000   | fixed mappings (top down)|约4MB(3D0000)|
-                      +--------------------------+      |      |
-ffff ffff ff80 0000   |      [guard region]      |  8MB |      |
-ffff ffff ffff ffff   +--------------------------+<------------+------+
+end - vmemmap size    |         vmemmap          |  地址空间页数 * sizeof(struct page)
+                      +--------------------------+<-----+  
+ffff ffff c000 0000   |      [guard region]      | 8MB  |
+                      +--------------------------+      |
+ffff ffff c080 0000   |       PCI I/O space      | 16MB |
+                      +--------------------------+     1GB
+ffff ffff c180 0000   ~   				         ~      |
+                      +--------------------------+      |
+ffff ffff ff40 0000   | fixed mappings (top down)| 4MB  |
+                      +--------------------------+      |
+ffff ffff ff80 0000   |      [guard region]      | 8MB  |
+ffff ffff ffff ffff   +--------------------------+<------------------+
+
+#define VA_BITS			(CONFIG_ARM64_VA_BITS)
+#define _PAGE_OFFSET(va)	(-(UL(1) << (va)))
+#define PAGE_OFFSET		(_PAGE_OFFSET(VA_BITS))
+#define KIMAGE_VADDR		(MODULES_END)
+#define MODULES_END		(MODULES_VADDR + MODULES_VSIZE)
+#define MODULES_VADDR		(_PAGE_END(VA_BITS_MIN))
+#define MODULES_VSIZE		(SZ_2G)
+#define VMEMMAP_START		(VMEMMAP_END - VMEMMAP_SIZE)
+#define VMEMMAP_END		(-UL(SZ_1G))
+#define PCI_IO_START		(VMEMMAP_END + SZ_8M)
+#define PCI_IO_END		(PCI_IO_START + PCI_IO_SIZE)
+#define FIXADDR_TOP		(-UL(SZ_8M))
 ```
 
 **不同体系架构即便是相同位的地址总线，因为设计不同，可用的地址空间大小也不一样。例如 X86 计算机的 48 位地址总线，由于是根据 48 位的最高位判断是用户还是系统地址空间，因此用户和内核地址空间可用的大小各 128TB。在Arm64 上，是用 64 位的最高位判断是用户还是内核地址空间，因此用户和内核地址空间各 256TB。**
+
+即便是相同体系结构的CPU，地址空间的分配也可能不同，例如 ARM64 48位地址空间，如果是采用了 16K 的页面，则内核地址空间是从 `ffff 8000 0000 0000` 开始，内核地址空间只占了 128TB。但总体的布局是不变的。如果想要查看具体的划分，[可以自己编译内核，打开内核的地址空间调试](https://docs.kernel.org/arch/arm64/ptdump.html)，在 `/sys/kernel/debug/kernel_page_tables` 文件中可以看到实际的内核的地址空间使用情况。
+
+
+
 
 Arm64 内核地址空间中的区域：
 
@@ -122,13 +138,112 @@ Arm64 内核地址空间中的区域：
 - PCI I/O space： 预留给 IO 设备的映射区。 
 - fixed mappings：启动时用于临时映射内核的区域。启动后不再使用了？
 
-linux 内核运行时动态分配内存都是从 vmaloc 区域分配（？），其它 modules、vmemmap、PCI I/O space 虽然也会发生变化，但都是用于特定用途的区域。
+linux 内核运行时动态分配内存都是从线性映射区（kmalloc()）和 vmalloc(vmalloc())区分配，其它 modules、vmemmap、PCI I/O space 虽然也会发生变化，但都是用于特定用途的区域。你可能像我一样疑惑，为什么线性映射区已经映射了所有的物理内存，还需要 vmalloc 区域，看起来kmalloc 和 vmalloc 只是分配策略的不同，也不至于使用不同区域的地步。实际上是因为 [32 位机器的历史原因](https://stackoverflow.com/questions/58837677/memory-mapping-in-linux-kernel-use-of-vamlloc-and-kmalloc)。32 位 Linux 内核将 4GB 空间 3GB 留给用户空间，内核使用 1GB(据说也可以在编译是调整大小为 2GB用户2GB内核)，早期内存比较小（不超过 1GB），全部内存可以直接映射到内核空间，Linux 采用线性映射来映射所有物理内存。随着硬件技术的发展，物理内存大小很快突破了 1GB，此时 1GB 的内核地址继续使用线性映射已经无法访问全部的物理内存了，这样的内核显然不合格。Linux 的解决方案是，将一部分还使用线性映射。留一部分可以动态映射到物理内存的任意位置，动态映射部分使用后释放可以映射到其它位置，这样就可以访问全部的物理内存了。线性映射的部分别设置为 896MB，这部分线性映射到物理内存开始的 896MB，这部分物理内存也被称为低端内存，高于 896MB 的内存称为高端内存。到了 64位内存地址机器上，地址空间足够大了，以至于可以预见的将来，单机的物理内存大小都无法超过 64 位地址空间。现在主流的机器实际使用了 48 位物理地址，即便如此也达到了 256TB。此时内核地址空间足以线性映射全部的物理内存。然而 vmalloc 区仍然被保留了下来。stackoverflow 上的一个回答说 vmalloc 区域不再必要了。（注意，这里是说内核 vmalloc 区域不再必要，而不是 vmalloc() 函数调用的分配策略，个人认为他们可以使用同一映射区，是指分配策略不同。）
 
 
 ARM64 为 EL1、EL2、EL3 三级异常级的每个异常级都有单独的寄存器来指向地址映射表。这样不同异常级的切换不必修改寄存器，可以提高效率。
 
 同时每个异常级都有两个寄存器，以 EL1 为例，ttbr0_el1 和 ttbr1_el1, ttbr0 指向 0 开始的低地址地址映射表，ttbr1 指向 1 开始的高地址空间。如上，Linux 的内存布局将内核分配到了高地址空间，即 ttbr1 存放。ttbr0 和 ttbr1 两个寄存器分别指向内核空间和内核空间的映射表可以在进程切换时，只修改 ttbr0。而 ttbr1 无需任何修改，这样内核就自动映射到了新的进程地址空间。
 
+
+```
+---[ Linear Mapping start ]---
+ 
+0xffF0000000000000
+
+0xffff80 00 0000 0000-0xffff800000210000        2112K PTE       RW NX SHD AF            UXN    MEM/NORMAL-TAGGED
+0xffff800000210000-0xffff800002000000       30656K PTE       ro NX SHD AF            UXN    MEM/NORMAL
+0xffff800002000000-0xffff800004000000          32M PMD       ro NX SHD AF        BLK UXN    MEM/NORMAL
+0xffff800080000000-0xffff801000000000          62G PMD
+0xffff801000000000-0xffffb00000000000       49088G PGD
+---[ Linear Mapping end ]---
+---[ Kasan shadow start ]---
+0xffffb00000000000-0xffffb00010000000         256M PTE       RW NX SHD AF            UXN    MEM/NORMAL
+0xffffb00010000000-0xffffb01000000000       65280M PMD
+0xffffbff7f7ef8000-0xffffbff7f7f00000          32K PTE       RW NX SHD AF            UXN    MEM/NORMAL
+0xffffbff7f7f00000-0xffffc00000000000       32897M PTE       ro NX SHD AF            UXN    MEM/NORMAL
+---[ Kasan shadow end ]---
+---[ Modules start ]---
+0xffffc00000000000-0xffffc00080000000           2G PMD
+---[ Modules end ]---
+---[ vmalloc() area ]---
+0xffffc00080000000-0xffffc00080008000          32K PTE       RW NX SHD AF            UXN    MEM/NORMAL
+0xffffc00080008000-0xffffc00080010000          32K PTE
+0xffffffbfbf7e8000-0xffffffbfbf800000          96K PTE       RW NX SHD AF            UXN    MEM/NORMAL
+---[ vmalloc() end ]---
+0xffffffbfbf800000-0xffffffbfc0000000           8M PTE
+---[ vmemmap start ]---
+0xffffffbfc0000000-0xffffffbfc0800000           8M PTE       RW NX SHD AF            UXN    MEM/NORMAL
+0xffffffbfc0800000-0xffffffbfc2000000          24M PTE
+0xffffffbfc2000000-0xffffffc000000000         992M PMD
+0xffffffc000000000-0xfffffff000000000         192G PGD
+0xfffffff000000000-0xffffffffc0000000          63G PMD
+---[ vmemmap end ]---
+0xffffffffc0000000-0xffffffffc0800000           8M PTE
+---[ PCI I/O start ]---
+0xffffffffc0800000-0xffffffffc0810000          64K PTE       RW NX SHD AF            UXN    DEVICE/nGnRE
+0xffffffffc0810000-0xffffffffc1800000       16320K PTE
+---[ PCI I/O end ]---
+0xffffffffc1800000-0xffffffffc2000000           8M PTE
+0xffffffffc2000000-0xfffffffffe000000         960M PMD
+0xfffffffffe000000-0xffffffffff400000          20M PTE
+---[ Fixmap start ]---
+0xffffffffff400000-0xffffffffff5f8000        2016K PTE
+0xffffffffff5f8000-0xffffffffff6f8000           1M PTE       ro NX SHD AF            UXN    MEM/NORMAL
+0xffffffffff6f8000-0xffffffffff800000        1056K PTE
+---[ Fixmap end ]---
+0xffffffffff800000-0x0000000000000000           8M PTE
+```
+
+```
+---[ Linear Mapping start ]---
+0xffff000000000000-0xffff000000210000        2112K PTE       RW NX SHD AF            UXN    MEM/NORMAL-TAGGED
+0xffff000000210000-0xffff000000400000        1984K PTE       ro NX SHD AF            UXN    MEM/NORMAL
+0xffff000000400000-0xffff000004000000          60M PMD       ro NX SHD AF        BLK UXN    MEM/NORMAL
+0xffff000004000000-0xffff000004020000         128K PTE       ro NX SHD AF            UXN    MEM/NORMAL
+0xffff00007ffff000-0xffff000080000000           4K PTE F     RW NX SHD AF            UXN    MEM/NORMAL-TAGGED
+0xffff000080000000-0xffff008000000000         510G PUD
+0xffff008000000000-0xffff600000000000       97792G PGD
+---[ Linear Mapping end ]---
+---[ Kasan shadow start ]---
+0xffff600000000000-0xffff600010000000         256M PTE       RW NX SHD AF            UXN    MEM/NORMAL
+0xffff600010000000-0xffff600040000000         768M PMD
+0xffff7fbff7e00000-0xffff7fbff7efd000        1012K PTE
+0xffff7fbff7efd000-0xffff7fbff7f00000          12K PTE       RW NX SHD AF            UXN    MEM/NORMAL
+0xffff7fbff7f00000-0xffff800000000000      262273M PTE       ro NX SHD AF            UXN    MEM/NORMAL
+---[ Kasan shadow end ]---
+---[ Modules start ]---
+0xffff800000000000-0xffff800080000000           2G PUD
+---[ Modules end ]---
+---[ vmalloc() area ]---
+0xffff800080000000-0xffff800080008000          32K PTE       RW NX SHD AF            UXN    MEM/NORMAL
+0xffff800080008000-0xffff800080009000           4K PTE
+0xfffffdffbf7e8000-0xfffffdffbf7fa000          72K PTE       RW NX SHD AF            UXN    MEM/NORMAL
+0xfffffdffbf7fa000-0xfffffdffbf800000          24K PTE
+---[ vmalloc() end ]---
+0xfffffdffbf800000-0xfffffdffc0000000           8M PMD
+
+---[ vmemmap start ]---
+0xfffffdffc0000000-0xfffffdffc2000000          32M PMD       RW NX SHD AF        BLK UXN    MEM/NORMAL
+0xfffffdffc2000000-0xfffffe0000000000         992M PMD
+0xfffffe0000000000-0xffffff8000000000        1536G PGD
+0xffffff8000000000-0xffffffffc0000000         511G PUD
+---[ vmemmap end ]---
+0xffffffffc0000000-0xffffffffc0800000           8M PMD
+---[ PCI I/O start ]---
+0xffffffffc0800000-0xffffffffc0810000          64K PTE       RW NX SHD AF            UXN    DEVICE/nGnRE
+0xffffffffc0810000-0xffffffffc0a00000        1984K PTE
+0xffffffffc0a00000-0xffffffffc1800000          14M PMD
+---[ PCI I/O end ]---
+0xffffffffc1800000-0xffffffffff400000         988M PMD
+0xffffffffff400000-0xffffffffff430000         192K PTE
+---[ Fixmap start ]---
+0xffffffffff430000-0xffffffffff5fe000        1848K PTE
+0xffffffffff5fe000-0xffffffffff6fe000           1M PTE       ro NX SHD AF            UXN    MEM/NORMAL
+0xffffffffff6fe000-0xffffffffff800000        1032K PTE
+---[ Fixmap end ]---
+0xffffffffff800000-0x0000000000000000           8M PMD
+```
 
 在内核启动的过程中，有三次地址映射：
 

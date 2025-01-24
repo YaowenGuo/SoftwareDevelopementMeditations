@@ -38,6 +38,11 @@ These are your best option for debugging memory errors on Android.
 
 TODO: 查看 Address Sanitizer 的崩溃报告
 
+LeakSanitizer（LSan）作为ASan的一部分，用于检测内存泄漏。但是使用 clang -fsanitize=address 开启 asan 时并不会检测内存泄漏，需要通过设置环境变量ASAN_OPTIONS=detect_leaks=1来启用内存泄漏检测
+```
+ASAN_OPTIONS=detect_leaks=1 ./your_program
+```
+
 #### Malloc debug
 See Malloc Debug and Native Memory Tracking using libc Callbacks for a thorough description of the C library's built-in options for debugging native memory issues.
 

@@ -1,4 +1,6 @@
 # Proc 
+Linux provides a clever mechanism, called the /proc filesystem, that allows user mode processes to access the contents of kernel data structures. The /proc filesystem exports the contents of many kernel data structures as a hierarchy of text files that can be read by user programs. 
+
 /proc 目录是 Linux 系统的一个伪文件系统，它描述了系统和进程相关的各种信息，为访问内核数据结构提供了一个接口。我们可以通过打开这个目录下的一些文件来查看该进程的内存使用情况，例如：`cat /proc/1464/maps`。下面是内存相关的文件或目录：
 
 ```

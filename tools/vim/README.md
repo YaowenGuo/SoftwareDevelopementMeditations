@@ -25,6 +25,29 @@ VIM 和 emacs 是命令行的两大编辑器。 VIM 被称为神的编辑器，�
 | l	  | 方向右键，右移一个字符   |
 | $	  | 移至行尾              |
 | 0	  | 移至行首              |
+| w/nw| Move to next word |
+| W/nW| Move to next blank delimited word |
+| b/nb| Move to the beginning of the word |
+| B/nB| Move to the beginning of blank delimted word |
+| e/ne| Move to the end of the word |
+| E/nE| Move to the end of Blank delimited word |
+| (   | Move to a sentence back |
+| )   | Move to a sentence forward |
+| {   | Move to a paragraph back |
+| }   | Move to a paragraph forward |
+| G   | Move to the last line of the file |
+| nG  | Move to nth line of the file |
+| :n  | Move to nth line of the file |
+| fc  | Move forward to c |
+| Fc  | Move back to c |
+| H   | Move to top of screen |
+| M   | Move to middle of screen |
+| L   | Move to botton :of screen |
+| %   | Move to associated ( ), { }, [ ] |
+| ctrl-f | Next page |
+| ctrl-b | Backup page |
+| ctrl-d |（down）可以向后翻半页 |
+| ctlr-u |（up）可以向上翻半页。 |
 
 大致位置
 
@@ -53,9 +76,14 @@ VIM 和 emacs 是命令行的两大编辑器。 VIM 被称为神的编辑器，�
 | x	        | 删除光标所在处字符         |
 | nx	    | 删除光标所在处后n个字符     |
 | dd	    | 删除光标所在行，ndd删除n行  |
+| dw        | 从光标处删除到一个单词的词末 |
+| d$        | 删除当前光标到行末         |
 | D	        | 删除从光标所在处到行尾      |
-| :x,yd	    | 删除x开始到y结束的行,包括x,y行  |
+| d3w       | 删除三行                  |
+| 2dd       | 删除两行                  |
+| :x,yd	    | 删除x开始到y结束的行,包括x,y行 |
 
+此处可以观察到 操作+操作对象 的使用规则，通过后面的计数操作，功能会更加强大，即 操作+number+操作对象
 
 复制和剪切命令
 
@@ -101,3 +129,9 @@ VIM 和 emacs 是命令行的两大编辑器。 VIM 被称为神的编辑器，�
 
 
 可以直接执行make族命令，在运行make命令前一定要设置autowrite,vim尅自动保存文件。
+
+[TOC]
+
+### show line number
+
+:set number
