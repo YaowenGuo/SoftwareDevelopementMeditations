@@ -1,4 +1,4 @@
-## 1. Bitmaip 和　Ｄrawable 区别
+## 1. Bitmaip 和　Drawable 区别
 
 Bitmap 是由像素值组成的，是图片资源在内存中位图信息的存储。
 

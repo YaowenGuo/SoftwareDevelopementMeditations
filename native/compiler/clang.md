@@ -289,4 +289,6 @@ g++ simplegrep.c -o simplegrep -I/usr/local/include/hs -L/usr/local/lib64/ -lhs 
 -L:静态库目录
 
 -l:静态库名字
+
+-fomit-frame-pointer 标志会生成更小的二进制文件，但导致调试将被禁用
 ```

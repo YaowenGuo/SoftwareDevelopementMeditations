@@ -9,25 +9,25 @@ UNIX 系统中除进程之外的一切皆是文件，而 Linux 保持了这一�
 ```
 /              # 跟目录
 |-- boot       # 启动目录
-|-- dev        # 存放设备文件
-|-- etc        # 存放系统配置文件
+|-- dev        # 存放设备文件 device
+|-- etc        # 存放系统配置文件 
 |-- home       # 用户目录
 |-- media      # 可卸载存储介质挂载点
 |-- mnt        # 文件系统临时挂载点
 |-- opt        # 附加的应用程序包
 |-- proc       # Linux 上的虚拟文件系统，用于访问内核的各种信息。
 |-- root       # root 用户主目录
-|-- run
+|-- run        # /run 目录用于存储系统和服务在运行期间需要的临时文件。这些文件通常是动态生成的，例如进程 ID 文件、套接字文件、锁文件等。系统重启后，/run 目录中的内容会被清除。
 |-- srv        # 存放服务相关数据
 |-- sys        # sys 虚拟文件系统挂载点
 |-- tmp        # 存放临时文件
-|-- usr        # usr是Unix Software Resource的缩写，即“UNIX操作系统软件资源”所放置的目录。
+|-- usr        # usr是 Unix Software Resource的缩写，即“UNIX操作系统软件资源”所放置的目录。
 |   |-- bin    # 存放用户二进制文件
 |   |-- games
 |   |-- include
 |   |-- lib    # 动态共享库
 |   |-- libexec
-|   |-- local
+|   |-- local 
 |   |-- sbin   # 存放系统二进制文件
 |   |-- share
 |   `-- src
@@ -37,9 +37,9 @@ UNIX 系统中除进程之外的一切皆是文件，而 Linux 保持了这一�
  
 - etc不是什么缩写，是and so on的意思 来源于 法语的 et cetera 翻译成中文就是 等等 的意思. 后来FHS规定用来放配置文件，就解释为："Editable Text Configuration" 
  
-- /usr：系统级的目录，可以理解为C:/Windows/，/usr/lib理解为C:/Windows/System32。
+- /usr：系统级的目录，可以理解为 C:/Windows/，/usr/lib理解为C:/Windows/System32。
 
-- /usr/local：用户级的程序目录，可以理解为C:/Progrem Files/。用户自己编译的软件默认会安装到这个目录下。
+- /usr/local：用户级的程序目录，The preferred directory for new packages is /usr/local/bin, as this will keep separate binaries not part of the original Linux installation. 可以理解为C:/Progrem Files/。用户自己编译的软件默认会安装到这个目录下。
 
 - /opt：用户级的程序目录，可以理解为D:/Software，opt有可选的意思，这里可以用于放置第三方大型软件（或游戏），当你不需要时，直接rm -rf掉即可。在硬盘容量不够时，也可将/opt单独挂载到其他磁盘上使用。
 
@@ -182,3 +182,119 @@ $ dumpe2fs -h /dev/sda7 | grep "Inode size"
 $ tune2fs -l /dev/sda7 | grep "Inode size"
  Inode size: 	          256
 ```
+
+
+
+## 磁盘格式化
+
+```
+sudo mkfs.vfat -v /dev/vdc1
+sudo mkfs -v -t ext4 /dev/vdc2
+sudo mkfs.btrfs -v /dev/vdc3
+sudo mkswap /dev/vdc4
+```
+
+## 文件权限
+
+### 特殊权限位
+
+除了基本的 rwx 权限外，还有 3 个特殊权限位。Set User ID (SUID)、Set Group ID (SGID) 和 粘滞位 (Sticky Bit) ，用于增强文件或目录的权限控制。
+
+####  SUID（Set User ID）：
+
+作用：当文件被执行时，进程的有效用户 ID 变为文件所有者，有效用户 ID 用于各种用户的权限检查。
+
+```
+chmod u+s <文件名> # 用 s 表示，位于所有者权限的执行位。
+chmod 4xxx <文件名> 
+```
+
+例如：
+```
+典型示例：/usr/bin/passwd（普通用户修改密码时临时获得 root 权限）。
+
+目录：SUID 对目录无意义，通常会被忽略。
+```
+#### SGID（Set Group ID）：
+
+作用
+
+- 文件： 当用户执行设置了 SGID 的 可执行文件 时，进程的 有效组 ID（Effective GID） 会被设置为文件所属组的 GID。
+
+  - 典型示例：/usr/bin/wall（向所有终端广播消息时继承 tty 组权限）
+
+- 目录：在设置了 SGID 的目录中，新创建的文件会继承目录的所属组，而非创建者的主组。
+
+  - 典型场景：团队共享目录，确保文件归属统一。
+
+设置方法：
+
+```
+chmod g+s <目录或文件名>
+chmod 2xxx <目录或文件名>  # 如 2775（SGID + rwxrwsr-x）
+```
+权限标识：
+
+文件权限中，所有者的执行位会显示为 s（若原执行位存在）或 S（若原执行位不存在）。
+```
+-rwsr-xr-x   # SUID 生效
+-rwSr-xr-x   # SUID 设置但文件无执行权限（无效）
+```
+
+权限标识：
+
+组权限的执行位会显示为 s 或 S（同 SUID）。
+```
+drwxrwsr-x   # 目录的 SGID 生效
+-rwxr-sr-x   # 文件的 SGID 生效
+```
+
+
+####  Sticky Bit（粘滞位）：
+
+作用：
+
+- 目录：在设置了粘滞位的目录中，用户 只能删除自己拥有的文件，即使目录权限允许写入。
+
+  - 典型示例：/tmp 或 /var/tmp（防止用户随意删除他人文件）。
+
+设置方法：
+
+```
+chmod o+t <目录>
+chmod 1xxx <目录>  # 如 1777（粘滞位 + rwxrwxrwt）
+```
+
+权限标识：
+
+其他用户的执行位会显示为 t 或 T。
+
+```
+drwxrwxrwt   # 粘滞位生效
+drwxrwxr-T   # 粘滞位设置但无执行权限（无效）
+```
+
+### 用户 ID 和组 ID
+
+- 真实用户/组 ID：标识进程的创建者，权限修改严格受限。还有附加组 ID（Supplementary Groups）：进程所属的其他组列表（通过 getgroups() 查看）。
+- 有效用户/组 ID：决定当前权限，支持动态调整。
+- 保存用户/组 ID：实现权限的临时提升与安全恢复。
+
+作用：
+- 真实用户/组 ID 是进程创建者的用户 ID 和主组ID，用于记录进程的原始归属，在保存日志时使用，能够真是定位实际操作的来源。
+- 有效用户/组 ID 决定了进程能访问哪些资源，
+- 实现权限的临时提升与安全恢复。
+
+## 虚拟文件系统
+
+在 Linux 系统运行期间，必须挂载以下几个虚拟文件系统（Virtual Filesystems）以支持基本功能。它们是内核与用户空间交互的核心接口，提供了进程管理、设备控制、运行时数据存储等功能。以下是它们的挂载位置、作用及挂载条件：
+
+
+| 虚拟文件系统	| 挂载点          | 必需    | 内核配置     |  作用 |
+| ----------- | -------------- | ------ | ----------- | ---- |
+| proc	      | /proc	         | 必需	   | FIG_PROC_FS | 进程和内核信息，文件接口动态修改内核参数 |
+| sysfs	      | /sys	         | 必需	   | FIG_SYSFS   | 系统信息和配置接口 |
+| devtmpfs	  | /dev	         | 必需	   | FIG_DEVTMPFS | 提供基础设备访问接口（如磁盘、终端、输入设备） |
+| tmpfs	      | /run	         | 必需	   | FIG_TMPFS   | 共享内存、运行时数据 | 
+| cgroup	    | /sys/fs/cgroup | 必需	   | FIG_CGROUPS |管理 系统资源分配（CPU、内存、I/O 等）。支持容器技术（如 Docker、Kubernetes）的资源隔离 |
+| devpts	    | /dev/pts	     | 推荐	   | FIG_UNIX98_PTYS| 伪终端文件系统 |

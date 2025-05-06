@@ -1,0 +1,2 @@
+# M
+大多数软件包都附带一个或多个预先格式化的手册页。 以 root 身份 ，将 Xfoo.man 文件复制到相应的 /usr/man、/usr/local/man 或 /usr/X11R6/man 目录 （man1 - man9），并相应地重命名它。例如，如果 Xfoo.man 位于 /usr/man/man4 中，则应将其重命名为 Xfoo.4 （mv Xfoo.man Xfoo.4）。按照惯例，用户命令在 man1 中，游戏在 man6 中，管理包在 man8 的 （有关详细信息，请参阅 man 文档 ）。当然，如果您愿意，您可以在自己的系统上偏离这一点。

@@ -25,7 +25,7 @@ qemu-<arch> [options ...]
 
 ## 系统模拟
 
-QEMU命令行的一般形式可以表示为：
+QEMU 命令行的一般形式可以表示为：
 ```shell
 $ qemu-system-x86_64 [options] [disk_image]
 ```
@@ -87,6 +87,20 @@ QEMU向客座机器提供虚拟/模拟的硬件设备，使其与外部世界进
     ```
 这将一个 bar 设备(ID为baz)连接到地址为1的第一个foo总线(foo.0)。提供该总线的foo设备本身连接到第一个PCI总线(PCI.0)。
 
+device 类型有：
+- Controller/Bridge/Hub devices
+- USB devices
+- Storage devices
+- Network devices
+- Input devices
+- Display devices
+- Sound devices
+- Misc devices
+- Watchdog devices
+
+可以通过 `qemu-system-<aarch64> -device help` 来查看具体类型。
+
+
 ### -drive
 
 定义一个新驱动器。这包括创建块驱动程序节点(后端)和客户机设备，并且主要是定义相应的-blockdev和-device 选项的快捷方式。-drive 接受 -blockdev接受的所有选项。
@@ -123,3 +137,6 @@ $ qemu-system-x86_64 -device sd-card,help
 - Misc devices
 - Watchdog devices
 - Uncategorized devices
+
+
+[使用 SHELL 脚本搭建 QEMU 自动化的教程](https://www.cnblogs.com/schips/p/15489856.html)
