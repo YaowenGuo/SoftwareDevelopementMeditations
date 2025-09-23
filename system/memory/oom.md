@@ -1,12 +1,5 @@
 ## android内存管理
 
-### Overcommit
-
-Overcommit allows more memory to be allocated than physically available. (more that the main memory + swap). It is dependent on on-demand paging and on applications not using more than a minority of allocated memory.
-
-It allows for malloc () requests to succeed instead of failing as system will rarely decline requests for virtual memory.
-
-Consequences of overcommit depend on tumbles and how kernel manages memory pressure — most frequently you’ll see OOM Killed (Out of memory killer).
 
 > (1). 内存的整体使用情况.
 

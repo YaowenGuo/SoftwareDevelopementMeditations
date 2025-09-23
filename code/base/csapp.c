@@ -23,6 +23,7 @@
  */
 /* $begin csapp.c */
 #include "csapp.h"
+#include <netdb.h>
 
 /************************** 
  * Error-handling functions
@@ -1065,7 +1066,3 @@ int Open_listenfd(char *port)
 }
 
 /* $end csapp.c */
-
-
-
-

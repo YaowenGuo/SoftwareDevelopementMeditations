@@ -1,6 +1,12 @@
 # 压缩指令
+压缩比：xz > zstd > bzip2 > gzip
+速度 ： zstd >= gzip > bzip2 > xz
 
-文件压缩工具一般只能压缩单个文件，对于目录的压缩其实是隐藏了。如下命令等效
+极致压缩比：zx
+极好又快：zstd
+兼容性好：gzip
+
+部分压缩工具一般只能压缩单个文件，对于目录的压缩其实是隐藏了。如下命令等效
 ```shell
 tar -xzvf filename
 gzip -cd filename | tar xvf -
@@ -23,7 +29,7 @@ tar xyvf filename
 
 ## zip
 
-需要说明的是 zip 是一个打包压缩命令，会包含目录一起压缩，如果想要不包含目录，需要使用 `-r` 参数
+需要说明的是 zip 是一个打包压缩命令，会包含目录一起压缩。想要包含目录以及隐藏文件(`.`开头) 需要使用 `-r` 参数
 
 ```
 zip test.zip test.txt  #添加压缩文件
@@ -56,67 +62,51 @@ zip test.zip test.txt -6
 -e   交互设置密码
 -P   直接设置密码
 ```
-## rar
 
-01-.tar格式
+
+1. tar格式
 解包：$ tar xvf FileName.tar
 打包：$ tar cvf FileName.tar DirName（注：tar是打包，不是压缩！）
 
-02-.gz格式
+2. gz格式
 解压1：$ gunzip FileName.gz
 解压2：$ gzip -d FileName.gz
 压 缩：$ gzip FileName
 
-03-.tar.gz格式
+3. tar.gz/tgz 格式
 解压：$ tar zxvf FileName.tar.gz
 压缩：$ tar zcvf FileName.tar.gz DirName
 
-04-.bz2格式
+4. bz2格式
 解压1：$ bzip2 -d FileName.bz2
 解压2：$ bunzip2 FileName.bz2
 压 缩： $ bzip2 -z FileName
 
-05-.tar.bz2格式
+5. tar.bz2/tar.bz格式
 解压：$ tar jxvf FileName.tar.bz2
 压缩：$ tar jcvf FileName.tar.bz2 DirName
 
-06-.bz格式
+6. bz格式
 解压1：$ bzip2 -d FileName.bz
 解压2：$ bunzip2 FileName.bz
 
-07-.tar.bz格式
-解压：$ tar jxvf FileName.tar.bz
-
-08-.Z格式
+8. Z格式
 解压：$ uncompress FileName.Z
 压缩：$ compress FileName
 
-09-.tar.Z格式
+9. tar.Z格式
 解压：$ tar Zxvf FileName.tar.Z
 压缩：$ tar Zcvf FileName.tar.Z DirName
 
-10-.tgz格式
-解压：$ tar zxvf FileName.tgz
-
-11-.tar.tgz格式
-解压：$ tar zxvf FileName.tar.tgz
-压缩：$ tar zcvf FileName.tar.tgz FileName
-
-12-.zip格式
+12. zip格式
 解压：$ unzip FileName.zip
 压缩：$ zip FileName.zip DirName
 
-13-.lha格式
+13. lha格式
 解压：$ lha -e FileName.lha
 压缩：$ lha -a FileName.lha FileName
 
-14-.rar格式
+14. rar格式
 unrar e /tmp/test.rar /home/test
 解压：$ rar x FileName.rar
-压缩：$ rar e FileName.rar     
-rar请到：http://www.rarsoft.com/download.htm 下载！
-解压后请将rar_static拷贝到/usr/bin目录（其他由$PATH环境变量
-指定的目录也行）：$ cp rar_static /usr/bin/rar
-
-
-https://hera-webapp.fenbi.com/android/notification/list/v2?unread=0&msgType=%5B10%5D&score=-1&num=20&version=6.17.58.100&vendor=fenbi&app=gwy&av=117&kav=108&hav=113&apcid=2&deviceId=uVD7HyfphpJz8s3Vn1kjBA==&client_context_id=67EB107BB1825A4D8E8F
+压缩：$ rar e FileName.rar

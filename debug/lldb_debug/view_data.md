@@ -8,7 +8,7 @@
 (lldb) target list
 ```
 
-lldb 将程序中的的主题，每个动态库都视为一个 `module`。例如列出程序的所有组成部分：
+lldb 将程序中的每个文件(可执行文件自身、依赖的动态库)都视为一个 `module`。例如列出程序的所有组成部分：
 ```shell
 (lldb) target modules list
 [  0] 8C4C512A-8DF0-34D4-BB0A-8BE115992A63 0x0000000100000000 /Users/lim/Projects/test_native/a.out

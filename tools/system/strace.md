@@ -9,7 +9,6 @@ $strace -e 'trace=file'  git status
 
 strace
 
-strace 只能看 syscall, malloc 不是 syscall 而是c库，最后去调用 brk()/mmap()
 
 https://www.jianshu.com/p/4ddf472226cc
 https://blog.csdn.net/Danny_llp/article/details/120882548

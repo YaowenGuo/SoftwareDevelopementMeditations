@@ -1,5 +1,6 @@
 #include <stdio.h>
-
+#include <stdlib.h>
+#include <stdint.h>
 // int main() {
 //     long _end = 0xffff800082390000;
 //     long size = ((((1 + ((((((48) - 4) / (12 - 3)) - 1)) > 3 ? ((((((_end)) - 1) >> (((12 - 3) * (4 - (2)) + 3) + 3 * (12 - 3))) - (((((((-(((1)) << (((48)) - 1)))) + (0x80000000))))) >> (((12 - 3) * (4 - (2)) + 3) + 3 * (12 - 3))) + 1) + (1)) : 0) + ((((((48) - 4) / (12 - 3)) - 1)) > 2 ? ((((((_end)) - 1) >> (((12 - 3) * (4 - (2)) + 3) + 2 * (12 - 3))) - (((((((-(((1)) << (((48)) - 1)))) + (0x80000000))))) >> (((12 - 3) * (4 - (2)) + 3) + 2 * (12 - 3))) + 1) + (1)) : 0) + ((((((48) - 4) / (12 - 3)) - 1)) > 1 ? ((((((_end)) - 1) >> (((12 - 3) * (4 - (2)) + 3) + 1 * (12 - 3))) - (((((((-(((1)) << (((48)) - 1)))) + (0x80000000))))) >> (((12 - 3) * (4 - (2)) + 3) + 1 * (12 - 3))) + 1) + (1)) : 0))) + 3) * (1 << 12));
@@ -138,6 +139,22 @@ enum fixed_addresses {
 // #define FOO(A, B) int foo(A x, B y)
 // #define BAR(A, B) FOO(PP_REMOVE_PARENS(A), PP_REMOVE_PARENS(B))
 
+#define ql_head(a_type)							\
+struct {								\
+	a_type *qlh_first;						\
+}
+
+typedef struct {
+	ql_head(int) head;
+} list_node;
+
+
 int main() {
+	uint8_t sz_size2index_tab[10];
+	list_node head;
+	head.head.qlh_first = NULL;
+	head.head.qlh_first = (int *)malloc(sizeof(int));
+	*(head.head.qlh_first) = 10;
+	printf("head: %d\n", *(head.head.qlh_first));	
     return 0;
 }
