@@ -1,9 +1,5 @@
 # 物理内存管理
 
-## 物理内存
-
-https://zhuanlan.zhihu.com/p/663690992
-
 
 ## 物理地址
 
@@ -166,3 +162,8 @@ MOV (0x123) ES
 
 
 例如，我就曾经遇到过一个性能很差的程序，经过 perf 工具分析后，我发现是因为缺页中断过多导致的。这个时候，那么掌握页的结构和映射过程的知识就非常有必要了。所以我也想跟你来探讨一下这方面的内容。
+
+
+[https://blog.csdn.net/bemind1/article/details/111942222](利用/proc/pid/pagemap跟踪进程物理页迁移)
+[Arm64 支持的页面大小](https://www.kernel.org/doc/Documentation/arm64/memory.txt)
+[Virtual kernel memory layout 是内核启动时打印的，已经被删掉了](https://blog.csdn.net/yhb1047818384/article/details/104621500)

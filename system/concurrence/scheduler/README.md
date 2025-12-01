@@ -1,6 +1,9 @@
 # 实现方式
 
-2. Process 实现（机制）
+线程是操作系统进行 CPU 调度的最小执行单元，凡是支持多线程的操作系统的调度单位都是面向线程。线程可以视为进程的执行流的一个实体，即使只创建一个进程，它也有一个主线程。
+
+
+2. 调度的实现（机制）
     1. 机制和策略
     2. 上下文切换
     3. 时钟中断 
@@ -111,6 +114,17 @@ http://dbp-consulting.com/tutorials/debugging/linuxProgramStartup.html
 
 1. exit(status) 的状态值和 main 函数renturn 的结果等价。
 
+查看系统实际的时钟中断频率：
+
+```shell
+zcat /proc/config.gz | grep CONFIG_HZ
+# 或者
+cat /proc/config.gz | gunzip | grep -i "hz"
+```
+- 传统 Linux: 250 Hz
+- 大多数 Android 设备: 300 Hz
+- 高性能设备: 1000 Hz
+- 使用 tickless 的设备: 动态变化
 
 ## Linux interrupts
 
@@ -154,5 +168,13 @@ grep 'CONFIG_HZ=' /boot/config-$(uname -r)
 
 full tickless: https://tinylab.org/lwn-549580/
 
-### [Linux CFS](https://blog.csdn.net/qq_62309585/article/details/127034832)
+## Linux 调度器
+[Linux CFS](https://blog.csdn.net/qq_62309585/article/details/127034832)
 https://zhuanlan.zhihu.com/p/556295381
+
+[Linux kernel-CFS调度器学习
+](https://www.cnblogs.com/withwhom/p/17059055.html)
+[揭秘Linux进程调度器](https://www.eet-china.com/mp/a111242.html)
+[Linux 新的 EEVDF 调度器！](https://blog.csdn.net/Linux_Everything/article/details/129807209)
+[未来的拥塞控制与 Linux EEVDF 调度器](https://blog.csdn.net/dog250/article/details/134364038)
+[CFS的覆灭，Linux新调度器EEVDF详解](https://mp.weixin.qq.com/s/Tm5k0cz4c2KFm-3EdQDU0Q)

@@ -13,10 +13,25 @@
 5. 优化
     - 调用者和被调用函数如何做到最小的内存占用？
 
+
+在计算机科学中，栈是一种实现先进后出的数据模型。函数调用恰好是这种模型，因此为函数调用分配的内存空间称为栈。当一个函数被调用时，会在栈上分配一个栈帧（stack frame），用于保存：
+- 参数
+- 局部变量
+- 返回地址（函数结束后要回到哪里）
+- 寄存器现场（比如 caller/callee 保护的寄存器）
+
+主流架构（如 x86、ARM）：栈通常从高地址向低地址增长，即每次分配新的栈帧，栈指针（SP/RSP）会减小。这个方向由硬件和操作系统 ABI 约定，不是强制标准，但主流如此。
+
 ## 栈空间大小
 
+栈空间的大小的分配方式主线程和子线程名下不同，这也是计算机科学发展的历史遗迹。主线程的由内核分配，大小受内核限制（RLIMIT_STACK，通过 ulimit -s 可以查看，一般为 8MB）。早期计算机程序只有进程概念，一个进程只有一个栈，栈被安排在地址空间的末尾，其内存由内核分配；多线程编程出现时，mmap 的内存分配方式已在各个 Unix 系统普及，栈空间采用匿名映射的方式可以分配在虚拟内存空间的任意（满足mmap 的位置和对齐要求）位置，库和内核采用了 mmap 进行分配。大小可以在创建线程时指定，位置和大小灵活，受限于 mmap 可用空间和 PTHREAD_STACK_MIN。没有直接受 RLIMIT_STACK 限制（但部分库实现会用它作为默认值参考）。
 
-Linux 上栈空间的大小默认是 8MB，对于主线程的栈和其它线程还有点细微差别。
+因此：
+
+- 主线程栈通过 RLIMIT_STACK 受限。可以使用 `getrlimit` 获取主线程栈的大小限制，可以使用 `setrlimit` 增加主线程内存大小限制，甚至超过 `ulimit` 的大小限制。
+
+- 子线程栈通过 mmap 分配，受 PTHREAD_STACK_MIN 限制，可通过 pthread_attr 指定。线程栈在创建线程的时候由线程库确定，想要修改只能重新创建线程。使用 `pthread_attr_setstack` 来设置不超过限制的栈大小。
+
 
 #### 主线程栈大小
 
@@ -240,94 +255,6 @@ Stack size          = 0x800000 (8388608) bytes
 stack 3 bottom value: 0x7fd545f60eec
 ```
 
-### 修改默认栈大小
-
-#### 主线程
-
-我们可以使用 `getrlimit` 获取栈的大小限制，可以使用 `setrlimit` 增加内存大小限制，甚至超过 `ulimit` 的大小限制。
-
-```C
-// 该程序来自 https://stackoverflow.com/questions/2279052/increase-stack-size-in-linux-with-setrlimit
-#include <sys/resource.h>
-#include <stdio.h>
-
-int main (int argc, char **argv)
-{
-    const rlim_t kStackSize = 64L * 1024L * 1024L;   // min stack size = 64 Mb
-    struct rlimit rl;
-    int result;
-
-    result = getrlimit(RLIMIT_STACK, &rl);
-    if (result == 0)
-    {
-        if (rl.rlim_cur < kStackSize)
-        {
-            rl.rlim_cur = kStackSize;
-            result = setrlimit(RLIMIT_STACK, &rl);
-            if (result != 0)
-            {
-                fprintf(stderr, "setrlimit returned result = %d\n", result);
-            }
-        }
-    }
-
-    // ...
-
-    return 0;
-}
-```
-运行该程序，查看该进程的内存限制。
-
-```shell
-prompt> cat /proc/139/limits
-Limit                     Soft Limit           Hard Limit           Units
-...
-Max stack size            67108864             unlimited            bytes
-...
-```
-`67108864 / 1024 / 1024 = 64MB`，看一下系统的限制仍然是 8MB.
-
-```shell
-prompt> ulimit -s
-8192
-```
-
-#### 子线程
-
-线程栈在创建线程的时候由线程库确定，想要修改只能重新创建线程。使用 `pthread_attr_setstack` 来设置不超过限制的栈大小。
-
-```C
-#include <pthread.h>
-
-#define PAGE_SIZE 4096
-#define STK_SIZE (10 * PAGE_SIZE)
-
-void *stack;
-pthread_t thread;
-pthread_attr_t attr;
-
-void *dowork(void *arg)
-{
- int data[2*STK_SIZE];
- int i = 0;
- for(i = 0; i < 2*STK_SIZE; i++) {
-   data[i] = i;
- }
-}
-
-int main(int argc, char **argv)
-{
-  //pthread_attr_t *attr_ptr = &attr;
-  posix_memalign(&stack,PAGE_SIZE,STK_SIZE);
-  pthread_attr_init(&attr);
-  pthread_attr_setstack(&attr,&stack,STK_SIZE);
-  pthread_create(&thread,&attr,dowork,NULL);
-  pthread_exit(0);
-}
-pthread_create(&thread, &attr, dowork, NULL);
-```
-
-
 ## Linux 可以创建多少线程？
 
 这些问题有两方面的限制：
@@ -358,7 +285,7 @@ prompt> cat /proc/sys/vm/max_map_count # 表示限制一个进程可以拥有的
 262144
 ```
 
-修改这三个参数都会影响系统实际创建线程的数量。更详细的测试可以看这个博客：https://www.jianshu.com/p/c4bb6457e4a9 
+修改这三个参数都会影响系统实际创建线程的数量。更详细的测试可以看这个博客：https://www.jianshu.com/p/c4bb6457e4a9
 
 ### 1. 调用和返回
 
@@ -473,8 +400,6 @@ may have been lost
 
 
 #### 3. 局部变量
-
-
 
 **在不同语言的编译器中，调用参数压栈的顺序，参数栈的弹出，名字修饰是不同的。例如 c/c++ 的参数是从由右向左开始压栈，由调用方负责弹出，命名修饰使用 `下划线 + 函数名`**
 

@@ -4,7 +4,7 @@
 
 ENTRY(_start)
 SECTIONS {
-    . = 0x0040000;  /* ⚠️ 强制基地址为0 */
+    . = 0x0;  /* ⚠️ 强制基地址为0 */
     .text : { *(.text) }
     .data : { *(.data) }
     .bss : { *(.bss) }

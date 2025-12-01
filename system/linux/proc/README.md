@@ -3,6 +3,8 @@ Linux provides a clever mechanism, called the /proc filesystem, that allows user
 
 /proc 目录是 Linux 系统的一个伪文件系统，它描述了系统和进程相关的各种信息，为访问内核数据结构提供了一个接口。我们可以通过打开这个目录下的一些文件来查看该进程的内存使用情况，例如：`cat /proc/1464/maps`。下面是内存相关的文件或目录：
 
+Linux 操作系统会为每一个进程都在 /proc 目录下创建一个目录，目录名就是进程号。我们可以通过打开这个目录下的一些文件来查看该进程的内存使用情况，例如：
+
 ```
 /proc
 |-- 1               # [DIR] 进程目录，目录名是进程号
@@ -94,7 +96,7 @@ Linux provides a clever mechanism, called the /proc filesystem, that allows user
 |-- maps            # 虚拟内存的映射关系
 |-- mem             # 当前进程所占用的内存空间，由open、read和lseek等系统调用使用，不能被用户读取；
 |-- pagemap         # 这个文件显示每个进程的虚拟页到物理页帧或交换区域的映射。
-|-- smaps           # 内存页映射相关的详细统计数据和标志位
+|-- smaps           # 每个 VMA 的详细统计数据和标志位
 |-- smaps_rollup
 
 |-- oom_adj         # 2.6.36 开始，偏向使用 oom_score_adj
@@ -153,14 +155,29 @@ https://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/proc.html
 
 为了高效的使用 `/proc/[pid]/pagemap`，可以通过 `/proc/[pid]/maps` 确定哪些内存空间实际映射了，从而跳过未使用的区域。
 
+### [pid]/maps
 
-### [pid]/smaps
+```
+地址区间                权限   偏移                  对应的文件
+address               erms offset  dev   inode    pathname
+00400000-00452000     -xp 00000000 08:02 173521   /usr/bin/dbus-daemon
+...
+```
+每一行都是内核中一个虚拟内存区域VMA（Virtual Memory Area)。也可以理解为段。
+各列的含义：
+- 第一列地址区间: `00400000-00452000` 是该虚拟内存段的开始和结束位置，需要说明的是，该地址是前闭后开区间 `[start, end)`，即结束地址不是该断占用的，它可能是下一段的起始地址。
+- 第二列内存权限: `r-xp` 内存段的权限，分别是可读、可写、可运行、私有或共享，最后一位p代表私有，s代表共享。例如程序段 `r-xs`，数据段 `r--p`，还有用户保护栈越界触发中断的 `---p`。
+- 第三列文件偏移: `00000000` 该虚拟内存段起始地址在对应的映射文件中以页为单位的偏移量，对匿名映射，它等于0或者vm_start/PAGE_SIZE
+- 第四列设备号  : `08:02` 文件的主设备号和次设备号。对匿名映射来说，没有对应的磁盘文件，所以没有设备号，始终为00:00。
+- 第五列 innode: `173521` 被映射到虚拟内存的文件的索引节点号，通过该节点可以找到该文件，匿名映射的该列始终为00:00。
+- 第六列映射文件: `/bin/bash` 被映射到虚拟内存的文件名称。后面带(deleted)的是内存数据，可以被销毁。对于文件映射，是映射的文件名。对匿名映射来说，是此段虚拟内存在进程中的角色：[stack]表示在进程中作为栈使用，[heap]表示堆。如果在申请时没有设置名称，也可能不显示名称。
 
-/proc/{pid}/smaps文件记录的是内存映射的详细信息：第一行同maps文件，其余行表示：内存大小、Rss、Pss、Shared_Clean、Shared_Dirty、Private_Clean、Private_Dirty、Referenced、Anonymous、AnonHugePages、ShmemHugePages、ShmemPmdMapped、Swap、KernelPageSize、MMUPageSize、Locked、ProtectionKey、VmFlags等。
 
-注意的是, maps 文件打印的只是地址空间使用, 即是虚拟地址空间占用情况, 而实际的具体的 memory 占用多少需要查看 proc/pid/smaps. smaps 文件是基于 maps 的扩展，展示进程的内存消耗的各种信息，比 maps 文件更为详细
+### [pid]/smaps (Segment Maps)
 
-当评估一个进程的内存占用时, 需要衡量它的虚拟内存空间占用, 物理内存占用, 以及它和其他进程的平均内存占用, 即:
+/proc/{pid}/smaps 可以看做 /proc/<pid>/maps 的增强版。maps 只有虚拟地址空间占用情况, 而实际的具体的 memory 占用物理内存需要查看 proc/pid/smaps. smaps 文件是基于 maps 的扩展，展示进程的内存消耗的各种信息，比 maps 文件更为详细。当评估一个进程的内存占用时, 需要衡量它的虚拟内存空间占用, 物理内存占用, 以及它和其他进程的平均内存占用。
+
+内存大小、Rss、Pss、Shared_Clean、Shared_Dirty、Private_Clean、Private_Dirty、Referenced、Anonymous、AnonHugePages、ShmemHugePages、ShmemPmdMapped、Swap、KernelPageSize、MMUPageSize、Locked、ProtectionKey、VmFlags等。
 
 VSS- Virtual Set Size 虚拟耗用内存（包含共享库占用的内存）
 RSS- Resident Set Size 实际使用物理内存（包含共享库占用的内存）
@@ -242,16 +259,12 @@ uw  - userfaultfd wprotect pages tracking (since Linux 4.3)
 
 也可以查看 `[pid]/smaps_rollup` 来获取整个进程的汇总信息。smaps_rollup 的 输出和 smaps 的信息基本一致，只不过是不再分段，而是整个进程的。
 
-### pmap
+### mem
 
-```
-$ pmap 9919
-9919:   /proc/9919/mem
-0000000000400000      4K r---- a.out
-0000000000401000      4K r-x-- a.out
-0000000000402000      4K r---- a.out
-...
-```
+This file can be used to access the pages of a process's memory through open(2), read(2), and lseek(2).
+
+可以操作该文件实际修改另一个进程的数据。可以参看：
+[五、替换进程的字符串](https://www.cnblogs.com/my_life/articles/12068025.html)
 
 ### [pic]/stack (since Linux 2.6.29)
 

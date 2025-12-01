@@ -9,9 +9,7 @@ Android平台提供了多种捕获跟踪的选项：
 
 - System Tracing 应用
 
-- Systrace命令行工具 
-
-- Perfetto命令行工具
+- Perfetto(Systrace 的替代)命令行工具
 
 后面三个可以配合使用
 
@@ -29,15 +27,12 @@ Android平台提供了多种捕获跟踪的选项：
 
 两种报告都提供了一定时间段内Android设备的系统进程的总体情况。该报告还检查捕获的跟踪信息，以高亮显示它检测到的问题，例如UI垃圾或高功耗。
 
-Perfetto和Systrace是可互操作的：
+Perfetto 和 Systrace是可互操作的：
 
 - Perfetto UI中使用旧版 Systrace 查看器可以打开Systrace文件（使用“Open with legacy UI”功能）。
 
 - 使用 `traceconv` 工具将 `Perfetto` 跟踪转换为传统的`Systrace` 文本格式。
 
-**注意：Systrace 和 Perfetto 不会收集有关应用程序运行中代码执行的详细信息。 有关您的应用正在执行哪些方法以及正在使用多少CPU资源的更多详细信息，请使用 Android Studio 中的CPU profile。**
+在安卓手机上通过设置里开启的System Trace功能后，抓取到的文件默认存放在设备的 /data/local/traces/ 目录下。
 
-
-- [使用 CPU Profile 分析应用的CPU使用率和线程活动](cpu_profile.md)
-
-- []
+F: Press 'F' to center the selected entity in the viewport, and press 'F' again to fit that slice to the viewport. This can be useful for really short events that cannot otherwise be seen clearly at the current zoom level 。At any point, press 'escape' or click on some empty space in the timeline to clear the selection.

@@ -15,16 +15,13 @@
         2. [language. vm](virtual_machine.md)
 
 3. 虚拟内存之下(操作系统的实现)：
-    1. 系统虚拟内存空间
+    1. [系统虚拟内存空间](1.virtual_memory_layout.md)
     2. 物理内存管理
     3. Catch、三级缓存。
     4. OOM Killer
 
 4. [Summary](4.summary.md)
 
-- 虚拟内存是如何工作的 9.1 ~ 9.7
-
-- 应用程序如何使用和管理虚拟内存 8.8 ~ 9.11
 
 三W What, Why, How
 
@@ -54,7 +51,6 @@
 内存关联的内容非常多。它牵涉到、应用、编程语言（编译器、解释器或者虚拟机）、操作系统、物理硬件。每层都负责了一部分内存相关的内容，又和其它层有关联。
 
 
-
 - 分析对比不同技术、不同的解决方案。比较他们的优缺点、方便我们在实际使用中根据场景选择何时的方案。
 
 - 对于每个技术点，举例说明其应用（我们会反问自己，我为什么要花时间知道这个？知道这个玩意儿有什么用🤪？）。这样不至于过分理论化，学了之后从来不知道怎么用。同时根据案例，我们自己也方便我们做一些延伸和变通，更可能在实际开发中使用。
@@ -62,77 +58,26 @@
 一个变量要经过编译器、链接器、加载器和操作系统的进程管理，然后再经过 CPU 的 MMU 模块，才能最终出现在真正的物理内存里。
 
 
-- Compiler & Linker
-    地址空间分配
-    - [链接](link.md)
-    - Loader
-    - [动态库](shared_lib.md)
-- 操作系统
-    - [虚拟内存](1.virtual_memory_layout.md)
-
-- Hardware
-
-0. 程序运行的准备
-
-1. 程序运行时，它的内存排布是怎样的？或者说，程序指令是如何定位的？
-
-2. 程序中的地址是何时确定的？如何计算这些地址？
-
-3. 程序何时分配内存的？
-
-4. 计算机如何实现虚拟地址的？MCU 寻址
-
 看起来我们使用内存时一个简单的 `new Object()`，其背后内存的管理牵涉到计算机硬件，操作系统、编译器、编程语言共同协作才能完成。因此想要弄清楚全部的细节不是几句话就能讲清楚的。
 
-底层的内存管理复杂而晦涩，由于现代计算机系统系统的抽象抽象，应用开发者不会直接对内存硬件进行管理。 因此我们自上而下从最常接触到的开始，先从应用的角度来看内存组成，作为应用开发者，这也是我们对内存最直观的印象。
 
 
-## Linux 内存管理子系统
-
-![Linux 内存管理概览](README_img/MemoryMS.png)
-
-Memory (de)allocation may be different for entities like user mode processes, drivers, etc. To satisfy memory allocation requirements Linux uses different memory allocators. It checks for free memory threshold in required zone (watermarks), if allocation fails, the kernel go through page rotation and tries to free memory.
-
-- 物理内存管理是以页为单位的。
-
-- 伙伴系统（buddy system）是以**页为单位管理和分配内存**。
-
-- Slub 负责更细的内存分配。(Linux 6.4 移除 Slob，6.8 移除 Slab)
-
-![linux memory allocalte api](README_img/memory_function_call.jpeg)
-
-alloc_pages/__get_free_page: 以页为单位分配，以 Buddy 为基础。
-slab allocator，字节为单位。
-kmalloc: 以字节为单位分配物理地址连续的内存块，它是以slab为基础的
-vmalloc: 以**页为单位**分配虚拟地址连续，但物理地址不一定连续的内存块
-
-内核空间中如何申请内存有 kmalloc()、kzalloc()、vmalloc() 等。而用户空间申请和释放内存有 brk/sbrk、mmap/mummap.
-
-各层的接口：
-1. 所有的页描述符存放在 `mem_map` 数组中，因为每个描述符长度为32字节，所以mem_map 所需要的空间略⼩于整个RAM的1%。`virt_to_page(addr)` 宏产⽣线性地址 addr 对应的页描述符地址。pfn_to_page(pfn) 宏产⽣与页框号 pfn 对应的页描述符地址。
-
-2. 内核使⽤ zonelist 数据结构作为管理区描述符指针数组
-
-2. 每个节点都有⼀个类型⼒ pg_data_t 的描述符，所有节点的描述符存
-放在⼀个单向链表中，它的第⼀个元素由 pgdat_list 变量指向。
-
-
-[物理内存管理](physical_memory_management.md)
-[伙伴系统](buddy_allocator.md)
-
-kmalloc和vmalloc是分配的是内核的内存,malloc分配的是用户的内存。
-[kmalloc分配内存是基于slab，因此slab的一些特性包括着色，对齐等都具备，性能较好。物理地址和逻辑地址都是连续的](https://www.cnblogs.com/wuchanming/p/4465155.html)
-[vmalloc](https://cloud.tencent.com/developer/article/1812357)
-
-hvigorw assembleHap -p debuggable=false -p product=online
-
-## 内存问题定位工具
-
-free 用于查看物理内存的使用情况。除此外 `/proc/meminfo` 也提供了相关的物理内存使用情况。
-可以使用 `cat /proc/self/maps` 和 `cat /proc/<process id>/maps` 获得更多内存信息。
 
 ## TODO
 
+
+
+kernel space 使用的memory 通常包括 kernel stack, slub, page table, vmalloc, shmem 等.
+
+mulit-media 使用的memory 通常使用的方式包括 ion, gpu 等.
+
+其他方式的memory 使用, 此类一般直接从buddy system 中申请出以page 为单位的memory, android 中比较常见如ashmem.
+
+pthread stack 使用memory, 注意目前pthread create 时只标注了它底部的 "thread stack guard", 默认pthread stack 大小是1M - 16K. guard 是 4K. 注意的是java thread 在art 里面还会再隔离一个page, 判断收到的SIGSEGV 是否为StackOverflowError.
+
+- 虚拟内存是如何工作的 9.1 ~ 9.7
+
+- 应用程序如何使用和管理虚拟内存 8.8 ~ 9.11
 
 2.输出内存占用问题的排查文档
 
@@ -150,24 +95,4 @@ free 用于查看物理内存的使用情况。除此外 `/proc/meminfo` 也提�
 
     3. RVO, NRVO
 
-    4. 指针传递给一个对象，何时释放问题。比如一个对象 A 传给一个函数，不确定这个函数会不会释放 A, 自己主动释放，如果 函数启动新线程，使用了 A 就会崩溃。如果函数先释放了 A, 自己再次释放，又会引起重复释放问题。
-   
     4. 模板编程与 STL的常用类。
-
-https://www.cnblogs.com/sevenyuan/p/13305420.html
-
-安卓 art 内存管理， https://developer.android.com/topic/performance/memory-overview
-
-
-PIC PIE
-https://blog.csdn.net/zat111/article/details/46738649
-https://mropert.github.io/2018/02/02/pic_pie_sanitizers/
-https://www.anquanke.com/post/id/177520#h2-4
-https://zhuanlan.zhihu.com/p/109862930
-https://blog.csdn.net/bemind1/article/details/111942222
-http://nickdesaulniers.github.io/blog/2016/11/20/static-and-dynamic-libraries/
-
-http://thinkiii.blogspot.com/2014/02/arm64-linux-kernel-virtual-address-space.html
-[Arm64 内存分配](https://www.kernel.org/doc/html/latest/arm64/memory.html)
-[Arm64 支持的页面大小](https://www.kernel.org/doc/Documentation/arm64/memory.txt)
-[Virtual kernel memory layout 是内核启动时打印的，已经被删掉了](https://blog.csdn.net/yhb1047818384/article/details/104621500)

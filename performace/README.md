@@ -5,14 +5,24 @@
 - inspect performance（开发时）
 - improve performance（什么因素对于性能更加重要）
 - monitor performance （生产环境）
+    - ProfilingManager
 
 
-Order File: https://developer.android.com/ndk/guides/orderfile
-PGO: https://developer.android.com/ndk/guides/pgo
-
-https://androidperformance.com/2022/01/07/The-Performace-1-Performance-Tools
 
 
-谷歌官方在22年3月发布的33.0.1版本的platform-tools包中移除了systrace。在运行 Android 10（API 级别 29）或更高版本的设备上，跟踪文件以 Perfetto 格式保存，如本文档后面所示。在运行早期版本 Android 的设备上，跟踪文件以 Systrace 格式保存。
-Perfetto 和 Systrace 是可互操作的：
-在 Perfetto UI 中打开 Perfetto 文件和 Systrace 文件。在 Perfetto UI 中使用旧版 Systrace 查看器打开 Systrace 文件（使用 使用旧版 UI 打开链接）。
+关注点：
+- 启动时间
+- 渲染缓慢（卡顿）
+- 屏幕转换和导航的事件
+- 长时任务
+- 后台操作，如 I/O 和联网
+
+
+Two tools: 
+Prefetto and Android Studio Profiler。实际上 Android Studio  Profiler 也是基于 Prefetto 的采集技术，额外加了安卓框架中收集的数据。Android Studio Profiler 由于封装可能限制更多的自定义选项，而 Prefetto 则更灵活，
+
+
+他们可以以各种方式使用
+- Android 集成或者UI
+- 命令工行
+- 系统设置

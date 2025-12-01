@@ -13,9 +13,9 @@ VIM 和 emacs 是命令行的两大编辑器。 VIM 被称为神的编辑器，�
 
 ```                 进入之后
                       ▽
-        ESC/Ctrl+c    ▽      :
+        ESC/Ctrl+c    ▽      : ->
 插入模式  ---------- 普通模式 ------------ 命令行模式
-          i、a、o      ▽                    ▽
+          i、a、o      ▽      <- 回车         ▽
                     v/V/Ctrl+v          :wq 退出 vim
                       ▽                    ▽
                    视觉模式
@@ -68,8 +68,8 @@ Ctrl + v: 块选中，移动光标选中一个矩形的块。
 | }   | Move to a paragraph back. |
 | [	向后（向上）跳转到前一个特定文本边界（如代码块开头、注释起始等）。
 | ]	向前（向下）跳转到下一个特定文本边界（如代码块结尾、注释结束等）。
-| G   | Move to the last line of the file (1G/gg 到第一行) |
-| nG  | Move to nth line of the file (or :n)|
+| g<> | g 后跟指令，gg 到第一行 (1G/) |
+| nG  | Move to nth line of the file (or :n)，G Move to the last line of the file。|
 | H   | Move to top of screen |
 | M   | Move to middle of screen |
 | L   | Move to bottom of screen |
@@ -79,8 +79,10 @@ Ctrl + v: 块选中，移动光标选中一个矩形的块。
 | ctrl-d |（down）可以向后翻半页 |
 | ctlr-u |（up）可以向上翻半页。 |
 | ctlr-] | 光标选中在一个 tag 上，跳转到子函数 |
+| ctlr-i | 前进 |
 | ctlr-o | 返回 |
 
+善用 gi：gi 是一个非常有用的命令，它能让你立刻回到上一次插入文本的地方并直接进入插入模式，非常适合进行连续编辑
 
 **注意大写 G 和小写 g 的区别，大小 G 是前跟数字。而小写 g 是 goto 指令，后跟目标。**
 

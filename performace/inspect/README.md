@@ -15,17 +15,18 @@ Android提供了几个工具，你可以用来检查你的应用程序的性能�
 
 检查性能有两种主要方法，手动和自动。在检查一个新领域时，很可能从手动调试开始。
 
-<<<<
+
 性能是对资源利用的另一个视角审查：对性能的本质其实是对资源的利用，这些资源包括硬件资源： CPU、内存、电量、网络 以及软件资源（操作系统系统资源）线程数量、文件描述符、网络连接数量。其中软件资源的本质也是硬件资源，其是对应用可使用硬件资源的进一步限制。例如线程的数量限制本质是对可使用内存的限制。文件描述符也是对内存和 IO 资源的限制。
->>>>
+
 
 解决性能问题涉及确定您的应用程序使CPU，内存，图形，网络或设备电池等资源效率低下的领域。
 
 ## 手动
 
-在决定要检查应用的哪个区域之后，你可以使用各种工具来确定到底发生了什么。最全面的检查Android 9及以后设备性能的工具是[Perfetto](https://perfetto.dev/)。Perfetto为您提供尽可能详细的跟踪信息。通过使用强大的过滤器，您可以根据需要调整细节级别。有关如何从Android设备捕获跟踪的详细信息，请参阅快速入门:[在Android上记录跟踪指南](https://perfetto.dev/docs/quickstart/android-tracing)。
+在决定要检查应用的哪个区域之后，你可以使用各种工具来确定到底发生了什么。最全面的检查 Android M(6)及以后设备性能的工具是[Perfetto](https://perfetto.dev/)。Perfetto为您提供尽可能详细的跟踪信息。通过使用强大的过滤器，您可以根据需要调整细节级别。有关如何从Android设备捕获跟踪的详细信息，请参阅快速入门:[在Android上记录跟踪指南](https://perfetto.dev/docs/quickstart/android-tracing)。
 
-Android Studio内置的Android profiler也可以提供一些关于应用性能的有价值的见解，这些细节级别可能仅限于你的应用，或者在低于Android 9的设备上运行时。
+最新的 Android Studio 内置的 Android profiler 也是基于 Android Perfetto 的采集技术，额外加了安卓框架中收集的数据。Android Studio Profiler 由于封装可能限制更多的自定义选项，而 Perfetto 则更灵活，您可以根据需要选择使用哪种。
+
 
 
 

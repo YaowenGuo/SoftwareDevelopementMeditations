@@ -236,6 +236,28 @@ Python/JS 解释器、GO 运行时这些叫法差异很大，在早期他们也�
 3. 线程任务完成没有及时结束。
 4. 线程声明周期超过了使用其执行任务的 Activity。
 
+Java 字节码被编译成本地代码，在运行时同样经过映射进内存，并能够在 maps 文件中查看。编译后的代码通常存储在 /data/dalvik-cache 目录下的 .oat 或 .vdex 文件中。
+
+主要涉及的文件与内存映射：
+
+1. boot.oat / boot.art / boot.vdex
+系统框架类库的预编译镜像。Zygote 启动时 mmap 进来。随后通过 fork 共享给所有 app（COW）。
+
+2. App 自身的 base.odex / base.vdex（目录多在 /data/app/<pkg>/oat/arm64/）
+.odex (或 .oat) 里包含已经 AOT 的方法机器码段（TEXT 段为 r-xp）。
+vdex 保存经过验证、优化 reordering 的 dex 字节码/quickened 指令。
+
+3. JIT Code Cache
+运行期热点方法编译成机码放在匿名或 memfd 映射里：标记常见为
+[anon:dalvik-jit-code-cache] 或 /memfd:/jit-cache (Android 11+ 常见)。
+权限一般为 r-xp（可执行）。
+
+4. Dex 文件本身
+原始 classes.dex（打包在 APK 里，APK 本质 zip）可以被 ART 直接 mmap 一层（可能通过 zip 虚拟偏移），也可只部分映射（有时看到 .../base.apk 的 r--p 映射）。
+
+5. JNI/NDK 动态库
+.so 文件同样由动态链接器 mmap，并在 maps 中清晰显示。（这与 Java/ART 运行时无关，但同属“映射加载”机制。）
+
 ### Java
 
 **不同于 native 的内存泄露是丢失引用，忘记释放。Java 具有垃圾回收器，其内存泄露的原因是持有引用没有释放（以及持有的引用超出了使用的生命周期）**。因此及时释放应用是关键。

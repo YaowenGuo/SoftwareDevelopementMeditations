@@ -5,7 +5,7 @@
 
 您可以使用CPU Profiler实时检查在与应用程序交互时应用程序的CPU使用率和线程活动，CPU profile 提供了四种类型的检测方法来追踪方法（Java）/函数(C/C++)，系统跟踪数据信息。
 
-![CPU Profile Mode](images/cpu_profile_mode.png)
+![CPU Profile Mode](image/cpu_profile_mode.png)
 
 
 - 方法/函数跟踪(前三个): 用户 app 中线程的每个函数消耗的 CPU 资源(执行时长)，以此来优化避免不必要的工作。
@@ -32,12 +32,3 @@
 Debug 应该与用于开始和停止 CPU 活动记录的其他方法（如 CPU Profiler 图形界面中的按钮，以及在应用启动时执行的自动记录的记录配置中的设置）分开使用。
 
 此跟踪配置在 systrace 的基础上构建而成。您可以使用 systrace 命令行实用程序指定除 CPU Profiler 提供的选项之外的其他选项。systrace 提供的其他系统级数据可帮助您检查原生系统进程并排查丢帧或帧延迟问题。
-
-
-
-
-
-
-
-
-
