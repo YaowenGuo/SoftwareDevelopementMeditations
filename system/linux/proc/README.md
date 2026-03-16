@@ -36,7 +36,7 @@ Linux 操作系统会为每一个进程都在 /proc 目录下创建一个目录�
 |-- diskstats
 |-- partitions      # 系统已知的分区表
 |-- driver          # [DIR] 各种驱动程序的分组
-|-- iomem           # IO 的映射信息
+|-- iomem           # 物理内存的映射信息
 |-- ioports         # IO 的端口使用情况
 
                     安全

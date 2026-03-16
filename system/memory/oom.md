@@ -1,20 +1,20 @@
+# OOM(内存不足)
+
+OOM 的大类有哪几个？
+Native 的OOM 和 Jvm 的 OOM， 
+另一个不属于OOM 的泄露是 FD 泄露
+Native 的内存空间足够大，为什么还是会 OOM? OOM Kiler
+
+
+内存不足是一个非常复杂的问题，它有时候不是程序本身的问题，而是物理内存确实不够用了，最直接的办法就是安装更大的内存条，这也是我们最近几十年计算机和手机不断发展的历史。所以我们的讨论的前提是，如何在有限的物理内存限制下，如何高效的使用内存。
+
+1. 内存是一种有限的宝贵资源， 首先需要破除一个观念，内存使用不是越少越好，
+
+
+
 ## android内存管理
 
 
-> (1). 内存的整体使用情况.
-
-
-要分析 memory leaks, 你需要知道总体的内存使用情况和划分. 以判断内存泄露是发生在user space, kernel space, mulit-media 等使用的memory, 从而进一步去判断具体的 memory leaks.
-
-user space 使用的 memory 即通常包括从进程直接申请的memory, 比如 malloc: 先 mmap/sbrk 整体申请大块Memory 后再malloc 细分使用, 比如stack memory, 直接通过mmap 从系统申请; 以及因user space 进程打开文件所使用的page cache, 以及使用ZRAM 压缩 user space memory 存储所占用的memory.
-
-kernel space 使用的 memory 通常包括 kernel stack, slub, page table, vmalloc, shmem 等.
-
-mulit-media 使用的memory 通常使用的方式包括 ion, gpu 等.
-
-其他方式的memory 使用, 此类一般直接从buddy system 中申请出以page 为单位的memory, android 中比较常见如ashmem.
-
-而从进程的角度来讲, 通常情况下进程所使用的 memory, 都会通过mmap 映射到进程空间后访问使用(注: 也会一些非常特别异常的流程, 没有mmap 到进程空间), 所以进程的memory maps 资讯是至关重要的. 对应在AEE DB 里面的file 是 PROCESS_MAPS
 
 > 内存溢出和内存泄露的区别：
 
@@ -31,6 +31,34 @@ Android为不同类型的进程分配了不同的内存使用上限，每个应�
 
 
 
+什么是内存泄漏？
+
+虚拟内存（Virtual Memory Size，VIRT，VSZ）一直增长到很大，可以认为是内存泄漏吗？
+
+答案是不一定。以下情况并不是泄漏：
+- 文件映射：如果应用使用了很大的内存映射文件（例如播放器映射一个2GB的电影文件），虚拟内存会瞬间增长2GB，但物理内存只会加载实际访问的部分；
+
+- 预留地址空间：内存分配器可能会提前预留一大段虚拟地址空间，以备将来分配之用，这会导致VIRT很高，但物理内存使用可能很低；
+
+- 分配了但未使用：在C/C++中，可能会malloc一大块内存但从未真正写入它，这只会增长VIRT，而不会增加物理内存。
+
+以下情况很可能是泄漏：
+
+- 虚拟内存和物理内存同步持续增长：这是最经典的泄漏迹象，泄漏的对象分配在堆上，既占用了虚拟地址，也因写入数据而占用了物理内存；
+
+- 地址空间耗尽：32位系统的虚拟地址空间是有限的，如果VIRT增长到接近极限，即使物理内存不高，也说明进程的虚拟地址空间已经被各种映射塞满，可能发生了泄漏或资源管理异常。虚拟内存增
+
+
+通常我们认为，在运行的程序中，如果一个无法访问的对象却仍然占用着内存空间，即为此对象造成了内存泄漏。
+
+如果您使用过 C 语言或 C++ 的指针，您会很熟悉这个概念。
+
+但是在 Kotlin 和 Java 的世界中，事情有些许不同。因为这两种语言是运行在 Java 虚拟机 (JVM) 中的。在 JVM 中，有个重要的概念，就是垃圾回收 (GC)。当垃圾回收运行时，虚拟机会首先识别 GC Root。
+
+GC Root 是一个可以从堆外部访问的对象，它可以是本地变量或运行中的线程等。虚拟机会识别所有可以从 GC Root 访问的对象，它们将会被保留。而其他无法从 GC root 访问的对象，则会被认为是垃圾并回收掉。
+
+所以，一般意义上的内存泄漏在 JVM 中并不存在。在 JVM 中的内存泄漏通常是指: 内存中含有那些再也不会被使用、但是仍然能够访问的对象。
+
 1. 内存泄露导致
 
 由于我们程序的失误，长期保持某些资源（如Context）的引用，垃圾回收器以为还在使用而无法回收它，当然该对象占用的内存就无法被使用，这就造成内存泄露。
@@ -42,6 +70,20 @@ Android为不同类型的进程分配了不同的内存使用上限，每个应�
 
 3. 一次创建过多的对象，而使整体占用空间超过了可分配空间。
 
+> (1). 内存的整体使用情况.
+
+
+要分析 memory leaks, 你需要知道总体的内存使用情况和划分. 以判断内存泄露是发生在user space, kernel space, mulit-media 等使用的memory, 从而进一步去判断具体的 memory leaks.
+
+user space 使用的 memory 即通常包括从进程直接申请的memory, 比如 malloc: 先 mmap/sbrk 整体申请大块Memory 后再malloc 细分使用, 比如stack memory, 直接通过mmap 从系统申请; 以及因user space 进程打开文件所使用的page cache, 以及使用ZRAM 压缩 user space memory 存储所占用的memory.
+
+kernel space 使用的 memory 通常包括 kernel stack, slub, page table, vmalloc, shmem 等.
+
+mulit-media 使用的memory 通常使用的方式包括 ion, gpu 等.
+
+其他方式的memory 使用, 此类一般直接从buddy system 中申请出以page 为单位的memory, android 中比较常见如ashmem.
+
+而从进程的角度来讲, 通常情况下进程所使用的 memory, 都会通过mmap 映射到进程空间后访问使用(注: 也会一些非常特别异常的流程, 没有mmap 到进程空间), 所以进程的memory maps 资讯是至关重要的. 对应在AEE DB 里面的file 是 PROCESS_MAPS
 
 ## 内存溢出到常见场景
 
@@ -323,3 +365,5 @@ Fragment 是否需要持有引用，或者如何销毁。
 
 
 [Android 内存大小限制]https://blog.csdn.net/weixin_39793420/article/details/117498032
+[穿越二十年：Android Native内存泄漏检测的进化之路](https://mp.weixin.qq.com/s/fWBabV6YsQe8_GT01D-JGg)
+[Protetto 快速定位安卓内存泄漏的方法](https://mp.weixin.qq.com/s/RNN0A-VJ_oJesOcdn6C0HQ)

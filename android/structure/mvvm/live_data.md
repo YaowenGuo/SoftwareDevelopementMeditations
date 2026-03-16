@@ -3,7 +3,7 @@
 LiveData是一个可观察的数据持有者类。与常规的可观察数据不同，LiveData具有生命周期感知能力，这意味着它尊重其他应用程序组件的生命周期，如 Activity、Fragment 或 Service。这种感知确保 LiveData 只更新处于活动生命周期状态的应用程序组件观察器。
 
 - 当将 LiveData 注册给实现了 `LifecycleOwner` 接口的对象后，LiveData只通知活动状态(in the STARTED or RESUMED state)的观察者更新有关的信息，非活动状态的将不会收到信息。
-- 观察注册将会在相应对象生命周期的状态更改为 `DESTROYED` 时删除观察者。这对 `Activity` 和 `Fragment` 特别有用，因为它们可以安全地观察 `LiveData` 对象，而不必担心泄漏，当它们的生命周期被销毁时，`Activity` 和 `Fragment` 会立即取消订阅。
+- 观察注册将会在相应对象生命周期的状态更改为 `DESTROYED` 时删除观察者。这对 `Activity` 和 `Fragment` 特别有用，因为它们可以安全地观察 `LiveData` 对象，而不必担心泄漏，当它们的生命周期被销毁时，`Activity` 和 `Fragment` 会立即取消订阅。
 
 
 > 优点

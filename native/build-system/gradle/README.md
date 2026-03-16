@@ -1,19 +1,32 @@
 # Gradle
 
-Gradle 的构建脚本虽然是 Groovy 或者 Kotlin, 但 Gradle 的核心代码都是 Java 编写的。
+首先明确 Gradle 是一个构建工具，而且定位一个通用构建自动化工具和依赖管理框架。不针对特定语言和平台，而是提供一套平台。这是Gradle设计哲学的关键：“核心提供机制，插件提供策略”。
 
-## 运行环境
+Gradle 提供的核心能力：
+- 任务模型
+- 依赖管理
+- 构建生命周期
 
-所有的 Java 程序都会使用由环境变量 `JAVA_OPTS` （java options）设置的相同的 JVM 参数。如果想要给 Gradle 运行设置单独的参数，可以使用 `GRADLE_OPTS` 环境变量。例如，想要设置最小的堆空间为 1G，可以设置
 
-```
-GRADLE_OPTS="-Xmx2024m"
-```
-最好的添加位置是位于 `$GRADLE_HOME/bin` 目录下的 Gradle 启动脚本（gradle 命令本身是一个脚本程序，即 gradle 脚本文件，可以通过 which 查找）。
+## Gradle 安装
 
-## gradle wrapper
+- 如果运行已有 gralde 项目，项目中会携带一个和具体版本绑定的脚本。目的就不会因为版本兼容性的问题引起编译错误。这也是为什么下载完项目就可以直接运行的原因。
 
-该指令会在项目目录下生成一个和具体版本绑定的脚本，这样就不会因为版本兼容性的问题引起编译错误。该指令会生 gradlew 的脚本指令。用于下载对应版本的 gradle 和运行指令。
+- 如果是新创建项目，需要单独下载 gradle，并设置环境变量，使用 gradle 命令创建项目。
+
+项目结构
+├── gradlew / gradlew.bat   项目中 gradle 应该使用的命令。
+├── gradle                  项目中携带的 gradle 版本。
+│   ├── libs.versions.toml  定义项目依赖的文件
+│   └── wrapper             项目中携带的 gradle 程序
+├── gradle.properties       项目的一些属性
+├── local.properties        个人需要修改的项目属性
+├── settings.gradle.kts     项目的整体设置
+├── build.gradle.kts        项目整体配置
+├── build                   编译后的输出
+├── ...                     子模块
+├── ...
+
 
 ## gradle home 
 
@@ -58,7 +71,7 @@ gradlew stop
 
 ## 执行命令
 
-gradle 命令本身是一个脚本，有它再启动 Gradle 构建程序。 gradle 的构建脚本名默人为 `build.gradle`，当执行 gradle 命令时，脚本就会在命令执行的目录查找 `build.gradle` 文件。 先写个 `Hello World` 示例：
+gradle 命令本身是一个脚本，由它再启动 Gradle 构建程序。 gradle 的构建脚本名默人为 `build.gradle`，当执行 gradle 命令时，脚本就会在命令执行的目录查找 `build.gradle` 文件。 先写个 `Hello World` 示例：
 
 ```
 // build.gradle

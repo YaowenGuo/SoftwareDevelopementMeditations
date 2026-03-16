@@ -4,26 +4,10 @@
     1. 抽象和虚拟
     2. API
     3. 安全
-2. Process 实现（机制）
-    1. 机制和策略
-    2. 上下文切换
 
+2. Process 查看工具
 
-3. Process 调度（策略）
-
-4. Process 查看工具
-
-5. 进程间通信
-    - 管道/命名管道
-    - 信号
-    - 信号量
-    - 共享内存/内存映射
-    - 消息队列
-    - 套接字
-    - D-Bus
-    - 文件
-
-6. 并发安全
+3. 并发安全
 
 
 When we run a program on a modern system, we are presented with the illusion that our program is the only one currently running in the system. Our program appears to have exclusive use of both the processor and the memory. The processor appears to execute the instructions in our program, one after the other, without interruption. Finally, the code and data of our program appear to be the only objects in the system's memory. These illusions are provided to us by the notion of a process.
@@ -441,10 +425,6 @@ In order for the operating system kernel to provide an airtight process abstract
 
 Processors typically provide this capability with a mode bit in some control register that characterizes the privileges that the process currently enjoys. When the mode bit is set, the process is running in kernel mode (sometimes called supervisor mode). A process running in kernel mode can execute any instruction in the instruction set and access any memory location in the system.
 
-
-## IPC
-
-在UNIX中，文件（File）、信号（Signal）、无名管道（Unnamed Pipes）、有名管道（FIFOs）是传统IPC功能；新的IPC功能包括消息队列（Message queues）、共享存储段（Shared memory segment）和信号量（Semaphore）。以及 Socket 可以在不同主机的进程间进行通信。
 
 
 ## 系统调用

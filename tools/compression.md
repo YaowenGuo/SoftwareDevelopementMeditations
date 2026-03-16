@@ -32,12 +32,12 @@ tar xyvf filename
 需要说明的是 zip 是一个打包压缩命令，会包含目录一起压缩。想要包含目录以及隐藏文件(`.`开头) 需要使用 `-r` 参数
 
 ```
-zip test.zip test.txt  #添加压缩文件
-zip test.zip test1.txt  #移动文件到压缩包
-zip -d test.zip test.txt    #删除test.txt
+zip test.zip test.txt   # 添加压缩文件
+zip test.zip test1.txt  # 移动文件到压缩包
+zip -d test.zip test.txt#删除test.txt
 
-zip -r test.zip ./*          #压缩当前全部文件到test.zip
-zip test2.zip test2/*   #打包目录
+zip -r test.zip ./*     # 压缩当前全部文件到test.zip
+zip test2.zip test2/*   # 打包目录
 zip test3.zip tests/* -x tests/ln.log  #压缩目录,除了tests/ln.log
 
 zip -r test.zip ./* -P 123  #设置密码(明文设置密码不太安全)

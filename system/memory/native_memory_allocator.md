@@ -1,5 +1,6 @@
 # Mimalloc
 
+[比 tcmalloc 快 43%！mimalloc 高性能背后的 5 大核心技术揭秘](https://mp.weixin.qq.com/s?__biz=MzkwMzcyMTM3OQ==&mid=2247486232&idx=1&sn=61f902de1ac85f02058d38bb3494abfb&chksm=c10dde6f7b608af3a00cc8b913009cf2fdf4c99b95a7b69d76fcda5c8d12a80e264c95331d43&mpshare=1&scene=24&srcid=0619pmMSZTGqktnbmHfaA7U9&sharer_shareinfo=b352d5deefdcac427f561562ece4d957&sharer_shareinfo_first=b352d5deefdcac427f561562ece4d957#rd)
 > 将回答如下问题：
 
 1  malloc和free是怎么实现的？
@@ -725,3 +726,6 @@ bt
     frame #19: 0x0000fffff7f58360 libmimalloc-debug.so.3`_mi_heap_malloc_zero_ex(heap=0x0000fffff7fb0400, size=1, zero=false, huge_alignment=0) at alloc.c:176:12
 
 ```
+
+https://www.cnblogs.com/linkwk7/p/11193728.html
+https://zhuanlan.zhihu.com/p/658307892

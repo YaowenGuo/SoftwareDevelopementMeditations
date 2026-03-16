@@ -254,7 +254,3 @@ gradle.taskGraph.addTaskExecutionGraphListener(new TaskExecutionGraphListener() 
     }
 })
 ```
-
-
-
-

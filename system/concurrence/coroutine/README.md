@@ -418,3 +418,7 @@ thirdPartyLogin(userAccount)
 
 
 这里有篇文章将协称分为[有栈、无栈协程](https://blog.csdn.net/weixin_39875941/article/details/110592519)。我看不过是栈是由系统在栈区分配，还是由用户在堆分配空间作为栈使用的区别。因为**函数调用的入栈规则不改变，就不可能没有栈。**
+
+QA:
+
+协程里的suspend为什么只能放在协程里面运行?

@@ -111,3 +111,8 @@
 * Kotlin
   * [function](kotlin/function.md)
   * [Coroutine](kotlin/coroutine/README.md)
+
+* [官方文档快速连接]
+  * [库版本与归类](https://developer.android.google.cn/jetpack/androidx/explorer?hl=zh-cn&case=all)
+  * [API](https://developer.android.google.cn/reference)
+  * [Compose 文档](https://developer.android.google.cn/develop/ui/compose/documentation)

@@ -23,7 +23,7 @@ The `objdump` program is just one of many tools you should learn how to use; a d
 
 - [elf 文件格式](elf.md)
 - [dwarfdump](dwarfdump.md)
-- ldd 查看程序依赖的共享库。
+- ldd 查看程序依赖的共享库。或者 `readelf -d libhilog_ndk.z.so | grep NEEDED`
 
 memory profilers like valgrind or purify
 

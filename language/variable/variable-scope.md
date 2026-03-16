@@ -82,10 +82,3 @@ if (True):
     print(a) # 2
 print(a) # 2
 ```
-PHP
-```
-if (true):
-    $a = 2
-    print($a) // 2
-print($a) // 2
-```

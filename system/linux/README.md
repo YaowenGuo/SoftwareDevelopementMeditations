@@ -7,11 +7,14 @@ OS 设计的四个核心概念：
 - 安全
 
 Linux 内核的五大组成部分：
-- 进程管理
-- 内存管理
-- 文件系统（设备驱动）
-- 网络接口
+- 进程调度
 - 进程间通信
+- 内存管理
+- 虚拟文件系统
+- 网络接口
+
+进程分为不同状态，如 TASK_RUNNING（正在运行或处于就绪状态）、TASK_INTERRUPTIBLE（可被中断的等待状态）、TASK_UNINTERRUPTIBLE（不可被中断的等待状态）、TASK_ZOMBIE（已完成执行但等待父进程处理）和 TASK_STOPPED（因外部信号被暂停）。
+
 
 ![五大部分](README_img/kerner_5_main_part.gif)
 

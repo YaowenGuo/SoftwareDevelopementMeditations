@@ -163,6 +163,10 @@ MOV (0x123) ES
 
 例如，我就曾经遇到过一个性能很差的程序，经过 perf 工具分析后，我发现是因为缺页中断过多导致的。这个时候，那么掌握页的结构和映射过程的知识就非常有必要了。所以我也想跟你来探讨一下这方面的内容。
 
+Linux 物理内存的完整布局和分配情况可以在 /proc/iomem 文件查看。
+
+TODO:
+[内存基础知识（八）-- 如何统计内存流量](https://mp.weixin.qq.com/s?__biz=MzkyMjQzOTkyMQ==&mid=2247484889&idx=1&sn=63a6676e274f5b542a075f9928a2d11c&chksm=c0cea762f320ba8d8e6955b5448d6a6f730c9e0a28251e3ea106cd9c0bb51a0748a162c946a0&mpshare=1&scene=24&srcid=1011KD8XblBESKjzlrZLDPE4&sharer_shareinfo=bfba46154119b5620ac59692f5bd8781&sharer_shareinfo_first=bfba46154119b5620ac59692f5bd8781#rd)
 
 [https://blog.csdn.net/bemind1/article/details/111942222](利用/proc/pid/pagemap跟踪进程物理页迁移)
 [Arm64 支持的页面大小](https://www.kernel.org/doc/Documentation/arm64/memory.txt)

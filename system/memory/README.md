@@ -65,6 +65,28 @@
 
 ## TODO
 
+NUMA:
+多处理器NUMA架构中，处理器访问本地内存的速度远快于远程内存。可通过以下方式优化：
+
+- 用numactl工具将进程绑定到本地内存节点，减少跨节点访问延迟；
+- 启用CONFIG_NUMA，让伙伴系统按节点管理内存，避免远程内存分配导致的性能下降和碎片扩散。
+例如数据库服务器的优化命令：
+```
+numactl --cpunodebind=0 --membind=0 ./mysql-server
+```
+
+大页技术优化
+采用2MB或1GB大页映射数据库缓冲区、Java堆等大块内存，可减少页表项数量，降低TLB压力，避免小块分配产生的碎片。例如Redis启用大页的配置步骤：
+
+配置大页数量：
+```
+echo 1024 > /proc/sys/vm/nr_hugepages
+```
+绑定大页启动Redis：
+```
+numactl --cpunodebind=0 --membind=0 ./redis-server --hugepages /mnt/huge
+```
+实战中，Redis启用大页后，内存分配延迟可降低40%，碎片率从35%降至5%。
 
 
 kernel space 使用的memory 通常包括 kernel stack, slub, page table, vmalloc, shmem 等.

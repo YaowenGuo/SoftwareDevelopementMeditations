@@ -1,46 +1,56 @@
 # Signal
 
-we will study a higher-level software form of exceptional control flow, known as a Linux signal, that allows processes and the kernel to interrupt other processes. A signal is a small message that notifies a process that an event of some type has occurred in the system. The 30 different types of signals that are supported on Linux systems. SIG 是信号名的通用前缀, 
+We will study a higher-level software form of exceptional control flow, known as a Linux signal, that allows processes and the kernel to interrupt other processes. A signal is a small message that notifies a process that an event of some type has occurred in the system. The 30 different types of signals that are supported on Linux systems. SIG 是信号名的通用前缀, 
 
 
 | Number |   Name  | Default action               | Corresponding event            |
 | ------ | ------- | ---------------------------- | ------------------------------ |
+|   4    | SIGILL  | Terminate                    | Illegal instruction          |
+|   5    | SIGTRAP | Terminate and dump corea$^a$ | Trace trap (debug 使用，由断点指令产生)|
+|   7    | SIGBUS  | Terminate                    | Bus error                    |
+|   8    | SIGFPE  | Terminate and dump corea     | Floating-point exception     |
+|   11   | SIGSEGV | Terminate and dump core$^a$  | Invalid memory reference (seg fault) |
+|   16   | SIGSTKFLT|Terminate                    | Stack fault on coprocessor      |
+|   30   | SIGPWR  | Terminate                    | Power failure                   |
+|        |         |                              |                                |
+|   13   | SIGPIPE | Terminate                    | Wrote to a pipe with no reader |
+|   31   | SIGSYS  | Terminate                    | 非法的系统调用                    |
+|        |         |                              |                                |
 |   1    | SIGHUP  | Terminate                    | Terminal line hangup 终端挂起或控制进程终止|
 |   2    | SIGINT  | Terminate                    | Interrupt from keyboard (Ctrl-C)| 
 |   3    | SIGQUIT | Terminate                    | Quit from keyboard (Ctrl-`\`)  |
-|   4    | SIGILL  | Terminate                    | Illegal instruction
-|   5    | SIGTRAP | Terminate and dump corea$^a$ | Trace trap (debug 使用，由断点指令产生)|
-|   6    | SIGABRT | Terminate and dump corea$^a$ | Abort signal from abort function (abort 或 assert)|
-|   7    | SIGBUS  | Terminate                    | Bus error                    |
-|   8    | SIGFPE  | Terminate and dump corea     | Floating-point exception     |
-|   9    | SIGKILL | Terminate$^b$                | Kill program from kill function or command|
-|   10   | SIGUSR1 | Terminate                    | User-defined signal 1        |
-|   11   | SIGSEGV | Terminate and dump core$^a$  | Invalid memory reference (seg fault) |
-|   12   | SIGUSR2 | Terminate                    | User-defined signal 2         |
-|   13   | SIGPIPE | Terminate                    | Wrote to a pipe with no reader|
+|        |          |      |                    |
+|   6    | SIGABRT | Terminate and dump corea$^a$ | Abort signal from abort function (assert 内部也是调用 abort)|
+|   9    | SIGKILL | Terminate$^b$                | Kill program from kill function  |
+|        |          |      |                    |
 |   14   | SIGALRM | Terminate                    | Timer signal from alarm function |
 |   15   | SIGTERM | Terminate                    | Software termination signal   |
-|   16   | SIGSTKFLT|Terminate                    | Stack fault on coprocessor    |
+|        |          |      |                    |
 |   17   | SIGCHLD | Ignore                       | A child process has stopped or terminated |
 |   18   | SIGCONT | Ignore                       | Continue process if stopped   |
-|   19   | SIGSTOP | Stop until next SIGCONT$^b$  | Stop signal not from terminal |
+|   19   | SIGSTOP | Stop until next SIGCONT$^b$  | Stop signal not from terminal 挂起作业 |
 |   20   | SIGTSTP | Stop until next SIGCONT      | Stop signal from terminal(Ctrl+z)|
 |   21   | SIGTTIN | Stop until next SIGCONT      | Background process read from terminal |
 |   22   | SIGTTOU | Stop until next SIGCONT      | Background process wrote to terminal |
 |   23   | SIGURG  | Ignore                       | Urgent condition on socket(有"紧急"数据)|
+|       |          |      |                    |
 |   24   | SIGXCPU | Terminate                    | CPU time limit exceeded       |
 |   25   | SIGXFSZ | Terminate                    | File size limit exceeded(文件大小超额)|
 |   26   | SIGVTALRM|Terminate                    | Virtual timer expired(虚拟时钟信号)|
 |   27   | SIGPROF | Terminate                    | Profiling timer expired(时钟信号描述)|
 |   28   | SIGWINCH| Ignore                       | Window size changed                                 |
 |   29   | SIGIO   | Terminate                    | I/O now possible on a descriptor(可以进行输入/输出操作)|
-|   30   | SIGPWR  | Terminate                    | Power failure                                       |
-|   31   | SIGSYS  | Terminate                    | 非法的系统调用                                        |
-|   32   | SIGUNUSED| Ignore                      | 未使用信号                                            |
+|       |          |      |                    |
+|   10   | SIGUSR1 | Terminate                    | User-defined signal 1            |
+|   12   | SIGUSR2 | Terminate                    | User-defined signal 2            |
+|  32-33 | 保留     | Ignore                       | 未使用信号，Linux 上有特殊用处       |
+|  34-64 | 实时信号 POSIX.1b标准扩展 | Ignore        | 未使用信号                         |
 
-Notes: (a) Years ago, main memory was implemented with a technology known as core memory. “Dumping core” is a historical term that means writing an image of the code and data memory segments to disk, (b) This signal can be neither caught nor ignored.
+Notes: (a) Years ago, main memory was implemented with a technology known as core memory（磁芯存储器 Magnetic Core Memory, 值得一提的是其发明者还是一个美籍华人王安博士）. “Dumping core” is a historical term that means writing an image of the code and data memory segments to disk, (b) This signal can be neither caught nor ignored.
 
 SIGPWR: 如果电源失效,系统依靠蓄电池继续运行。但是如果蓄电池也将不能工作,此时发送SIGPWR信号。通常是接到蓄电池电压过低信息的进程将SIGPWR发送给init进程,然后由init处理停机操作
+
+**raise() / kill() / pthread_kill() / sigqueue() 等都能发送“任意编号”的信号，包括像 SIGSEGV 这样的同步/故障信号。**
 
 可以使用 `kill -l` 查看该系统支持的信号量。结果中，编号为1 ~ 31的信号为传统UNIX支持的信号，是不可靠信号(非实时的)，编号为32 ~ 63的信号是后来扩充的，称做可靠信号(实时信号)。不可靠信号和可靠信号的区别在于前者不支持排队，可能会造成信号丢失，而后者不会。
 
@@ -380,3 +390,30 @@ pointer->getValue();
 ```
 022-05-10 12:26:44.739 3788-3788/? A/DEBUG: signal 11 (SIGSEGV), code 2 (SEGV_ACCERR), fault addr 0x7ffbb43e20
 ```
+对应用程序开发者的正确做法
+对于普通应用程序开发者，唯一正确的做法是：
+
+让程序崩溃：允许 SIGSEGV 执行默认操作（终止并生成核心转储）。
+
+事后调试：分析 core dump 文件，使用调试器精确定位到崩溃的源代码行、调用栈和变量状态，从根源上修复代码逻辑的bug。
+
+试图在信号处理中“掩盖” SIGSEGV，无异于病人关掉监护仪假装手术成功——崩溃可能暂时停止，但程序内部已“病入膏肓”，后续行为完全无法预测（未定义行为），可能导致数据静默损坏、安全漏洞或更诡异的崩溃。
+
+SIGSEGV 是操作系统发出的“死刑判决”，它意味着程序的行为已经突破了内存安全这个底线。虽然法律程序上（信号处理机制）允许你上诉一次（运行处理函数），但你几乎不可能找到新的证据（安全地修复内存状态）来推翻这个判决。
+
+因此，请将 SIGSEGV 视为一个明确的终止符，而不是一个可以捕获和修复的异常。它的存在就是为了让错误尽早暴露，而不是被掩盖。
+
+并非无用，极少数“正确”的用例
+在极少数情况下，系统级软件会利用这种机制实现高级功能。这些用例的共同点是：错误是“故意”或“可预期”的，恢复逻辑是预先设计好的。
+
+垃圾回收器与惰性分配：某些高级语言运行时（如某些Lisp实现或研究型JVM）可能会捕获 SIGSEGV，在信号处理函数中扩展堆空间或加载“惰性”页面，然后让指令重新执行。这要求运行时完全掌控内存布局和硬件架构。
+
+软件故障隔离与沙箱：通过捕获沙箱内代码的 SIGSEGV，在信号处理中模拟指令或终止沙箱，防止其破坏宿主进程。
+
+调试器和仿真器：调试器（如GDB）会接管所有信号，在收到 SIGSEGV 后停下来让开发者检查状态，然后可以选择让程序继续。这本质上是调试器在外部控制进程，而非进程自身“修复”自己。
+
+Java（高级语言运行时） 像一个全权托管的智能驾驶系统。它预先规划了所有路线，遇到路障（除零）时，系统自己主动停车、重新规划，并安全地把你送到备用目的地（catch块）。
+
+Native程序 像手动驾驶。遇到突然爆胎（硬件异常）时，你只会听到一声巨响（信号），车辆瞬间失控（中断上下文）。虽然理论上你可以在空中修轮胎（信号处理），但实践中几乎必然车毁人亡（崩溃）。
+
+所以，Java的优雅并非来自对信号的巧妙处理，而是来自在信号触发之前，就用软件层完全接管了所有执行路径。这是托管运行时（Managed Runtime）带来的核心优势之一。

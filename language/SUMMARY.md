@@ -2,20 +2,19 @@
 
 * [Introduction](README.md)
   * [run envirement](install/run-envirement.md)
-  * [php](debug/debug_php.md)
 * Help
   * [python](help/python.md)
 
-* Debug
-  * [PHP](debug/debug_php.md)
 * Variable & Constant
   * [Name Rules](variable/name-rules.md)
-  * [Variable's Scope](variable/variable-scope.md)
+  * [Scope](variable/variable-scope.md)
   * [js var let const](variable/js's-var-and-let.md)
   * [Rust's ownership](variable/rust_ownership.md)
+
 * Data
   * [Data Type](data/data-type.md)
   * [Complex Data Type](data/complex_data_type.md)
+
 * Function
   * [Function](./function/Function.md)
   * [Overloading](./function/overloading.md)
