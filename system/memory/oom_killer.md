@@ -1,5 +1,124 @@
 # OOM Killer
 
+内存不足是一个影响面非常广的问题。不只是应用程序需要使用，操作系统本身也需要内存来维持自身运行。一旦内存不足，不只是拖累系统运行速度，甚至可能造成系统崩溃。因此内核会引入一些机制，在内存不足时及时回收内存，确保整个系统不会崩溃。在 Linux 系统上是 OOM Killer，它是内核的一个组件，负责在内存不足时杀死进程，以保证系统不会崩溃。但是 OOM Killer 只会在内存不足时才会触发，它无法解决程序响应速度的问题。因此 Android 系统上引入了 LMK，它是一个守护进程，会在系统卡顿时就及时介入。LMK 并没有替代 OOM Killer，而是作为 OOM Killer 的补充，在 OOM Killer 之前就及时介入。
+
+内核在调用 OOM Killer 之前，会先尝试回收内存。按照“从易到难、从低成本到高成本”的顺序回收内存页。
+- 干净的文件页：文件映射没有修改过，可以直接丢弃。
+
+- 脏的文件页：必须先触发 回写（Flush/Writeback），把这些数据同步到磁盘才能回收物理页。
+
+- 匿名页：代价极高。压缩需要消耗大量 CPU，写入磁盘需要大量 I/O。
+
+- 内核缓存：内核为了加速文件系统访问而维护的元数据（比如文件夹结构、文件索引）。
+
+如果内核折腾完上面所有的步骤，依然无法凑够 min_free_kbytes 定义的“保命钱”，内核检测到物理内存和交换空间都已耗尽，OOM 杀手就会被激活。
+
+Linux 的 OOM（Out-Of-Memory）处理机制在过去十几年里经历了从“内核全权独裁”到“用户空间策略主导、内核兜底”，并正迈向“eBPF 可编程化”的演进。这一演变的背后，是对可预测性、可控性、灵活性的持续追求。
+
+- 早期（～2009）：完全内核决策
+    内核使用一套复杂的启发式算法计算出一个“坏分数”（badness score）。评分因素包括：进程内存占用、CPU 时间、运行时长、子进程内存、nice 值、特权等级、cpuset 隔离等，和用户可调整的 oom_adj（-17 到 15）。
+
+**问题**：用户只能通过 oom_adj 进行非常粗粒度的干预，且算法不透明，结果难以预测。
+
+- 目前：用户空间决策，内核保底
+    用户空间守护进程根据内核提供的 cgroup v2 和 PSI（Pressure Stall Information）信息，计算出每个进程的 badness score，并根据 score 决定是否杀死进程。
+
+    内核 OOM 杀手仅作为最后一道防线：当用户空间守护进程未能及时响应或压力瞬时爆发导致系统仍进入 OOM 时，内核才触发传统 OOM 流程。
+
+- 趋势：eBPF 可编程化
+    许多应用正在开发 BPF OOM 能力，允许用户编写 eBPF 程序并动态挂载到内核 OOM 路径上。这种方案兼具内核级的高效（不依赖用户空间守护进程）和用户空间策略的灵活性。
+
+    - **解决用户空间守护进程的痛点**：在极端内存压力下，用户空间守护进程可能无法运行或反应迟钝；eBPF 运行在内核，不受内存压力影响。
+
+    - **动态更新策略**：无需重启进程或内核，可以热加载新的 BPF OOM 程序，实现策略的在线升级。
+
+    - **更细粒度的控制**：BPF 程序可以访问内核内部数据结构，实现比用户空间更精细的决策（例如针对特定 cgroup、特定进程类型）。
+
+
+后面将主要介绍目前的主流方案。
+
+## 内核保底
+
+内核 2.6.36 引入 oom_score_adj（-1000～1000），评分简化为：
+```
+oom_score = (占用存储 / 可用存储) * 1000 + oom_score_adj
+```
+可用存储：分配给该控制组的总内存 + 交换空间
+占用存储：进程占用的内存 + 进程占用的交换空间
+
+“这个计算几乎没有启发式调整，只是为 root 拥有的进程减去一个很小的数值（30），因为它们比普通进程更有价值。”
+
+可以通过 /proc/{pid}/oom_score_adj 文件来设置进程的 OOM 建议值（取值范围为 -1000 ~ 1000）。建议值越小，进程被杀的机会越低。如果将其设置为 -1000 时，进程将被禁止杀掉。
+
+## 触发 OOM Killer
+
+使用压力工具来分配内存
+```
+stress --vm 2 --vm-bytes 2G --timeout 60s
+```
+这会生成两个工作进程，每个分配 2GB 内存，运行 60 秒。在内存有限的系统上，这会触发 OOM 杀手。
+
+更直接地写入内核的神奇 SysRq 接口来触发
+
+```
+echo f > /proc/sysrq-trigger
+```
+这会立即触发 OOM 杀手，无需等待实际内存耗尽。请谨慎使用——它会立即终止进程。
+
+## 用户空间策略：Android LMKD(Low Memory Killer Daemon)
+
+内核 OOM Killer 一直在简化，保证整个系统的稳定。从算法上可以看出，规则很生硬，就是存储占用最多的进程，这样的好处是行为可预测。缺点也很明显，没有区分应用程序的优先级，很难符合使用者的需求。例如手机使用者很关心正在使用的应用不能被中断，这对于体验来说太差了。不同系统上有不同的策略实现，例如桌面端有 systemd-oomd，Android 有 lmkd（Low Memory Killer Daemon）。
+
+安卓的 Low Memory Killer 经历了多代演进。最早的 lmk 是以 linux 驱动方式实现的。 Android 9 开始，内核驱动被移除，lmkd 守护进程负责用户空间的内存管理策略，它运行在用户空间，负责监控系统内存使用情况，并根据预设的规则杀死占用内存过多的进程。（值得一提的是 其实 lmkd 进程在安卓 5.0 就有了，但当时只是一个“传声筒”。它负责接收来自 ActivityManager 的指令（比如某个 App 变到后台了，优先级降低），然后把这些参数（如 oom_score_adj）写进内核驱动。 Android 7.0 / 8.0时 lmkd 开始尝试监听内核的 vmpressure 信号（基于内存页回收压力的通知）。如果内核驱动不存在，lmkd 可以做一些简单的补偿操作。）
+
+lmkd 也在不断演进，9.0 时它根据内存水位来杀进程，它盯着 /proc/meminfo，发现剩余内存低于 200MB，就去查 ADJ 列表，把最末尾的进程杀了。10.0 开始引入 VLMK(Virtual Low Memory Killer) 它不再只看内存剩余，还看系统压力，通过 epoll 监听内核的 PSI (Pressure Stall Information)。当压力超过设定阈值（比如内存申请延迟过高），内核会立刻通知 lmkd。lmkd 收到内核的压力信号后，主动出击杀掉进程。
+
+阈值缺点：太死板。有时候内存还剩很多，但系统因为频繁换页（Thrashing）已经卡死了，它却不干活。
+
+PIS: 
+
+架构：内核负责实时计算 CPU/内存的“阻塞时间”；当压力超过设定阈值（比如内存申请延迟过高），内核会立刻通知 lmkd。
+
+VLMK 架构的三个层次
+内核层 (Kernel)：通过 PSI 模块监控资源压力，通过 Cgroup 维护进程优先级。
+中间层 (lmkd 守护进程)：这是核心。它通过 poll() 监控 /proc/pressure/memory。
+应用层 (System Server)：由 ActivityManagerService (AMS) 实时更新进程的 oom_score_adj 并写入内核，告诉 lmkd 谁更重要。
+
+
+
+**内核 OOM Killer 杀死进程后，不会通知用户空间，安卓框架的 ActivityMangerService 无法知道App是否被杀死。**
+
+ActivityManagerService 通过更新 oom_score_adj 的数值来维护进程等级，数值越大（最高 1000），进程就越“该死”。
+
+1. 前台进程(Foreground process)：adj 范围：0  **特征**：用户交互直接相关的进程。
+    - 正在交互的 Activity。
+    - 绑定了前台服务（Foreground Service，如正在播放音乐、导航）。
+
+2. 可见进程(Visible process)：范围：100 - 200 **特征**：用户虽然没在点它，但能看到它。
+    - 分屏模式下的另一个窗口。
+    - 被透明 Activity 或弹窗遮住一部分的后台 Activity。
+
+3. 感知型/重量级进程 (Perceptible / Heavyweight)：范围：200 - 300 **特征**：用户没看到它，但能“感觉到”它在工作。
+    - 后台播放音乐的某些组件。
+    - 正在进行备份或下载的服务。
+
+4. 服务进程 (Service Process)：范围：500 - 700 **特征**：后台运行的长期任务（如同步数据、上传照片）。
+    - 后台长时任务，数据同步、上传照片等。
+
+
+5.后台/缓存进程 (Cached / Background Process)：范围：900 - 950 **特征**：用户按了 Home 键切走的 App。
+    - Activity 已经调用了 onStop()。它们是为了“热启动”而留在内存里的缓存
+
+6. 空进程(Empty process)：范围：950 - 1000。特征： 不含任何活动组件（没有 Activity，没有 Service）， 用户在最后一个 Activity 中按了 Back 键 Activity 也被销毁了。
+    - Activity 已经调用了 onDestroy()。
+    - 所有的 Service 都停止了。
+    - 完全没有灵魂，纯粹作为进程外壳存在。lmkd 第一个杀的就是它
+
+LMKD 根据进程的 oom_score_adj 值来决定杀掉哪些进程。oom_score_adj 的数值越大（最高 1000），进程就越容易被杀死。
+
+
+-------------------------->
+
 Root owned processes get a slight handicap — 30 is subtracted from the OOM score.
 
 It is only triggered for low order allocations, e.g., 2³ or less。 trying to allocate a larger set of pages than would trigger OOM Killer when low on memory will cause Page Allocation Failure.
@@ -39,7 +158,7 @@ Where -B100 signifies the number of lines before the kill happened.
 
 Omit -T on Mac OS.
 
-真个 OOM Killer 的输出分为三大部分：
+这个 OOM Killer 的输出分为三大部分：
 
 ### OOM Killer 的信息
 
@@ -64,7 +183,7 @@ Omit -T on Mac OS.
 
 kswapd0 invoked oom-killer: 由谁触发的 OOM Killer, 
 
-kswapd0本身是Linux系统中一个内核线程，负责虚拟内存管理。在系统不足时将不常用的页面从物理内存交换到swap space。网络攻击想要持久化。系统每个NUMA内存结点创建一个名为kswapd的内核线程
+kswapd0本身是Linux系统中一个内核线程，负责虚拟内存管理。在系统内存不足时将不常用的页面从物理内存交换到swap space。网络攻击想要持久化。系统每个NUMA内存结点创建一个名为kswapd的内核线程
 
 内核之所以要进行内存回收，主要原因有两个：
 
@@ -179,9 +298,6 @@ HighMem 是高端内存，只有在 32 位系统上存在。MovableOnly 是支�
 ```
 
 shmem: 共享内存
-
-
-
 
 
 

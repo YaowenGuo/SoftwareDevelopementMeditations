@@ -13,7 +13,10 @@ https://www.cnblogs.com/liulianzhen99/articles/18005637
 
 **以上这些都是在物理内存页上的分配上的分类。**
 
-1. `MemTotal` 和 `Reserved Memory`： 系统从加电开始到引导完成，firmware/BIOS要保留一些内存，kernel本身要占用一些内存(内核所用内存的静态部分，比如内核代码、页描述符等数据在引导阶段就分配了)，最后剩下可供kernel支配的内存就是 MemTotal。这个值在系统运行期间一般是固定不变的。Reserved 中包括内核的代码，
+1. `Reserved Memory`: 内核所用内存的静态部分，比如内核代码、页描述符等数据在引导阶段就分配掉了，并不计入MemTotal里，而是算作Reserved(在dmesg中能看到)。
+
+1. `MemTotal` 和 `Reserved Memory`： 系统从加电开始到引导完成，firmware/BIOS要保留一些内存，kernel本身要占用一些内存(内核所用内存的静态部分，比如内核代码、页描述符等数据在引导阶段就分配了)，最后剩下可供kernel支配的内存就是 MemTotal。这个值在系统运行期间一般是固定不变的。Reserved 中包括内核的代码。
+
     注：请把Page Table与Page Frame（页帧）区分开，物理内存的最小单位是page frame，每个物理页对应一个描述符(struct page)，在内核的引导阶段就会分配好、保存在mem_map[]数组中，mem_map[]所占用的内存被统计在dmesg显示的reserved中，/proc/meminfo的MemTotal是不包含它们的。（在NUMA系统上可能会有多个mem_map数组，在node_data中或mem_section中）。
 
 2. MemTotal = MemFree + Used Memory: 表示系统尚未使用的内存。`MemTotal-MemFree` 就是已被用掉的内存。
@@ -21,14 +24,10 @@ https://www.cnblogs.com/liulianzhen99/articles/18005637
 3. 内存黑洞：
     追踪Linux系统的内存使用一直是个难题，很多人试着把能想到的各种内存消耗都加在一起，kernel text、kernel modules、buffer、cache、slab、page table、process RSS…等等，却总是与物理内存的大小对不上，这是为什么呢？因为Linux kernel并没有滴水不漏地统计所有的内存分配，kernel动态分配的内存中就有一部分没有计入/proc/meminfo中。
 
-    通过alloc_pages分配的内存不会自动统计，除非调用alloc_pages的内核模块或驱动程序主动进行统计，否则我们只能看到free memory减少了，但从/proc/meminfo中看不出它们具体用到哪里去了。
+    **通过alloc_pages分配的内存不会自动统计**，除非调用alloc_pages的内核模块或驱动程序主动进行统计，否则我们只能看到free memory减少了，但从/proc/meminfo中看不出它们具体用到哪里去了。
 
 **其它的数据没有那么多严格的层次分类，不同类型的信息是不同用途的统计。**
 
-
-## 内核
-
-内核所用内存的静态部分，比如内核代码、页描述符等数据在引导阶段就分配掉了，并不计入MemTotal里，而是算作Reserved(在dmesg中能看到)。而内核所用内存的动态部分，是通过上文提到的几个接口申请的，其中通过alloc_pages申请的内存有可能未纳入统计，就像黑洞一样。
 
 
 ### Slub 分配的内存
@@ -47,7 +46,7 @@ VmallocUsed:      140404 kB
 VmallocChunk:          0 kB ?
 
 
-#### kernel modules 
+### kernel modules 
 
 
 ### PageTables
@@ -68,8 +67,6 @@ Kernel stack（内核栈）是常驻内存的，既不包括在LRU lists里，�
 
 
 ## 用户空间
-
-
 
 
 MemAvailable:   32069444 kB
@@ -119,7 +116,6 @@ FilePmdMapped:         0 kB
 
 > 物理内存有多大？
 
-MemTotal 并不是实际的物理内存总量，而是供整个系统使用的物理内存大小，已经减去了 Reserved Page.
 MemFree：MemTotal 中未被分配的内存。
 MemAvailable：包括 Free 和 可以被回收的内存，但是不包括被换出到磁盘的。
 https://www.cnblogs.com/cxj2011/p/17455096.html

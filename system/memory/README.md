@@ -13,12 +13,12 @@
     3. [堆的使用](heap.md)
         1. [native allocator](native_memory_allocator.md)
         2. [language. vm](virtual_machine.md)
-
+    4. 泄露 与 OOM Killer
 3. 虚拟内存之下(操作系统的实现)：
     1. [系统虚拟内存空间](1.virtual_memory_layout.md)
     2. 物理内存管理
     3. Catch、三级缓存。
-    4. OOM Killer
+  
 
 4. [Summary](4.summary.md)
 
@@ -64,6 +64,17 @@
 
 
 ## TODO
+
+## 使用建议
+
+1. 开发注意、避免
+2. 运行检测
+3. 线上监控，预警。收集调试信息
+
+1. 定位内存占用较高的原因，包括 java 和 native 对内存的使用，优化对内存的使用
+
+2. 了解Android系统内存使用的正常范围与OOM的边界
+
 
 NUMA:
 多处理器NUMA架构中，处理器访问本地内存的速度远快于远程内存。可通过以下方式优化：

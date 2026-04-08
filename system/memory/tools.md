@@ -46,11 +46,37 @@ Native Memory Usage = Mapped + AnonPages + Others
 比如，使用 pidstat -p pid -t 命令，可以查看指定进程下各个线程的统计信息，包括线程 ID、% usr（用户空间占用 CPU 的百分比）、% system（内核空间占用 CPU 的百分比）、% CPU（进程占用 CPU 的百分比）等。通过这些信息，我们能够找出占用资源较多的线程，进而分析线程的执行逻辑，判断是否存在内存泄漏或其他内存问题。
 
 
+swapon --show 以查看可用交换空间。
+
+## 影响 OOM 的因素
+
+1. 实际物理内存大小
+1. overcommit 行为
+
+2. oom_score_adj
+
+4. 调整交换行:交换可以防止 OOM 击杀，但会增加延迟。对于延迟敏感的服务，完全禁用交换功能。对于后台工作者，适度交换（vm.swappiness=10-30）可以缓冲临时峰值。
+
+你也可以用 vm.swappiness 调整交换行为：
+
+echo 60 > /proc/sys/vm/swappiness
+
+值为60表示核心会适度交换。较低的数值（10-20）减少交换，保留更多内存。高值（80-100）则换得更激进。
+
+## Java 
+
+jmap: Sun JDK 提供的工具，可以打印堆内存使用情况。安卓上可以使用 dumpsys meminfo。
 
 ## Android 特有
 
- procrank, 根据进程占用内存进行排序。
- showmap: 根据 maps/smaps 进行统计排序
+-  procrank, 根据进程占用内存进行排序。
+
+- procmem: 打印进程的内存使用情况。
+
+- dumpsys meminfo: 打印全局或者某个进程的内存使用详细信息。
+    procrank, procmem 通常需要 root 权限，早期 dumpsys meminfo 的组合。应用开发者来说，dumpsys meminfo 是更好的选择。procrank 和 procmem 通常是系统开发人员用于排查 native 程序问题。
+
+- showmap: 根据 maps/smaps 进行统计排序
 
  [dumpsys](https://mp.weixin.qq.com/s?__biz=Mzg5OTMwOTQ3MQ==&mid=2247484031&idx=1&sn=6c6a086410a99d2948a0b19d66114e32&chksm=c1d15a55a6c4df3bbe0ec9d5df5cf2dfd5ad9e24739026419b9dffdd7ec79f2e3357f15906a6&mpshare=1&scene=24&srcid=1223fjGgdx80xnc89EABMv0Q&sharer_shareinfo=9874440ca792efe7b109a0300779d440&sharer_shareinfo_first=9874440ca792efe7b109a0300779d440#rd) meminfo 打印全局或者某个进程的内存使用详细信息。
  
