@@ -37,12 +37,11 @@ Notice that the idea of concurrent flows is independent of the number of process
 
 - 进程
 
-- I/O 多路复用
-
 - 线程
 
 - 协程
 
+- I/O 多路复用
 
 ##  进程与线程
 
