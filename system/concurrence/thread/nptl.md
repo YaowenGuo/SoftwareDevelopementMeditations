@@ -257,7 +257,7 @@ ARM 的调用流程比较长，最后还是调用了 [`__atomic_compare_exchange
 
 在现代 x86 处理骑上，基本算数运算、逻辑运算指令前添加 `LOCK` (80486)即可使用使用原子操作。比如x86处理器以及[ARMv8.1架构等处理器直接提供了CAS指令作为原子条件原语](https://blog.csdn.net/Roland_Sun/article/details/107552574)。而ARMv7、ARMv8处理器则使用了另一种LL-SC，这两种原子条件原语都可以作为Lock-free算法工具。
 
-比 CAS 与 LL_SC 更早一些一些的原子条件有 SWAP(8086, ARMv5), Bit test adn set(80386. Blackfin SDP561) 等，这些同步原语只能用于 `同步锁`，而无法作为 `lock-free` 的原子对象进行操作。
+比 CAS 与 LL_SC 更早一些的原子条件有 SWAP(8086, ARMv5), Bit test adn set(80386. Blackfin SDP561) 等，这些同步原语只能用于 `同步锁`，而无法作为 `lock-free` 的原子对象进行操作。
 
 没有搜到 `__sync_bool_compare_and_swap` 和 `__atomic_compare_exchange_n` 具体实现，但是可以自己写一个测试，然后编译，看一下具体的汇编代码。
 

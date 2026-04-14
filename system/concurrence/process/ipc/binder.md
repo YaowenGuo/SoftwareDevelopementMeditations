@@ -16,7 +16,7 @@ int result = someNodeInterface.foo(a, b); // someNodeInterface is a proxy object
 
 假设调用 foo() 的客户端在进程 A 中运行，而实现 foo() 的服务端在进程 B 中运行。图 1 显示了此调用的执行方式：
 
-![Binder 调用示意图](binder_img/binder-overview.png)
+![Binder 调用示意图](../binder_img/binder-overview.png)
 
 ## 优缺点
 

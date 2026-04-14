@@ -60,7 +60,7 @@ C11 只一个标准，各个平台和编译器器实现的具体代码不同，�
 
 原子操作是无锁操作，需要硬件在底层做支持，也就是 `CAS` 或者 `TAS` 原语。各个处理器上支持的原子操作的种类和形式各不相同。在现代 x86 处理骑上，基本算数运算、逻辑运算指令前添加 `LOCK` (80486)即可使用使用原子操作。比如x86处理器以及[ARMv8.1架构等处理器直接提供了CAS指令作为原子条件原语](https://blog.csdn.net/Roland_Sun/article/details/107552574)。而ARMv7、ARMv8处理器则使用了另一种LL-SC，这两种原子条件原语都可以作为Lock-free算法工具。
 
-比 CAS 与 LL_SC 更早一些一些的原子条件有 SWAP(8086, ARMv5), Bit test adn set(80386. Blackfin SDP561) 等，这些同步原语只能用于 `同步锁`，而无法作为 `lock-free` 的原子对象进行操作。另外，CAS 与 LL-SC 条件原语都能实现 SWAP 和 Bit test and set 指令的功能。
+比 CAS 与 LL_SC 更早一些的原子条件有 SWAP(8086, ARMv5), Bit test adn set(80386. Blackfin SDP561) 等，这些同步原语只能用于 `同步锁`，而无法作为 `lock-free` 的原子对象进行操作。另外，CAS 与 LL-SC 条件原语都能实现 SWAP 和 Bit test and set 指令的功能。
 
 - 使用处理器提供的指令级别的原子条件原语，可用来对原子对象过更更夫的修改操作，比如浮点数的原子计算。C11 标准中提供了 CAS 形式的条件原语。
 

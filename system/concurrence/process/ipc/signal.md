@@ -67,7 +67,7 @@ The transfer of a signal to a destination process occurs in two distinct steps:
 - **Receiving a signal.** A destination process receives a signal when it is forced by the kernel to react in some way to the delivery of the signal. The process can either ignore the signal, terminate, or catch the signal by executing a user-level function called a signal handler. Bellow figure shows the basic idea of a handler catching a signal.
 
 ![Signal handling:
-Receipt of a signal triggers a control transfer to a signal handler. After it finishes processing, the handler returns control to the interrupted program.](./signal_img/signal_handling.png)
+Receipt of a signal triggers a control transfer to a signal handler. After it finishes processing, the handler returns control to the interrupted program.](../signal_img/signal_handling.png)
 
 
 A signal that has been sent but not yet received is called **spending signal**. At any point in time, there can be at most one pending signal of a particular type. If a process has a pending signal of type k, then any subsequent signals of type k sent to that process are not queued; they are simply discarded. A process can selectively block the receipt of certain signals. When a signal is blocked, it can be delivered, but the resulting pending signal will not be received until the process unblocks the signal.
@@ -222,7 +222,7 @@ Caught SIGSEGV!
 
 Signal handlers can be interrupted by other handlers, as shown in Figure 8.31. In this example, the main program catches signal s, which interrupts the main program and transfers control to handler S. While S is running, the program catches signal t ≠ s, which interrupts S and transfers control to handler T. When T returns, S resumes where it was interrupted. Eventually, S returns, transferring control back to the main program, which resumes where it left off.
 
-![Handlers can be interrupted by other handlers.](./signal_img/signal_handler_interrupted_by_another.png)
+![Handlers can be interrupted by other handlers.](../signal_img/signal_handler_interrupted_by_another.png)
 
 
 ## Blocking and Unblocking Signals
