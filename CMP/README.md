@@ -17,7 +17,7 @@ google 团队每次修复一个问题或者发布新功能，老旧的设备都�
     Fragment 适合于一个可替换的块，更粗粒度的方式具有声明周期的模型。
     但是应有开发随着时间推移会发生变化，有时候 View 更合适，有时候 Framgment 更合适，然而从一个抽象模型切换到另一个抽象模型带来非常高的工程成本。
 
-    
+
 
 [Over the last several years, the entire industry has started shifting to a declarative UI model, which greatly simplifies the engineering associated with building and updating user interfaces. ](https://developer.android.com/jetpack/compose/mental-model)
 
@@ -110,3 +110,65 @@ gradle/libs.versions.toml 中 kotlin 升级到 2.2.21，否则报错：Unresolve
 
 
 [When you build your Compose Multiplatform application for Android, you use the Jetpack Compose artifacts published by Google. For example, if you add compose.material3 to your dependencies, your project will use androidx.compose.material3:material3 in the Android target, and org.jetbrains.compose.material3:material3 in other targets. This is done automatically, based on Gradle Module Metadata in the multiplatform artifacts.](https://kotlinlang.org/docs/multiplatform/compose-multiplatform-and-jetpack-compose.html#libraries-for-compose-multiplatform)
+
+
+## 可组合项的生命周期
+
+可组合项：@Composable 注解的函数。
+
+**Composition 描述应用的界面，它由运行 composables 生成。Composition 是描述 UI 的 composables 函数的树形结构。**
+
+Compose 首次运行 composables 时，在 composition 初始过程中，它将保存调用的composables 的追踪到一个 Composition 中。之后、当应用程序的状态发生变化时，Compose 会调度一个重组（recomposition）。重组是 Compose 重新执行可能因状态变化而发生变化的 composables，然后更新 Composition 以反映任何变化。
+
+Composition 只能在组合初始化时创建，之后重组过程中只能更新。并且修改 Composition 的唯一方法就是通过重组。
+
+composable 函数可以被执行 0 次或多次。而且每次重组都是这样，无法保证 composable 函数执行的次数。
+
+通常由更改 State<T> 对象来触发重组。 Compose 跟踪这些状态, 并在状态变化时运行 Composition 中读取该特定 State<T> 的所有 composables，以及由它们调用的任何无法跳过的 composables。
+
+
+> **注意：** composable 的生命周期比 View、Activity 和 Fragment 的生命周期更为简单。当 Composable 需要管理或有更复杂生命周期的外部资源进行交互时，应使用 Effects。
+
+如果某个 composable 被调用多次，则会在 Composition 中放置多个实例。每次调用在 Composition 中都有其独立的生命周期。
+
+```Kotlin
+@Composable
+fun MyComposable() {
+    Column {
+        Text("Hello")
+        Text("World")
+    }
+}
+```
+
+![Insatance](README_img/multi_instance_of_composable.png)
+Figure 2. Representation of MyComposable in the Composition. If a composable is called multiple times, multiple instances are placed in the Composition. An element having a different color is indicative of it being a separate instance.
+
+## Composition 中 composable 的剖析
+
+Composition 中 composable 的实例由其 **call site** 标识。 Compose 编译器认为每个call site都是不同的。从多个 call site 调用 composable 将在 Composition 中创建 composable 的多个实例。
+
+> **关键术语：** call site 是调用 composable 的源代码位置。这会影响它在组合中的位置，从而影响 UI 树。
+
+在重组过程中，如果 composable 相比前一次重组调用了不同的 composables，Compose 将识别哪些 composables 被调用、哪些未被调用，并且对于在两次重组中都被调用的 composables，如果它们的输入没有变化，Compose 将避免重组（调用）它们。
+
+
+
+保持身份对于将副作用与它们的 composable 关联起来至关重要，这样它们才能处理正确，而不是每次重组都重新执行。
+
+考虑如下的情况：
+```Kotlin
+@Composable
+fun LoginScreen(showError: Boolean) {
+    if (showError) {
+        LoginError()
+    }
+    LoginInput() // This call site affects where LoginInput is placed in Composition
+}
+
+@Composable
+fun LoginInput() { /* ... */ }
+
+@Composable
+fun LoginError() { /* ... */ }
+```

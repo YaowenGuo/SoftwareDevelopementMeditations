@@ -11,9 +11,10 @@ VIM 和 emacs 是命令行的两大编辑器。 VIM 被称为神的编辑器，�
 
 插入模式（Insert Mode）、普通模式（Normal Mode）和命令行模式（Command-line Mode）
 
-```                 进入之后
-                      ▽
-        ESC/Ctrl+c    ▽      : ->
+```
+   「------------------Ctrl + o ------------|                
+        Ctrl+c/[      
+            ESC             : ->
 插入模式  ---------- 普通模式 ------------ 命令行模式
           i、a、o      ▽      <- 回车         ▽
                     v/V/Ctrl+v          :wq 退出 vim

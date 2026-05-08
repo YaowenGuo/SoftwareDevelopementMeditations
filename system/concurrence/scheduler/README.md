@@ -107,9 +107,7 @@ Results have improved quite a bit over time, roughly tracking processor
 performance. For example, in 1996 running Linux 1.3.37 on a 200-MHz
 P6 CPU, system calls took roughly 4 microseconds, and a context switch
 roughly 6 microseconds [MS96]. Modern systems perform almost an order of magnitude better, with sub-microsecond results on systems with 2- or 3-GHz processors.
-It should be noted that not all operating-system actions track CPU performance. As Ousterhout observed, many OS operations are memory intensive, and memory bandwidth has not improved as dramatically as
-processor speed over time [O90]. Thus, depending on your workload,
-buying the latest and greatest p
+It should be noted that not all operating-system actions track CPU performance. As Ousterhout observed, many OS operations are memory intensive, and memory bandwidth has not improved as dramatically as processor speed over time [O90]. Thus, depending on your workload, buying the latest and greatest processor may not speed up your OS-intensive workload as much as you'd hope.
 ```
 
 millisecond (ms 毫秒

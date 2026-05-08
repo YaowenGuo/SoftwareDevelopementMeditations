@@ -369,12 +369,10 @@ thirdPartyLogin(userAccount)
 阻塞是指在**一个调用返回之前，后面的代码无法继续执行**。例如一个 I/O 请求，sleep() 调用。
 
 ```sleep
-
+// 示例：sleep 会阻塞当前线程
+Thread.sleep(1000)
 ```
 在协程中也有阻塞的方法，其阻塞的是协程本身，在协程阻塞时，当前线程被调度出去，继续用于执行其它协程。
-
-```
-```
 
 在协程中我们需要区分是阻塞线程还是阻塞协程。如果在协程中调用了一个阻塞线程的方法，将导致协程的性能退化到跟使用线程一样。**在 Kotlin 中非常方便区分，其协程是有单独的核心库实现的。协程库中提供的阻塞方法都是阻塞协程本身的。其它阻塞方法则是阻塞线程**因此在协程中，如果协程提供了实现相同功能的方法时，应该使用协程的方法来实现。
 
@@ -386,7 +384,7 @@ thirdPartyLogin(userAccount)
 
 ### 挂起函数
 
-并不是执行到这个函数就挂起了，而是函数内部可能包含有能够使携程挂起的代码，在函数内的代码执行到挂起代码的时候，携程被挂起。被 `suspend` 修饰的函数不应定有挂起代码，也不定会时携程挂起。由于挂起只能出现在携程内部，该修饰符就是为了给编译器标识函数万一有挂起函数，只能用于携程内部，用于安全检查的。
+并不是执行到这个函数就挂起了，而是函数内部可能包含有能够使协程挂起的代码，在函数内的代码执行到挂起代码的时候，协程被挂起。被 `suspend` 修饰的函数不一定有挂起代码，也不一定会使协程挂起。由于挂起只能出现在协程内部，该修饰符就是为了给编译器标识函数万一有挂起函数，只能用于协程内部，用于安全检查的。
 
 ## 遗憾
 
@@ -398,10 +396,9 @@ thirdPartyLogin(userAccount)
 协程实现的基础是可挂起的方法（suspending functions）。可挂起的方法可以在任意的地方被挂起，直到该方法被恢复执行。
 运行在协程中的可挂起的方法（通常情况下）不会阻塞当前线程，之所以是通常情况下，因为这取决于我们的使用方式（必须使用协程提供的方法挂起）。
 
+---
 
---------------->
-
-关于并发的定义在 CSAPP8.2.2 中定义非常简单：
+关于并发的定义在 CSAPP 8.2.2 中定义非常简单：
 
 > A logical flow whose execution overlaps in time with another flow is called a concurrent flow, and the two flows are said to run concurrently. More precisely, flows X and Y are concurrent with respect to each other if and only if X begins after Y begins and before Y finishes, or Y begins after X begins and before X finishes.
 
@@ -418,7 +415,3 @@ thirdPartyLogin(userAccount)
 
 
 这里有篇文章将协程分为[有栈、无栈协程](https://blog.csdn.net/weixin_39875941/article/details/110592519)。我看不过是栈是由系统在栈区分配，还是由用户在堆分配空间作为栈使用的区别。因为**函数调用的入栈规则不改变，就不可能没有栈。**
-
-QA:
-
-协程里的suspend为什么只能放在协程里面运行?

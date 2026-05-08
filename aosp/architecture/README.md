@@ -623,7 +623,8 @@ sequenceDiagram
 
 app_main.cpp 是 JVM 启动入口，用于启动 JVM 虚拟机。它被编译为 app_process 或者 app_process64 可执行文件。
 
-```Java
+```C++
+// frameworks/base/cmds/app_process/app_main.cpp
     if (zygote) {
         // Sygote 模式，Zygote、SystemServer、普通应用进程都走这里。
         runtime.start("com.android.internal.os.ZygoteInit", args, zygote);

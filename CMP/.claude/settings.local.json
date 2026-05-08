@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -L -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" \"https://developer.android.com/develop/ui/compose/performance/stability\" -o /tmp/stability.html)",
+      "Read(//tmp/**)",
+      "Bash(curl -sS -L --max-redirs 10 -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" \"https://developer.android.com/develop/ui/compose/performance/stability\" -o /tmp/stability.html)",
+      "Bash(echo \"exit=$?\")",
+      "Bash(curl -sS -L --max-redirs 30 -b \"NID=1\" -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" \"https://developer.android.com/develop/ui/compose/performance/stability?hl=en\" -o /tmp/stability.html)",
+      "Bash(curl -sS -I -L --max-redirs 5 -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" \"https://developer.android.com/develop/ui/compose/performance/stability?hl=en\")",
+      "Bash(curl -sS -L --max-redirs 5 -b \"signin=skip; SOCS=CAESEwgDEgk1NDM0MTU3NTIaAmVuIAEaBgiAtuC0Bg\" -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" \"https://developer.android.com/develop/ui/compose/performance/stability?hl=en\" -o /tmp/stability.html)",
+      "WebSearch",
+      "Bash(curl -sS -L --max-redirs 5 -b \"signin=skip; signin_details=off; SOCS=CAESEwgDEgk1NDM0MTU3NTIaAmVuIAEaBgiAtuC0Bg; CONSENT=YES+\" -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" \"https://developer.android.com/develop/ui/compose/performance/stability?hl=en&authuser=0\" -o /tmp/stability.html)",
+      "Bash(curl -sS --max-redirs 0 -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" -H \"Cookie: signin=skip\" -D /tmp/stability_headers.txt \"https://developer.android.com/develop/ui/compose/performance/stability?hl=en\" -o /tmp/stability.html)"
+    ]
+  }
+}
