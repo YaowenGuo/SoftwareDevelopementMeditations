@@ -1,5 +1,101 @@
 # Lifecycle
 
+当 Jetpack Compose 首次运行 composables 时，在初始 composition 期间，它会**记录**描述 UI 的 composables 调用。，之后，当应用的状态发生变化时，Jetpack Compose 会安排重新组合。重新组合是指 Jetpack Compose 重新执行可能因状态变化而改变的 composables，然后更新 composition 以反映任何变化。
+
+Composition 只能通过初始组合生成并通过重组来更新。修改 composition 的唯一方式是通过重新组合。
+
+> 关键点：composable 的生命周期由以下事件定义：进入 composition 、被重新组合 0 次或多次，以及离开组合。
+
+![Lifecycle of composable](https://developer.android.google.cn/static/develop/ui/compose/images/lifecycle-composition.png)
+
+> 注意：composable 的生命周期比 View、Activity 和 Fragment 的生命周期简单。当一个 composable 需要管理或与外部资源交互时，这些资源具有更复杂的生命周期，你应该使用 Effect。
+
+- 如果一个 composable 被多次调用，多个实例会被添加到 composition 中。每次调用在 composition 中都有自己的生命周期。(代码中的调用点，而不是运行时的调用) Composition 中的 com
+
+> 关键术语：call site 是 composable 被调用的源代码位置。这影响它在 Composition 中的位置，从而影响 UI 树。
+
+## Composition 中的 composable 剖析
+
+如果在重新组合期间，一个 composable 调用了与之前组合不同的 composables，Compose 将识别出哪些 composables 被调用或未被调用，对于在两次组合中都被调用的 composables，如果它们的输入没有改变，Compose 将避免重新组合它们。
+
+保持谁别对于将 side affect 与 composable 关联起来至关重要，以便它们能够成功完成而不是在每次重组时重新启动。
+
+
+### 添加额外信息帮助智能重组
+
+多次调用 composable 会多次将其添加到 composition 中。当从同一个 call site 多次调用 composable 时，Compose 没有足够的信息来唯一标识每次对该 composable 的调用，因此除了调用点之外，还会使用执行顺序来保持实例之间的区别。这种行为有时是足够的，但在某些情况下可能会导致意外的行为。
+
+```Kotlin
+@Composable
+fun MoviesScreen(movies: List<Movie>) {
+    Column {
+        for (movie in movies) {
+            // MovieOverview composables are placed in Composition given its
+            // index position in the for loop
+            MovieOverview(movie)
+        }
+    }
+}
+```
+
+在上面的例子中，Compose 使用执行顺序以及调用点来确保实例在组合中保持独立。如果在列表底部添加一个新的 movie ，Compose 可以重用已经在 Composition 中的实例，因为它们在列表中的位置没有改变，因此，对于这些实例， movie 的输入是相同的。
+
+![](https://developer.android.google.cn/static/develop/ui/compose/images/lifecycle-newelement-bottom.png)
+
+然而，如果 movies 列表在顶部或中间添加、删除或重新排序项目，它将导 MovieOverview 中的所有参数列表位置变法调用发生重组。这在使用 affect 时非常重要，例如 MovieOverview 使用副作用获取视频封面图，如果在 affect 进行过程中发生重新组合，affect 将被取消并重新开始。
+
+```Kotlin
+@Composable
+fun MovieOverview(movie: Movie) {
+    Column {
+        // Side effect explained later in the docs. If MovieOverview
+        // recomposes, while fetching the image is in progress,
+        // it is cancelled and restarted.
+        val image = loadNetworkImage(movie.url)
+        MovieHeader(image)
+
+        /* ... */
+    }
+}
+```
+![](https://developer.android.google.cn/static/develop/ui/compose/images/lifecycle-newelement-top-all-recompose.png)
+
+通过用对关键可组合项的调用将一段代码包裹起来，并传递一个或多个值，这些值将被组合起来用于在组合中标识该实例。 key 的值不需要全局唯一，它只需要在调用可组合项的位置上是唯一的。所以在本示例中，每个 movie 都需要有一个在 movies 中唯一的 key ；如果它与其他地方的某个可组合项共享该 key ，这是可以的。
+
+```Kotlin
+@Composable
+fun MoviesScreenWithKey(movies: List<Movie>) {
+    Column {
+        for (movie in movies) {
+            key(movie.id) { // Unique ID for this movie
+                MovieOverview(movie)
+            }
+        }
+    }
+}
+```
+
+有了以上内容，即使列表中的元素发生变化，Compose 也能识别对 MovieOverview 的单独调用并可以重用它们。
+
+![](https://developer.android.google.cn/static/develop/ui/compose/images/lifecycle-newelement-top-keys.png)
+
+一些 composable 内置支持 key 参数。例如， LazyColumn 允许在 items DSL 中指定自定义 key 。
+
+```Kortlin
+@Composable
+fun MoviesScreenLazy(movies: List<Movie>) {
+    LazyColumn {
+        items(movies, key = { movie -> movie.id }) { movie ->
+            MovieOverview(movie)
+        }
+    }
+}
+```
+
+
+
+
+
 Compose 更新帧时会经历三个阶段：
 
 - 组合：Compose 确定要显示的内容。它会运行可组合函数并构建界面树。
