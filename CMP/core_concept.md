@@ -142,6 +142,8 @@ Compose 对一个类型的信任程度：
 | 值相等 (Structural) | a.equals(b) | a == b | Kotlin 会自动处理 null 情况 |
 | 引用相等 (Referential) | a == b | a === b | 判断是否为同一个内存地址 |
 
+Kotlin 的 `==` 操作符会不是简单的调用 `equals()`，其已经处理了 null 安全的情况，两个为 null 的对象比较时会返回 true，而不是抛出 NullPointerException。
+
 ### Compose 中的实现:
 
 了解 Compose 究竟是如何决定哪些函数可以在重组中被跳过的，这虽然不是必须的，但会很有帮助。
@@ -163,6 +165,7 @@ Compose 会将类型标记为 **Immutable（不可变）** 或 **Stable（稳定
 
 - **Immutable**：当一个类型的属性永远不会改变，并且其所有方法都是引用透明（referentially transparent）的时，Compose 会将其标记为 immutable。
   - 注意：所有原始类型都被标记为 immutable，包括 `String`、`Int` 和 `Float`。
+
 - **Stable**：表示一个类型的属性在构造之后可以发生变化；当这些属性在运行时发生变化时，Compose 能够感知到这些变化。
 
 > **注意**：composable 的参数不必是不可变的，Compose 也可以认为它是 skippable 的。只要 Compose 运行时能被通知到所有变化，参数也可以是可变的。对大多数类型来说，遵守这种契约都不太现实；不过，Compose 自身提供了一些满足这一契约的可变类，例如 `MutableState`、`SnapshotStateMap` 和 `SnapshotStateList`。
@@ -399,6 +402,12 @@ Compose 编译器将 `Snack` 标记为 unstable。原因在于 `tags` 参数的�
 
 ## 修复稳定行问题
 
+稳定性问题是类引起的，修复也是从类下手。
+
+1. 最简单的办法就是开启启用强跳过（enable Skipping）功能 **（Kotlin 2.0.20 开始默认启用）**。对于不稳定的类，Compose 会将它们视为稳定的，并且在重组期间跳过它们。**这是一种过早的优化，可能会导致维护上的困难，因此应当谨慎使用**。
+
+2. 
+
 
 ## 最佳实践
 
@@ -607,10 +616,3 @@ fun BadComposable() {
 点击按钮后，由于 Compose 会重新组合这个可组合项，看到一个过时的状态读取，因此会安排另一个重新组合，导致计数器在无限循环中迅速增加。
 
 **Composable 应该禁止修改状态。应该在在响应事件时以 lambda 的形式写入状态，就像前面的 onClick 示例一样。**
-
-
-
-
-
-
-

@@ -46,3 +46,13 @@ sudo firewall-cmd --reload
 sudo dnf copr enable avengemedia/dms
 sudo dnf install niri dms
 systemctl --user add-wants niri.service dms
+
+## nvim
+
+lua/config/options.lua
+```
+-- 让拼写检查忽略驼峰命名（CamelCase）
+vim.opt.spelloptions:append("camel")
+-- cjk 代表中日韩字符，设置后 Neovim 会忽略这些区域的字符检查。
+vim.opt.spelllang = { "en", "cjk" }
+```

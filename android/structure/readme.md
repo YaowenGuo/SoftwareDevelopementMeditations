@@ -2,6 +2,12 @@
 
 最好的架构不是分层最多的，而是能清晰分离职责，同时又足够简单、让团队能轻松理解的。
 
+Drive UI from data models (数据模型驱动UI)
+
+数据模型代表应用的数据。它们独立于你应用中的 UI 元素和其他组件。这意味着它们不绑定在 UI 和应用组件生命周期上，但当操作系统从内存中移除应用进程时，它们仍会被销毁。
+
+https://developer.android.com/topic/architecture
+
 
 ## MVC: Model - View - Controller
 
