@@ -1,7 +1,7 @@
 
 ## 扇形中间位置限制文字计算
 ```
-    private void drawPieChart(Canvas canvas) {
+    private void drawPieChart(Canvas canvas) {
 
         int centerX = getWidth() / 2;
         int centerY = getHeight() / 2;

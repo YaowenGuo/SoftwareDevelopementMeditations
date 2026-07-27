@@ -38,3 +38,6 @@ vdex 保存经过验证、优化 reordering 的 dex 字节码/quickened 指令�
 
 
 ## 
+
+https://www.fenbi.com/gwy?path=hmyl&activityType=harmony_gift618&select=0
+https://www.fenbi.com/gwy?path=hmyl&activityType=harmony_gift618&select=1

@@ -252,7 +252,7 @@ https://github.com/Tencent-TDS/KuiklyBase-components
 -  版本:26.2.2日
               google      jetbrain                       ovCompose                     gwy
     Kotlin                 2.3.0(Dec 16, 2025)      2.0.21-KBA-009(Oct 10, 2024)      2.2.21 
-    compose   1.10.0       1.10.0     1.6.1-KBA-007         -
+    compose   1.10.0       1.10.0                   1.6.1-KBA-007                      -
  
 - 选择 ovCompose 的问题：
     - 只支持了 Mac 编译，ovCompose 不支持 Linux 编译，只编译了 Linux 的

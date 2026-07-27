@@ -8,6 +8,8 @@ google 团队每次修复一个问题或者发布新功能，老旧的设备都�
     例如，所有视图的基类 View.java 的拥有近 3W 行的代码量。(ViewGroup近1W行，TextView 1.6W)
     Button 继承自 TextView, TextView 有很多功能，导致 Button 中的文字具有 TextView 具有可选中、可编辑。
 
+    重新审视我们原有的 UI 体系，从本质上说 UI 就是对 文本+图 各种排布和装饰。反观 View 系统，设计上过于复杂，以 TextView 为例，其包含了各种 Drawable、ImageSpan 这些本不属于 Text 的功能。实际使用却对自定义支持有限，导致经常需要使用 ImageView 代替。
+
 
     编写自定义 View 有点令人生畏，View 系统是如此复杂，想要处理好各种逻辑并提供一套优秀的 API 并不简单。
         - 各种设置
