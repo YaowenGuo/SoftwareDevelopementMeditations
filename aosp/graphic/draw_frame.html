@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View 内容如何最终绘制到屏幕：从 ViewRootImpl 到 SurfaceFlinger</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1f2328;
+    --muted: #59636e;
+    --border: #d1d9e0;
+    --code-bg: #f6f8fa;
+    --accent: #0969da;
+    --note-bg: #ddf4ff;
+    --note-border: #54aeff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117;
+      --fg: #e6edf3;
+      --muted: #9198a1;
+      --border: #3d444d;
+      --code-bg: #151b23;
+      --accent: #4493f8;
+      --note-bg: #121d2f;
+      --note-border: #1f6feb;
+    }
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.7 -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+          "Microsoft YaHei", "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  main { max-width: 920px; margin: 0 auto; padding: 32px 24px 80px; }
+  h1 { font-size: 1.9em; border-bottom: 1px solid var(--border); padding-bottom: .3em; }
+  h2 { font-size: 1.45em; border-bottom: 1px solid var(--border); padding-bottom: .3em; margin-top: 2em; }
+  h3 { font-size: 1.2em; margin-top: 1.6em; }
+  a { color: var(--accent); }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: .88em;
+    background: var(--code-bg);
+    padding: .15em .4em;
+    border-radius: 4px;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    line-height: 1.5;
+  }
+  pre code { background: none; padding: 0; font-size: .85em; }
+  .note {
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 10px 16px;
+    border-radius: 0 6px 6px 0;
+    margin: 1em 0;
+  }
+  .toc { border: 1px solid var(--border); border-radius: 6px; padding: 8px 24px; }
+  .toc ol { margin: .4em 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+  th, td { border: 1px solid var(--border); padding: 6px 12px; text-align: left; vertical-align: top; }
+  th { background: var(--code-bg); }
+  .muted { color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+
+<h1>View 内容如何最终绘制到屏幕：从 ViewRootImpl 到 SurfaceFlinger</h1>
+
+<div class="note">
+  <strong>先澄清一个概念：</strong>View 的内容并不是画到 <code>ViewRootImpl</code> 本身上。
+  ViewRootImpl 不存像素，它负责<strong>调度绘制</strong>并<strong>持有窗口的 <code>Surface</code></strong>。
+  View 的内容最终写进这个 Surface 背后的图形缓冲区（<code>GraphicBuffer</code>），
+  再由 SurfaceFlinger 合成后显示到屏幕上。
+</div>
+
+<div class="toc">
+  <strong>目录</strong>
+  <ol>
+    <li><a href="#s1">准备阶段：ViewRootImpl 拿到 Surface</a></li>
+    <li><a href="#s2">触发绘制：invalidate → VSYNC → performTraversals</a></li>
+    <li><a href="#s3">硬件加速路径（默认）</a></li>
+    <li><a href="#s4">软件绘制路径</a></li>
+    <li><a href="#s5">从 Buffer 到屏幕</a></li>
+    <li><a href="#s6">总结</a></li>
+  </ol>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="s1">1. 准备阶段：ViewRootImpl 拿到 Surface</h2>
+
+<pre><code>WindowManagerGlobal.addView()
+  └─ new ViewRootImpl()
+  └─ ViewRootImpl.setView(decorView)
+        ├─ requestLayout()                  // 先安排一次遍历
+        └─ mWindowSession.addToDisplay()    // Binder → WMS，注册窗口</code></pre>
+
+<p>第一次 <code>performTraversals()</code> 时会调用 <code>relayoutWindow()</code>：</p>
+
+<pre><code>ViewRootImpl.relayoutWindow()
+  └─ mWindowSession.relayout(..., mSurfaceControl)
+  │     // WMS 创建 SurfaceControl（对应 SurfaceFlinger 中的 Layer）
+  └─ Android 12+：
+        mBlastBufferQueue = new BLASTBufferQueue(mSurfaceControl, ...)
+        mSurface.transferFrom(mBlastBufferQueue.createSurface())</code></pre>
+
+<p>这一步之后，ViewRootImpl 的 <code>mSurface</code> 才是有效的。
+它是 BufferQueue 的<strong>生产者端</strong>，往里画的东西最终会交给 SurfaceFlinger。</p>
+
+<!-- ============================================================ -->
+<h2 id="s2">2. 触发绘制：invalidate → VSYNC → performTraversals</h2>
+
+<pre><code>View.invalidate()
+  └─ 沿 mParent 链向上 invalidateChild / onDescendantInvalidated
+       └─ ViewRootImpl.scheduleTraversals()
+            ├─ 发送同步屏障（postSyncBarrier），优先处理异步消息
+            └─ Choreographer.postCallback(CALLBACK_TRAVERSAL, mTraversalRunnable)
+                 └─ 等下一个 VSYNC
+                      └─ doTraversal() → performTraversals()
+                           ├─ performMeasure()
+                           ├─ performLayout()
+                           └─ performDraw() → draw(fullRedrawNeeded)</code></pre>
+
+<p>在 <code>ViewRootImpl.draw()</code> 里分成两条路径：</p>
+
+<pre><code>if (isHardwareEnabled()) {
+    mAttachInfo.mThreadedRenderer.draw(mView, mAttachInfo, this);   // 硬件加速（默认）
+} else {
+    drawSoftware(surface, mAttachInfo, xoff, yoff, ...);            // 软件绘制
+}</code></pre>
+
+<!-- ============================================================ -->
+<h2 id="s3">3. 硬件加速路径（默认）</h2>
+
+<p>这条路径分两段：<strong>UI 线程只录制绘制命令</strong>，<strong>RenderThread 负责真正渲染</strong>。</p>
+
+<h3>3.1 UI 线程：构建 DisplayList（RenderNode 树）</h3>
+
+<pre><code>ThreadedRenderer.draw()
+  └─ updateRootDisplayList(view)
+       └─ updateViewTreeDisplayList(view)
+            └─ view.updateDisplayListIfDirty()        // 只重建脏的 View
+                 ├─ RecordingCanvas canvas = renderNode.beginRecording(w, h)
+                 ├─ draw(canvas)  或  dispatchDraw(canvas)（自身无需绘制时走快速路径）
+                 └─ renderNode.endRecording()          // 生成 DisplayList
+       └─ rootCanvas.drawRenderNode(view.updateDisplayListIfDirty())</code></pre>
+
+<p><code>View.draw(Canvas)</code> 的标准步骤：</p>
+
+<table>
+  <tr><th>步骤</th><th>方法</th><th>作用</th></tr>
+  <tr><td>1</td><td><code>drawBackground()</code></td><td>绘制背景</td></tr>
+  <tr><td>2</td><td><code>saveLayer</code>（必要时）</td><td>为渐变边缘做准备</td></tr>
+  <tr><td>3</td><td><code>onDraw(canvas)</code></td><td>绘制自身内容</td></tr>
+  <tr><td>4</td><td><code>dispatchDraw(canvas)</code></td><td>绘制子 View</td></tr>
+  <tr><td>5</td><td>绘制渐变边缘 + <code>restore</code></td><td>Fading edges</td></tr>
+  <tr><td>6</td><td><code>onDrawForeground()</code></td><td>前景、滚动条</td></tr>
+  <tr><td>7</td><td><code>drawDefaultFocusHighlight()</code></td><td>默认焦点高亮</td></tr>
+</table>
+
+<p><code>ViewGroup.dispatchDraw()</code> 对每个子 View 调用 <code>drawChild()</code>，
+也就是 <code>child.draw(canvas, this, drawingTime)</code> 这个<strong>三参数版本</strong>。
+在硬件模式下它不会直接画像素，而是：</p>
+
+<pre><code>RenderNode rn = child.updateDisplayListIfDirty();
+((RecordingCanvas) canvas).drawRenderNode(rn);</code></pre>
+
+<p>所以整个 View 树会变成一棵 <strong>RenderNode 树</strong>：父节点的 DisplayList 中只记录一条
+“绘制子 RenderNode”的操作。<code>translationX</code>、<code>alpha</code>、<code>rotation</code>
+等属性直接存在 RenderNode 上，修改这些属性<strong>不需要重新录制</strong>，这也是属性动画高效的原因。</p>
+
+<div class="note">
+  <code>onDraw</code> 里调用的 <code>canvas.drawRect()</code>、<code>drawText()</code> 等，
+  在这一阶段<strong>只是被记录为操作</strong>，并没有产生任何像素。
+</div>
+
+<h3>3.2 同步到 RenderThread</h3>
+
+<pre><code>ThreadedRenderer.syncAndDrawFrame(frameInfo)
+  └─ JNI → RenderProxy::syncAndDrawFrame()
+       └─ DrawFrameTask::drawFrame()     // 投递到 RenderThread，UI 线程阻塞等待 sync 完成</code></pre>
+
+<p>RenderThread 中的流程：</p>
+
+<pre><code>DrawFrameTask::run()
+  ├─ syncFrameState()        // 把 UI 线程的 RenderNode 属性 / DisplayList 同步到渲染侧，上传 Bitmap 纹理
+  │    （同步完成后即唤醒 UI 线程，UI 线程可以去处理下一帧）
+  └─ CanvasContext::draw()
+       ├─ mRenderPipeline-&gt;getFrame()       // 向 Surface dequeueBuffer，拿到一块 GraphicBuffer
+       ├─ mRenderPipeline-&gt;draw(...)        // SkiaOpenGLPipeline / SkiaVulkanPipeline
+       │     └─ 遍历 RenderNode 树，回放 DisplayList → Skia → GPU 指令
+       └─ mRenderPipeline-&gt;swapBuffers()    // eglSwapBuffers / vkQueuePresent
+             └─ Surface::queueBuffer()      // 把画好的 buffer 还给 BufferQueue</code></pre>
+
+<p>到这里，View 的内容才<strong>真正变成像素</strong>，存在一块 GraphicBuffer 里。</p>
+
+<!-- ============================================================ -->
+<h2 id="s4">4. 软件绘制路径</h2>
+
+<p>关闭硬件加速时，直接由 CPU 通过 Skia 画进 buffer：</p>
+
+<pre><code>// ViewRootImpl.drawSoftware()
+Canvas canvas = mSurface.lockCanvas(dirty);   // dequeueBuffer 并把 buffer 包装成 Bitmap-backed Canvas
+mView.draw(canvas);                           // 整棵树同步地直接画像素
+surface.unlockCanvasAndPost(canvas);          // queueBuffer</code></pre>
+
+<p>和硬件路径相比，这里没有 DisplayList 和 RenderThread，全部在 UI 线程完成。</p>
+
+<table>
+  <tr><th></th><th>硬件加速</th><th>软件绘制</th></tr>
+  <tr><td>Canvas 类型</td><td><code>RecordingCanvas</code>（只录制）</td><td>Bitmap-backed <code>Canvas</code>（直接出像素）</td></tr>
+  <tr><td>光栅化执行者</td><td>RenderThread + GPU</td><td>UI 线程 + CPU</td></tr>
+  <tr><td>局部刷新</td><td>只重建脏 View 的 DisplayList</td><td>按 dirty 区域重绘整棵树相交部分</td></tr>
+  <tr><td>属性动画</td><td>改 RenderNode 属性，无需重录</td><td>需要重绘</td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2 id="s5">5. 从 Buffer 到屏幕</h2>
+
+<pre><code>queueBuffer
+  └─ BLASTBufferQueue（Android 12+，在 App 进程内）
+       └─ 通过 SurfaceControl.Transaction 把 buffer 提交给 SurfaceFlinger
+            └─ SurfaceFlinger 在 VSYNC-sf 时刻收集所有 Layer
+                 └─ 交给 HWC（Hardware Composer）合成；
+                    HWC 处理不了的部分由 GPU 合成（Client Composition）
+                      └─ 送显（Display）</code></pre>
+
+<p class="muted">Android 12 之前，BufferQueue 的消费者端在 SurfaceFlinger 进程里。
+12 及以后改为 BLAST，buffer 和窗口几何变化可以放在同一个 Transaction 里原子提交。</p>
+
+<!-- ============================================================ -->
+<h2 id="s6">6. 总结</h2>
+
+<pre><code>View.invalidate()
+   ↓
+ViewRootImpl.scheduleTraversals() ──(Choreographer, VSYNC)──→ performTraversals()
+   ↓                                                       measure / layout / draw
+ViewRootImpl.draw()
+   ├─ 硬件：ThreadedRenderer.draw()
+   │     UI 线程：View.draw(RecordingCanvas) → 录制 DisplayList（RenderNode 树）
+   │     RenderThread：sync → dequeueBuffer → Skia/GPU 回放 → queueBuffer
+   └─ 软件：Surface.lockCanvas → View.draw(Canvas) → unlockCanvasAndPost
+   ↓
+Surface（BufferQueue / BLASTBufferQueue）中的 GraphicBuffer
+   ↓
+SurfaceFlinger + HWC 合成 → 屏幕</code></pre>
+
+<div class="note">
+  <strong>一句话概括：</strong>ViewRootImpl 负责调度绘制并提供 Surface；
+  View 在硬件加速下把绘制操作录制成 RenderNode，由 RenderThread 用 GPU 画进 Surface 的缓冲区；
+  最后由 SurfaceFlinger 把各窗口的 buffer 合成后显示到屏幕。
+</div>
+
+</main>
+</body>
+</html>

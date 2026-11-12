@@ -104,6 +104,67 @@ Compose 可以智能地跳过其中任何不需要的阶段。例如，假设单
 
 不过，代码错误可能会导致 Compose 难以确定可以安全跳过哪些阶段，在这种情况下，Compose 会运行所有三个阶段，这可能会降低界面的速度。因此，许多性能最佳实践都旨在帮助 Compose 跳过不需要的阶段。
 
+## Composition 移除 Composable
+
+当 composable 方法被执行时，它被记录到 Composition 中，只有它在整个 Composable 执行中都不被调用到时，它才会被移出 Composition。移除跟屏幕是否可见、Activity 重建没有关系。
+
+移出 Composition 的情况：
+
+
+1. 控制流不再调用它
+
+父级重组后，原本会调用某个 composable 的分支不再执行。最常见：
+```Kotlin
+```
+if (showDialog) {
+    MyDialog()   // showDialog 变 false → MyDialog 离开 Composition
+}
+
+when (page) {
+    Page.A -> PageA()
+    Page.B -> PageB()  // 切到 A 时，PageB 离开
+}
+```
+```
+
+2. 列表里的 key 不再出现
+
+LazyColumn / LazyRow 或 key(...) { } 包裹的项，当对应的 key 在新一轮重组里不再出现时被移除。滚出可视区域的 lazy item
+也会被 dispose（除非被 rememberSaveable / state holder 保留状态）。
+
+```Kotlin
+```
+LazyColumn {
+    items(list, key = { it.id }) { ... }   // id 从列表里消失 → 移除
+}
+```
+```
+
+3. 宿主销毁
+
+- Android：承载 Composition 的 ComposeView / Activity 销毁，或 setContent 被替换。
+- iOS：ComposeUIViewController 被 dismiss。
+- OHOS：ComposeArkUIViewController 对应的 ArkUI 节点被销毁。
+
+整棵 Composition 被释放，所有 DisposableEffect.onDispose / RememberObserver.onForgotten 触发。
+
+4. movableContentOf 搬迁后旧位置
+
+被 movableContentOf 包裹的内容，在移动到新位置时不会
+dispose（这是它的卖点），但如果搬迁后没有新宿主调用它，旧位置依旧算作离开。
+
+---
+触发的回调顺序（常用来验证）：
+- DisposableEffect { onDispose { ... } } 的 onDispose 块执行。
+- LaunchedEffect 的协程被取消。
+- remember { ... } 持有的对象如果实现了 RememberObserver，onForgotten() 被调用（onAbandoned() 则是从未进入 composition
+就被丢弃的情形）。
+
+一句话总结：当父级重组后不再调用某个 composable，或承载它的 Composition 整体销毁时，它就离开 Composition。 key
+变化和条件分支是最常见的两种触发方式。
+
+
+
 ## 一般原则
 
 - **尽可能将计算移出可组合函数。** 每当界面发生变化时，可能都需要重新运行可组合函数。您放置在可组合项中的任何代码都会重新执行，可能是针对动画的每一帧。将可组合项的代码限制为仅包含构建界面所需的代码。
