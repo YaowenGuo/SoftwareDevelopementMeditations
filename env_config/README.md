@@ -55,4 +55,4 @@ lua/config/options.lua
 vim.opt.spelloptions:append("camel")
 -- cjk 代表中日韩字符，设置后 Neovim 会忽略这些区域的字符检查。
 vim.opt.spelllang = { "en", "cjk" }
-```
+```nen't

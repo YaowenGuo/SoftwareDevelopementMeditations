@@ -588,31 +588,3 @@ AnimatedVisibility(visible = showButton) {
 
 * Snapshot.withoutReadObservation { ... }：
 * 原理：在块内读取状态，但不会建立“状态 -> UI”的订阅关系。这彻底延迟（或取消）了重组的发生，常用于只需要获取快照而不关注意后续变化的场景。
-
-
-
-
-
-###  避免向后写入
-
-
-在 composable 中写入状态值是非常危险的事情，如果在 composable 中同时观察了状态变化，可能导致每一帧都发生重新组合，无限循环。
-
-```Kotlin
-@Composable
-fun BadComposable() {
-    var count by remember { mutableIntStateOf(0) }
-
-    // Causes recomposition on click
-    Button(onClick = { count++ }, Modifier.wrapContentSize()) {
-        Text("Recompose")
-    }
-
-    Text("$count")
-    count++ // Backwards write, writing to state after it has been read</b>
-}
-```
-
-点击按钮后，由于 Compose 会重新组合这个可组合项，看到一个过时的状态读取，因此会安排另一个重新组合，导致计数器在无限循环中迅速增加。
-
-**Composable 应该禁止修改状态。应该在在响应事件时以 lambda 的形式写入状态，就像前面的 onClick 示例一样。**

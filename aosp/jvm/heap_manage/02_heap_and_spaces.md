@@ -2,13 +2,11 @@
 
 > 目标：把上一篇 `maps` 里那一堆 `dalvik-*` 区段逐个讲清楚——`Heap` 为什么要切成这么多 `Space`，每个 Space 装什么、谁分配谁回收，以及 Zygote 是怎么用「写时复制」让几百个 App 共享同一份系统类的。
 
-承接 [01 架构篇](01_architecture_overview.md)：`Runtime` 持有 `Heap`，`Heap` 把 `MemMap` 批发来的地址切成若干 `Space`。本篇就是放大「切成若干 Space」这一步。
 
 ---
 
 
-
-## What：一个 App 堆里到底有哪些 Space
+## What：一个 App JVM 堆里有 ***五种 Space***
 
 先看全景。ART 的 `Heap` 不是一整块，而是一组各司其职的分区：
 
@@ -36,13 +34,13 @@ graph TB
 
 对应到 `/proc/<pid>/maps` 里，你能看到类似这些名字（上一篇小实验里 `grep dalvik` 出来的就是它们）：
 
-| maps 里的名字 | 对应的 Space | 装什么 |
-|---|---|---|
-| `dalvik-main space` / `dalvik-main space 1` | main space | 你 `new` 出来的绝大多数对象 |
-| `dalvik-large object space` | LargeObjectSpace | 大数组、大字符串 |
-| `dalvik-non moving space` | non-moving space | 不可搬移的对象 |
-| `dalvik-zygote space` | ZygoteSpace | Zygote 预热的共享对象 |
-| `/…/boot.art`（文件映射） | ImageSpace | 系统框架预加载对象**包含预初始化的对象和类数据，即运行时所需的内存“快照”** |
+| maps 里的名字 | 对应的 Space | 装什么 |  类 |
+|---|---|---|---|
+| `dalvik-main space` / `dalvik-main space 1` | main space | 你 `new` 出来的绝大多数对象 | **BumpPointerSpace(CMC)**/RosAllocSpace(CMS)/RegionSpace(CC) |
+| `dalvik-large object space` | LargeObjectSpace | 大数组、大字符串 | LargeObjectMap/FreeListSpace | 
+| `dalvik-non moving space` | non-moving space | JNI AOT 编译器的 MS GC | DlMallocSpace |
+| `dalvik-zygote space` | ZygoteSpace | Zygote 预热的共享对象 | ZygoteSpace |
+| `/…/boot.art`（文件映射） | ImageSpace | 系统框架预加载对象**包含预初始化的对象和类数据，即运行时所需的内存“快照”** |  ImageSpace |
 
 ---
 
@@ -81,13 +79,16 @@ graph TD
 // 源码：art/runtime/gc/space/space.h（只看类型枚举，理解分类即可）
 enum SpaceType {
   kSpaceTypeImageSpace,          // 启动镜像
-  kSpaceTypeMallocSpace,         // RosAlloc/DlMalloc 管理的主空间
   kSpaceTypeZygoteSpace,         // Zygote 共享空间
-  kSpaceTypeBumpPointerSpace,    // 指针推进空间(CMC 标记压缩用)
   kSpaceTypeLargeObjectSpace,    // 大对象空间
+
+  kSpaceTypeMallocSpace,         // RosAlloc/DlMalloc 管理的主空间
+  kSpaceTypeBumpPointerSpace,    // 指针推进空间(CMC 标记压缩用)
   kSpaceTypeRegionSpace,         // Region 空间(CC 并发复制用)
 };
 ```
+
+前三种空间（Image、Zygote、LargeObject）是基础组件，通常都存在；后三种（Malloc、BumpPointer、Region）是“互斥”的，负责 main space，同一时刻有且只有一种作为“活跃的可分配对象空间”存在。
 
 ---
 
@@ -174,7 +175,7 @@ void Heap::PreZygoteFork() {
 
 > 前面讲清了「有哪些 Space、为什么这么切」，这一节把镜头拉到源码：**这些 Space 到底在什么时机、由哪个函数、按什么顺序创建出来**。
 >
-> **依据说明**：以下以 **AOSP `main` 分支（Android 17 时代，CMC 为默认 GC）** 为准。ART 已是 Mainline 模块，**文件路径与函数名跨版本高度稳定**，可在 [cs.android.com](https://cs.android.com/android/platform/superproject/main/+/main:art/) 按函数名直接检索复核；本节**不写死行号**（行号随版本频繁漂移，给错反而误导）。标注「精简」的代码块为保留关键调用、省略无关分支的语义化摘录，非逐字原文。
+> **依据说明**：以下以 **AOSP `main` 分支（Android 17 时代，CMC 为默认 GC）** 为准。ART 已是 Mainline 模块，**文件路径与函数名跨版本高度稳定**。标注「精简」的代码块为保留关键调用、省略无关分支的语义化摘录，非逐字原文。
 
 ### 全景：一次进程启动里 Space 的创建时序
 
@@ -290,6 +291,8 @@ ImageSpace::LoadBootImage(...)          // Heap 构造里调用的静态入口
 - **App 镜像**（`.art`，你的 App 自己那份预编译镜像）：不在 Heap 构造期，而是在 `ClassLinker` 打开 oat 文件时，由 `art/runtime/gc/space/image_space.cc → ImageSpace::CreateFromAppImage(...)` 创建。
 
 > 复核入口：cs.android.com 搜 `ImageSpace::LoadBootImage`、`ImageSpace::CreateFromAppImage`。
+>
+> 🎬 **想看 ImageSpace 加载的逐帧全过程**（`boot.art` 文件布局、`mmap`、重定位 relocation、COW 博弈、app image）？见 [09 镜像篇：ImageSpace 的加载操作全过程](09_image_space.md)——本篇只讲到"入口"，那篇把这一下 `mmap` 里发生的每一步都用动画图拆开了。
 
 ### main space 的三种 `Create`
 
@@ -412,6 +415,103 @@ void Heap::AddSpace(space::Space* space) {
 
 ---
 
+## How：站上 `gc::Heap` 这个类——关键 API 与关键设计
+
+> 前面几节都在讲一个个 Space，但它们全挂在同一个对象上——`gc::Heap`。最后把镜头拉到最远，看 `Heap` 这个类**本身**：它是整个托管堆的「总控台 / 门面（facade）」，对上给 `Runtime`、JNI、`java.lang.Runtime` 暴露一组 API，对下攥着所有 Space、GC 收集器和记账结构。本节沿用上文的依据约定（AOSP `main` 分支、不写死行号、函数名可在 cs.android.com 复核）。
+
+### Heap 是什么：一个门面，聚合四类下属
+
+`new gc::Heap()` 造出来的不只是「一堆 Space」，而是把内存管理的所有零件收拢到一个对象里：
+
+```mermaid
+graph TB
+    HEAP["<b>gc::Heap</b><br/>托管堆总控台 / facade"]
+    subgraph SP["① Space 家族（本篇主角）"]
+        S1["continuous_spaces_<br/>Image / Zygote / main / non-moving"]
+        S2["discontinuous_spaces_<br/>LargeObjectSpace"]
+    end
+    subgraph CO["② GC 收集器（05 篇）"]
+        C1["garbage_collectors_<br/>MarkCompact / ConcurrentCopying / MarkSweep / SemiSpace"]
+    end
+    subgraph AC["③ 记账结构（04 篇）"]
+        A1["card_table_ / live_bitmap / mark_bitmap"]
+        A2["num_bytes_allocated_<br/>target_footprint_ / concurrent_start_bytes_"]
+    end
+    subgraph TK["④ 后台调度（06 篇）"]
+        T1["task_processor_ + HeapTaskDaemon 守护线程"]
+    end
+    HEAP --> S1
+    HEAP --> S2
+    HEAP --> C1
+    HEAP --> A1
+    HEAP --> A2
+    HEAP --> T1
+
+    classDef h fill:#ffe6cc,stroke:#d79b00,stroke-width:2px;
+    class HEAP h;
+```
+
+一句话：**`Heap` 就是把「往哪放（Space）、谁来收（Collector）、涨到哪触发（记账阈值）、谁去后台跑（TaskProcessor）」这四件事焊在一起的门面**——本系列 02～06 篇讲的所有零件，都是它的成员。
+
+### 初始化流程：`Heap::Heap()` 到底做了几件事
+
+上一节的时序图聚焦「切 Space」，但那只是构造函数流水线里的一站。站到 Heap 高度看，一次构造是这样：
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant RT as Runtime::Init
+    participant HP as Heap::Heap()
+    participant MM as MemMap
+    participant COL as 收集器们
+    participant TP as TaskProcessor
+
+    RT->>HP: new gc::Heap(initial_size, growth_limit, collector_type, ...)
+    HP->>MM: ① 预留一大段连续地址 (heap_reservation)
+    HP->>HP: ② LoadBootImage → ImageSpace (见上节)
+    HP->>HP: ③ 切 non-moving / main / LargeObjectSpace (见上节)
+    HP->>HP: ④ 建 card_table_、live/mark bitmap (记账, 04 篇)
+    HP->>COL: ⑤ 按 collector_type 各 new 一个收集器<br/>push 进 garbage_collectors_ (05 篇)
+    HP->>TP: ⑥ new TaskProcessor (后台 GC 任务队列, 06 篇)
+    HP->>HP: ⑦ 设初始阈值 target_footprint_ = initial_size<br/>与 concurrent_start_bytes_ (06 篇「呼吸」的起点)
+    Note over HP: 构造结束 = 一个「能分配、能回收、能自适应」的堆
+    Note over RT,HP: ZygoteSpace 仍要等 fork 前 PreZygoteFork() 才诞生
+```
+
+看清这张图就明白：**「Space 创建」只是 Heap 初始化的第 ③ 步**；记账结构（④）、收集器（⑤）、后台调度（⑥）、初始阈值（⑦）同样在构造期一次就位——这也是为什么 Heap 一造好，GC 的增量记账（04 篇卡表）、并发触发（06 篇阈值）立刻就能工作。
+
+### 关键 API 分组：Heap 对外暴露什么
+
+`Heap` 的公开方法很多，但按「职责」归组只有几类。下表把最常被调用、也最值得你在 cs.android.com 上追的入口列出来，并标注它在本系列哪一篇展开：
+
+| 职责 | 关键 API | 谁来调 / 展开于 |
+|---|---|---|
+| **分配对象** | `AllocObject()` / `AllocLargeObject()` | 字节码 `new` 的落点，[03 篇](03_allocation.md) |
+| **主动回收** | `CollectGarbage()`（显式入口）/ `CollectGarbageInternal()`（总闸） | `System.gc()` / GC 触发，[06 篇](06_tuning_and_debugging.md) |
+| **并发回收** | `ConcurrentGC()` / `WaitForGcToComplete()` | HeapTaskDaemon 守护线程，[06 篇](06_tuning_and_debugging.md) |
+| **native 内存记账** | `RegisterNativeAllocation()` / `RegisterNativeFree()` | JNI 分配 native 内存时，可触发 `NativeAlloc` GC |
+| **堆增长 / 阈值** | `GrowForUtilization()` / `SetIdealFootprint()` | 每次 GC 收尾重设阈值，[06 篇](06_tuning_and_debugging.md)「呼吸」 |
+| **前后台切换** | `ChangeCollector()` / `RequestCollectorTransition()` | App 前后台切换（CollectorTransition），[06 篇](06_tuning_and_debugging.md) |
+| **内存回吐** | `Trim()` / `TrimSpaces()` | 响应 `onTrimMemory`，把空闲页还给系统 |
+| **Space 管理 / 查询** | `AddSpace()` / `FindSpaceFromObject()` / `GetLiveBitmap()` | GC 与本篇 Space 创建 |
+| **生命周期** | `PreZygoteFork()` | fork App 前封存 ZygoteSpace，见本篇上文 |
+| **度量 / 调试** | `GetBytesAllocated()` / `GetMaxMemory()` / `DumpGcPerformanceInfo()` | `Runtime.totalMemory()`、`dumpsys meminfo` 背后 |
+
+> 调优视角：表最后一行那几个 getter，就是 `Runtime.getRuntime().totalMemory()/freeMemory()/maxMemory()` 在 native 层的真身；`DumpGcPerformanceInfo` 则是 `dumpsys meminfo` / GC 性能日志的数据来源（呼应 [06 篇](06_tuning_and_debugging.md) 的排查工具）。
+
+### 关键设计：四条贯穿始终的取舍
+
+把前面所有细节抽象一层，`Heap` 的设计有四条主心骨，理解它们比记 API 更重要：
+
+1. **门面模式（facade）**：对外只暴露 `AllocObject` / `CollectGarbage` 等简洁入口，把「多 Space、多 collector、记账、后台线程」全藏在身后。呼应 [01 篇](01_architecture_overview.md)：GC 能掌控全局，正因为这些零件同属一个 `Heap`、`Heap` 又同属一个 `Runtime`。
+2. **地址先批发、再零售**：构造期先用 `MemMap` 预留一整段连续地址（`heap_reservation`），再切给各 Space，而不是每个 Space 各自 `mmap`。这样 boot image、main space、non-moving 紧挨着落在一段可控范围里，便于搬移压缩，也为「压缩指针 / 引用压缩」这类优化留了地基。
+3. **创建顺序即约束**：non-moving space 抢在 main space 前建（上节注释「免得它的 bitmap 占掉我们想要的地址段」）、记账结构必须早于第一次分配就位——顺序不是随意的，是「谁依赖谁」写死出来的。
+4. **前后台双收集器、可热切**：`Heap` 同时持有 `foreground_collector_type_` 与 `background_collector_type_` 两套，运行时用 `ChangeCollector()` 切换。这正是 [06 篇](06_tuning_and_debugging.md) 前台低延迟、后台省内存两套策略在类设计上的落点。
+
+> 复核入口：cs.android.com 搜 `class Heap`（`art/runtime/gc/heap.h`）可一次看全成员与 API 声明；搜 `Heap::Heap`（`heap.cc`）看构造顺序。字段名跨版本可能微调（如 `target_footprint_` 早期叫 `max_allowed_footprint_`），以你所看分支为准。
+
+---
+
 ## 课后验证
 
 ### 思考题
@@ -420,6 +520,7 @@ void Heap::AddSpace(space::Space* space) {
 2. `ZygoteSpace` 和 `main space` 为什么要在 fork 前就分开？如果不分开会发生什么？
 3. 写时复制（COW）在什么时刻会「失效」（即真正发生物理内存复制）？这对「共享系统类省内存」意味着什么？
 4. 为什么 main space 在 CMS 下是 RosAlloc space、CC 下是 RegionSpace、CMC 下又是 BumpPointerSpace？这体现了 Space 设计的什么原则？
+5. `gc::Heap` 的构造函数除了创建 Space，还一次性建好了哪几类零件？为什么它们必须在「第一次分配之前」就位？
 
 <details>
 <summary>参考答案</summary>
@@ -428,6 +529,7 @@ void Heap::AddSpace(space::Space* space) {
 2. fork 前把老对象封存进只读 ZygoteSpace、给 App 开全新 main space，是为了让 App 的新对象不去写脏共享页。若不分开，App 一 `new` 就可能触发共享页的 COW，跨进程共享的省内存效果就被破坏了。
 3. 当某进程**写入**一个共享的只读页时，内核为它单独复制该页。意味着只要系统类页不被改（通常只读），它们就一直被所有 App 共享、物理内存只算一份；被改的页才各自复制。
 4. 因为 main space 的数据结构要配合 GC 的回收方式：CMS 不搬对象、用分桶分配器 RosAlloc；CC 按区复制、用 RegionSpace；CMC 原地压缩、用 BumpPointerSpace。体现的原则是「Space 布局为回收策略服务」。
+5. 除切各 Space 外，构造期还一次建好三类零件：①记账结构（`card_table_`、live/mark bitmap，以及 `num_bytes_allocated_` 和 `target_footprint_` / `concurrent_start_bytes_` 阈值）；②各 GC 收集器（`new` 出来 push 进 `garbage_collectors_`）；③后台任务队列 `task_processor_`（配 HeapTaskDaemon 守护线程）。它们必须早于第一次分配：分配路径要靠记账阈值判断何时触发并发 GC（06 篇），GC 要靠卡表 / bitmap 做增量标记（04 篇）——若晚于分配就位，第一批对象就无法被正确记账和回收。
 
 </details>
 

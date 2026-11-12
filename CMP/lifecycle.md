@@ -1,6 +1,6 @@
-# Lifecycle
+# Lifecycle of composables
 
-当 Jetpack Compose 首次运行 composables 时，在初始 composition 期间，它会**记录**描述 UI 的 composables 调用。，之后，当应用的状态发生变化时，Jetpack Compose 会安排重新组合。重新组合是指 Jetpack Compose 重新执行可能因状态变化而改变的 composables，然后更新 composition 以反映任何变化。
+当 Jetpack Compose 首次运行 composables 时，在初始 composition 期间，它会**记录**描述 UI 的 composables 调用。之后，当应用的状态发生变化时，Jetpack Compose 会安排重新组合。重新组合是指 Jetpack Compose 重新执行可能因状态变化而改变的 composables，然后更新 composition 以反映任何变化。
 
 Composition 只能通过初始组合生成并通过重组来更新。修改 composition 的唯一方式是通过重新组合。
 
@@ -18,7 +18,7 @@ Composition 只能通过初始组合生成并通过重组来更新。修改 comp
 
 如果在重新组合期间，一个 composable 调用了与之前组合不同的 composables，Compose 将识别出哪些 composables 被调用或未被调用，对于在两次组合中都被调用的 composables，如果它们的输入没有改变，Compose 将避免重新组合它们。
 
-保持谁别对于将 side affect 与 composable 关联起来至关重要，以便它们能够成功完成而不是在每次重组时重新启动。
+保持识别对于将 side affect 与 composable 关联起来至关重要，以便它们能够成功完成而不是在每次重组时重新启动。
 
 
 ### 添加额外信息帮助智能重组
@@ -94,8 +94,6 @@ fun MoviesScreenLazy(movies: List<Movie>) {
 
 
 
-
-
 Compose 更新帧时会经历三个阶段：
 
 - 组合：Compose 确定要显示的内容。它会运行可组合函数并构建界面树。
@@ -111,3 +109,70 @@ Compose 可以智能地跳过其中任何不需要的阶段。例如，假设单
 - **尽可能将计算移出可组合函数。** 每当界面发生变化时，可能都需要重新运行可组合函数。您放置在可组合项中的任何代码都会重新执行，可能是针对动画的每一帧。将可组合项的代码限制为仅包含构建界面所需的代码。
 
 - **尽可能延后读取状态。** 通过将状态读取移至可组合子项或后续阶段，您可以最大限度地减少重组或完全跳过组合阶段。为此，您可以传递 lambda 函数（而不是状态值）以适应频繁变化的状态，并在传入频繁变化的状态时优先使用基于 lambda 的修饰符。您可以在遵循最佳做法的尽可能延后读取部分中查看此方法的示例。
+
+
+## 很多问题都是因为 composable 的生命周期导致的。
+
+### 1. 避免向后写入
+
+
+在 composable 中写入状态值是非常危险的事情，如果在 composable 中同时观察了状态变化，可能导致每一帧都发生重新组合，无限循环。
+
+```Kotlin
+@Composable
+fun BadComposable() {
+    var count by remember { mutableIntStateOf(0) }
+
+    // Causes recomposition on click
+    Button(onClick = { count++ }, Modifier.wrapContentSize()) {
+        Text("Recompose")
+    }
+
+    Text("$count")
+    count++ // Backwards write, writing to state after it has been read</b>
+}
+```
+
+点击按钮后，由于 Compose 会重新组合这个可组合项，看到一个过时的状态读取，因此会安排另一个重新组合，导致计数器在无限循环中迅速增加。
+
+**Composable 应该禁止修改状态。应该在在响应事件时以 lambda 的形式写入状态，就像前面的 onClick 示例一样。**
+
+
+### 
+
+
+# 页面生命周期
+
+❎ androidx.lifecycle -> org.jetbrains.androidx.lifecycle 但是这个是以 Native 的页面不适合。
+
+ 各平台事件到底由什么触发（重点）
+
+┌───────────────┬──────────────────────────────────┬──────────────────────────────────────────────────────┐
+│     平台      │        ON_START / ON_STOP         │                 ON_RESUME / ON_PAUSE                 │
+├───────────────┼──────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Android       │ Activity 生命周期                 │ Activity 生命周期                                      │
+├───────────────┼──────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ iOS           │ viewDidAppear / viewDidDisappear │ App 前后台（willEnterForeground/didEnterBackground）   │
+├───────────────┼──────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Desktop       │ 窗口可见 / 最小化                   │ 窗口获得/失去焦点                                      │
+├───────────────┼──────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Web (Wasm/JS) │ visibilitychange                 │ 页面 focus/blur                                      │
+└───────────────┴──────────────────────────────────┴──────────────────────────────────────────────────────┘
+
+✅ androidx.navigation 多平台版（推荐，和 Android 写法完全一致）：
+
+implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha10")
+
+```
+NavHost(navController, startDestination = "home") {
+    composable("home") {
+        // 这里的 LocalLifecycleOwner 是 NavBackStackEntry，
+        // push/pop 会正确触发 pause/resume
+        LifecycleResumeEffect(Unit) { ... }
+    }
+}
+
+Decompose：不用 Compose 的 Lifecycle，用 Essenty 的 Lifecycle，每个 Component 自带子生命周期，页面语义更准：
+
+lifecycle.doOnResume { reportPageShow() }
+```

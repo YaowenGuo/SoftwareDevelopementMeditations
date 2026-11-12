@@ -225,7 +225,7 @@ AS 断点调试鸿蒙端 KMP 代码。
 
 - ViewModel、导航、生命周期管理。
 - 路由：router
-- 网络请求：kotlinx-serialization + ktor
+- 网络请求：kotlinx-serialization + ktor + ktrofit
 - 图片加载和缓存，svga 动图
 - loger
 - WebView: https://github.com/KevinnZou/compose-webview-multiplatform 未支持鸿蒙
@@ -293,7 +293,7 @@ https://github.com/Tencent-TDS/KuiklyBase-components
 原生        JVM          Native    JS runtime/Native(提供了丰富的C/C++API，甚至 UI)
 CMP        JVM          Native       Native
 Fluter    Dart VM       Dart VM      Dart VM
-RN        JS 运行时
+RN        JS 运行时     JS 运行时      JS 运行时
 
 
 1. 在同一平台上，运行类型不同会导致互调用极其麻烦。因为对象是隔离的，牵涉到序列化/反序列化。
@@ -356,3 +356,21 @@ Gradle 9.0 的问题
 ## IOS 项目集成
 
 在 iosApp/iosApp.xcodeproj/project.pbxproj 中有一个 Run Script 构建阶段。
+
+
+
+## 技术集合
+
+UI: Nativation + ViewModel
+
+协程 + Flow
+
+Ktrofit + Ktor
+
+
+
+
+
+Other:
+数据库？
+Koin

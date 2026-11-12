@@ -129,3 +129,52 @@ pthread stack 使用memory, 注意目前pthread create 时只标注了它底部�
     3. RVO, NRVO
 
     4. 模板编程与 STL的常用类。
+
+## 已覆盖(内容真实存在的)
+
+
+ - 虚拟内存设计:1.virtual_memory.md(布局、映射、保护、延迟分配、overcommit、写时复制、限制)
+ - 虚拟内存实现:1.virtual_memory_impl.md + kernel_address_map.md(MMU 启动、恒等映射、页表、memblock、fixmap)
+ - 物理内存:physical_memory.md + kernel/physical_memory_management.md(node/zone/page、NUMA、内存模型、LRU)、kernel/buddy_allocator.md
+ - 缓存:3.cache_archtecture.md + page_cache.md
+ - 链接/加载:linke_and_load.md、mmap.md
+ - 分配器:native_memory_allocator.md(mimalloc)、c_allocator.md(Android bionic/jemalloc)
+ - 栈:stack.md
+ - 应用层责任:application_or_language_duty.md(所有权、引用计数)
+ - OOM:oom.md、oom_killer.md
+ - 内核共享内存 / DMA:dma.md
+ - 工具/排查:tools.md、leak_check_tools.md(MTE)、指标与问题排查思路.md
+
+ 真正欠缺的知识点
+
+ 1. 硬件/物理层薄弱(只留了一个空壳)
+ hardware.md 只有一个链接加两行,内存条的演化、DDR 型号×容量×频率、带宽与时延、ECC,基本没内容。而 README 把"物理硬件"列为四大层次之一,这里断档。
+
+ 2. 分页/地址翻译的核心原理缺精细展开
+ MMU 多级页表、TLB、TLB 缺失(miss)后处理器/内核怎么回填、TLB shootdown、大页(hugetlb)降低 TLB miss——只在 qa.md 里顺带提了 Android 16K 页,没有专门章节。这些是"虚拟内存 How"的关键。
+
+ 3. 缺"二级存储/内存回收"方向
+ 光有 OOM Killer 和 LRU 收回,但没有:
+ - swap / zram(交换与匿名页回收)——oom_killer.md 讲了杀进程,却缺 swap 这条回收路径
+ - 内存压力(direct reclaim / kswapd / watermarks)的完整机制
+ - 内存碎片(外部分裂/内部分裂)、vm.zone_reclaim_mode、compact
+
+ 4. 缺 Java/虚拟机层次的专项
+ java/ 下只有 lifecycle、leak_canary、android,而 java/README.md 引用的 gc.md 不存在(破链)。Java 对象堆、分代 GC、引用机制、OOM 分类等没内容。README 大纲的 "language.vm /
+ virtual_machine.md" 同样缺失。
+
+ 5. 缺"诊断实战方法"的完整闭环
+ 指标与问题排查思路.md 列了 VSS/RSS/PSS/USS,但缺:如何把指标和工具串成一条排查路径(比如 RSS 高是堆还是 native、是 mmap 还是共享库导致)、指标测量工具(dmesg 的 OOM 日志解读、slabtop、
+ smaps_rollup、procfs 逐项)。tools.md 是罗列式的,不是方法论的。
+
+ 6. 其他被 README 大纲引用但文件不存在(破链)
+ - application_memory.md(实际是 application_or_language_duty.md)
+ - heap.md、virtual_machine.md、1.virtual_memory_layout.md(实际是 1.virtual_memory_impl.md)
+ - 4.summary.md(总结章没写)
+
+ 结论
+
+ 按 README 蓝图倒推,系统底子(虚拟内存+物理内存+分配器)打得不错;最大的三块缺口是硬件层几乎空白、swap/zram 这条回收路径缺失、Java/GC 专项没落地。其次是把 VSS/RSS 指标升级成真正的排查
+ 方法论。
+
+ 要的话我可以逐块补:先从硬件内存和swap/zram+回收机制动手,这两块补上,自上而下和自下而上的两条线就都闭合了。

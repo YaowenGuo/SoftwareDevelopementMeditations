@@ -2,7 +2,7 @@
 
 > 目标：搞清楚一次 `new Object()` 从字节码到拿到一块内存，中间经过了哪些分配器；为什么 ART 要准备好几种分配器；以及最关键的「快路径为什么快、慢路径什么时候触发 GC」。
 
-承接 [02 分区篇](02_heap_and_spaces.md)：Space 是「货架」，本篇讲的**分配器**是「把货从货架上取给你的店员」。字节码层面的入口链路（`new` → entrypoint → `Heap::AllocObject`）在已有笔记 [对象创建](../create_object.md) 里已经拆得很细，本篇不重复，只从 **`Heap::AllocObject` 往下**、聚焦分配器本身。
+承接 [02 分区篇](02_heap_and_spaces.md)：Space 是「货架」，本篇讲的**分配器**是「把货从货架上取给你的店员」。字节码层面的入口链路（`new` → entrypoint → `Heap::AllocObject`）在已有笔记 [对象创建](create_object.md) 里已经拆得很细，本篇不重复，只从 **`Heap::AllocObject` 往下**、聚焦分配器本身。
 
 ---
 
@@ -99,7 +99,7 @@ inline mirror::Object* AllocInTlab(size_t size) {
 为什么这么快：
 - **无锁**：这块内存是线程私有的，别的线程碰不到，不需要任何同步。
 - **无搜索**：不像 `malloc` 要在空闲链表里找合适的块，这里就是「指针加一下」。
-- 这也解释了 [对象创建](../create_object.md) 笔记里那句「大部分小对象分配在无锁的线程本地缓冲区中，效率极高」。
+- 这也解释了 [对象创建](create_object.md) 笔记里那句「大部分小对象分配在无锁的线程本地缓冲区中，效率极高」。
 
 ### 慢路径：TLAB 用完了怎么办
 
@@ -145,7 +145,7 @@ graph TB
 - 同尺寸对象聚在一起，回收后留下的空洞恰好又能装下同尺寸的新对象，**碎片天然可控**。
 - 每个尺寸桶还分「线程本地 run」和「全局 run」，小对象优先走线程本地、少加锁。
 
-这就是 [对象创建](../create_object.md) 里提到的「rosalloc 比标准 dlmalloc 更擅长多线程并发分配小对象」的原因。`DlMalloc` 则是更通用的经典分配器，ART 里作为兜底/特定场景使用。
+这就是 [对象创建](create_object.md) 里提到的「rosalloc 比标准 dlmalloc 更擅长多线程并发分配小对象」的原因。`DlMalloc` 则是更通用的经典分配器，ART 里作为兜底/特定场景使用。
 
 ### RegionSpace（CC）与 BumpPointerSpace（CMC）—— 搬移类 GC 的两种主力
 
@@ -176,7 +176,7 @@ graph TB
 
 ### 大对象：LargeObjectSpace
 
-`size ≥ 12KB`（`large_object_threshold_`）且是基础类型数组或字符串时，直接走 `LargeObjectSpace`：按页映射一块独立内存，不塞进连续区、不参与搬移压缩。判断逻辑在 [对象创建](../create_object.md) 的 `Heap::AllocObject` 片段里能看到。
+`size ≥ 12KB`（`large_object_threshold_`）且是基础类型数组或字符串时，直接走 `LargeObjectSpace`：按页映射一块独立内存，不塞进连续区、不参与搬移压缩。判断逻辑在 [对象创建](create_object.md) 的 `Heap::AllocObject` 片段里能看到。
 
 > 为什么大对象门槛要限定「基础类型数组/字符串」？因为这类对象内部没有对指向堆内其他对象的引用（`int[]` 里全是 `int`，不是对象引用），GC 扫描时可以整块跳过，放进不参与压缩的 LOS 最划算。
 
@@ -212,7 +212,7 @@ sequenceDiagram
     H->>H: SetClass, 记账, 检查是否该触发下次 GC
 ```
 
-这张图和 [对象创建](../create_object.md) 开头那张流程图正好接续：那篇讲「`new` 怎么走到 `Heap::AllocObject`」，本篇讲「`Heap::AllocObject` 之后分配器怎么干活」。
+这张图和 [对象创建](create_object.md) 开头那张流程图正好接续：那篇讲「`new` 怎么走到 `Heap::AllocObject`」，本篇讲「`Heap::AllocObject` 之后分配器怎么干活」。
 
 ---
 

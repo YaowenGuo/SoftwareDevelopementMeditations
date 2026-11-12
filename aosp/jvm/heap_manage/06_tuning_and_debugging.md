@@ -43,6 +43,92 @@ class Heap {
 };
 ```
 
+> 阈值（`concurrent_start_bytes_` / `max_allowed_footprint_`）就在这里由 `GrowForUtilization` 设下。但阈值只是一个数字——**由谁盯着它、命中后哪段代码扣扳机**，见下一节。
+
+---
+
+## How：GC 的触发时机与代码路径——阈值定好了，谁来扣扳机
+
+开头「堆会呼吸」一节算出了「下次堆长到多大就触发 GC」，但阈值只是一个数字——**由谁盯着它、命中之后哪段代码把 GC 发起来、又发给哪个线程去跑**，才是这一节要补的另一半。先看 ART 到底为哪几种「因」（GcCause）触发 GC：
+
+| 触发因（GcCause） | 命中条件 | 派发方式 | 去哪看 |
+|---|---|---|---|
+| **达并发阈值** | 分配后 `已用字节 ≥ concurrent_start_bytes_` | **异步**，甩给守护线程，App 不停 | 本节 |
+| **分配要不到内存**（`GC_FOR_ALLOC`） | 慢路径向 Space 要内存失败 | **同步**，就在当前线程阻塞跑 | [03 篇](03_allocation.md) |
+| **显式**（`Explicit`） | 代码调 `System.gc()` | 被动触发，打乱自适应节奏 | [05 篇](05_gc_collectors.md) 触发表 |
+| **前后台切换**（`CollectorTransition`） | App 退到后台，切省内存策略 | 异步 | 下一节 |
+| **native 压力**（`NativeAlloc`） | native 分配累计到阈值 | 异步 | [05 篇](05_gc_collectors.md) |
+
+> 这张表和 [05 篇](05_gc_collectors.md) 的「触发类型」表是**两个角度**：那张教你**从 logcat 关键字反推**发生了什么，这张讲**代码里哪段逻辑扣的扳机**。排查线上问题用 05 的，读源码理解机制用这张。
+
+### 触发代码：阈值检查就藏在分配快路径的末尾
+
+并发 GC 的扳机不在什么定时器里，而在**每次分配成功之后**顺手比一下阈值——这段检查紧贴 [03 篇](03_allocation.md) TLAB 快路径的尾巴：
+
+```cpp
+// 源码：art/runtime/gc/heap.cc(语义示意，省略无关参数)
+inline void Heap::CheckConcurrentGCForJava(Thread* self,
+                                           size_t new_num_bytes_allocated,
+                                           ObjPtr<mirror::Object>* obj) {
+  // new_num_bytes_allocated：本次分配后，堆里已用的总字节
+  if (new_num_bytes_allocated >= concurrent_start_bytes_) {  // 命中并发触发线
+    RequestConcurrentGCAndSaveObject(self, /*force_full=*/false, obj);
+    // ↑ 不在这里跑 GC，只是「请求」一次，把活儿丢给守护线程
+  }
+}
+```
+
+- `concurrent_start_bytes_` 正是开头呼吸那节里 `GrowForUtilization` 在上一次 GC 收尾时设下的那条线——**呼吸负责设阈值、这里负责比阈值**，指的是同一个字段。它比真正的「装满线」`max_allowed_footprint_` 略低，留出提前量，好让并发 GC 在堆被填满**之前**就开跑，避免退化成同步阻塞的 `GC_FOR_ALLOC`。
+- 这段检查处在**最热的分配路径**上，所以只做一次整数比较，绝不在此处真正回收——回收的活儿被「请求」出去了。请求之后发生什么，就是下面这张时序图。
+
+### 代码时序图：从「阈值命中」到「GC 真正跑起来」
+
+ART 把 GC 分成**异步**和**同步**两条派发路，同一次 `new` 视内存松紧走其一：
+
+```mermaid
+sequenceDiagram
+    participant APP as 应用线程(正在 new)
+    participant HEAP as Heap
+    participant TP as GC守护线程(HeapTaskDaemon)
+    participant COL as 收集器 collector
+
+    Note over APP,COL: 路径一 异步并发GC(达阈值, App 不阻塞)
+    APP->>HEAP: 分配成功, CheckConcurrentGCForJava
+    HEAP->>HEAP: 已用字节 ≥ concurrent_start_bytes_ ?
+    HEAP->>TP: RequestConcurrentGCAndSaveObject (入任务队列)
+    APP-->>APP: 立刻拿到新对象继续跑, 不等 GC
+    TP->>HEAP: 取出任务 → Heap::ConcurrentGC
+    HEAP->>HEAP: CollectGarbageInternal (选 GcType)
+    HEAP->>COL: collector RunPhases() (进入 05 篇五阶段)
+    COL-->>HEAP: 回收完成
+    HEAP->>HEAP: GrowForUtilization() 重设阈值, 闭环回呼吸
+
+    Note over APP,COL: 路径二 同步GC_FOR_ALLOC(要不到内存, App 阻塞)
+    APP->>HEAP: 慢路径分配失败 → AllocateInternalWithGc
+    HEAP->>HEAP: 就地 CollectGarbageInternal (当前线程)
+    HEAP->>COL: collector RunPhases()
+    COL-->>HEAP: 回收完成, 腾出空间
+    HEAP-->>APP: 重试分配, 成功才返回 (全程被阻塞)
+```
+
+两条路的分水岭就一句话：**阈值是「提前预警」，异步补；真装满了是「当场断供」，只能同步堵着等。** 但注意它们最终都汇入同一个 `Heap::CollectGarbageInternal`——这是所有 GC 的总闸，[05 篇](05_gc_collectors.md) 的 `RunPhases()` 就在它内部被调起。而它收尾时又调一次 `GrowForUtilization` 重设 `concurrent_start_bytes_`，**正好闭环回开头的呼吸**：这就是「堆呼吸」在代码里跑完整的一圈。
+
+### 对着 AOSP 读：关键方法地图
+
+想顺着源码走一遍，`art/runtime/gc/heap.cc` 里这几个入口是骨架：
+
+| 方法 | 职责 | 属于哪条路 |
+|---|---|---|
+| `CheckConcurrentGCForJava` | 分配后比阈值，命中就请求并发 GC | 异步·触发点 |
+| `RequestConcurrentGCAndSaveObject` | 把 `ConcurrentGCTask` 丢进 `HeapTaskDaemon` 队列 | 异步·派发 |
+| `ConcurrentGC` | 守护线程取到任务后执行的任务体 | 异步·执行 |
+| `AllocateInternalWithGc` | 分配失败时就地循环触发（GcType 递增）的 GC | 同步·GC_FOR_ALLOC |
+| `CollectGarbage` | `System.gc()` 等显式入口 | Explicit |
+| **`CollectGarbageInternal`** | **总闸**：所有触发因最终都汇到这里，内部调收集器 `RunPhases` | 两条路共用 |
+| `GrowForUtilization` | 一次 GC 收尾：算下次足迹 + 重设 `concurrent_start_bytes_` | 闭环回呼吸 |
+
+> 建议阅读顺序：先 `CheckConcurrentGCForJava` 看**扳机在哪** → 再 `RequestConcurrentGCAndSaveObject` + `HeapTaskDaemon` 看**怎么把活儿甩给守护线程** → 然后 `CollectGarbageInternal` 看**总闸** → 最后回 `GrowForUtilization` 看**阈值怎么被重设、闭环回呼吸**。和本系列一贯的「先入口、再派发、后闭环」同一个读法。
+
 ---
 
 ## Why：为什么前台后台要用不同策略
@@ -206,6 +292,7 @@ adb pull /data/local/tmp/leak.hprof
 3. `OutOfMemoryError` 和「被 Low Memory Killer 杀掉」有什么本质区别？各自应该往哪个方向排查？
 4. 为什么内存排查要「先 `dumpsys meminfo` 分类，再上 heap dump」，而不是反过来？
 5. 一次 GC 后存活量持续变大、GC 越来越频繁却回收不动，最可能是什么问题？怎么定位？
+6. 并发 GC 和 `GC_FOR_ALLOC` 在「派发方式」和「是否阻塞应用线程」上有什么本质区别？各自由哪段代码发起？
 
 <details>
 <summary>参考答案</summary>
@@ -215,6 +302,7 @@ adb pull /data/local/tmp/leak.hprof
 3. Java OOM 是 ART 判定「堆到上限分配失败」，抛异常有 Java 栈，查 Java 堆泄漏/大对象；LMK 是系统判定整机内存紧张、按优先级直接 SIGKILL 进程，无异常无栈，要查整机内存和本进程 Native/Graphics 等非 Java 部分。
 4. 因为不同内存块（Java/Native/Graphics）的定位工具完全不同，先分类才能选对工具；若直接抓 Java heap dump，而问题其实在 Native/Graphics，就白忙且被误导。
 5. 典型的 Java 内存泄漏——对象仍被某 GC Root 链（如 static 集合、未注销监听器）可达，GC 无法回收，于是存活量涨、堆频繁增长、GC 频繁但徒劳。用 heap dump + MAT/Profiler 看该类对象的 GC Root 持有链定位。
+6. 并发 GC 是**异步**：`CheckConcurrentGCForJava` 在分配后发现已用字节到达 `concurrent_start_bytes_`，调 `RequestConcurrentGCAndSaveObject` 把任务丢给 `HeapTaskDaemon` 守护线程，应用线程立刻拿到对象继续跑、不阻塞。`GC_FOR_ALLOC` 是**同步**：慢路径真要不到内存，`AllocateInternalWithGc` 就在当前应用线程就地调 `CollectGarbageInternal` 并阻塞等回收腾空间。前者是「提前预警、后台补」，后者是「当场断供、堵着等」，所以频繁 `GC_FOR_ALLOC` 才是坏信号。两条路最终都汇入同一个 `CollectGarbageInternal`。
 
 </details>
 

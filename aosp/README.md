@@ -58,8 +58,28 @@ sudo dnf install openssl -y
 lunch sdk_phone64_x86_64-aosp_current-userdebug
 m -j $(nproc)
 ```
-lunch 后的内容以中划线分为三部分 PRODUCT-RELEASE-VARIANT，具体查看：
-lunch --help
+## lunch 目标
+
+lunch 后的内容以中划线分为三部分 PRODUCT-RELEASE-VARIANT，具体查看：lunch --help
+
+产品目标：
+sdk_phone/tablate/car 用于模拟器
+aosp_cf_  用于 Cuttlefish 更接近真机
+aosp_<代号>，真机 例如 aosp_shiba（Pixel 8）、aosp_husky（Pixel 8 Pro）
+aosp_<架构> 验证编译或者历史遗留。如 aosp_arm64、aosp_x86。
+
+release：发布配置（只有新格式有）
+
+- trunk_staging：主线开发分支，跟着 main 或最新源码编译时一般选这个
+- next：下一个版本的功能预览
+- ap3a、ap4a、bp1a 这类：对应具体发布版本的配置。拉的是某个 release tag 的源码时，选和它对应的那一个
+
+variant：编译类型
+
+- eng  开发版，带 root 和调试工具，没有优化  底层开发、调试 
+- userdebug 和正式版接近，同时可以 root 和调试。 日常开发推荐。
+- user      正式发布版，权限受限。
+
 
 查看有哪些组合可用，使用 list_products, list_releases, or list_variants 指令查看。
 // 手机：

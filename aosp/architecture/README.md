@@ -610,6 +610,10 @@ sp<IBinder> ProcessState::getStrongProxyForHandle(int32_t handle) {
 
 App 不能自己创建进程,整条链是:**Launcher → AMS →(Socket)Zygote fork → 新进程初始化 → 向 AMS 报到 → AMS 回调组件生命周期**。
 
+Zygote 会循环读取SystemServer发来的请求，如果有新请求，
+**fork进程后进入ZygoteInit.zygoteInit，调用传进来的类的main方法。** AMS 发送的类是 `android.app.ActivityThread`。
+
+
 ```mermaid
 sequenceDiagram
     participant A as 发起者 (如 Launcher)
@@ -641,6 +645,16 @@ sequenceDiagram
 
 - **`ActivityThread`**:应用进程主线程入口,`main()` 是 App 的真正起点,内部建立主线程 `Looper` 与消息循环。
 - **`ApplicationThread`**:`ActivityThread` 的内部类,实现 `IApplicationThread.Stub`。**AMS 通过 Binder 调用它的方法**来通知应用进程干活(创建 Activity/Service 等);它收到命令后通过 `Handler` 把任务转发给主线程 `ActivityThread` 执行。
+
+Activity 的创建和执行流程
+
+handleLaunchActivity
+1. performLaunchActivity: 反射创建 Activity
+2. activity.attach() → 创建 PhoneWindow
+3. onCreate()(setContentView)
+4. handleStartActivity → onStart
+5. handleResumeActivity → onResume
+6. wm.addView(decor) ← 这里创建 ViewRootImpl
 
 ### native 入口:app_main.cpp
 
